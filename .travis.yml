@@ -19,8 +19,8 @@ scripts:
   - bundle exec rspec spec
 
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-  - ./cc-test-reporter after-build --debug -t lcov --exit-code $?
+    - ./cc-test-reporter after-build --debug -t lcov --exit-code $?
+    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
     - false
