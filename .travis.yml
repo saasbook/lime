@@ -18,7 +18,7 @@ env:
     CC_TEST_REPORTER_ID=7859b2a9afa12a79aa17a382731ee5d82078e1b9314393be49d51d55caa08747
 
 before_install:
-  - nvm install                         # Install node version from .nvmrc
+    #  - nvm install                         # Install node version from .nvmrc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   #- export DISPLAY=:99.0                # Display number for xvfb (for headless browser testing)
@@ -26,7 +26,7 @@ before_install:
 
 install:
   - bundle install --without production --path=${BUNDLE_PATH:-vendor/bundle}  # Install ruby gems, excluding production only gems such as unicorn (already present by default in Travis)
-  - npm install                         # Install npm dependencies
+    # - npm install                         # Install npm dependencies
   #- npm install karma-firefox-launcher codeclimate-test-reporter
 
 # Setup the database
@@ -37,7 +37,7 @@ script:
   - bundle exec rubocop -DESP           # Backend linting
   - bundle exec rake                    # Backend specs
   #- npm test -- --browsers Firefox      # Frontend specs
-  - npm test                            # Frontend linting & specs
+  #  - npm test                            # Frontend linting & specs
 
 # Pipe the coverage data to Code Climate
 after_script:
