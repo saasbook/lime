@@ -17,6 +17,7 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.string :approved_by       # hidden
       t.integer :flagged          # hidden??
       t.text :flagged_comment     # hidden??
+      t.timestamps
       # attachments??
     end
 
