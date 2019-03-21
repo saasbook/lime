@@ -16,9 +16,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 scripts:
-  - bundle exec rspec spec
+  - bundle exec rspec
   - ./cc-test-reporter format-coverage --output coverage/codeclimate.$SUITE.json
-
 
 after_script:
     - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
