@@ -23,7 +23,7 @@ scripts:
 
 after_script:
   - ./cc-test-reporter sum-coverage coverage/.*.json | ./cc-test-reporter upload-coverage
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -r $CC_TEST_REPORTER_ID
 
 notifications:
     - false
