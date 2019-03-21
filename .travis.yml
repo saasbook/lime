@@ -19,11 +19,10 @@ before_script:
 
 scripts:
   - bundle exec rspec
-  - ./cc-test-reporter format-coverage -t simplecov --output coverage/.$SUITE.json
+  - ./cc-test-reporter format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
 
 after_script:
-  - ./cc-test-reporter sum-coverage coverage/.*.json | ./cc-test-reporter upload-coverage
+  - ./cc-test-reporter sum-coverage -i coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -r $CC_TEST_REPORTER_ID
-
 notifications:
     - false
