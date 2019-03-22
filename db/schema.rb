@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_100624) do
+ActiveRecord::Schema.define(version: 2019_03_21_231748) do
 
   create_table "audiences", force: :cascade do |t|
     t.integer "resource_id"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_campuses_on_resource_id"
+  end
+
+  create_table "client_tags", force: :cascade do |t|
+    t.integer "resource_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["resource_id"], name: "index_client_tags_on_resource_id"
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -77,14 +85,6 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.string "approved_by"
     t.integer "flagged"
     t.text "flagged_comment"
-  end
-
-  create_table "tags", force: :cascade do |t|
-    t.integer "resource_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_tags_on_resource_id"
   end
 
   create_table "technologies", force: :cascade do |t|

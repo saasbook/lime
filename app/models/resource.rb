@@ -1,7 +1,7 @@
 class Resource < ActiveRecord::Base
   has_many :types
   has_many :audiences
-  has_many :tags
+  has_many :client_tags
   has_many :population_focuses
   has_many :campuses
   has_many :colleges

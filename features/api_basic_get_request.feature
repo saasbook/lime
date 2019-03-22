@@ -121,4 +121,9 @@ Feature: display list of resources filtered by any combination of available tags
 
   Scenario: do not restrict by any tag
     When I make a GET request to the API with no parameters
-    Then I should receive all the resources
+    Then I should receive all the resource
+
+  Scenario: restrict by deadline
+    When I make a GET request to the API with parameters: "deadline="
+    Then I should receive a JSON object
+    And I should receive

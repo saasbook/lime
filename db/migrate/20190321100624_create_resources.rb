@@ -3,7 +3,7 @@ class CreateResources < ActiveRecord::Migration[5.2]
     create_table :resources do |t|
       t.string :title             # required
       t.string :url               # required, validate
-      t.string :contact_email     # required, valiate, hidden
+      t.string :contact_email     # required, validate, hidden
       t.text :desc                # required, validate
       t.string :location          # required
       t.string :resource_email    # validate
@@ -12,13 +12,13 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.string :contact_name      # hidden
       t.string :contact_phone     # validate, hidden
       t.datetime :deadline        # validate
-      t.text :notes               
+      t.text :notes               # validate, 1000 chars
+      t.string :funding_amount    # validate
       t.integer :approval_status  # hidden
       t.string :approved_by       # hidden
-      t.integer :flagged          # hidden??
-      t.text :flagged_comment     # hidden??
+      t.integer :flagged          # hidden?? yes
+      t.text :flagged_comment     # hidden?? yes
       t.timestamps
-      # attachments??
     end
 
     create_table :types do |t|
@@ -33,9 +33,9 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :tags do |t|
+    create_table :client_tags do |t| # hidden
       t.belongs_to :resource     # NOT required
-      t.string :name             # tag name
+      t.string :name             # client name
       t.timestamps
     end
 
