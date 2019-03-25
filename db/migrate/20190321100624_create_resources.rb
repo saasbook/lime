@@ -22,61 +22,61 @@ class CreateResources < ActiveRecord::Migration[5.2]
     end
 
     create_table :types do |t|
-      t.belongs_to :resource      # required
+      t.belongs_to :resources      # required
       t.string :name              # type name
       t.timestamps
     end
 
     create_table :audiences do |t|
-      t.belongs_to :resource      # required
+      t.belongs_to :resources      # required
       t.string :type              # audience type
       t.timestamps
     end
 
     create_table :client_tags do |t| # hidden
-      t.belongs_to :resource     # NOT required
+      t.belongs_to :resources     # NOT required
       t.string :name             # client name
       t.timestamps
     end
 
     create_table :population_focuses do |t|
-      t.belongs_to :resource     # NOT required
+      t.belongs_to :resources     # NOT required
       t.string :type             # population focus type
       t.timestamps
     end
 
     create_table :campuses do |t|
-      t.belongs_to :resource     # NOT required
+      t.belongs_to :resources     # NOT required
       t.string :name             # campus name
       t.timestamps
     end
 
     create_table :colleges do |t|
-      t.belongs_to :resource     # NOT required
+      t.belongs_to :resources     # NOT required
       t.string :name             # college name
       t.timestamps
     end
 
     create_table :availabilities do |t|
-      t.belongs_to :resource     # NOT required
+      t.belongs_to :resources     # NOT required
       t.string :type             # availability type
       t.timestamps
     end
 
     create_table :innovation_stages do |t|
-      t.belongs_to :resource     # NOT required
+      t.belongs_to :resources     # NOT required
       t.string :name             # innovation stage name
       t.timestamps
     end
 
     create_table :topics do |t|
-      t.belongs_to :resource    # NOT required
+      t.belongs_to :resources    # NOT required
       t.string :name            # topic name
       t.timestamps
     end
 
     create_table :technologies do |t|
-      t.belongs_to :resource    # NOT required
+      t.belongs_to :resources    # NOT required
       t.string :type            # technology type
       t.timestamps
     end
