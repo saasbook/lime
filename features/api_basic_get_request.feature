@@ -7,38 +7,14 @@ Feature: display list of resources filtered by any combination of available tags
   Background: resources have been added to database
 
     Given the following resources exist:
-      | title                        | deadline |
-      | Feminist Research Institute  |          |
-      | FEM Tech Berkeley            |          |
-      | Girls in Engineering         | 3/1/2019 |
-      | Core Citris Seed Funding     | 1/31/2019|
-      | Graduate Women in Engineering|          |
-      | Scholarship for Latinos      |          |
-    And the following resource_types exist
-      | resource_id | resource_type |
-      | 1           | education     |
-      | 1           | funding       |
-      | 3           | event         |
-      | 3           | mentoring     |
-      | 5           | network       |
-      | 5           | student group |
-      | 6           | scholarship   |
-    And the following audiences exist
-      | resource_id | audience |
-      | 1           | undergraduate |
-      | 1           | graduate      |
-      | 1           | faculty       |
-      | 1           | staff         |
-      | 1           | alumni        |
-      | 2           | undergraduate |
-      | 3           | other         |
-      | 5           | graduate      |
-      | 6           | undergraduate |
-    And the following locations exist
-      | resource_id | location |
+      | title                        | url | contact_email | location | types | audiences |
+      | Feminist Research Institute  |
 
     And the following audiences exist
       | resource_id | audience |
+
+    And the following resource_types exist
+      | resource_id | resource_type |
 
   Scenario: restrict to resources pertaining to women
     When I make a GET request to the API with parameters: "population_focus=women"

@@ -14,3 +14,9 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.irregular 'campus', 'campuses'
+  inflect.irregular 'population_focus', 'population_focuses'
+  inflect.irregular 'innovation_stage', 'innovation_stages'
+end
