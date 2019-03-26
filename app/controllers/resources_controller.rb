@@ -6,7 +6,7 @@ class ResourcesController < ApplicationController
   end
 
   # assumes API GET request in this format :
-  # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate
+  # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
     if params.include? :sort_by
