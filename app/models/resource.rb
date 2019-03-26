@@ -31,7 +31,7 @@ class Resource < ActiveRecord::Base
     puts 'params', params
     puts 'hmh', has_many_hash
 
-    retval = [] # return value (list of records matching query)
+    filtered = [] # return value (list of records matching query)
     resources = Resource.where(params) # filter by singular parameters first
 
     puts 'resources:' , resources
@@ -54,10 +54,10 @@ class Resource < ActiveRecord::Base
         end
         # if all queries return true, append the record to the returned value
         if bool_arr.all?
-          retval.append resource
+          filtered.append resource
         end
       end
-      return retval
+      return Resource.where(id: filtered.map(&:id))
     end
   end
 

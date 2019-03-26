@@ -8,11 +8,12 @@ class ResourcesController < ApplicationController
   def index
     sort_by = nil
     if params.include? :sort_by
+      puts 'included sort_by'
       sort_by = params[:sort_by]
       params.delete :sort_by
     end
 
-    @resources = Resource.filter(resource_params)
+    @resources = Resource.filter(resource_params).order(sort_by)
 
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym } ) }
