@@ -14,14 +14,14 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-03-24T23:27:35-07:00">2019-03-24T23:27:35-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-03-25T22:20:43-07:00">2019-03-25T22:20:43-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">96.88%</span></span>
+    (<span class="covered_percent"><span class="green">97.1%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
@@ -31,9 +31,9 @@
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>18</b> files in total.
-    <b>64</b> relevant lines. 
-    <span class="green"><b>62</b> lines covered</span> and
+    <b>19</b> files in total.
+    <b>69</b> relevant lines. 
+    <span class="green"><b>67</b> lines covered</span> and
     <span class="red"><b>2</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -173,11 +173,11 @@
       <tr>
         <td class="strong"><a href="#fedadccc92476f92033e8917b2f1461996780b96" class="src_link" title="config/initializers/inflections.rb">config/initializers/inflections.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>16</td>
+        <td>22</td>
+        <td>4</td>
+        <td>4</td>
         <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0.0</td>
+        <td>1.0</td>
       </tr>
       
       <tr>
@@ -216,6 +216,16 @@
         <td>7</td>
         <td>4</td>
         <td>4</td>
+        <td>0</td>
+        <td>1.0</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#d63090a411c52053796828cb200b360307102f33" class="src_link" title="spec/controller/resource_controller_spec.rb">spec/controller/resource_controller_spec.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>2</td>
+        <td>1</td>
+        <td>1</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -1415,8 +1425,8 @@
     <h3>config/initializers/inflections.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>0</b> relevant lines. 
-      <span class="green"><b>0</b> lines covered</span> and
+      <b>4</b> relevant lines. 
+      <span class="green"><b>4</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -1518,6 +1528,42 @@
           
           
           <code class="ruby"># end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">ActiveSupport::Inflector.inflections(:en) do |inflect|</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  inflect.irregular &#39;campus&#39;, &#39;campuses&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="20">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  inflect.irregular &#39;population_focus&#39;, &#39;population_focuses&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  inflect.irregular &#39;innovation_stage&#39;, &#39;innovation_stages&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">end</code>
         </li>
       
     </ol>
@@ -1700,7 +1746,7 @@
         <li class="covered" data-hits="1" data-linenumber="3">
           <span class="hits">1</span>
           
-          <code class="ruby">  resources :resources</code>
+          <code class="ruby">  resources :resources, :defaults =&gt; {:format =&gt; &#39;json&#39;}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="4">
@@ -1774,6 +1820,37 @@
           
           
           <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="d63090a411c52053796828cb200b360307102f33">
+  <div class="header">
+    <h3>spec/controller/resource_controller_spec.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>1</b> relevant lines. 
+      <span class="green"><b>1</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require &#39;rspec&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby"></code>
         </li>
       
     </ol>

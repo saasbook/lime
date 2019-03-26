@@ -1,3 +1,3 @@
-class Innovation_Stage < ActiveRecord::Base
+class InnovationStage < ActiveRecord::Base
   belongs_to :resource
 end

@@ -262,6 +262,12 @@
         null,
         null,
         null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
         null
       ],
       "/Users/andrewlaw/cs169/proj/lime/config/initializers/mime_types.rb": [
@@ -301,8 +307,12 @@
         1,
         1,
         null
+      ],
+      "/Users/andrewlaw/cs169/proj/lime/spec/controller/resource_controller_spec.rb": [
+        1,
+        null
       ]
     },
-    "timestamp": 1553495255
+    "timestamp": 1553577643
   }
 }
