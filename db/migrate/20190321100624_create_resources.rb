@@ -5,7 +5,6 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.string :url               # required, validate
       t.string :contact_email     # required, validate, hidden
       t.text :desc                # required, validate
-      t.string :location          # required
       t.string :resource_email    # validate
       t.string :resource_phone    # validate
       t.string :address
@@ -20,6 +19,13 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.text :flagged_comment     # hidden?? yes
       t.timestamps
     end
+
+   create_table :locations do |t|
+      t.belongs_to :resources     # required
+      t.belongs_to :child
+      t.string :val
+      t.timestamps
+   end
 
     create_table :types do |t|
       t.belongs_to :resources      # required

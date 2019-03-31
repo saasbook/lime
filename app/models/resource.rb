@@ -9,6 +9,7 @@ class Resource < ActiveRecord::Base
   has_many :innovation_stages
   has_many :topics
   has_many :technologies
+  has_one  :location
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :contact_email, :location, :types, :audiences, :presence => true
   validates :desc, :presence => true, :length => {:maximum => 500} 
