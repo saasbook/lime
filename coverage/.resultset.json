@@ -801,6 +801,10 @@
         null
       ]
     },
+<<<<<<< HEAD
     "timestamp": 1554162202
+=======
+    "timestamp": 1554158413
+>>>>>>> location_get
   }
 }
