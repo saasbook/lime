@@ -11,8 +11,8 @@ class Resource < ActiveRecord::Base
   has_many :technologies
   has_one  :location
   # validations: https://guides.rubyonrails.org/active_record_validations.html
-  validates :title, :url, :contact_email, :location, :types, :audiences, :presence => true
-  validates :desc, :presence => true, :length => {:maximum => 500} 
+  # validates :title, :url, :contact_email, :location, :types, :audiences, :presence => true
+  # validates :desc, :presence => true, :length => {:maximum => 500}
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
   def self.has_many_associations
@@ -73,14 +73,14 @@ class Resource < ActiveRecord::Base
       # look at parent resources b
     end
 
-    if(Location.find(loc).parent != nil)
-      # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
-      # recusive call
-    end
-
-    if(Location.find(loc).child_ids != nil)
-      #same deal as parent shtuff
-    end
+    # if(Location.find(loc).parent != nil)
+    #   # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
+    #   # recusive call
+    # end
+    #
+    # if(Location.find(loc).child_ids != nil)
+    #   #same deal as parent shtuff
+    # end
 
     #return resources
   end
@@ -92,6 +92,21 @@ class Resource < ActiveRecord::Base
   def self.get_required_resources
     return [:title, :url, :contact_email, :location, :types, :audiences, :desc]
   end 
+
+  def self.get_has_many_hashes(params)
+    has_many_hash = {}
+    params.each do |key, value|
+      # puts "oof"
+      # puts key
+      # puts value
+      if @@has_many_associations.include?(key.to_sym)
+        # puts "loop"
+        has_many_hash[key] = params[key].split(',').map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace
+        params.delete(key) # remove has_many key from params
+      end
+    end
+    return has_many_hash
+  end
 
 end
 

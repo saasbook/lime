@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
-                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types => [], :audiences => [])
+                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :desc, :types => [], :audiences => [])
   end
 
   # assumes API GET request in this format :
@@ -15,9 +15,11 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
-    @resources = Resource.filter(resource_params)
-    if @resources != nil
-      @resources = @resources.order(sort_by)
+    @resources = Resource.filter(resource_params).order(sort_by)
+    if params.include? :location
+      # if filtering by location
+      Resource.location_helper(resource_params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
+
     end
 
     respond_to do |format|
@@ -42,28 +44,40 @@ class ResourcesController < ApplicationController
   end
 
   def create
-    #this should check if any of the params are missing via validation and set an instance variable equal to the missing fields
+    #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database 
     #redirect to a submission page
-    @error = false
-    #attempt to create and save resource to the database for approval
-    r = Resource.new(resource_params)
-    r.approval_status = 0
-    
-    if r.invalid?
-      @error = true
-      @missing = []
-      @desc_too_long = false
-      Resource.get_required_resources.each do |resource|
-        if !params.include? resource or params[resource] == nil?
-          @missing.push(resource)
-        end
-      end
-      if !params[:desc] == nil and params[:desc].length > 500
-        @desc_too_long = true
+    @missing = []
+    @desc_too_long = false
+    #manual validation of resources
+    Resource.get_required_resources.each do |resource|
+      if !params.include? resource or params[resource] == nil
+        @missing.push(resource)
       end
     end
-    r.save
+    if !params[:desc] == nil and params[:desc].length > 500
+      @desc_too_long = true
+    end
+
+    if @missing.size != 0 or @desc_too_long
+      return
+    end
+    #
+    resource = Resource.create(resource_params)
+
+    #create all associated entries
+    has_many_hash = Resource.get_has_many_hashes(params)
+    has_many_hash.each_key do |key|
+      has_many_hash[key].each do |val|
+        if key == "audiences"
+          resource.audiences.create(val: val)
+        end
+        if key == "types"
+          resource.types.create(val: val)
+        end
+      end
+    end
+    # puts "success"
   end
 
   def update
