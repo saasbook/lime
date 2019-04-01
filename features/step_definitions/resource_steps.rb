@@ -1,6 +1,6 @@
-Given /the following resouces exist/ do |resouces_table|
-  resouces_table.hashes.each do |resouce|
-    Resource.create resouce
+Given /the following resouces exist/ do |resources_table|
+  resources_table.hashes.each do |resource|
+    Resource.create resource
   end
 end
 
@@ -20,5 +20,10 @@ Then /the following locations exist/ do |locations_table|
   locations_table.hashes.each do |location|
     Location.create location
   end
+end
+
+# 55 Total resouces
+Then /I should receive all the resources/ do
+   expect(all("table#resources tr").count).to eq 55
 end
 
