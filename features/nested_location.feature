@@ -64,4 +64,4 @@ Feature: display list of resources filtered by any combination of available tags
       | location |
       | Berkeley |
     Then I should receive a JSON object
-    And it should be empty
+    And the JSON should be empty

@@ -34,9 +34,8 @@ Then /I should receive a JSON object/ do
 end
 
 Then /I should receive all the resources/ do
-   json = ActiveSupport::JSON.decode(@response.body)
-   expect(Resource.all.count).eq? json.length
-   expect(all("table#resources tr").count).to eq 55
+   json = JSON.parse(@response.body)
+   expect(Resource.all.count).to eq json.length
 end
 
 Then /the JSON should contain "(.*)"/ do |res|
@@ -53,7 +52,17 @@ Then /I should not see resources other than "(.*)"/ do |resource|
   end
 end
 
-When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ do |method, url,  params|
+Then /I should not see "(.*)"/ do |resource|
+  json = JSON.parse(@response.body)
+  expect(json.include? resource).not_to be true
+end
+
+Then /the JSON should be empty/ do
+  json = JSON.parse(@response.body)
+  expect(json.blank?)
+end
+
+When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ do |method, url, params|
   case method
     when "GET"
       @response = page.driver.get(url, params.hashes.first)
@@ -65,6 +74,23 @@ When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ 
       @response = page.driver.put(url, params.hashes.first)
     when "DELETE"
       @response = page.driver.delete(url, params.hashes.first)
+    else
+      false
+  end
+end
+
+When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with no parameters$/ do |method, url|
+  case method
+    when "GET"
+      @response = page.driver.get(url)
+    when "POST"
+      @response = page.driver.post(url)
+    when "PATCH"
+      @response = page.driver.patch(url)
+    when "PUT"
+      @response = page.driver.put(url)
+    when "DELETE"
+      @response = page.driver.delete(url)
     else
       false
   end
