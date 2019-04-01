@@ -15,9 +15,13 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
+    logger.debug("sort = " + resource_params.to_s)
     @resources = Resource.filter(resource_params)
     if @resources != nil
       @resources = @resources.order(sort_by)
+    if sort_by == "location"
+      # if filtering by location
+      Resource.location_helper(params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
     end
 
     respond_to do |format|
@@ -35,6 +39,7 @@ class ResourcesController < ApplicationController
       format.html
     end
   end
+
 
   def new
 

@@ -9,6 +9,7 @@ class Resource < ActiveRecord::Base
   has_many :innovation_stages
   has_many :topics
   has_many :technologies
+  has_one  :location
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :contact_email, :location, :types, :audiences, :presence => true
   validates :desc, :presence => true, :length => {:maximum => 500} 
@@ -60,6 +61,28 @@ class Resource < ActiveRecord::Base
       # return ActiveRecord::Relation instead of array so that ActiveRecord calls can be chained outside this function
       return Resource.where(id: filtered.map(&:id))
     end
+  end
+
+
+  # this method is here
+  # if filtering by location, filtering should behave as the following
+  # if the location has no resources, find the parent location, and return resources for the parent location
+  # if the location has child locations, also return those locations
+  def self.location_helper(loc, resources)
+    if(resources.size == 0)
+      # look at parent resources b
+    end
+
+    if(Location.find(loc).parent != nil)
+      # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
+      # recusive call
+    end
+
+    if(Location.find(loc).child_ids != nil)
+      #same deal as parent shtuff
+    end
+
+    #return resources
   end
 
   #todo verify email and url beforehand?
