@@ -38,7 +38,7 @@ class Resource < ActiveRecord::Base
     # return early if there are no has_many fields
     if has_many_hash.empty?
       return resources
-    else #todo - find a way to clean up this block. :(  [matching the has_many queries is a potential bottleneck! O(NK) sorts and set operations
+    else #matching the has_many queries is a potential bottleneck! O(NK) sorts and set operations
           # where N = # records and K = # fields (max 10)]
           # alternative is to do a 11 way join, and check the existence of each value of the query
       # for each of the candidate resources filtered by the singular parameters, check if it matches the has_many queries

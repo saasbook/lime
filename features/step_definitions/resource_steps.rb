@@ -1,6 +1,6 @@
-Given /the following resouces exist/ do |resouces_table|
-  resouces_table.hashes.each do |resouce|
-    Resource.create resouce
+Given /the following resources exist/ do |resources_table|
+  resources_table.hashes.each do |resource|
+    Resource.create resource
   end
 end
 
