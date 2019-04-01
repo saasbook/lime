@@ -26,6 +26,7 @@ Feature: display list of resources filtered by any combination of available tags
       | Berkeley    | California|
       | Davis       | California|
       | Stanfurd    | California|
+      | Siberia     | nil       |
 
 
   Scenario: search for all resources within California
@@ -50,3 +51,8 @@ Feature: display list of resources filtered by any combination of available tags
     And I should receive "Girls in Engineering"
     And I should receive "Society of Women Engineers"
     And I should see no other resources
+
+  Scenario: search for resources at a location with no resources or parent
+    When I make a GET request to the API with parameters: "location=Berkeley"
+    Then I should receive a JSON object
+    And it should be empty

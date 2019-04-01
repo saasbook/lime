@@ -86,6 +86,7 @@ class ResourcesController < ApplicationController
   def location_helper(params)
     location = params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s
 
+    if(@resources.)
   end
 
 end
