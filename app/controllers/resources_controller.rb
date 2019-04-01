@@ -1,11 +1,7 @@
 class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
-<<<<<<< HEAD
-                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :desc, :types => [], :audiences => [])
-=======
-                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences)
->>>>>>> get_testing
+                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences, :desc)
   end
 
   # assumes API GET request in this format :
@@ -19,22 +15,13 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
-<<<<<<< HEAD
-    @resources = Resource.filter(resource_params).order(sort_by)
+    @resources = Resource.filter(resource_params)
+    if @resources != nil
+       @resources = @resources.order(sort_by)
+    end
     if params.include? :location
       # if filtering by location
       Resource.location_helper(resource_params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
-
-=======
-    logger.debug("sort = " + resource_params.to_s)
-    @resources = Resource.filter(resource_params)
-    if @resources != nil
-      @resources = @resources.order(sort_by)
-    end
-    if sort_by == "location"
-      # if filtering by location
-      @resources = Resource.location_helper(params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
->>>>>>> get_testing
     end
 
     respond_to do |format|
@@ -62,37 +49,25 @@ class ResourcesController < ApplicationController
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database 
     #redirect to a submission page
-    @missing = []
     @desc_too_long = false
     #manual validation of resources
-    Resource.get_required_resources.each do |resource|
-      if !params.include? resource or params[resource] == nil
-        @missing.push(resource)
-      end
-    end
-    if !params[:desc] == nil and params[:desc].length > 500
+    @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
+    if params[:desc] != nil and params[:desc].length > 500
       @desc_too_long = true
     end
 
-    if @missing.size != 0 or @desc_too_long
+    if @missing or @desc_too_long
+      flash[:notice] = "Description was too long or missing required fields"
       return
     end
-    #
-    resource = Resource.create(resource_params)
 
-    #create all associated entries
-    has_many_hash = Resource.get_has_many_hashes(params)
-    has_many_hash.each_key do |key|
-      has_many_hash[key].each do |val|
-        if key == "audiences"
-          resource.audiences.create(val: val)
-        end
-        if key == "types"
-          resource.types.create(val: val)
-        end
-      end
+    @resource = Resource.create_resource(resource_params)
+
+    respond_to do |format|
+      format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
+      format.html
     end
-    # puts "success"
+
   end
 
   def update
