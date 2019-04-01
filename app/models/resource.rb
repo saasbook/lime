@@ -69,14 +69,14 @@ class Resource < ActiveRecord::Base
       # look at parent resources b
     end
 
-    if(Location.find(loc).parent != nil)
-      # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
-      # recusive call
-    end
-
-    if(Location.find(loc).child_ids != nil)
-      #same deal as parent shtuff
-    end
+    # if(Location.find(loc).parent != nil)
+    #   # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
+    #   # recusive call
+    # end
+    #
+    # if(Location.find(loc).child_ids != nil)
+    #   #same deal as parent shtuff
+    # end
 
     #return resources
   end

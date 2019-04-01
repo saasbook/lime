@@ -19,7 +19,8 @@ class ResourcesController < ApplicationController
     @resources = Resource.filter(resource_params).order(sort_by)
     if sort_by == "location"
       # if filtering by location
-      Resource.location_helper(params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
+      logger.debug("Here")
+      Resource.location_helper(resource_params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
     end
 
     respond_to do |format|
