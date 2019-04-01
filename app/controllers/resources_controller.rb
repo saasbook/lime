@@ -15,15 +15,13 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
-    logger.debug("sort = " + resource_params.to_s)
-    @resources = Resource.filter(resource_params).order(sort_by)
-    if sort_by == "location"
-      # if filtering by location
-      Resource.location_helper(params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
+    @resources = Resource.filter(resource_params)
+    if @resources != nil
+      @resources = @resources.order(sort_by)
     end
 
     respond_to do |format|
-      format.json {render :json => @resources.to_json(:include => Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym } ) }
+      format.json {render :json => @resources.to_json(:include => Resource.has_many_associations) }
       format.html
     end
   end
@@ -33,7 +31,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.find_by_id(id)
 
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym } ) }
+      format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
       format.html
     end
   end

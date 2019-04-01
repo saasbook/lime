@@ -15,7 +15,9 @@ class Resource < ActiveRecord::Base
   validates :desc, :presence => true, :length => {:maximum => 500} 
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
-  @@has_many_associations = Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym }
+  def self.has_many_associations
+    Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym }
+  end
 
   def self.filter(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h # convert ActiveRecord::Controller params into hash with symbol keys
@@ -24,7 +26,7 @@ class Resource < ActiveRecord::Base
     # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
     has_many_hash = {}
     params.each_key do |key|
-      if @@has_many_associations.include?(key)
+      if self.has_many_associations.include?(key)
         has_many_hash[key] = params[key].split(',').map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace
         params.delete(key) # remove has_many key from params
       end
@@ -36,7 +38,9 @@ class Resource < ActiveRecord::Base
     # return early if there are no has_many fields
     if has_many_hash.empty?
       return resources
-    else #todo - find a way to clean up this block. :(  [matching the has_many queries]
+    else #todo - find a way to clean up this block. :(  [matching the has_many queries is a potential bottleneck! O(NK) sorts and set operations
+          # where N = # records and K = # fields (max 10)]
+          # alternative is to do a 11 way join, and check the existence of each value of the query
       # for each of the candidate resources filtered by the singular parameters, check if it matches the has_many queries
       resources.find_each do |resource|
         associations_hash = {:types => resource.types, :audiences => resource.audiences, :client_tags => resource.client_tags,
