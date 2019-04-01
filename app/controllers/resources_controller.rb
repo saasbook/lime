@@ -15,13 +15,9 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
-    @resources = Resource.filter(resource_params)
+    @resources = Resource.location_helper(resource_params)
     if @resources != nil
        @resources = @resources.order(sort_by)
-    end
-    if params.include? :location
-      # if filtering by location
-      @resources = Resource.location_helper(resource_params, @resources)
     end
 
     respond_to do |format|

@@ -5,7 +5,6 @@ class Location < ActiveRecord::Base
 
   # locations = [US, California, Bay Area, Berkeley]
   def self.seed
-
   end
 
 end

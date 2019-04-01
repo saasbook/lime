@@ -45,4 +45,25 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     end
   end
 
+  describe 'location functionality' do
+    Resource.destroy_all
+    Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "USA",
+                             "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+    Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Berkeley",
+                             "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+    Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Bay Area",
+                             "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+    Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "California",
+                             "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+
+    it 'gets children locations' do
+      puts Resource.all.pretty_print_inspect
+      result = Resource.location_helper({:location => "Bay Area"})
+      expect(result.count).to eq 2
+      expect(result.where(title: "thing1")).not_to exist
+      expect(result.where(title: "thing2")).to exist
+      expect(result.where(title: "thing3")).to exist
+      expect(result.where(title: "thing4")).not_to exist
+    end
+  end
 end
