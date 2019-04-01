@@ -66,7 +66,6 @@ class Resource < ActiveRecord::Base
   # if the location has child locations, also return those locations
   def self.location_helper(params, resources)
     locations = params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].split(',')
-    logger.debug(params)
 
     locations.each do |loc|
       resources = self.find_parent_resources(loc, params).or(resources)

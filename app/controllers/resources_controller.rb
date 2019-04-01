@@ -19,8 +19,6 @@ class ResourcesController < ApplicationController
     @resources = Resource.filter(resource_params).order(sort_by)
     if params.include? :location
       # if filtering by location
-      logger.debug(resource_params.to_s)
-      logger.debug(params.to_s)
       @resources = Resource.location_helper(resource_params, @resources)
     end
 
