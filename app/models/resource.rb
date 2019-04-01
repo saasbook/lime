@@ -69,7 +69,7 @@ class Resource < ActiveRecord::Base
     logger.debug(params)
 
     locations.each do |loc|
-      resources = resources.merge(self.find_parent_resources(loc, params))
+      resources = self.find_parent_resources(loc, params).or(resources)
     end
 
     return resources
@@ -83,7 +83,7 @@ class Resource < ActiveRecord::Base
       # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
       # recusive call
       resources = self.filter(params)
-      resources.merge(self.find_parent_resources(parent, params))
+      resources.or(self.find_parent_resources(parent, params))
       return resources
     end
     return Resource.none
