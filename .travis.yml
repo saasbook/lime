@@ -18,6 +18,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 scripts:
+  - bundle exec rake db:rollback
+  - bundle exec rake db:migrate --trace RAILS_ENV=test
   - bundle exec rspec
   - ./cc-test-reporter format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
 
