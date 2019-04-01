@@ -11,7 +11,7 @@ class Resource < ActiveRecord::Base
   has_many :technologies
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :contact_email, :location, :types, :audiences, :presence => true
-  validates :desc, :presence => true, :length => {:maximum => 500}
+  validates :desc, :presence => true, :length => {:maximum => 500} 
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
   def self.has_many_associations
@@ -61,6 +61,14 @@ class Resource < ActiveRecord::Base
       return Resource.where(id: filtered.map(&:id))
     end
   end
+
+  #todo verify email and url beforehand?
+  def self.validate_email_url(email, url)
+  end
+
+  def self.get_required_resources
+    return [:title, :url, :contact_email, :location, :types, :audiences, :desc]
+  end 
 
 end
 
