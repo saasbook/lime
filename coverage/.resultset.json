@@ -2,6 +2,7 @@
   "RSpec": {
     "coverage": {
 <<<<<<< HEAD
+<<<<<<< HEAD
       "/Users/andrewlaw/cs169/proj/lime/spec/controller/resources_controller_spec.rb": [
         1,
         1,
@@ -17,12 +18,34 @@
         1,
         null,
         null,
+=======
+      "/Users/andrewlaw/cs169/proj/lime/spec/controller/resources_controller_spec.rb": [
+>>>>>>> get_testing
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
         1,
         1,
         1,
         1,
         1,
         1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+<<<<<<< HEAD
+=======
+        1,
+        1,
+>>>>>>> get_testing
         null,
         1,
         null,
@@ -41,6 +64,10 @@
         1,
         1,
         1,
+        null,
+        null,
+        1,
+        null,
         1,
         1,
         null,
@@ -101,7 +128,18 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019Spring/CS169/lime/config/environment.rb": [
+=======
+      "/Users/andrewlaw/cs169/proj/lime/spec/support/factory_girl.rb": [
+        1,
+        null,
+        1,
+        1,
+        null
+      ],
+      "/Users/andrewlaw/cs169/proj/lime/config/environment.rb": [
+>>>>>>> get_testing
         null,
         1,
         null,
@@ -546,6 +584,9 @@
         null,
         null,
         null,
+        null,
+        1,
+        null,
         null
       ],
 <<<<<<< HEAD
@@ -611,15 +652,107 @@
         null,
         null
       ],
+      "/Users/andrewlaw/cs169/proj/lime/app/controllers/resources_controller.rb": [
+        1,
+        1,
+        4,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        2,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        2,
+        2,
+        2,
+        1,
+        null,
+        2,
+        null,
+        0,
+        null,
+        null,
+        2,
+        2,
+        2,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        2,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
       "/Users/andrewlaw/cs169/proj/lime/app/controllers/application_controller.rb": [
 =======
       "/Users/antonio/Documents/2019Spring/CS169/lime/app/models/audience.rb": [
 >>>>>>> 73ddbc09b6cf68def1ab4921fa45c09a18981088
         1,
+        null,
         1,
         null
       ],
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> get_testing
       "/Users/andrewlaw/cs169/proj/lime/app/models/resource.rb": [
         1,
         1,
@@ -630,9 +763,13 @@
         1,
         1,
         1,
+<<<<<<< HEAD
 =======
       "/Users/antonio/Documents/2019Spring/CS169/lime/app/models/type.rb": [
 >>>>>>> 73ddbc09b6cf68def1ab4921fa45c09a18981088
+=======
+        1,
+>>>>>>> get_testing
         1,
         1,
         null,
@@ -650,6 +787,7 @@
         null,
         null,
         1,
+<<<<<<< HEAD
         1,
         0,
         0,
@@ -658,6 +796,16 @@
         null,
         null,
         1,
+=======
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+>>>>>>> get_testing
         1,
         null,
         null,
@@ -690,6 +838,7 @@
         null,
         null,
         null,
+<<<<<<< HEAD
         null
       ]
     },
@@ -698,5 +847,41 @@
 =======
     "timestamp": 1554086600
 >>>>>>> 73ddbc09b6cf68def1ab4921fa45c09a18981088
+=======
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1554086734
+>>>>>>> get_testing
   }
 }

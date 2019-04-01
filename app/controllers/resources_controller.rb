@@ -1,7 +1,11 @@
 class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
+<<<<<<< HEAD
                                       :colleges, :availabilities, :innovation_stages, :topics, :technologies, :desc, :types => [], :audiences => [])
+=======
+                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences)
+>>>>>>> get_testing
   end
 
   # assumes API GET request in this format :
@@ -15,11 +19,22 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
+<<<<<<< HEAD
     @resources = Resource.filter(resource_params).order(sort_by)
     if params.include? :location
       # if filtering by location
       Resource.location_helper(resource_params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
 
+=======
+    logger.debug("sort = " + resource_params.to_s)
+    @resources = Resource.filter(resource_params)
+    if @resources != nil
+      @resources = @resources.order(sort_by)
+    end
+    if sort_by == "location"
+      # if filtering by location
+      @resources = Resource.location_helper(params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
+>>>>>>> get_testing
     end
 
     respond_to do |format|

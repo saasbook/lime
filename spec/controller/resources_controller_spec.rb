@@ -1,5 +1,20 @@
 require 'rspec'
 require 'rails_helper'
+<<<<<<< HEAD
+=======
+require 'support/factory_girl'
+
+FactoryGirl.define do
+
+  factory :resource do
+    title "Resource Title"
+    url "http://google.com"
+    contact_email "andrewlaw8@gmail.com"
+    location "California"
+    desc "Ex"
+  end
+end
+>>>>>>> get_testing
 
 RSpec.describe ResourcesController, :type => :controller do
   it 'responds successfully' do

@@ -18,7 +18,7 @@ def create_resource(record)
   }
   fields_hash.each do |field, association|
     record[field].each do |val|
-      association.create({:val => val, :created_at => resource.created_at, :updated_at => resource.updated_at})
+      association.create(:val => val)
     end
   end
 end
