@@ -45,4 +45,40 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     end
   end
 
+  describe 'location functionality' do
+    Resource.destroy_all
+    Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+                             "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+    Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Berkeley",
+                             "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+    Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "USA",
+                             "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+    Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "California",
+                             "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+
+    Location.seed
+
+    it 'gets parent locations' do
+      puts Resource.all.pretty_print_inspect
+      puts Location.all.pretty_print_inspect
+      result = Resource.location_helper({:location => "California"})
+
+      expect(result.count).to eq 3
+      expect(result.where(title: "thing1")).to exist
+      expect(result.where(title: "thing2")).not_to exist
+      expect(result.where(title: "thing3")).to exist
+      expect(result.where(title: "thing4")).to exist
+    end
+
+    it 'returns no results given an invalid location' do
+      result = Resource.location_helper({:location => "fake location"})
+      expect(result.count).to eq 0
+    end
+
+    it 'does not null pointer given global' do
+      result = Resource.location_helper({:location => "Global"})
+      expect(result.count).to eq 1
+      expect(result.where(title: "thing1")).to exist
+    end
+  end
 end
