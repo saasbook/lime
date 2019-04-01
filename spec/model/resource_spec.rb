@@ -51,7 +51,7 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
                              "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
     Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Berkeley",
                              "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
-    Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Bay Area",
+    Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "USA",
                              "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
     Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "California",
                              "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
@@ -63,10 +63,10 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       puts Location.all.pretty_print_inspect
       result = Resource.location_helper({:location => "California"})
 
-      expect(result.count).to eq 2
+      expect(result.count).to eq 3
       expect(result.where(title: "thing1")).to exist
       expect(result.where(title: "thing2")).not_to exist
-      expect(result.where(title: "thing3")).not_to exist
+      expect(result.where(title: "thing3")).to exist
       expect(result.where(title: "thing4")).to exist
     end
 
