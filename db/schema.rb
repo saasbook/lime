@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.index ["resources_id"], name: "index_innovation_stages_on_resources_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.integer "resources_id"
+    t.integer "child_id"
+    t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_locations_on_child_id"
+    t.index ["resources_id"], name: "index_locations_on_resources_id"
+  end
+
   create_table "population_focuses", force: :cascade do |t|
     t.integer "resources_id"
     t.string "val"
@@ -73,7 +83,6 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.string "url"
     t.string "contact_email"
     t.text "desc"
-    t.string "location"
     t.string "resource_email"
     t.string "resource_phone"
     t.string "address"

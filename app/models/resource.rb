@@ -69,15 +69,16 @@ class Resource < ActiveRecord::Base
     logger.debug(params)
 
     locations.each do |loc|
-      resources = resources.or(self.find_parent_resources(loc, params)).or()
+      resources = resources.or(self.find_parent_resources(loc, params))
     end
 
     return resources
   end
 
   def self.find_parent_resources(location, params)
-    parent = Location.find(location).parent
-    if(parent != nil)
+
+    if Location.exists?(location) and Location.find(location).parent
+      parent = Location.find(location).parent
       params[:location] = parent
       # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
       # recusive call
