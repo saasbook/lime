@@ -21,7 +21,7 @@ class ResourcesController < ApplicationController
       # if filtering by location
       logger.debug(resource_params.to_s)
       logger.debug(params.to_s)
-      Resource.location_helper(resource_params, @resources)
+      @resources = Resource.location_helper(resource_params, @resources)
     end
 
     respond_to do |format|
