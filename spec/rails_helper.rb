@@ -2,6 +2,10 @@
 require 'simplecov'
 SimpleCov.start
 require 'spec_helper'
+
+# Factory girl
+require 'support/factory_girl'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production

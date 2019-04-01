@@ -60,6 +60,12 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.index ["resource_id"], name: "index_innovation_stages_on_resource_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "population_focuses", force: :cascade do |t|
     t.integer "resource_id"
     t.string "val"
@@ -73,7 +79,6 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.string "url"
     t.string "contact_email"
     t.text "desc"
-    t.string "location"
     t.string "resource_email"
     t.string "resource_phone"
     t.string "address"
@@ -82,6 +87,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.datetime "deadline"
     t.text "notes"
     t.string "funding_amount"
+    t.string "location"
     t.integer "approval_status"
     t.string "approved_by"
     t.integer "flagged"

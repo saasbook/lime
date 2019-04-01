@@ -1,4 +1,4 @@
-Given /the following resouces exist/ do |resources_table|
+Given /the following resources exist/ do |resources_table|
   resources_table.hashes.each do |resource|
     Resource.create resource
   end

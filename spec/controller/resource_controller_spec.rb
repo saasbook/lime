@@ -23,7 +23,7 @@ RSpec.describe ResourcesController, type: :controller do |variable|
 		post :create, params: {title: "something2",contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions"}
 		expect(Resource.where(title: "something")).to exist
 		expect(Resource.where(title: "something2")).not_to exist
-	end
+    end
   end
 end
 
