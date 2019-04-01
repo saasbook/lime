@@ -52,4 +52,3 @@ When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ 
     #url = url.include?('?') ? %/#{url}&#{query}/ : %/#{url}?#{query}/
   #end
 end
-

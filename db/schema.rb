@@ -13,51 +13,61 @@
 ActiveRecord::Schema.define(version: 2019_03_21_100624) do
 
   create_table "audiences", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_audiences_on_resource_id"
+    t.index ["resources_id"], name: "index_audiences_on_resources_id"
   end
 
   create_table "availabilities", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_availabilities_on_resource_id"
+    t.index ["resources_id"], name: "index_availabilities_on_resources_id"
   end
 
   create_table "campuses", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_campuses_on_resource_id"
+    t.index ["resources_id"], name: "index_campuses_on_resources_id"
   end
 
   create_table "client_tags", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_client_tags_on_resource_id"
+    t.index ["resources_id"], name: "index_client_tags_on_resources_id"
   end
 
   create_table "colleges", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_colleges_on_resource_id"
+    t.index ["resources_id"], name: "index_colleges_on_resources_id"
   end
 
   create_table "innovation_stages", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_innovation_stages_on_resource_id"
+    t.index ["resources_id"], name: "index_innovation_stages_on_resources_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.integer "resources_id"
+    t.integer "child_id"
+    t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_locations_on_child_id"
+    t.index ["resources_id"], name: "index_locations_on_resources_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -69,11 +79,11 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
   end
 
   create_table "population_focuses", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_population_focuses_on_resource_id"
+    t.index ["resources_id"], name: "index_population_focuses_on_resources_id"
   end
 
   create_table "resources", force: :cascade do |t|
@@ -99,27 +109,27 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
   end
 
   create_table "technologies", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_technologies_on_resource_id"
+    t.index ["resources_id"], name: "index_technologies_on_resources_id"
   end
 
   create_table "topics", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_topics_on_resource_id"
+    t.index ["resources_id"], name: "index_topics_on_resources_id"
   end
 
   create_table "types", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "resources_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["resource_id"], name: "index_types_on_resource_id"
+    t.index ["resources_id"], name: "index_types_on_resources_id"
   end
 
 end

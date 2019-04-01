@@ -30,9 +30,12 @@ Feature: display list of resources filtered by any combination of available tags
       | California |
     Then I should receive a JSON object
     And I should receive "Girls in Engineering of California"
-    And I should receive "Girls in Engineering"
-    And I should receive "Society of Women Engineers"
-    And I should receive "UC Davis Feminist Research Institute"
+    And I should see no other resources
+
+  Scenario: search for all resources within California and Berkeley
+    When I make a GET request to the API with parameters: "location=california,Berkeley"
+    Then I should receive a JSON object
+    And I should receive "Girls in Engineering of California"
     And I should see no other resources
 
   Scenario: if no resources available, return parent locations resources
