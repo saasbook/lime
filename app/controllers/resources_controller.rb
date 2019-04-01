@@ -21,7 +21,7 @@ class ResourcesController < ApplicationController
     end
     if params.include? :location
       # if filtering by location
-      Resource.location_helper(resource_params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
+      @resources = Resource.location_helper(resource_params, @resources)
     end
 
     respond_to do |format|
