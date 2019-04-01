@@ -15,7 +15,12 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
+    logger.debug("sort = " + resource_params.to_s)
     @resources = Resource.filter(resource_params).order(sort_by)
+    if sort_by == "location"
+      # if filtering by location
+      location_helper(resource_params)
+    end
 
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym } ) }
@@ -32,6 +37,7 @@ class ResourcesController < ApplicationController
       format.html
     end
   end
+
 
   def new
 
@@ -71,6 +77,14 @@ class ResourcesController < ApplicationController
   end
 
   def destroy
+
+  end
+
+  # if filtering by location, filtering should behave as the following
+  # if the location has no resouces, find the parent location, and return resources for the parent location
+  # if the location has child locations, also return those locations
+  def location_helper(params)
+    location = params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s
 
   end
 
