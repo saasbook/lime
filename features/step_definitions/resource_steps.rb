@@ -1,4 +1,4 @@
-Given /the following resouces exist/ do |resources_table|
+Given /the following resources exist/ do |resources_table|
   resources_table.hashes.each do |resource|
     Resource.create resource
   end
@@ -29,11 +29,6 @@ end
 
 And /I should receive (.*)/ do |res|
   #parse_json(resource) => check if json has this res by name
-  json = ActiveSupport::JSON.decode(@response.body)
-  json['resource']['name'].should == res
-end
-
-Then /I should receive (.*)/ do |res|
   json = ActiveSupport::JSON.decode(@response.body)
   json['resource']['name'].should == res
 end

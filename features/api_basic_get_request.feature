@@ -151,3 +151,8 @@ Feature: display list of resources filtered by any combination of available tags
     When I make a GET request to the API with parameters: "deadline="
     Then I should receive a JSON object
     And I should receive
+
+  Scenario: malformed API request
+    # should be notified that the request was malformed
+    When I make a GET request to the API with parameters: "titl=Feminist Research Institute"
+    Then I should receive

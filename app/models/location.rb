@@ -1,6 +1,11 @@
 class Location < ActiveRecord::Base
-  belongs_to :resource
-  belongs_to :parent, :class_name => "Location"
-  has_many :child, :class_name => "Location"
+  belongs_to :parent, :class_name => "Location", :foreign_key => "parent_location_id"
+  has_many :child, :class_name => "Location", :foreign_key => "child_location_id"
   validates :parent, :presence => true
+
+  # locations = [US, California, Bay Area, Berkeley]
+  def self.seed
+
+  end
+
 end

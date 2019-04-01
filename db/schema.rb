@@ -70,6 +70,12 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.index ["resources_id"], name: "index_locations_on_resources_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "population_focuses", force: :cascade do |t|
     t.integer "resources_id"
     t.string "val"
@@ -91,6 +97,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.datetime "deadline"
     t.text "notes"
     t.string "funding_amount"
+    t.string "location"
     t.integer "approval_status"
     t.string "approved_by"
     t.integer "flagged"
