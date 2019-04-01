@@ -27,3 +27,20 @@ Then /I should receive all the resources/ do
    expect(all("table#resources tr").count).to eq 55
 end
 
+And /I should receive (.*)/ do |res|
+  #parse_json(resource) => check if json has this res by name
+  json = ActiveSupport::JSON.decode(@response.body)
+  json['resource']['name'].should == res
+end
+
+Then /I should receive (.*)/ do |res|
+  json = ActiveSupport::JSON.decode(@response.body)
+  json['resource']['name'].should == res
+end
+
+When /I make a (GET|POST|PATCH|PUT|DELETE) request to to "(.*?)" with:$/) do |method, url, params| do
+  unless param.hashes.empty?
+    query = param.hashes.first.map{|key, value| %/#{key}=#{value}/}.join("&")
+    url = url.include?('?') ? %/#{url}&#{query}/ : %/#{url}?#{query}/
+end
+
