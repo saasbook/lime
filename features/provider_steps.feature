@@ -31,12 +31,4 @@ Scenario: adding a resource called "The Coaching Fellowship" with certain fields
     When I press "Submit"
     Then I should see "Please fill in the required fields."
     And I see the fields "Resource URL, Email-Contact, Resource Description" highlighted red.
-
-
-
-
-    
-    
-    
-    
     

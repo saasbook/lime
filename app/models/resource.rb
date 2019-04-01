@@ -105,7 +105,7 @@ class Resource < ActiveRecord::Base
       return self.filter(params)
     end
 
-    locations = Resource.find_parent_locations(location)
+    locations = Resource.ancestor_locations(location)
     resources = Resource.none
     locations.each do |location|
       params[:location] = location
@@ -115,12 +115,12 @@ class Resource < ActiveRecord::Base
   end
 
   # returns list of locations that match given location, including the location and all of its ancestors
-  def self.find_parent_locations(location)
+  def self.ancestor_locations(location)
     if location == nil or !Location.exists?(:val => location)
       return []
     end
     parent = Location.find_by_val(location).parent
-    return [location] + self.find_parent_locations(parent&.val)
+    return [location] + self.ancestor_locations(parent&.val)
   end
 
   #todo verify email and url beforehand?
