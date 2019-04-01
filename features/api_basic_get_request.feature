@@ -5,16 +5,64 @@ Feature: display list of resources filtered by any combination of available tags
   So that I can get JSON/XML data of resource types that are relevant to me.
 
   Background: resources have been added to database
-
+  
     Given the following resources exist:
-      | title                        | url | contact_email | location | types | audiences |
-      | Feminist Research Institute  |
-
-    And the following audiences exist
-      | resource_id | audience |
-
-    And the following resource_types exist
-      | resource_id | resource_type |
+    | Resource                                                                  | Resource Type | Audience      | Population Focus | Location
+    | Feminist Research Institute                                               |               | Undergraduate | Women            |
+    | FEM Tech Berkeley                                                         |               | Undergraduate | Women            |
+    | Girls in Engineering                                                      |               |               | Women            | Bay Area
+    | Core Citris Seed Funding                                                  |               |               | Women            |
+    | Graduate Women in Engineering                                             |               |               | Women            |
+    | BERKELEYBESSA                                                             |               | Undergraduate |                  | Bay Area
+    | Berkeley STEM Equity and Inclusion Initiative                             |               | Undergraduate |                  | Bay Area
+    | Stanford Clayman Institute for Gender Research                            |               |               |                  | Bay Area
+    | Global Social Venture Competition                                         |               |               |                  | Bay Area
+    | Berkeley Blockchain Xcelerator                                            |               |               |                  | Bay Area
+    | Berkeley SkyDeck Accelerator                                              |               |               |                  | Bay Area
+    | Berkeley Cleantech University Prize (CUP)                                 |               |               |                  | Bay Area
+    | Berkeley Angel Network                                                    |               |               |                  | Bay Area
+    | Anita Bord Institute                                                      |               |               |                  | Bay Area
+    | Lean In                                                                   |               |               |                  | Bay Area
+    | MPower Financing WOMEN IN STEM SCHOLARSHIP                                | Scholarship   | Undergraduate |                  |
+    | Zonta International Women in Technology Scholarship                       | Scholarship   | Undergraduate |                  |
+    | Box Diversity Scholarship                                                 | Scholarship   | Undergraduate |                  |
+    | Jack Larson Scholarship-Graduate                                          | Scholarship   |               |                  |
+    | Jack Larson Scholarship-undergraduate                                     | Scholarship   |               |                  |
+    | Mildred Jordan Sharp Scholarship                                          | Scholarship   |               |                  |
+    | Institute of International Studies Undergraduate Merit Scholarship        | Scholarship   |               |                  |
+    | Berkeley Research on Contemporary India Program (BRCIP) Scholarship       | Scholarship   |               |                  |
+    | Society of Women Engineer                                                 |               | Undergraduate |                  |
+    | Women in Science and Engineering Theme Program (WiSE)                     |               | Undergraduate |                  |
+    | The Hispanic Engineers and Scientists (HES)                               |               | Undergraduate |                  |
+    | Association of Women in EECS (AWE)                                        |               | Undergraduate |                  |
+    | Berkeley STEM Equity and Inclusion Initiative                             |               | Undergraduate |                  |
+    | Phi Sigma Rho - Female Engineering/STEM sorority                          |               | Undergraduate |                  |
+    | Women Techmakers                                                          |               | Undergraduate |                  |
+    | Committee on the Status of Women in Computing Research                    |               | Undergraduate |                  |
+    | American Indian Science and Engineering Society                           |               | Undergraduate |                  |
+    | ACM Richard Tapia Celebration of Diversity in Computing                   |               | Undergraduate |                  |
+    | Adobe Research Women-in-Technology                                        |               | Undergraduate |                  |
+    | Out in Science, Technology, Engineering and Mathematics                   |               | Undergraduate |                  |
+    | SMART Mentoring                                                           |               | Undergraduate |                  |
+    | Next Generation Women Leaders award                                       |               | Undergraduate |                  |
+    | Innovation Grants                                                         |               | Undergraduate |                  |
+    | Major Insights Mentorship                                                 |               | Undergraduate |                  |
+    | Getting into Graduate School (GiGS) Mentors                               |               | Undergraduate |                  |
+    | International Peer Mentorship Program                                     |               | Undergraduate |                  |
+    | Berkeley Career Network                                                   |               | Undergraduate |                  |
+    | National Center for Women in Information Technology                       |               | Undergraduate |                  |
+    | Girl Geek Dinner                                                          |               | Undergraduate |                  |
+    | Women in Science & Engineering Leadership Institute (WISELI)              |               | Undergraduate |                  |
+    | UC Davis Feminist Research Institute                                      |               | Undergraduate |                  |
+    | Center for Women in Technology (CWIT)                                     |               | Undergraduate |                  |
+    | Black Engineers Association (BEA)                                         |               | Undergraduate |                  |
+    | CALESS                                                                    |               | Undergraduate |                  |
+    | STEM Resource Center                                                      |               | Undergraduate |                  |
+    | Ingenieros Unidos                                                         |               | Undergraduate |                  |
+    | National Society of Black Engineers (UC Merced)                           |               | Undergraduate |                  |
+    | National Society of Black Engineers (UC Santa Cruz)                       |               | Undergraduate |                  |
+    | Society of Hispanic Professional Engineers                                |               | Undergraduate |                  |
+    | Stanford Women in Technology                                              |               | Undergraduate |                  |
 
   Scenario: restrict to resources pertaining to women
     When I make a GET request to the API with parameters: "population_focus=women"
