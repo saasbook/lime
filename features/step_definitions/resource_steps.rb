@@ -1,6 +1,7 @@
-Given /the following resources exist/ do |resources_table|
+Given /the following resources exist:/ do |resources_table|
   resources_table.hashes.each do |resource|
-    Resource.create resource
+   Resource.create_resource resource
+   true
   end
 end
 
@@ -17,25 +18,37 @@ Then /the following resource_types exist/ do |resource_types_table|
 end
 
 Then /the following locations exist/ do |locations_table|
+  global = Location.create :val => "Global"
+  global.save :validate => false
   locations_table.hashes.each do |location|
-    Location.create location
+    parent = Location.where(:val => location['parent'].to_s).first
+    Location.create! :val => location['location'], :parent => parent
   end
 end
 
-# 55 Total resouces
+Then /I should receive a JSON object/ do
+    JSON.parse(@response.body)
+    return true
+  rescue JSON::ParserError => e
+    return false
+end
+
 Then /I should receive all the resources/ do
+   json = ActiveSupport::JSON.decode(@response.body)
+   byebug
+   expect(Resource.all.count).eq? json.length
    expect(all("table#resources tr").count).to eq 55
 end
 
-And /I should receive (.*)/ do |res|
+Then /I should receive (.*)/ do |res|
   #parse_json(resource) => check if json has this res by name
   json = ActiveSupport::JSON.decode(@response.body)
   json['resource']['name'].should == res
 end
 
-When /I make a (GET|POST|PATCH|PUT|DELETE) request to to "(.*?)" with:$/) do |method, url, params| do
-  unless param.hashes.empty?
-    query = param.hashes.first.map{|key, value| %/#{key}=#{value}/}.join("&")
-    url = url.include?('?') ? %/#{url}&#{query}/ : %/#{url}?#{query}/
+When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ do |method, url,  params|
+  # #{root_url}
+    #query = param.hashes.first.map{|key, value| %/#{key}=#{value}/}.join("&")
+    #url = url.include?('?') ? %/#{url}&#{query}/ : %/#{url}?#{query}/
+  #end
 end
-

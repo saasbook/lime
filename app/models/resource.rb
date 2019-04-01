@@ -111,10 +111,11 @@ class Resource < ActiveRecord::Base
 
   # returns list of locations that match given location, including the location and all of its ancestors
   def self.find_parent_locations(location)
-    if location == nil or !Location.exists?(location)
+    if location == nil or !Location.exists?(:val => location)
       return []
     end
-    return [location] + self.find_parent_locations(Location.find(location).parent)
+    parent = Location.find_by_val(location).parent
+    return [location] + self.find_parent_locations(parent&.val)
   end
 
   # def self.find_parent_resources(location, params)
