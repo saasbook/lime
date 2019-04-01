@@ -19,7 +19,7 @@ class ResourcesController < ApplicationController
     @resources = Resource.filter(resource_params).order(sort_by)
     if sort_by == "location"
       # if filtering by location
-      location_helper(resource_params)
+      location_helper(params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s)
     end
 
     respond_to do |format|
@@ -83,10 +83,18 @@ class ResourcesController < ApplicationController
   # if filtering by location, filtering should behave as the following
   # if the location has no resouces, find the parent location, and return resources for the parent location
   # if the location has child locations, also return those locations
-  def location_helper(params)
-    location = params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s
+  def location_helper(loc)
 
-    if(@resources.)
+
+    if(@resources.size == 0)
+      # look at parent resources
+    end
+
+    if(Location.find(loc).parent != nil)
+      # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
+      # recusive call
+    end
+
   end
 
 end
