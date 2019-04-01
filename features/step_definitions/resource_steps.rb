@@ -28,27 +28,44 @@ end
 
 Then /I should receive a JSON object/ do
     JSON.parse(@response.body)
-    return true
+    true
   rescue JSON::ParserError => e
-    return false
+    false
 end
 
 Then /I should receive all the resources/ do
    json = ActiveSupport::JSON.decode(@response.body)
-   byebug
    expect(Resource.all.count).eq? json.length
    expect(all("table#resources tr").count).to eq 55
 end
 
-Then /I should receive (.*)/ do |res|
-  #parse_json(resource) => check if json has this res by name
-  json = ActiveSupport::JSON.decode(@response.body)
-  json['resource']['name'].should == res
+Then /the JSON should contain "(.*)"/ do |res|
+  json = JSON.parse(@response.body)
+  expect(json.any? {|r| r["title"] == res}).to be true
+end
+
+Then /I should not see resources other than "(.*)"/ do |resource|
+  json = JSON.parse(@response.body)
+  Resource.all.each do |res|
+    if res != resource
+      expect(json.include? res).to be false
+    end
+  end
 end
 
 When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ do |method, url,  params|
-  # #{root_url}
-    #query = param.hashes.first.map{|key, value| %/#{key}=#{value}/}.join("&")
-    #url = url.include?('?') ? %/#{url}&#{query}/ : %/#{url}?#{query}/
-  #end
+  case method
+    when "GET"
+      @response = page.driver.get(url, params.hashes.first)
+    when "POST"
+      @response = page.driver.post(url, params.hashes.first)
+    when "PATCH"
+      @response = page.driver.patch(url, params.hashes.first)
+    when "PUT"
+      @response = page.driver.put(url, params.hashes.first)
+    when "DELETE"
+      @response = page.driver.delete(url, params.hashes.first)
+    else
+      false
+  end
 end
