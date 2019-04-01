@@ -30,7 +30,6 @@ Feature: display list of resources filtered by any combination of available tags
   Scenario: restrict to resources pertaining to undergraduates
     When I make a GET request to the API with parameters: "audiences=Undergraduate"
 
-
   Scenario: do not restrict by any tag
     When I make a GET request to the API with no parameters
     Then I should receive all the resources
