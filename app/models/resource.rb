@@ -94,29 +94,42 @@ class Resource < ActiveRecord::Base
   # if filtering by location, filtering should behave as the following
   # if the location has no resources, find the parent location, and return resources for the parent location
   # if the location has child locations, also return those locations
-  def self.location_helper(params, resources)
-    locations = params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].split(',')
-
-    locations.each do |loc|
-      resources = self.find_parent_resources(loc, params).or(resources)
+  def self.location_helper(params)
+    location = params[:location]
+    if location == nil
+      return self.filter(params)
     end
 
+    locations = Resource.find_parent_locations(location)
+    resources = Resource.none
+    locations.each do |location|
+      params[:location] = location
+      resources = resources.or(self.filter(params))
+    end
     return resources
   end
 
-  def self.find_parent_resources(location, params)
-
-    if Location.exists?(location) and Location.find(location).parent
-      parent = Location.find(location).parent
-      params[:location] = parent
-      # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
-      # recusive call
-      resources = self.filter(params)
-      resources.or(self.find_parent_resources(parent, params))
-      return resources
+  # returns list of locations that match given location, including the location and all of its ancestors
+  def self.find_parent_locations(location)
+    if location == nil or !Location.exists?(:val => location)
+      return []
     end
-    return Resource.none
+    parent = Location.find_by_val(location).parent
+    return [location] + self.find_parent_locations(parent&.val)
   end
+
+  # def self.find_parent_resources(location, params)
+  #   if Location.exists?(location) and Location.find(location).parent
+  #     parent = Location.find(location).parent
+  #     params[:location] = parent
+  #     # make a hash of :location to loc, call Resource.filter, then combine the 2 lists, if parent has parent then do
+  #     # recusive call
+  #     resources = self.filter(params)
+  #     resources.or(self.find_parent_resources(parent, params))
+  #     return resources
+  #   end
+  #   return Resource.none
+  # end
 
   #todo verify email and url beforehand?
   def self.validate_email_url(email, url)
