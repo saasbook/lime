@@ -13,7 +13,7 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.datetime :deadline        # validate
       t.text :notes               # validate, 1000 chars
       t.string :funding_amount    # validate
-      t.string :location          #
+      t.string :location          # required
       t.integer :approval_status  # hidden
       t.string :approved_by       # hidden
       t.integer :flagged          # hidden?? yes
@@ -22,6 +22,7 @@ class CreateResources < ActiveRecord::Migration[5.2]
     end
 
     create_table :locations do |t|
+      t.belongs_to :parent, :class_name => "Location"
       t.string :val
       t.timestamps
     end

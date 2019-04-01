@@ -61,9 +61,11 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
   end
 
   create_table "locations", force: :cascade do |t|
+    t.integer "parent_id"
     t.string "val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_locations_on_parent_id"
   end
 
   create_table "population_focuses", force: :cascade do |t|
