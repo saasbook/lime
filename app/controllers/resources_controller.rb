@@ -15,11 +15,10 @@ class ResourcesController < ApplicationController
       sort_by = nil
     end
 
-    logger.debug("sort = " + resource_params.to_s)
+
     @resources = Resource.filter(resource_params).order(sort_by)
-    if sort_by == "location"
+    if params.include? :location
       # if filtering by location
-      logger.debug("Here")
       Resource.location_helper(resource_params.to_h.map {|k,v| [k.to_sym, v]}.to_h[:location].to_s, @resources)
     end
 
