@@ -534,6 +534,13 @@
         null,
         null
       ],
+      "/Users/andrewlaw/cs169/proj/lime/spec/model/resource_spec.rb": [
+        1,
+        null,
+        1,
+        null,
+        null
+      ],
       "/Users/andrewlaw/cs169/proj/lime/spec/requests/resource_management_spec.rb": [
         1,
         1,
@@ -760,6 +767,6 @@
         null
       ]
     },
-    "timestamp": 1554103338
+    "timestamp": 1554140381
   }
 }
