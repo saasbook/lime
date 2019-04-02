@@ -83,7 +83,13 @@ class Resource < ActiveRecord::Base
       end
     end
 
+    # begin
+    #   resource = Resource.create!(resource_hash)
+    # rescue Exception
+    #   return
+    # end
     resource = Resource.create!(resource_hash)
+    
     fields_hash = self.get_associations_hash(resource)
     fields_hash.each do |field, association|
       if params[field] != nil

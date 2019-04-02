@@ -53,10 +53,16 @@ class ResourcesController < ApplicationController
       @desc_too_long = true
     end
 
-    if @missing or @desc_too_long
-      flash[:notice] = "Description was too long or missing required fields"
+    if @missing
+      flash[:notice] = "Please fill in the required fields."
+      return
+    elsif @desc_too_long
+      flash[:notice] = "Description was too long."
       return
     end
+
+    flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
+    # redirect_to 'resources/new'
 
     @resource = Resource.create_resource(resource_params)
 
