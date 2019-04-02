@@ -43,6 +43,15 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       expect(result.where(title: "thing3")).not_to exist
       expect(result.where(title: "thing4")).not_to exist
     end
+
+    it 'returns all resources if no filter is specified' do
+      result = Resource.filter({})
+      expect(result.count).to eq 4
+      expect(result.where(title: "thing1")).to exist
+      expect(result.where(title: "thing2")).to exist
+      expect(result.where(title: "thing3")).to exist
+      expect(result.where(title: "thing4")).to exist
+    end
   end
 
   describe 'location functionality' do
