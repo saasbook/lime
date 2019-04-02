@@ -1,1 +1,26 @@
-<h1> New </h1>
+<h1>Add a new resource </h1>
+
+<%= form_tag("/resources", method: "post") do %>
+    <%= label_tag(:title, "Resource name") %>
+    <%= text_field_tag(:title) %>
+
+    <%= label_tag(:url, "Resource URL") %>
+    <%= text_field_tag(:url) %>
+
+    <%= label_tag(:contact_email, "Email-Contact") %>
+    <%= text_field_tag(:contact_email) %>
+
+    <%= label_tag(:desc, "Resource Description") %>
+    <%= text_field_tag(:desc) %>
+
+    <%= label_tag(:types, "Resource Type") %>
+    <%= select_tag(:types, options_for_select([['Networks', 'Networks'], ['Fellowships & Scholarships', 'Fellowships & Scholarships']])) %>
+
+    <%= label_tag(:audiences, "Audience") %>
+    <%= select_tag(:audiences, options_for_select([['Undergraduate Students', 'Undergraduate Students'], ['Graduate Students', 'Graduate Students']])) %>
+
+    <%= label_tag(:location, "Location") %>
+    <%= select_tag(:location, options_for_select(['Global', 'Global'], ['United States', 'United States'])) %>
+
+    <%= submit_tag("Submit") %>
+<% end %>

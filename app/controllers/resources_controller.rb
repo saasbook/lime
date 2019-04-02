@@ -38,7 +38,8 @@ class ResourcesController < ApplicationController
 
 
   def new
-
+    render template: "resources/new.html.erb"
+    # render "resources/new"
   end
 
   def create
