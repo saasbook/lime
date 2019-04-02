@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-01T19:56:51-07:00">2019-04-01T19:56:51-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-01T21:10:22-07:00">2019-04-01T21:10:22-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -163,7 +163,7 @@
       <tr>
         <td class="strong"><a href="#c51333dd4128755b7be29f22d3eac4017df6f53b" class="src_link" title="app/models/resource.rb">app/models/resource.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>142</td>
+        <td>137</td>
         <td>70</td>
         <td>70</td>
         <td>0</td>
@@ -1989,343 +1989,313 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
-          
-          
-          <code class="ruby">    # begin</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="87">
-          
-          
-          <code class="ruby">    #   resource = Resource.create!(resource_hash)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="88">
-          
-          
-          <code class="ruby">    # rescue Exception</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="89">
-          
-          
-          <code class="ruby">    #   return</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="90">
-          
-          
-          <code class="ruby">    # end</code>
-        </li>
-      
-        <li class="covered" data-hits="16" data-linenumber="91">
+        <li class="covered" data-hits="16" data-linenumber="86">
           <span class="hits">16</span>
           
           <code class="ruby">    resource = Resource.create!(resource_hash)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="92">
+        <li class="never" data-hits="" data-linenumber="87">
           
           
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="93">
+        <li class="covered" data-hits="16" data-linenumber="88">
           <span class="hits">16</span>
           
           <code class="ruby">    fields_hash = self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="94">
+        <li class="covered" data-hits="16" data-linenumber="89">
           <span class="hits">16</span>
           
           <code class="ruby">    fields_hash.each do |field, association|</code>
         </li>
       
-        <li class="covered" data-hits="160" data-linenumber="95">
+        <li class="covered" data-hits="160" data-linenumber="90">
           <span class="hits">160</span>
           
           <code class="ruby">      if params[field] != nil</code>
         </li>
       
-        <li class="covered" data-hits="32" data-linenumber="96">
+        <li class="covered" data-hits="32" data-linenumber="91">
           <span class="hits">32</span>
           
           <code class="ruby">        params[field].each do |val|</code>
         </li>
       
-        <li class="covered" data-hits="81" data-linenumber="97">
+        <li class="covered" data-hits="81" data-linenumber="92">
           <span class="hits">81</span>
           
           <code class="ruby">          association.create(:val =&gt; val)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="98">
+        <li class="never" data-hits="" data-linenumber="93">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="never" data-hits="" data-linenumber="94">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="100">
+        <li class="never" data-hits="" data-linenumber="95">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="101">
+        <li class="covered" data-hits="16" data-linenumber="96">
           <span class="hits">16</span>
           
           <code class="ruby">    return resource</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="97">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="103">
+        <li class="never" data-hits="" data-linenumber="98">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="104">
+        <li class="never" data-hits="" data-linenumber="99">
           
           
           <code class="ruby">  # this method is here</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
+        <li class="never" data-hits="" data-linenumber="100">
           
           
           <code class="ruby">  # if filtering by location, filtering should behave as the following</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="106">
+        <li class="never" data-hits="" data-linenumber="101">
           
           
           <code class="ruby">  # if the location has no resources, find the parent location, and return resources for the parent location</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="107">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby">  # if the location has child locations, also return those locations</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="108">
+        <li class="covered" data-hits="1" data-linenumber="103">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.location_helper(params)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="109">
+        <li class="covered" data-hits="6" data-linenumber="104">
           <span class="hits">6</span>
           
           <code class="ruby">    location = params[:location]</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="110">
+        <li class="covered" data-hits="6" data-linenumber="105">
           <span class="hits">6</span>
           
           <code class="ruby">    if location == nil</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="111">
+        <li class="covered" data-hits="3" data-linenumber="106">
           <span class="hits">3</span>
           
           <code class="ruby">      return self.filter(params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="112">
+        <li class="never" data-hits="" data-linenumber="107">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="113">
+        <li class="never" data-hits="" data-linenumber="108">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="114">
+        <li class="covered" data-hits="3" data-linenumber="109">
           <span class="hits">3</span>
           
           <code class="ruby">    locations = Resource.ancestor_locations(location)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="115">
+        <li class="covered" data-hits="3" data-linenumber="110">
           <span class="hits">3</span>
           
           <code class="ruby">    resources = Resource.none</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="116">
+        <li class="covered" data-hits="3" data-linenumber="111">
           <span class="hits">3</span>
           
           <code class="ruby">    locations.each do |location|</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="117">
+        <li class="covered" data-hits="4" data-linenumber="112">
           <span class="hits">4</span>
           
           <code class="ruby">      params[:location] = location</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="118">
+        <li class="covered" data-hits="4" data-linenumber="113">
           <span class="hits">4</span>
           
           <code class="ruby">      resources = resources.or(self.filter(params))</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="119">
+        <li class="never" data-hits="" data-linenumber="114">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="120">
+        <li class="covered" data-hits="3" data-linenumber="115">
           <span class="hits">3</span>
           
           <code class="ruby">    return resources</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="121">
+        <li class="never" data-hits="" data-linenumber="116">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="117">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="123">
+        <li class="never" data-hits="" data-linenumber="118">
           
           
           <code class="ruby">  # returns list of locations that match given location, including the location and all of its ancestors</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="124">
+        <li class="covered" data-hits="1" data-linenumber="119">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.ancestor_locations(location)</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="125">
+        <li class="covered" data-hits="7" data-linenumber="120">
           <span class="hits">7</span>
           
           <code class="ruby">    if location == nil or !Location.exists?(:val =&gt; location)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="126">
+        <li class="covered" data-hits="3" data-linenumber="121">
           <span class="hits">3</span>
           
           <code class="ruby">      return []</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="127">
+        <li class="never" data-hits="" data-linenumber="122">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="128">
+        <li class="covered" data-hits="4" data-linenumber="123">
           <span class="hits">4</span>
           
           <code class="ruby">    parent = Location.find_by_val(location).parent</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="129">
+        <li class="covered" data-hits="4" data-linenumber="124">
           <span class="hits">4</span>
           
           <code class="ruby">    return [location] + self.ancestor_locations(parent&amp;.val)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="130">
+        <li class="never" data-hits="" data-linenumber="125">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="131">
+        <li class="never" data-hits="" data-linenumber="126">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="132">
+        <li class="never" data-hits="" data-linenumber="127">
           
           
           <code class="ruby">  #todo verify email and url beforehand?</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="133">
+        <li class="covered" data-hits="1" data-linenumber="128">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.validate_email_url(email, url)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="134">
+        <li class="never" data-hits="" data-linenumber="129">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="135">
+        <li class="never" data-hits="" data-linenumber="130">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="136">
+        <li class="covered" data-hits="1" data-linenumber="131">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.get_required_resources</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="137">
+        <li class="covered" data-hits="10" data-linenumber="132">
           <span class="hits">10</span>
           
           <code class="ruby">    return [&quot;title&quot;, &quot;url&quot;, &quot;contact_email&quot;, &quot;location&quot;, &quot;types&quot;, &quot;audiences&quot;, &quot;desc&quot;]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="138">
+        <li class="never" data-hits="" data-linenumber="133">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="139">
+        <li class="never" data-hits="" data-linenumber="134">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="140">
+        <li class="never" data-hits="" data-linenumber="135">
           
           
           <code class="ruby">end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="141">
+        <li class="never" data-hits="" data-linenumber="136">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="142">
+        <li class="never" data-hits="" data-linenumber="137">
           
           
           <code class="ruby"></code>

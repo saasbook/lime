@@ -27,10 +27,12 @@ Then /the following locations exist/ do |locations_table|
 end
 
 Then /I should receive a JSON object/ do
-    JSON.parse(@response.body)
+  begin
+    json = JSON.parse(@response.body)
     true
   rescue JSON::ParserError => e
     false
+  end
 end
 
 Then /I should receive all the resources/ do
@@ -53,8 +55,12 @@ Then /I should not see resources other than "(.*)"/ do |resource|
 end
 
 Then /I should not see "(.*)"/ do |resource|
-  json = JSON.parse(@response.body)
-  expect(json.include? resource).not_to be true
+  begin
+    json = JSON.parse(@response.body)
+    expect(json.include? resource).not_to be true
+  rescue JSON::ParserError => e
+    expect(@response.include? resource).not_to be true
+  end
 end
 
 Then /the JSON should be empty/ do
@@ -112,10 +118,34 @@ When /I press "(.*)"/ do |button|
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  visit 'resources/new'
+  json = JSON.parse(@response.body)
+  string = JSON.generate(json)
+  expect(string.include? text).to be true
+end
+
+Then /I should not receive a JSON/ do
+  begin
+    json = JSON.parse(@response.body)
+    false
+  rescue JSON::ParserError => e
+    true
+  end
+end
+
+Then /I should see the message "(.*)"/ do |text|
+  visit "/resources/new"
   if page.respond_to? :should
-      page.should have_content(text)
-    else
-      assert page.has_content?(text)
-    end
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
+end
+
+Then /I should not see the message "(.*)"/ do |text|
+  visit "/resources/new"
+  if page.respond_to? :should
+    page.should_not have_content(text)
+  else
+    assert !page.has_content?(text)
+  end
 end
