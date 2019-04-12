@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
-                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences, :desc)
+                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences, :desc).merge(approval_status: 0)
   end
 
   # assumes API GET request in this format :
@@ -45,9 +45,7 @@ class ResourcesController < ApplicationController
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database 
-    #redirect to a submission page
     @desc_too_long = false
-    #manual validation of resources
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if params[:desc] != nil and params[:desc].length > 500
       @desc_too_long = true

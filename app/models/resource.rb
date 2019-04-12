@@ -124,10 +124,6 @@ class Resource < ActiveRecord::Base
     return [location] + self.ancestor_locations(parent&.val)
   end
 
-  #todo verify email and url beforehand?
-  def self.validate_email_url(email, url)
-  end
-
   def self.get_required_resources
     return ["title", "url", "contact_email", "location", "types", "audiences", "desc"]
   end

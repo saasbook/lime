@@ -15,7 +15,7 @@ RSpec.describe ResourcesController, :type => :controller do
 
   describe 'model filter method is called upon GET request' do
     it 'calls the model method that performs the database filtering' do
-      params = ActionController::Parameters.new(  {types: "Events,Mentoring"} )
+      params = ActionController::Parameters.new(  {types: "Events,Mentoring", approval_status: 0} )
       params.permit!
       expect(Resource).to receive(:filter).with(params)
       get :index, params: {:types => 'Events,Mentoring', :sort_by => 'title'}
@@ -24,7 +24,7 @@ RSpec.describe ResourcesController, :type => :controller do
 
   describe "POST create" do
     it 'calls the correct model method' do
-      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions"})
+      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions", approval_status: 0})
       params.permit!
       expect(Resource).to receive(:create_resource).with(params)
       post :create, params: {title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions"}
