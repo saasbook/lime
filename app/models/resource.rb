@@ -40,7 +40,6 @@ class Resource < ActiveRecord::Base
     end
 
     resources = Resource.where(params) # filter by singular parameters first
-
     # return early if there are no has_many fields
     if has_many_hash.empty?
       return resources
