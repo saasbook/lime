@@ -1,7 +1,8 @@
 class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
-                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences, :desc, :approval_status)
+                  :colleges, :availabilities, :innovation_stages, :topics, :technologies,
+                  :types, :audiences, :desc, :approval_status, :exclusive)
   end
 
   # assumes API GET request in this format :
