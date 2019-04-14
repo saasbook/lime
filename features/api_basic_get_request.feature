@@ -14,29 +14,28 @@ Feature: display list of resources filtered by any combination of available tags
       | UC Davis Feminist Research Institute | https://fri.ucdavis.edu/ | fri@ucdavis.edu | Davis | Mentoring | Other | placeholder | Women
 
   Scenario: restrict to resources pertaining to women
-    When I make a GET request to the API with parameters: "population_focus=women"
-    Then I should receive a valid reply
-    Then I should receive "Girls in Engineering of California"
-    And I should receive "Girls in Engineering"
-    And I should receive "Society of Women Engineers"
-    And I should receive "UC Davis Feminist Research Institute"
-
-  Scenario: restrict to resources that are scholarships
-    When I make a GET request to the API with parameters: "types=Scholarship"
-    Then I should receive a valid reply
-    And I should receive "Girls in Engineering of California"
-    And I should receive "Girls in Engineering"
-
-  Scenario: restrict to resources pertaining to undergraduates
-    When I make a GET request to the API with parameters: "audiences=Undergraduate"
-
-  Scenario: do not restrict by any tag
-    When I make a GET request to the API with no parameters
+    When I make a GET request to "/resources" with parameters: 
+      | population_focus |
+      |      women       |
+    Then I should receive a JSON object
     Then I should receive all the resources
 
-  Scenario: restrict by deadline
+  Scenario: restrict to resources that are scholarships
+    When I make a GET request to "/resources" with parameters: 
+      |    types    |
+      | Scholarship |
+    Then I should receive a JSON object
+    And the JSON should contain "Girls in Engineering of California"
+    And the JSON should contain "Girls in Engineering"
+    And I should not see "Society of Women in Engineers"
+    And I should not see "UC Davis Feminist Research Institute"
 
-  Scenario: malformed API request
-    # should be notified that the request was malformed
-    When I make a GET request to the API with parameters: "titl=Feminist Research Institute"
-    Then I should receive
+  Scenario: restrict to resources pertaining to undergraduates
+    When I make a GET request to "/resources" with parameters: 
+      |   audiences   |
+      | Undergraduate |
+    Then the JSON should be empty
+
+  Scenario: do not restrict by any tag
+    When I make a GET request to "/resources" with no parameters
+    Then I should receive all the resources

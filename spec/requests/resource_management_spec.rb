@@ -30,4 +30,28 @@ RSpec.describe 'Resource management', :type => :request do
     end
   end
 
+  describe 'create' do
+    it "receive a valid post request via create" do
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      expect(Resource.where(title: "something")).to exist
+      resource = Resource.find_by(title: "something")
+
+      expect(resource.title).to eq "something"
+      expect(resource.url).to eq "something.com"
+      expect(resource.contact_email).to eq "something@gmail.com"
+      expect(resource.location).to eq "someplace"
+      expect(resource.audiences).to exist
+      expect(resource.types).to exist
+      expect(resource.desc).to eq "description"
+      expect(resource.approval_status).to eq 0
+    end
+
+    it "receive an invalid post request via create" do
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      post '/resources?title=something2&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
+
+      expect(Resource.where(title: "something")).to exist
+      expect(Resource.where(title: "something2")).not_to exist
+    end
+  end
 end
