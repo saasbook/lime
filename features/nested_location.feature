@@ -61,7 +61,22 @@ Feature: display list of resources filtered by any combination of available tags
 
   Scenario: search for resources at a location with no resources or parent
     When I make a GET request to "/resources" with parameters:
-      | location |
+      |  location |
+      | Roseville |
+    Then I should receive a JSON object
+    And the JSON should be empty
+
+  Scenario: search for resources at only one location
+    When I make a GET request to "/resources" with parameters:
+      | location | exclusive |
+      |   Davis  |   true    |
+    Then I should receive a JSON object
+    And the JSON should contain "UC Davis Feminist Research Institute"
+    And I should not see resources other than "UC Davis Feminist Research Institute"
+    
+  Scenario: search for a resource with no resources exclusively
+    When I make a GET request to "/resources" with parameters:
+      |  location |
       | Roseville |
     Then I should receive a JSON object
     And the JSON should be empty
