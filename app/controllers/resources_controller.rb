@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
-                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences, :desc)
+                                      :colleges, :availabilities, :innovation_stages, :topics, :technologies, :types, :audiences, :desc, :approval_status)
   end
 
   # assumes API GET request in this format :
@@ -45,9 +45,7 @@ class ResourcesController < ApplicationController
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database 
-    #redirect to a submission page
     @desc_too_long = false
-    #manual validation of resources
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if params[:desc] != nil and params[:desc].length > 500
       @desc_too_long = true
@@ -62,9 +60,10 @@ class ResourcesController < ApplicationController
     end
 
     flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
-    # redirect_to 'resources/new'
-
-    @resource = Resource.create_resource(resource_params)
+    #https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
+    rp = resource_params
+    rp[:approval_status] = 0
+    @resource = Resource.create_resource(rp)
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }

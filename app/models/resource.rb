@@ -40,7 +40,6 @@ class Resource < ActiveRecord::Base
     end
 
     resources = Resource.where(params) # filter by singular parameters first
-
     # return early if there are no has_many fields
     if has_many_hash.empty?
       return resources
@@ -122,10 +121,6 @@ class Resource < ActiveRecord::Base
     end
     parent = Location.find_by_val(location).parent
     return [location] + self.ancestor_locations(parent&.val)
-  end
-
-  #todo verify email and url beforehand?
-  def self.validate_email_url(email, url)
   end
 
   def self.get_required_resources
