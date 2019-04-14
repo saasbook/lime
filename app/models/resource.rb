@@ -93,15 +93,18 @@ class Resource < ActiveRecord::Base
   # this method is here
   # if filtering by location, filtering should behave as the following
   # if the location has no resources, find the parent location, and return resources for the parent location
-  # if the location has child locations, also return those locations
   def self.location_helper(params)
+    exclusive = (params[:exclusive] == true)
+    params.delete :exclusive
+    
     location = params[:location]
-    if location == nil
+    if (location == nil) or exclusive
       return self.filter(params)
     end
 
     locations = Resource.find_parent_locations(location)
     resources = Resource.none
+
     locations.each do |location|
       params[:location] = location
       resources = resources.or(self.filter(params))
