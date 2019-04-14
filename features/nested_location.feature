@@ -62,6 +62,6 @@ Feature: display list of resources filtered by any combination of available tags
   Scenario: search for resources at a location with no resources or parent
     When I make a GET request to "/resources" with parameters:
       | location |
-      | Berkeley |
+      | Roseville |
     Then I should receive a JSON object
     And the JSON should be empty

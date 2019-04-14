@@ -65,7 +65,7 @@ end
 
 Then /the JSON should be empty/ do
   json = JSON.parse(@response.body)
-  expect(json.blank?)
+  expect(json.blank?).to be true
 end
 
 When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ do |method, url, params|

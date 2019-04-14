@@ -103,7 +103,7 @@ class Resource < ActiveRecord::Base
     params.delete :exclusive
     
     location = params[:location]
-    if (location == nil) or exclusive
+    if location.nil? or exclusive
       return self.filter(params)
     end
 
