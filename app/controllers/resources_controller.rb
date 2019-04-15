@@ -68,7 +68,7 @@ class ResourcesController < ApplicationController
     rp[:approval_status] = 0
     @resource = Resource.create_resource(rp)
 
-  
+
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
@@ -85,58 +85,73 @@ class ResourcesController < ApplicationController
     end
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:flagged])
     end
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:approval_status])
     end
     if params[:title]
       params[:title] = params[:title].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:title])
     end
     if params[:url]
       params[:url] = params[:flagged].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:url])
     end
     if params[:contact_email]
       params[:contact_email] = params[:contact_email].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:contact_email])
     end
     if params[:location]
       params[:location] = params[:location].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
     end
     if params[:population_focuses]
       params[:population_focuses] = params[:population_focuses].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:campuses])
     end
     if params[:campuses]
       params[:campuses] = params[:campuses].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:campuses])
     end
     if params[:colleges]
       params[:colleges] = params[:colleges].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:colleges])
     end
     if params[:availabilities]
       params[:availabilities] = params[:availabilities].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter =>  params[:availabilities])
     end
     if params[:innovation_stages]
       params[:innovation_stages] = params[:innovation_stages].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:innovation_stages])
     end
     if params[:availabilities]
       params[:availabilities] = params[:availabilities].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:availabilities])
     end
     if params[:topics]
       params[:topics] = params[:topics].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:topics])
     end
     if params[:technologies]
       params[:technologies] = params[:technologies].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:technologies])
     end
     if params[:types]
       params[:types] = params[:types].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:types])
     end
     if params[:audiences]
       params[:audiences] = params[:audiences].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:audiences])
     end
-
-    @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => resource_params)
 
     Resource.update(params[:id], resource_params)
 
     @resource = Resource.find(params[:id])
+
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
       format.html
