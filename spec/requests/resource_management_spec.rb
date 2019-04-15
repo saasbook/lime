@@ -74,24 +74,68 @@ RSpec.describe 'Resource management', :type => :request do
   describe 'update' do
     it 'properly updates values for admins' do
       User.delete_all
+
+      # seed with a resource
+
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       expect(Resource.where(title: "something")).to exist
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "something.com"
 
+      # patch as admin changes values
       patch '/resources/' + resource.id.to_s + '/?url=somethingelse.com&flagged=1&api_key=example'
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "somethingelse.com"
       expect(resource.flagged).to eq 1
+
+      patch '/resources/' + resource.id.to_s + '/?location=anotherplace&desc=another description&flagged=1&api_key=example'
+      resource = Resource.find_by(title: "something")
+      expect(resource.location).to eq "anotherplace"
+      expect(resource.desc).to eq "another description"
+
+      # make sure change is reflected in future HTTP request
+      get '/resources/' + resource.id.to_s
+      assert response.body.to_s.include?('anotherplace')
+      assert response.body.to_s.include?('another description')
+      assert response.body.to_s.include?('somethingelse.com')
+    end
+
+    it "doesn't let guests update values they are not allowed to" do
+      # seed with a resource
+      expect(Resource.where(title: "something")).not_to exist
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      expect(Resource.where(title: "something")).to exist
+      resource = Resource.find_by(title: "something")
+      resource_id_str = resource.id.to_s
+
+      # patch as guest does nothing
+      patch '/resources/' + resource.id.to_s + '/?url=guest.com&description=guestupdatedescription&contact_email=guest@gmail.com&location=anotherplace&types=Networking&audiences=Grad'
+      expect(Resource.where(title: "something")).to exist
+      resource = Resource.find_by(title: "something")
+      expect(resource.url).to eq "something.com"
+      expect(resource.desc).to eq "description"
+      expect(resource.contact_email).to eq "something@gmail.com"
+      expect(resource.location).to eq "someplace"
+      expect(resource.types.collect(&:val)).to eq ['Scholarship','Funding']
+      expect(resource.audiences.collect(&:val)).to eq ["Grad","Undergrad"]
+
+      # make sure no changes are reflected in http request
+      get '/resources/' + resource_id_str
+      assert response.body.to_s.include?('something.com')
+      assert response.body.to_s.include?('description')
+      assert !response.body.to_s.include?('guest.com')
+      assert !response.body.to_s.include?('guestupdatedescription')
     end
 
     it 'lets guests flag resources' do
+      # seed with a resource
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       expect(Resource.where(title: "something")).to exist
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "something.com"
 
+      # flag as guest is allowed
       patch '/resources/' + resource.id.to_s + '/?flagged=1'
       resource = Resource.find_by(title: "something")
       expect(resource.flagged).to eq 1
