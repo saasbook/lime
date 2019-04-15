@@ -1,8 +1,10 @@
 class ResourcesController < ApplicationController
   def resource_params
-    params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
+    params.permit(
+                  :title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged)
+                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged
+                 )
   end
   
   before_action :set_user
@@ -11,6 +13,9 @@ class ResourcesController < ApplicationController
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
+    if @user.nil?
+      params[:approval_status] = 1 # only admins can view unapproved resources
+    end
     if params.include? :sort_by
       sort_by = params[:sort_by] # fetch sort_by term
       params.delete :sort_by # remove sort_by param from params hash
