@@ -2,8 +2,10 @@ class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive)
+                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key)
   end
+  
+  before_action :set_user
 
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
@@ -83,6 +85,15 @@ class ResourcesController < ApplicationController
 
   def destroy
 
+  end
+
+  def set_user
+    if request.format.json? and params.include? :api_key
+      @user = User.where(:api_token => params[:api_key]).first
+    else
+      @user = current_user
+    end
+    params.delete :api_key
   end
 
 end
