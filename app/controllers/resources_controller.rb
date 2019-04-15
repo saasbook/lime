@@ -94,7 +94,7 @@ class ResourcesController < ApplicationController
     Resource.update(params[:id], resource_params)
 
     @resource = Resource.find(params[:id])
-   
+
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
       format.html
