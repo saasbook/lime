@@ -67,6 +67,16 @@ RSpec.describe 'Resource management', :type => :request do
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "somethingelse.com"
       expect(resource.flagged).to eq 1
+
+      patch '/resources/' + resource.id.to_s + '/?location=anotherplace&desc=another description&flagged=1&api_key=example'
+      resource = Resource.find_by(title: "something")
+      expect(resource.location).to eq "anotherplace"
+      expect(resource.desc).to eq "another description"
+
+      get '/resources/' + resource.id.to_s
+      assert response.body.to_s.include?('anotherplace')
+      assert response.body.to_s.include?('another description')
+      assert response.body.to_s.include?('somethingelse.com')
     end
 
     it 'lets guests flag resources' do
