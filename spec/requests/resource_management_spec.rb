@@ -56,7 +56,7 @@ RSpec.describe 'Resource management', :type => :request do
   end
 
   describe 'update' do
-    it 'properly updates values' do
+    it 'properly updates values for admins' do
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       expect(Resource.where(title: "something")).to exist
@@ -66,6 +66,17 @@ RSpec.describe 'Resource management', :type => :request do
       patch '/resources/' + resource.id.to_s + '/?url=somethingelse.com&flagged=1&api_key=example'
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "somethingelse.com"
+      expect(resource.flagged).to eq 1
+    end
+
+    it 'lets guests flag resources' do
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      expect(Resource.where(title: "something")).to exist
+      resource = Resource.find_by(title: "something")
+      expect(resource.url).to eq "something.com"
+
+      patch '/resources/' + resource.id.to_s + '/?flagged=1'
+      resource = Resource.find_by(title: "something")
       expect(resource.flagged).to eq 1
     end
   end

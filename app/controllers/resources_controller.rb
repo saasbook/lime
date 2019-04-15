@@ -76,27 +76,9 @@ class ResourcesController < ApplicationController
   end
 
   def update
-    # # get the resource we want to update by its id
-    # id = params[:id]
-    # puts id
-    # @resource = Resource.find_by_id(id)
-    # @resource = Resource.find(13)
-    # puts "update"
-    # puts @resource.id
-    # puts @resource.desc
-    # # @resource = Resource.update_resource(@resource)
-    # @resource.update_attributes!(resource_params)
-    # puts @resource.desc
-
-    # change diff params
-
-    puts @user == nil
-
-    if @user == nil
+    # Don't let guests update anything unless the params are "allowed"
+    if @user == nil and !Resource.guest_update_params_allowed?(resource_params)
       flash[:notice] = "You don't have permissions to update records"
-      return
-    end
-    if params[:id] == nil
       return
     end
     if params[:flagged]
