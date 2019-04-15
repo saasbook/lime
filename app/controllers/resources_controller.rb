@@ -75,10 +75,6 @@ class ResourcesController < ApplicationController
 
   def update
     # get the resource we want to update by its id
-    respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
-      format.html
-    end
     id = params[:id]
     @resource = Resource.find_by_id(id)
 
