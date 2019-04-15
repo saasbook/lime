@@ -13,8 +13,12 @@ class Resource < ActiveRecord::Base
   validates :title, :url, :contact_email, :location, :presence => true
   validates :desc, :presence => true, :length => {:maximum => 500}
 
-  def self.auth_params
-    [:flagged, :approval_status, :approved_by]
+  # def self.auth_params
+  #   [:flagged, :approval_status, :approved_by]
+  # end
+
+  def self.guest_update_params_allowed?(resource_params)
+    return (resource_params.keys.size == 1 and resource_params.keys[0] == "flagged" and resource_params["flagged"] == '1')
   end
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
