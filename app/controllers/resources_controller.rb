@@ -110,7 +110,6 @@ class ResourcesController < ApplicationController
   end
 
   def set_user
-    puts request.format.json?
     if request.format.json? and params.include? :api_key
       @user = User.where(:api_token => params[:api_key]).first
     else
