@@ -68,6 +68,8 @@ class ResourcesController < ApplicationController
     rp[:approval_status] = 0
     @resource = Resource.create_resource(rp)
 
+  
+
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
       format.html
@@ -86,6 +88,48 @@ class ResourcesController < ApplicationController
     end
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
+    end
+    if params[:title]
+      params[:title] = params[:title].to_s
+    end
+    if params[:url]
+      params[:url] = params[:flagged].to_s
+    end
+    if params[:contact_email]
+      params[:contact_email] = params[:contact_email].to_s
+    end
+    if params[:location]
+      params[:location] = params[:location].to_s
+    end
+    if params[:population_focuses]
+      params[:population_focuses] = params[:population_focuses].to_s
+    end
+    if params[:campuses]
+      params[:campuses] = params[:campuses].to_s
+    end
+    if params[:colleges]
+      params[:colleges] = params[:colleges].to_s
+    end
+    if params[:availabilities]
+      params[:availabilities] = params[:availabilities].to_s
+    end
+    if params[:innovation_stages]
+      params[:innovation_stages] = params[:innovation_stages].to_s
+    end
+    if params[:availabilities]
+      params[:availabilities] = params[:availabilities].to_s
+    end
+    if params[:topics]
+      params[:topics] = params[:topics].to_s
+    end
+    if params[:technologies]
+      params[:technologies] = params[:technologies].to_s
+    end
+    if params[:types]
+      params[:types] = params[:types].to_s
+    end
+    if params[:audiences]
+      params[:audiences] = params[:audiences].to_s
     end
 
     @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => resource_params)
