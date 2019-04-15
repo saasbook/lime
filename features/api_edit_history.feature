@@ -15,6 +15,6 @@ Background: database already has the following resources
     Scenario: adding a resource called "Society of Women Engineers" with its fields
       When I make a PUT request to "/resources/1" with parameters:
         | location |
-        | San |
+        | SanFran |
       Then I should receive a JSON object
-      Then I should see "San"
+      Then I should see "SanFran"
