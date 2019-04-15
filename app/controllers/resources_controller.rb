@@ -65,7 +65,11 @@ class ResourcesController < ApplicationController
     flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
     #https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
-    rp[:approval_status] = 0
+    if @user == nil
+      rp[:approval_status] = 0
+    else
+      rp[:approval_status] = 1
+    end
     @resource = Resource.create_resource(rp)
 
     respond_to do |format|
