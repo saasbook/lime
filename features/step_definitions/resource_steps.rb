@@ -45,6 +45,11 @@ Then /the JSON should contain "(.*)"/ do |res|
   expect(json.any? {|r| r["title"] == res}).to be true
 end
 
+Then /the resource should be flagged/ do
+  json = JSON.parse(@response.body)
+  expect(json["flagged"]).to be 1
+end
+
 Then /I should not see resources other than "(.*)"/ do |resource|
   json = JSON.parse(@response.body)
   Resource.all.each do |res|
@@ -69,6 +74,7 @@ Then /the JSON should be empty/ do
 end
 
 When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ do |method, url, params|
+
   case method
     when "GET"
       @response = page.driver.get(url, params.hashes.first)
