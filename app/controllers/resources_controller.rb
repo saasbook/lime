@@ -5,7 +5,7 @@ class ResourcesController < ApplicationController
                   :types, :audiences, :desc, :approval_status, :exclusive, :api_key)
   end
   
-  before_action :authenticate_user!, set_user
+  before_action :set_user
 
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
@@ -88,8 +88,8 @@ class ResourcesController < ApplicationController
   end
 
   def set_user
-    if request.format.json?
-      @user = User.get_user_by_api_key(params[:api_key])
+    if request.format.json? and params.include? :api_key
+      @user = User.where(:api_token => params[:api_key]).first
     else
       @user = current_user
     end
