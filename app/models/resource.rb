@@ -67,7 +67,7 @@ class Resource < ActiveRecord::Base
       bool_arr = []
       # for each has_many query, check if the current record's has_many field contains all values in the query
       has_many_hash.each do |field, values|
-        bool_arr.append (associations_hash[field].records.map { |x| x.val } & values).sort == values.sort
+        bool_arr.append (associations_hash[field].records.collect(&:val) & values).sort == values.sort
       end
       # if all queries return true, append the record to the returned value
       if bool_arr.all?
