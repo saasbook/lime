@@ -149,3 +149,12 @@ Then /I should not see the message "(.*)"/ do |text|
     assert !page.has_content?(text)
   end
 end
+
+# Timecop steps
+Given 'the time is $time' do |time|
+  Timecop.freeze Time.parse(time)
+end
+
+When 'time stands still' do
+  Timecop.freeze Time.now
+end
