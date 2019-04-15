@@ -77,8 +77,8 @@ class ResourcesController < ApplicationController
 
   def update
     # # get the resource we want to update by its id
-    id = params[:id]
-    puts id
+    # id = params[:id]
+    # puts id
     # @resource = Resource.find_by_id(id)
     # @resource = Resource.find(13)
     # puts "update"
