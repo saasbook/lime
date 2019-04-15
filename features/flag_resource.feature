@@ -15,7 +15,6 @@ Feature: display list of resources filtered by any combination of available tags
       | UC Davis Feminist Research Institute | https://fri.ucdavis.edu/ | fri@ucdavis.edu | Davis | Mentoring | Other | placeholder | Women
 
 
-
   Scenario: flag a resource with no comment
     When I make a PUT request to "/resources/1" with parameters:
       | flagged |

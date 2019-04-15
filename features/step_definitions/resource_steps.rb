@@ -37,6 +37,7 @@ end
 
 Then /I should receive all the resources/ do
    json = JSON.parse(@response.body)
+   puts(json)
    expect(Resource.all.count).to eq json.length
 end
 
