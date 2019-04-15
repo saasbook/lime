@@ -12,9 +12,12 @@ Background: database already has the following resources
       | Girls in Engineering of California | http://gie.uc.edu |  gie@uc.edu | California | Mentoring,Scholarship | Other | placeholder | Women |
       | Girls in Engineering         | http://gie.berkeley.edu |  gie@berkeley.edu | Berkeley | Mentoring,Scholarship | Other | placeholder | Women |
 
-    Scenario: adding a resource called "Society of Women Engineers" with its fields
+    Scenario: changing the location of resource Girls in Engineering of California
       When I make a PUT request to "/resources/1" with parameters:
         | location |
-        | SanFran |
+        | Turkey |
+      When I make a GET request to "/resources" with parameters:
+        | location |
+        | Turkey |
       Then I should receive a JSON object
-      Then I should see "SanFran"
+      Then the JSON should be empty
