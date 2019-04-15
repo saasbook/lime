@@ -30,4 +30,16 @@ RSpec.describe ResourcesController, :type => :controller do
       post :create, params: {title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions"}
     end
   end
+
+  describe "PATCH update" do
+    it 'calls the correct model method' do
+      resource = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+                               "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions"})
+      params.permit!
+      expect(Resource).to receive(:update).with(resource.id.to_s, params)
+      patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions", api_key: "example"}, :format => :json
+    end
+  end
 end

@@ -76,14 +76,29 @@ class ResourcesController < ApplicationController
   end
 
   def update
+    puts @user == nil
+
     if @user == nil
       flash[:notice] = "You don't have permissions to update records"
       return
     end
-    id = params[:id]
-    params[:flagged] = params[:flagged]&.to_i
-    params[:approval_status] = params[:approval_status]&.to_i
-    Resource.update(id, resource_params)
+    if params[:id] == nil
+      return
+    end
+    if params[:flagged]
+      params[:flagged] = params[:flagged].to_i
+    end
+    if params[:approval_status]
+      params[:approval_status] = params[:approval_status].to_i
+    end
+
+    Resource.update(params[:id], resource_params)
+
+    @resource = Resource.find(params[:id])
+    respond_to do |format|
+      format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
+      format.html
+    end
   end
 
   def edit
@@ -95,6 +110,7 @@ class ResourcesController < ApplicationController
   end
 
   def set_user
+    puts request.format.json?
     if request.format.json? and params.include? :api_key
       @user = User.where(:api_token => params[:api_key]).first
     else
