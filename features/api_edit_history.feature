@@ -12,10 +12,9 @@ Background: database already has the following resources
       | Girls in Engineering of California | http://gie.uc.edu |  gie@uc.edu | California | Mentoring,Scholarship | Other | placeholder | Women |
       | Girls in Engineering         | http://gie.berkeley.edu |  gie@berkeley.edu | Berkeley | Mentoring,Scholarship | Other | placeholder | Women |
 
-    Scenario: adding a resource called "Society of Women Engineers" with itsfields
-      When time stands still
+    Scenario: adding a resource called "Society of Women Engineers" with its fields
       When I make a PUT request to "/resources/1" with parameters:
         | location |
-        | San Francisco |
+        | San |
       Then I should receive a JSON object
-      Then I should see "San Francisco"
+      Then I should see "San"
