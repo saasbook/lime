@@ -2,7 +2,7 @@ class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key)
+                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged)
   end
   
   before_action :set_user
@@ -76,7 +76,14 @@ class ResourcesController < ApplicationController
   end
 
   def update
-
+    if @user == nil
+      flash[:notice] = "You don't have permissions to update records"
+      return
+    end
+    id = params[:id]
+    params[:flagged] = params[:flagged]&.to_i
+    params[:approval_status] = params[:approval_status]&.to_i
+    Resource.update(id, resource_params)
   end
 
   def edit

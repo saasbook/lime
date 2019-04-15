@@ -54,4 +54,18 @@ RSpec.describe 'Resource management', :type => :request do
       expect(Resource.where(title: "something2")).not_to exist
     end
   end
+
+  describe 'update' do
+    it 'properly updates values' do
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      expect(Resource.where(title: "something")).to exist
+      resource = Resource.find_by(title: "something")
+      expect(resource.url).to eq "something.com"
+
+      put '/resources/' + resource.id.to_s + '/?url=somethingelse.com&flagged=1'
+      resource = Resource.find_by(title: "something")
+      expect(resource.url).to eq "somethingelse.com"
+      expect(resource.flagged).to eq 1
+    end
+  end
 end

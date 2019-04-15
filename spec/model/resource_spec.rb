@@ -27,11 +27,21 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
                              "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
     Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
                              "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+
     it 'can do a simple filter by column name' do
       result = Resource.filter({"title" => "thing3"})
       print result.pretty_print_inspect
       expect(result.count).to eq 1
       expect(result.first.title).to eq "thing3"
+    end
+
+    it 'returns the flagged resources if flagged is specified' do
+      Resource.create_resource "title" => "thing5", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
+                               "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "flagged" => 1
+      result = Resource.filter({"flagged" => 1})
+      print result.pretty_print_inspect
+      expect(result.count).to eq 1
+      expect(result.first.title).to eq "thing5"
     end
 
     it 'splits has_many associations correctly and returns the right thing' do
@@ -46,6 +56,7 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
 
     it 'returns all resources if no filter is specified' do
       result = Resource.filter({})
+      print result.pretty_print_inspect
       expect(result.count).to eq 4
       expect(result.where(title: "thing1")).to exist
       expect(result.where(title: "thing2")).to exist

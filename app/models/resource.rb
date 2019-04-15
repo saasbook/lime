@@ -13,6 +13,10 @@ class Resource < ActiveRecord::Base
   validates :title, :url, :contact_email, :location, :presence => true
   validates :desc, :presence => true, :length => {:maximum => 500}
 
+  def self.auth_params
+    [:flagged, :approval_status, :approved_by]
+  end
+
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
   def self.has_many_associations
     Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym }
