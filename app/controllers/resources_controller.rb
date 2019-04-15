@@ -4,7 +4,7 @@ class ResourcesController < ApplicationController
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
                   :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged)
   end
-  
+
   before_action :set_user
 
   # assumes API GET request in this format :
@@ -47,7 +47,7 @@ class ResourcesController < ApplicationController
 
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
-    #otherwise add a new object to the database 
+    #otherwise add a new object to the database
     @desc_too_long = false
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if params[:desc] != nil and params[:desc].length > 500
@@ -87,6 +87,8 @@ class ResourcesController < ApplicationController
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
     end
+
+    @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => resource_params)
 
     Resource.update(params[:id], resource_params)
 
