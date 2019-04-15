@@ -74,9 +74,18 @@ class ResourcesController < ApplicationController
   end
 
   def update
+    puts "ddakdlsjadslfladfjslkfdsklafkfdlksjl"
     # get the resource we want to update by its id
     id = params[:id]
+    puts id
     @resource = Resource.find_by_id(id)
+    @resource = Resource.find(13)
+    puts "update"
+    puts @resource.id
+    puts @resource.desc
+    # @resource = Resource.update_resource(@resource)
+    @resource.update_attributes!(resource_params)
+    puts @resource.desc
 
     # change diff params
 

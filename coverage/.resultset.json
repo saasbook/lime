@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/andrewlaw/cs169/proj/lime/spec/application_spec.rb": [
+      "/Users/antonio/Documents/2019/lime/spec/application_spec.rb": [
         1,
         1,
         1,
@@ -10,7 +10,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/rails_helper.rb": [
+      "/Users/antonio/Documents/2019/lime/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -79,7 +79,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/support/factory_girl.rb": [
+      "/Users/antonio/Documents/2019/lime/spec/support/factory_girl.rb": [
         1,
         null,
         1,
@@ -95,14 +95,14 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/environment.rb": [
+      "/Users/antonio/Documents/2019/lime/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/application.rb": [
+      "/Users/antonio/Documents/2019/lime/config/application.rb": [
         1,
         null,
         1,
@@ -137,13 +137,13 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/boot.rb": [
+      "/Users/antonio/Documents/2019/lime/config/boot.rb": [
         1,
         null,
         1,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/environments/test.rb": [
+      "/Users/antonio/Documents/2019/lime/config/environments/test.rb": [
         1,
         null,
         null,
@@ -191,7 +191,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/application_controller_renderer.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -201,7 +201,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/assets.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -217,7 +217,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/backtrace_silencers.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -226,7 +226,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/content_security_policy.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/content_security_policy.rb": [
         null,
         null,
         null,
@@ -253,20 +253,20 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/cookies_serializer.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/filter_parameter_logging.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/inflections.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -290,13 +290,13 @@
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/mime_types.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/wrap_parameters.rb": [
+      "/Users/antonio/Documents/2019/lime/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -312,7 +312,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/routes.rb": [
+      "/Users/antonio/Documents/2019/lime/config/routes.rb": [
         1,
         null,
         1,
@@ -322,17 +322,17 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/helpers/application_helper.rb": [
+      "/Users/antonio/Documents/2019/lime/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/controllers/application_controller.rb": [
+      "/Users/antonio/Documents/2019/lime/app/controllers/application_controller.rb": [
         1,
         null,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/controller/resources_controller_spec.rb": [
+      "/Users/antonio/Documents/2019/lime/spec/controller/resources_controller_spec.rb": [
         1,
         1,
         null,
@@ -367,7 +367,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/controllers/resources_controller.rb": [
+      "/Users/antonio/Documents/2019/lime/app/controllers/resources_controller.rb": [
         1,
         1,
         6,
@@ -377,6 +377,7 @@
         null,
         null,
         null,
+        null,
         1,
         3,
         1,
@@ -415,9 +416,7 @@
         1,
         null,
         null,
-        null,
         5,
-        null,
         5,
         5,
         1,
@@ -433,7 +432,8 @@
         null,
         3,
         null,
-        null,
+        3,
+        3,
         3,
         null,
         3,
@@ -444,6 +444,21 @@
         null,
         null,
         1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
         null,
         null,
         null,
@@ -457,7 +472,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/model/resource_spec.rb": [
+      "/Users/antonio/Documents/2019/lime/spec/model/resource_spec.rb": [
         1,
         1,
         null,
@@ -552,7 +567,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/resource.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/resource.rb": [
         1,
         1,
         1,
@@ -570,7 +585,7 @@
         null,
         null,
         1,
-        1353,
+        1375,
         null,
         null,
         1,
@@ -595,7 +610,6 @@
         null,
         null,
         9,
-        null,
         null,
         9,
         8,
@@ -627,14 +641,14 @@
         null,
         null,
         1,
-        128,
+        130,
         null,
         16,
         16,
-        112,
+        114,
         32,
         null,
-        80,
+        82,
         null,
         null,
         null,
@@ -651,6 +665,48 @@
         16,
         null,
         null,
+        1,
+        null,
+        0,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
         null,
         null,
         null,
@@ -658,11 +714,15 @@
         1,
         6,
         6,
+        null,
+        6,
+        6,
         3,
         null,
         null,
         3,
         3,
+        null,
         3,
         4,
         4,
@@ -677,10 +737,6 @@
         null,
         4,
         4,
-        null,
-        null,
-        null,
-        1,
         null,
         null,
         1,
@@ -691,57 +747,57 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/audience.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/audience.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/availability.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/availability.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/campus.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/campus.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/client_tag.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/client_tag.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/college.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/college.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/innovation_stage.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/innovation_stage.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/population_focus.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/population_focus.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/technology.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/technology.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/topic.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/topic.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/type.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/type.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/location.rb": [
+      "/Users/antonio/Documents/2019/lime/app/models/location.rb": [
         1,
         1,
         1,
@@ -768,7 +824,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/requests/resource_management_spec.rb": [
+      "/Users/antonio/Documents/2019/lime/spec/requests/resource_management_spec.rb": [
         1,
         1,
         null,
@@ -807,6 +863,7 @@
         1,
         1,
         null,
+        1,
         1,
         1,
         1,
@@ -827,6 +884,6 @@
         null
       ]
     },
-    "timestamp": 1554246719
+    "timestamp": 1555290349
   }
 }
