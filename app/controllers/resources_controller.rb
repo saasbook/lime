@@ -81,13 +81,9 @@ class ResourcesController < ApplicationController
   end
 
   def update
-    puts @user == nil
-
-    if @user == nil
+    # Don't let guests update anything unless the params are "allowed"
+    if @user == nil and !Resource.guest_update_params_allowed?(resource_params)
       flash[:notice] = "You don't have permissions to update records"
-      return
-    end
-    if params[:id] == nil
       return
     end
     if params[:flagged]
