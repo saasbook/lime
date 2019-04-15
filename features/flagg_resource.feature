@@ -16,14 +16,23 @@ Feature: display list of resources filtered by any combination of available tags
 
 
 
-  Scenario: flag a resource
+  Scenario: flag a resource with no comment
     When I make a PUT request to "/resources/1" with parameters:
       | flagged |
       |    1    |
     Then I should receive a JSON object
     Then I should see "Society of Women Engineers"
-    Then the resource should be flagged
+    Then the resource should have the attribute "flagged" equal to "1"
 
+
+  Scenario: flag a resource with a comment
+    When I make a PUT request to "/resources/1" with parameters:
+      | flagged | flagged_comment   |
+      |    1    | this resource bad |
+    Then I should receive a JSON object
+    Then I should see "Society of Women Engineers"
+    Then the resource should have the attribute "flagged" equal to "1"
+    Then the resource should have the attribute "flagged_comment" equal to "this resource bad"
 
 
 #    When I make a PUT request to "/resources" with parameters:

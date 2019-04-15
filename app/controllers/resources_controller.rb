@@ -78,10 +78,10 @@ class ResourcesController < ApplicationController
   def update
     puts @user == nil
 
-    # if @user == nil
-    #   flash[:notice] = "You don't have permissions to update records"
-    #   return
-    # end
+    if @user == nil
+      flash[:notice] = "You don't have permissions to update records"
+      return
+    end
     if params[:id] == nil
       return
     end
