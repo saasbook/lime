@@ -14,13 +14,8 @@ Background: database already has the following resources
 
     Scenario: adding a resource called "Society of Women Engineers" with itsfields
       When time stands still
-      When I make a POST request to "/resources" with parameters:
-        | title                        | url | contact_email | location | types | audiences | desc| population_focuses |
-        | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women |
+      When I make a PUT request to "/resources/1" with parameters:
+        | location |
+        | San Francisco |
       Then I should receive a JSON object
-      Then I should see "Berkeley"
-      When I make a PUT request to "/resources" with parameters:
-        | title                        | url | contact_email | location | types | audiences | desc| population_focuses |
-        | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | San Francisco | Mentoring | Other | placeholder | Women |
-      Then I should receive a JSON object
-      Then I should see "updated_at"
+      Then I should see "San Francisco"
