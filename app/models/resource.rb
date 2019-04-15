@@ -40,7 +40,6 @@ class Resource < ActiveRecord::Base
     end
 
     resources = Resource.where(params) # filter by singular parameters first
-
     # return early if there are no has_many fields
     if has_many_hash.empty?
       return resources
@@ -99,15 +98,18 @@ class Resource < ActiveRecord::Base
   # this method is here
   # if filtering by location, filtering should behave as the following
   # if the location has no resources, find the parent location, and return resources for the parent location
-  # if the location has child locations, also return those locations
   def self.location_helper(params)
+    exclusive = (params[:exclusive] == true)
+    params.delete :exclusive
+    
     location = params[:location]
-    if location == nil
+    if location.nil? or exclusive
       return self.filter(params)
     end
 
     locations = Resource.ancestor_locations(location)
     resources = Resource.none
+
     locations.each do |location|
       params[:location] = location
       resources = resources.or(self.filter(params))
@@ -122,10 +124,6 @@ class Resource < ActiveRecord::Base
     end
     parent = Location.find_by_val(location).parent
     return [location] + self.ancestor_locations(parent&.val)
-  end
-
-  #todo verify email and url beforehand?
-  def self.validate_email_url(email, url)
   end
 
   def self.get_required_resources

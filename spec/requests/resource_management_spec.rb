@@ -43,6 +43,7 @@ RSpec.describe 'Resource management', :type => :request do
       expect(resource.audiences).to exist
       expect(resource.types).to exist
       expect(resource.desc).to eq "description"
+      expect(resource.approval_status).to eq 0
     end
 
     it "receive an invalid post request via create" do
