@@ -1,0 +1,2 @@
+class Edit < ApplicationRecord
+end
