@@ -35,17 +35,4 @@ Feature: display list of resources filtered by any combination of available tags
     Then the resource should have the attribute "flagged_comment" equal to "this resource bad"
 
 
-#    When I make a PUT request to "/resources" with parameters:
-#      | title                        | url | contact_email | location | types | audiences | desc| population_focuses | flagged | flagged_comment |
-#      | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women | true | bad |
-#    Then I should receive a JSON object
-#    Then I should see "Society of Women Engineers"
-#    Then the JSON should contain "flagged"
-#  Scenario: flag a resource
-#    When I make a POST request to "/resources" with parameters:
-#      | title                        | flagged | flagged_comment |
-#      | Society of Women Engineers   | true    | bad             |
-#    Then I should receive a JSON object
-#
-#    Then the JSON should contain "flagged"
 
