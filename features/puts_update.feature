@@ -60,14 +60,14 @@ Feature: update a resource given certain params
     Scenario: edit attributes initially set as nil for a resource
         When I make a PUT request to "/resources/1" with parameters:
             | contact_name  |  contact_phone  | desc | api_key |
-            |    somename    | 111-111-1111 | not a placeholder | example |
+            |    somename    | 111-111-1111 | another placeholder | example |
         Then I should receive a JSON object
 
         When I make a GET request to "/resources" with parameters: 
             |    title    |
             | Girls in Engineering of California |
         Then I should receive a JSON object
-        Then the first resource should have the attribute "desc" equal to "not a placeholder"
+        Then the first resource should have the attribute "desc" equal to "another placeholder"
         Then the first resource should have the attribute "contact_name" equal to "somename"
         Then the first resource should have the attribute "contact_phone" equal to "111-111-1111"
 

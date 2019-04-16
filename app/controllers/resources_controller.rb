@@ -2,7 +2,7 @@ class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment)
+                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment, :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, :address, :deadline, :notes, :funding_amount, :approved_by)
   end
   
   before_action :set_user
@@ -91,14 +91,7 @@ class ResourcesController < ApplicationController
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
     end
-
-    @resource = Resource.find(params[:id])
-    puts @resource.has_attribute?("title")
-    puts @resource.has_attribute?("contact_name")
-    @resource.update_attributes(contact_name: "somename")
-    puts @resource.title
-    puts @resource.contact_name
-    puts resource_params
+    
     Resource.update(params[:id], resource_params)
     @resource = Resource.find(params[:id])
 

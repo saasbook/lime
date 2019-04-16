@@ -29,7 +29,7 @@ end
 Then /I should receive a JSON object/ do
   begin
     json = JSON.parse(@response.body)
-    puts json
+    # puts json
     true
   rescue JSON::ParserError => e
     false
