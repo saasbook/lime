@@ -44,12 +44,12 @@ Scenario: adding a resource called "Society of Women Engineers" with itsfields
       | title                        | url | contact_email | location | types | audiences | desc| population_focuses |
       | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women |
     Then I should receive a JSON object
-    Then I should see "Society of Women Engineers"
+    And the JSON should contain "Society of Women Engineers"
 
 Scenario: adding a resource called "Coaching Fellowship Again" with missing other fields
     When I make a POST request to "/resources" with parameters: 
       | title                         | location | types | audiences | desc| population_focuses |
       | Coaching Fellowship Again     | Berkeley | Mentoring | Other | placeholder | Women |
     Then I should not receive a JSON
-    And I should not see "Coaching Fellowship Again"
+    And the JSON should not contain "Coaching Fellowship Again"
     

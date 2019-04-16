@@ -5,6 +5,12 @@ Given /the following resources exist:/ do |resources_table|
   end
 end
 
+Given /the following users exist:/ do |users_table|
+  users_table.hashes.each do |user|
+    User.create user
+  end
+end
+
 Then /the following audiences exist/ do |audiences_table|
   audiences_table.hashes.each do |audience|
     Audience.create audience
@@ -42,7 +48,7 @@ Then /I should receive a JSON object/ do
   end
 end
 
-Then /I should receive all the resources/ do
+Then /the JSON should contain all the resources/ do
    json = JSON.parse(@response.body)
    expect(Resource.all.count).to eq json.length
 end
@@ -53,7 +59,11 @@ end
 
 Then /the JSON should contain "(.*)"/ do |res|
   json = JSON.parse(@response.body)
-  expect(json.any? {|r| r["title"] == res}).to be true
+  if json.is_a? Array
+    expect(json.any? {|r| r["title"] == res}).to be true
+  else
+    expect(json["title"] == res).to be true
+  end
 end
 
 Then /the resource should have the attribute "(.*)" equal to "(.*)"/ do |attribute, value|
@@ -66,7 +76,7 @@ Then /the first resource should have the attribute "(.*)" equal to "(.*)"/ do |a
   expect(json[attribute.to_s].to_s).to match value.to_s
 end
 
-Then /I should not see resources other than "(.*)"/ do |resource|
+Then /the JSON should not contain resources other than "(.*)"/ do |resource|
   json = JSON.parse(@response.body)
   Resource.all.each do |res|
     if res != resource
@@ -75,7 +85,7 @@ Then /I should not see resources other than "(.*)"/ do |resource|
   end
 end
 
-Then /I should not see "(.*)"/ do |resource|
+Then /the JSON should not contain "(.*)"/ do |resource|
   begin
     json = JSON.parse(@response.body)
     expect(json.include? resource).not_to be true
@@ -177,4 +187,35 @@ Then /I should not see the message "(.*)"/ do |text|
   else
     assert !page.has_content?(text)
   end
+end
+
+Then /the "(.*)" resource should be unapproved/ do |resource|
+  resource = Resource.find_by(:title => resource)
+  expect(resource.approval_status).to eq 0
+end
+
+Then /the "(.*)" resource should be approved/ do |resource|
+  expect(Resource.where(:title => resource).first.approval_status).to eq 1
+end
+
+Then /all the resources should be approved/ do
+  expect(Resource.all.any? {|r| r.approval_status == 0}).to be false
+end
+
+When /I approve the following resources with api key "(.*)":/ do |api_key, params|
+  resources = params.hashes.map {|r| Resource.where(:title => r["title"]).first.id}
+  if resources.length > 1
+    ids = resources * ","
+    @response = page.driver.put('/resources/approve/many', {:approve_list => ids, :api_key => api_key, :approval_status => 1})
+  else
+    @response = page.driver.put("/resources/approve/#{resources[0]}", {:api_key => api_key, :approval_status => 1})
+  end
+end
+
+Then /the response status should be "(.*)"/ do |code|
+  expect(@response.status).to eq code.to_i
+end
+
+When /I approve resources "(.*)" with api key "(.*)"/ do |ids, api_key|
+  @response = page.driver.put('/resources/approve/many', {:approve_list => ids, :api_key => api_key})
 end

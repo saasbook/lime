@@ -1,10 +1,12 @@
 class ResourcesController < ApplicationController
   def resource_params
-    params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
+    params.permit(
+                  :title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged,
-                  :flagged_comment, :contact_name, :contact_phone, :client_tags, :resource_email,
-                  :resource_phone, :address, :deadline, :notes, :funding_amount, :approved_by)
+                  :types, :audiences, :desc, :approval_status, :flagged, :flagged_comment, 
+                  :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, 
+                  :address, :deadline, :notes, :funding_amount, :approved_by
+                 )
   end
 
   before_action :set_user
@@ -13,14 +15,14 @@ class ResourcesController < ApplicationController
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
-    if params.include? :sort_by
-      sort_by = params[:sort_by] # fetch sort_by term
-      params.delete :sort_by # remove sort_by param from params hash
-    else
-      sort_by = nil
+    if @user.nil?
+      params[:approval_status] = 1 # only admins can view unapproved resources
     end
 
-    @resources = Resource.location_helper(resource_params)
+    sort_by = params[:sort_by]
+    exclusive = params[:exclusive]
+    @resources = Resource.location_helper(resource_params.merge({:exclusive => exclusive}))
+
     if @resources != nil
        @resources = @resources.order(sort_by)
     end
@@ -129,6 +131,47 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def approve_many
+    if @user.nil?
+      approve_many_sad_path("This action is unauthorized.", 401)
+      return
+    end
+
+    lst = params[:approve_list]
+    status = params[:approval_status]
+    if not status.nil?
+      status = status.to_i
+    else
+      status = 1
+    end
+    if not [0, 1].include? status
+      approve_many_sad_path("Approval status must be either 0 or 1.", 403)
+      return
+    end
+
+    if lst == 'all'
+      Resource.where(:approval_status => 0).each do |resource|
+        Resource.update(resource.id, :approval_status => status)
+      end
+      @resources = Resource.all
+    else
+      lst = lst.split(',')
+      if (lst.length <= 1 or lst.any? {|id| not id.scan(/\D/).empty?})
+        approve_many_sad_path("Approval list not formatted correctly.", 400)
+        return
+      else
+        @resources = []
+        lst.each do |id|
+          @resources << Resource.update(id, :approval_status => status)
+        end
+      end
+    end
+    respond_to do |format|
+      format.json {render :json => @resources.to_json(:include => Resource.has_many_associations) }
+      format.html {redirect_to "/resources"}
+    end
+  end
+
   def edit
 
   end
@@ -136,7 +179,8 @@ class ResourcesController < ApplicationController
   def destroy
 
   end
-
+  
+  private
   def set_user
     if request.format.json? and params.include? :api_key
       @user = User.where(:api_token => params[:api_key]).first
@@ -146,4 +190,13 @@ class ResourcesController < ApplicationController
     params.delete :api_key
   end
 
+  def approve_many_sad_path(notice, code)
+    respond_to do |format|
+      format.html {
+        flash[:notice] = notice
+        redirect_to "/resources/approve/many.html"
+      }
+      format.json { render status: code, json: {}.to_json }
+    end
+  end
 end

@@ -15,7 +15,7 @@ RSpec.describe ResourcesController, :type => :controller do
 
   describe 'model filter method is called upon GET request' do
     it 'calls the model method that performs the database filtering' do
-      params = ActionController::Parameters.new(  {types: "Events,Mentoring"} )
+      params = ActionController::Parameters.new(  {types: "Events,Mentoring", approval_status: 1} )
       params.permit!
       expect(Resource).to receive(:filter).with(params)
       get :index, params: {:types => 'Events,Mentoring', :sort_by => 'title'}
