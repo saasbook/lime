@@ -4,7 +4,7 @@ class ResourcesController < ApplicationController
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
                   :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment)
   end
-  
+
   before_action :set_user
 
   # assumes API GET request in this format :
@@ -47,7 +47,7 @@ class ResourcesController < ApplicationController
 
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
-    #otherwise add a new object to the database 
+    #otherwise add a new object to the database
     @desc_too_long = false
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if params[:desc] != nil and params[:desc].length > 500
@@ -81,14 +81,89 @@ class ResourcesController < ApplicationController
       flash[:notice] = "You don't have permissions to update records"
       return
     end
+
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:flagged])
+      @edit.save!
     end
     if params[:flagged_comment]
       params[:flagged_comment] = params[:flagged_comment].to_s
     end
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:approval_status])
+      @edit.save!
+    end
+    if params[:title]
+      params[:title] = params[:title].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:title])
+      @edit.save!
+    end
+    if params[:url]
+      params[:url] = params[:flagged].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:url])
+      @edit.save!
+    end
+    if params[:contact_email]
+      params[:contact_email] = params[:contact_email].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:contact_email])
+      @edit.save!
+    end
+    if params[:location]
+      params[:location] = params[:location].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
+      @edit.save!
+    end
+    if params[:population_focuses]
+      params[:population_focuses] = params[:population_focuses].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:campuses])
+      @edit.save!
+    end
+    if params[:campuses]
+      params[:campuses] = params[:campuses].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:campuses])
+      @edit.save!
+    end
+    if params[:colleges]
+      params[:colleges] = params[:colleges].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:colleges])
+      @edit.save!
+    end
+    if params[:availabilities]
+      params[:availabilities] = params[:availabilities].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter =>  params[:availabilities])
+      @edit.save!
+    end
+    if params[:innovation_stages]
+      params[:innovation_stages] = params[:innovation_stages].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:innovation_stages])
+      @edit.save!
+    end
+    if params[:availabilities]
+      params[:availabilities] = params[:availabilities].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:availabilities])
+      @edit.save!
+    end
+    if params[:topics]
+      params[:topics] = params[:topics].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:topics])
+      @edit.save!
+    end
+    if params[:technologies]
+      params[:technologies] = params[:technologies].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:technologies])
+      @edit.save!
+    end
+    if params[:types]
+      params[:types] = params[:types].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:types])
+      @edit.save!
+    end
+    if params[:audiences]
+      params[:audiences] = params[:audiences].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:audiences])
+      @edit.save!
     end
 
     Resource.update(params[:id], resource_params)

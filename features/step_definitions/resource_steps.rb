@@ -17,6 +17,12 @@ Then /the following resource_types exist/ do |resource_types_table|
   end
 end
 
+Then /the following users exist/ do |users_table|
+  users_table.hashes.each do |user|
+    User.create user
+  end
+end
+
 Then /the following locations exist/ do |locations_table|
   global = Location.create :val => "Global"
   global.save :validate => false
@@ -29,6 +35,7 @@ end
 Then /I should receive a JSON object/ do
   begin
     json = JSON.parse(@response.body)
+    puts JSON.pretty_generate(json)
     true
   rescue JSON::ParserError => e
     false
@@ -39,6 +46,10 @@ Then /I should receive all the resources/ do
    json = JSON.parse(@response.body)
    puts(json)
    expect(Resource.all.count).to eq json.length
+end
+
+Then /I should receive one edit/ do
+  expect(Edit.all.count).to eq 1
 end
 
 Then /the JSON should contain "(.*)"/ do |res|
