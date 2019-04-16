@@ -101,6 +101,17 @@ RSpec.describe 'Resource management', :type => :request do
       assert response.body.to_s.include?('somethingelse.com')
     end
 
+    it 'properly adds to edit table' do
+      User.delete_all
+
+      # seed with a resource
+      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      resource = Resource.find_by(title: "something")
+      patch '/resources/' + resource.id.to_s + '/?location=anotherplace&desc=another description&flagged=1&approval_status=1&title=blasd&url=weqweqwe.com&contact_email=ssds&api_key=example'
+      expect(Edit.all.count).to eq 6
+    end
+
     it "doesn't let guests update values they are not allowed to" do
       # seed with a resource
       expect(Resource.where(title: "something")).not_to exist
