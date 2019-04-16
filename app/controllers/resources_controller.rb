@@ -101,7 +101,7 @@ class ResourcesController < ApplicationController
       @edit.save!
     end
     if params[:url]
-      params[:url] = params[:flagged].to_s
+      params[:url] = params[:url].to_s
       @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:url])
       @edit.save!
     end
@@ -113,56 +113,6 @@ class ResourcesController < ApplicationController
     if params[:location]
       params[:location] = params[:location].to_s
       @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
-      @edit.save!
-    end
-    if params[:population_focuses]
-      params[:population_focuses] = params[:population_focuses].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:campuses])
-      @edit.save!
-    end
-    if params[:campuses]
-      params[:campuses] = params[:campuses].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:campuses])
-      @edit.save!
-    end
-    if params[:colleges]
-      params[:colleges] = params[:colleges].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:colleges])
-      @edit.save!
-    end
-    if params[:availabilities]
-      params[:availabilities] = params[:availabilities].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter =>  params[:availabilities])
-      @edit.save!
-    end
-    if params[:innovation_stages]
-      params[:innovation_stages] = params[:innovation_stages].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:innovation_stages])
-      @edit.save!
-    end
-    if params[:availabilities]
-      params[:availabilities] = params[:availabilities].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:availabilities])
-      @edit.save!
-    end
-    if params[:topics]
-      params[:topics] = params[:topics].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:topics])
-      @edit.save!
-    end
-    if params[:technologies]
-      params[:technologies] = params[:technologies].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:technologies])
-      @edit.save!
-    end
-    if params[:types]
-      params[:types] = params[:types].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:types])
-      @edit.save!
-    end
-    if params[:audiences]
-      params[:audiences] = params[:audiences].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:audiences])
       @edit.save!
     end
 
