@@ -4,7 +4,7 @@ class ResourcesController < ApplicationController
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
                   :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment, :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, :address, :deadline, :notes, :funding_amount, :approved_by)
   end
-  
+
   before_action :set_user
 
   # assumes API GET request in this format :
@@ -47,7 +47,7 @@ class ResourcesController < ApplicationController
 
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
-    #otherwise add a new object to the database 
+    #otherwise add a new object to the database
     @desc_too_long = false
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if params[:desc] != nil and params[:desc].length > 500
@@ -82,14 +82,39 @@ class ResourcesController < ApplicationController
       # puts "You don't have permissions to update records"
       return
     end
+
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:flagged])
+      @edit.save!
     end
     if params[:flagged_comment]
       params[:flagged_comment] = params[:flagged_comment].to_s
     end
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:approval_status])
+      @edit.save!
+    end
+    if params[:title]
+      params[:title] = params[:title].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:title])
+      @edit.save!
+    end
+    if params[:url]
+      params[:url] = params[:url].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:url])
+      @edit.save!
+    end
+    if params[:contact_email]
+      params[:contact_email] = params[:contact_email].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:contact_email])
+      @edit.save!
+    end
+    if params[:location]
+      params[:location] = params[:location].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
+      @edit.save!
     end
     
     Resource.update(params[:id], resource_params)
