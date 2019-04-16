@@ -29,7 +29,6 @@ end
 Then /I should receive a JSON object/ do
   begin
     json = JSON.parse(@response.body)
-    # puts json
     true
   rescue JSON::ParserError => e
     false
@@ -101,7 +100,6 @@ Then /the following users exist/ do |users_table|
   users_table.hashes.each do |user|
     # User.create!(user)
     User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
-    puts "added"
   end
 end
 

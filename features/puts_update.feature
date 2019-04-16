@@ -71,8 +71,29 @@ Feature: update a resource given certain params
         Then the first resource should have the attribute "contact_name" equal to "somename"
         Then the first resource should have the attribute "contact_phone" equal to "111-111-1111"
 
-    
+    Scenario: make a post, update its attributes, then get
+        When I make a POST request to "/resources" with parameters: 
+        | title                        | url | contact_email | location | types | audiences | desc| population_focuses |
+      | Coaching Fellowship   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women |
+        Then I should not receive a JSON
+        And I should see "Coaching Fellowship"
 
-        # Then I should see "Girls in Engineering of California"
-        # Then the resource should have the attribute "funding_amount" equal to "10"
+        When I make a PUT request to "/resources/5" with parameters:
+            | notes  |  contact_phone  | desc | api_key |
+            |    here are notes   | 222-222-2222 | more placeholder | example |
+        Then I should receive a JSON object
+
+        When I make a GET request to "/resources" with parameters: 
+            |    title    |
+            | Coaching Fellowship |
+        Then I should receive a JSON object
+        Then the first resource should have the attribute "notes" equal to "here are notes"
+        Then the first resource should have the attribute "desc" equal to "more placeholder"
+        Then the first resource should have the attribute "contact_phone" equal to "222-222-2222"
+
+        
+
+
+
+    
 
