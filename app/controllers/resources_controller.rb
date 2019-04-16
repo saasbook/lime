@@ -2,7 +2,9 @@ class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment, :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, :address, :deadline, :notes, :funding_amount, :approved_by)
+                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged,
+                  :flagged_comment, :contact_name, :contact_phone, :client_tags, :resource_email,
+                  :resource_phone, :address, :deadline, :notes, :funding_amount, :approved_by)
   end
 
   before_action :set_user
@@ -76,6 +78,7 @@ class ResourcesController < ApplicationController
   end
 
   def update
+    @resource = Resource.find(params[:id])
     # Don't let guests update anything unless the params are "allowed"
     if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
       flash[:notice] = "You don't have permissions to update records"
@@ -116,8 +119,8 @@ class ResourcesController < ApplicationController
       @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
       @edit.save!
     end
-    
-    Resource.update(params[:id], resource_params)
+
+    Resource.update_resource(params[:id], resource_params)
     @resource = Resource.find(params[:id])
 
     respond_to do |format|

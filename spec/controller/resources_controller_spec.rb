@@ -42,11 +42,11 @@ RSpec.describe ResourcesController, :type => :controller do
       params.permit!
 
       # test allowed to update
-      expect(Resource).to receive(:update).with(resource.id.to_s, params)
+      expect(Resource).to receive(:update_resource).with(resource.id.to_s, params)
       patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions", api_key: "example"}, :format => :json
 
       # test not allowed to update without valid api key
-      expect(Resource).not_to receive(:update)
+      expect(Resource).not_to receive(:update_resource)
       patch :update, params: {id: resource.id, api_key: 'invalid', flagged: 0}, :format => :json
     end
 
@@ -59,7 +59,7 @@ RSpec.describe ResourcesController, :type => :controller do
       params.permit!
 
       # test allowed to update
-      expect(Resource).to receive(:update).with(resource.id.to_s, params)
+      expect(Resource).to receive(:update_resource).with(resource.id.to_s, params)
       patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions", contact_name: "contact", api_key: "example"}, :format => :json
     end
 
@@ -70,19 +70,19 @@ RSpec.describe ResourcesController, :type => :controller do
       params.permit!
 
       # test not allowed to update values
-      expect(Resource).not_to receive(:update)
+      expect(Resource).not_to receive(:update_resource)
       patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions"}, :format => :json
 
       # test not allowed to unflag
-      expect(Resource).not_to receive(:update)
+      expect(Resource).not_to receive(:update_resource)
       patch :update, params: {id: resource.id, flagged: 0}, :format => :json
 
       # test not allowed to insert garbage values into flagged
-      expect(Resource).not_to receive(:update)
+      expect(Resource).not_to receive(:update_resource)
       patch :update, params: {id: resource.id, flagged: 'asdfasdf'}, :format => :json
 
       # test not allowed without a valid api_key
-      expect(Resource).not_to receive(:update)
+      expect(Resource).not_to receive(:update_resource)
       patch :update, params: {id: resource.id, api_key: 'invalid', flagged: 0}, :format => :json
     end
 
@@ -93,7 +93,7 @@ RSpec.describe ResourcesController, :type => :controller do
       params.permit!
 
       # test allowed to flag without api key
-      expect(Resource).to receive(:update).with(resource.id.to_s, params)
+      expect(Resource).to receive(:update_resource).with(resource.id.to_s, params)
       patch :update, params: {id: resource.id, flagged: 1}
     end
   end

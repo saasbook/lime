@@ -74,31 +74,48 @@ RSpec.describe 'Resource management', :type => :request do
   describe 'update' do
     it 'properly updates values for admins' do
       User.delete_all
-
       # seed with a resource
-
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
-      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description&client_tags=BearX'
       expect(Resource.where(title: "something")).to exist
+
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "something.com"
+      expect(resource.location).to eq 'someplace'
+      expect(resource.types.collect(&:val)).to eq ['Scholarship', 'Funding']
+      expect(resource.client_tags.collect(&:val)).to eq ['BearX']
 
       # patch as admin changes values
-      patch '/resources/' + resource.id.to_s + '/?url=somethingelse.com&flagged=1&api_key=example'
+      patch '/resources/' + resource.id.to_s + '/?url=somethingelse.com&flagged=1&api_key=example&client_tags=WITI,CITRIS&location=anotherplace&desc=another description'
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "somethingelse.com"
       expect(resource.flagged).to eq 1
-
-      patch '/resources/' + resource.id.to_s + '/?location=anotherplace&desc=another description&flagged=1&api_key=example'
-      resource = Resource.find_by(title: "something")
       expect(resource.location).to eq "anotherplace"
       expect(resource.desc).to eq "another description"
+      expect(resource.client_tags.collect(&:val)).to eq ['WITI','CITRIS']
 
       # make sure change is reflected in future HTTP request
       get '/resources/' + resource.id.to_s
       assert response.body.to_s.include?('anotherplace')
       assert response.body.to_s.include?('another description')
       assert response.body.to_s.include?('somethingelse.com')
+      assert response.body.to_s.include?('WITI')
+
+      # make sure this doesn't clear the rest of the values
+      patch '/resources/' + resource.id.to_s + '/?client_tags=BearX&api_key=example'
+      resource = Resource.find_by(title: "something")
+      expect(resource.url).to eq "somethingelse.com"
+      expect(resource.flagged).to eq 1
+      expect(resource.location).to eq "anotherplace"
+      expect(resource.desc).to eq "another description"
+      expect(resource.client_tags.collect(&:val)).to eq ['BearX']
+
+      # make sure change is reflected in future HTTP request
+      get '/resources/' + resource.id.to_s
+      assert response.body.to_s.include?('anotherplace')
+      assert response.body.to_s.include?('another description')
+      assert response.body.to_s.include?('somethingelse.com')
+      assert response.body.to_s.include?('BearX')
     end
 
     it 'properly adds to edit table' do

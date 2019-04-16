@@ -107,12 +107,12 @@ When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ 
   end
 end
 
-Then /the following users exist/ do |users_table|
-  users_table.hashes.each do |user|
-    # User.create!(user)
-    User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
-  end
-end
+# Then /the following users exist/ do |users_table|
+#   users_table.hashes.each do |user|
+#     # User.create!(user)
+#     User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+#   end
+# end
 
 When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with no parameters$/ do |method, url|
   case method
