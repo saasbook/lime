@@ -14,9 +14,10 @@ Feature: update a resource given certain params
       | UC Davis Feminist Research Institute | https://fri.ucdavis.edu/ | fri@ucdavis.edu | Davis | Mentoring | Other | placeholder | Women
 
   Scenario: update population focus for women
-    When I make a PUT request to "/resources" with parameters: 
+    When I make a PUT request to "/resources/1" with parameters: 
       | id | desc |
       | 1  |  This is an updated placeholder.   |
     Then I should receive a JSON object
-    # Then I should receive all the resources
+    Then I should see "Girls in Engineering of California"
+    Then the resource should have the attribute "desc" equal to "This is an updated placeholder."
 
