@@ -80,7 +80,11 @@ class ResourcesController < ApplicationController
   end
 
   def update
-    @resource = Resource.find(params[:id])
+    @resource = Resource.find_by(id: params[:id])
+    if @resource == nil
+      flash[:notice] = "This resource does not exist"
+      return
+    end
     # Don't let guests update anything unless the params are "allowed"
     if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
       flash[:notice] = "You don't have permissions to update records"
