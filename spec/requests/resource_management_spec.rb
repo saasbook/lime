@@ -16,7 +16,7 @@ RSpec.describe 'Resource management', :type => :request do
                                "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
 
       get '/resources?title=thing3'
-      puts response.body
+      # puts response.body
 
       # [{"id":3,"title":"thing3","url":"something.com","contact_email":"something@gmail.com","desc":"descriptions","location":"someplace","resource_email":null,"resource_phone":null,"address":null,"contact_name":null,"contact_phone":null,"deadline":null,"notes":null,"funding_amount":null,"approval_status":null,"approved_by":null,"flagged":null,"flagged_comment":null,"created_at":"2019-04-01T05:48:22.835Z","updated_at":"2019-04-01T05:48:22.835Z",
       #   "types":[{"id":8,"resource_id":3,"val":"Scholarship","created_at":"2019-04-01T05:48:22.863Z","updated_at":"2019-04-01T05:48:22.863Z"},
@@ -116,6 +116,17 @@ RSpec.describe 'Resource management', :type => :request do
       assert response.body.to_s.include?('another description')
       assert response.body.to_s.include?('somethingelse.com')
       assert response.body.to_s.include?('BearX')
+    end
+
+    it 'properly adds to edit table' do
+      User.delete_all
+
+      # seed with a resource
+      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      resource = Resource.find_by(title: "something")
+      patch '/resources/' + resource.id.to_s + '/?location=anotherplace&desc=another description&flagged=1&approval_status=1&title=blasd&url=weqweqwe.com&contact_email=ssds&api_key=example'
+      expect(Edit.all.count).to eq 6
     end
 
     it "doesn't let guests update values they are not allowed to" do
