@@ -76,13 +76,12 @@ class ResourcesController < ApplicationController
   end
 
   def update
-    puts "update"
     # Don't let guests update anything unless the params are "allowed"
-    # if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
-    #   flash[:notice] = "You don't have permissions to update records"
-    #   puts "flash"
-    #   return
-    # end
+    if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
+      flash[:notice] = "You don't have permissions to update records"
+      # puts "You don't have permissions to update records"
+      return
+    end
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
     end
@@ -93,10 +92,14 @@ class ResourcesController < ApplicationController
       params[:approval_status] = params[:approval_status].to_i
     end
 
-    puts "about to update"
+    @resource = Resource.find(params[:id])
+    puts @resource.has_attribute?("title")
+    puts @resource.has_attribute?("contact_name")
+    @resource.update_attributes(contact_name: "somename")
+    puts @resource.title
+    puts @resource.contact_name
+    puts resource_params
     Resource.update(params[:id], resource_params)
-    puts "updated"
-    puts params
     @resource = Resource.find(params[:id])
 
     respond_to do |format|

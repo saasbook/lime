@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-15T17:11:02-07:00">2019-04-15T17:11:02-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-15T20:36:18-07:00">2019-04-15T20:36:18-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.86
+         8.76
        </span>
     </span> hits/line)
   </h2>
@@ -62,12 +62,12 @@
       
       <tr>
         <td class="strong"><a href="#812e57b84d40e36c875834ee5dce23a9f02ab3a3" class="src_link" title="app/controllers/resources_controller.rb">app/controllers/resources_controller.rb</a></td>
-        <td class="green strong">95.24 %</td>
-        <td>121</td>
-        <td>63</td>
-        <td>60</td>
+        <td class="green strong">95.59 %</td>
+        <td>127</td>
+        <td>68</td>
+        <td>65</td>
         <td>3</td>
-        <td>5.7</td>
+        <td>5.6</td>
       </tr>
       
       <tr>
@@ -177,7 +177,7 @@
         <td>94</td>
         <td>78</td>
         <td>16</td>
-        <td>39.9</td>
+        <td>39.2</td>
       </tr>
       
       <tr>
@@ -383,9 +383,9 @@
       <tr>
         <td class="strong"><a href="#64fadbe7ec5a0536c23721b0c4d40408c0e98a25" class="src_link" title="spec/controller/resources_controller_spec.rb">spec/controller/resources_controller_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>103</td>
-        <td>65</td>
-        <td>65</td>
+        <td>100</td>
+        <td>60</td>
+        <td>60</td>
         <td>0</td>
         <td>1.0</td>
       </tr>
@@ -492,10 +492,10 @@
         <div class="source_table" id="812e57b84d40e36c875834ee5dce23a9f02ab3a3">
   <div class="header">
     <h3>app/controllers/resources_controller.rb</h3>
-    <h4><span class="green">95.24 %</span> covered</h4>
+    <h4><span class="green">95.59 %</span> covered</h4>
     <div>
-      <b>63</b> relevant lines. 
-      <span class="green"><b>60</b> lines covered</span> and
+      <b>68</b> relevant lines. 
+      <span class="green"><b>65</b> lines covered</span> and
       <span class="red"><b>3</b> lines missed.</span>
     </div>
   </div>
@@ -515,8 +515,8 @@
           <code class="ruby">  def resource_params</code>
         </li>
       
-        <li class="covered" data-hits="29" data-linenumber="3">
-          <span class="hits">29</span>
+        <li class="covered" data-hits="28" data-linenumber="3">
+          <span class="hits">28</span>
           
           <code class="ruby">    params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,</code>
         </li>
@@ -581,20 +581,20 @@
           <code class="ruby">  def index</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="14">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="3" data-linenumber="14">
+          <span class="hits">3</span>
           
           <code class="ruby">    if params.include? :sort_by</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="15">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="15">
+          <span class="hits">1</span>
           
           <code class="ruby">      sort_by = params[:sort_by] # fetch sort_by term</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="16">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
           
           <code class="ruby">      params.delete :sort_by # remove sort_by param from params hash</code>
         </li>
@@ -623,20 +623,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="21">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="3" data-linenumber="21">
+          <span class="hits">3</span>
           
           <code class="ruby">    @resources = Resource.location_helper(resource_params)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="22">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="3" data-linenumber="22">
+          <span class="hits">3</span>
           
           <code class="ruby">    if @resources != nil</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="23">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="2" data-linenumber="23">
+          <span class="hits">2</span>
           
           <code class="ruby">       @resources = @resources.order(sort_by)</code>
         </li>
@@ -653,20 +653,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="26">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="3" data-linenumber="26">
+          <span class="hits">3</span>
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="27">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="4" data-linenumber="27">
+          <span class="hits">4</span>
           
           <code class="ruby">      format.json {render :json =&gt; @resources.to_json(:include =&gt; Resource.has_many_associations) }</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="28">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="3" data-linenumber="28">
+          <span class="hits">3</span>
           
           <code class="ruby">      format.html</code>
         </li>
@@ -989,130 +989,130 @@
           <code class="ruby">      flash[:notice] = &quot;You don&#39;t have permissions to update records&quot;</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="82">
+        <li class="never" data-hits="" data-linenumber="82">
+          
+          
+          <code class="ruby">      # puts &quot;You don&#39;t have permissions to update records&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="83">
           <span class="hits">6</span>
           
           <code class="ruby">      return</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="83">
+        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="84">
+        <li class="covered" data-hits="6" data-linenumber="85">
           <span class="hits">6</span>
           
           <code class="ruby">    if params[:flagged]</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="85">
+        <li class="covered" data-hits="4" data-linenumber="86">
           <span class="hits">4</span>
           
           <code class="ruby">      params[:flagged] = params[:flagged].to_i</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
+        <li class="never" data-hits="" data-linenumber="87">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="87">
+        <li class="covered" data-hits="6" data-linenumber="88">
           <span class="hits">6</span>
           
           <code class="ruby">    if params[:flagged_comment]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="88">
+        <li class="missed" data-hits="0" data-linenumber="89">
           
           
           <code class="ruby">      params[:flagged_comment] = params[:flagged_comment].to_s</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="89">
+        <li class="never" data-hits="" data-linenumber="90">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="90">
+        <li class="covered" data-hits="6" data-linenumber="91">
           <span class="hits">6</span>
           
           <code class="ruby">    if params[:approval_status]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="91">
+        <li class="missed" data-hits="0" data-linenumber="92">
           
           
           <code class="ruby">      params[:approval_status] = params[:approval_status].to_i</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="92">
+        <li class="never" data-hits="" data-linenumber="93">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="93">
+        <li class="never" data-hits="" data-linenumber="94">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="94">
-          <span class="hits">6</span>
-          
-          <code class="ruby">    Resource.update(params[:id], resource_params)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="95">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="96">
+        <li class="covered" data-hits="6" data-linenumber="95">
           <span class="hits">6</span>
           
           <code class="ruby">    @resource = Resource.find(params[:id])</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="97">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="98">
+        <li class="covered" data-hits="6" data-linenumber="96">
           <span class="hits">6</span>
           
-          <code class="ruby">    respond_to do |format|</code>
+          <code class="ruby">    puts @resource.has_attribute?(&quot;title&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="99">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="6" data-linenumber="97">
+          <span class="hits">6</span>
           
-          <code class="ruby">      format.json {render :json =&gt; @resource.to_json(:include =&gt; Resource.has_many_associations) }</code>
+          <code class="ruby">    puts @resource.has_attribute?(&quot;contact_name&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="98">
+          
+          
+          <code class="ruby">    # @resource.update_attributes(resource_params)</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="99">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    puts @resource.title</code>
         </li>
       
         <li class="covered" data-hits="6" data-linenumber="100">
           <span class="hits">6</span>
           
-          <code class="ruby">      format.html</code>
+          <code class="ruby">    puts @resource.contact_name</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="covered" data-hits="6" data-linenumber="101">
+          <span class="hits">6</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">    Resource.update(params[:id], resource_params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="covered" data-hits="6" data-linenumber="102">
+          <span class="hits">6</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    @resource = Resource.find(params[:id])</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="103">
@@ -1121,34 +1121,34 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="104">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="6" data-linenumber="104">
+          <span class="hits">6</span>
           
-          <code class="ruby">  def edit</code>
+          <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
+        <li class="covered" data-hits="11" data-linenumber="105">
+          <span class="hits">11</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">      format.json {render :json =&gt; @resource.to_json(:include =&gt; Resource.has_many_associations) }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="106">
+        <li class="covered" data-hits="6" data-linenumber="106">
+          <span class="hits">6</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">      format.html</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="107">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="108">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="108">
           
-          <code class="ruby">  def destroy</code>
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="109">
@@ -1157,10 +1157,10 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="110">
+        <li class="covered" data-hits="1" data-linenumber="110">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">  def edit</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="111">
@@ -1169,61 +1169,97 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="112">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def set_user</code>
-        </li>
-      
-        <li class="covered" data-hits="28" data-linenumber="113">
-          <span class="hits">28</span>
-          
-          <code class="ruby">    if request.format.json? and params.include? :api_key</code>
-        </li>
-      
-        <li class="covered" data-hits="7" data-linenumber="114">
-          <span class="hits">7</span>
-          
-          <code class="ruby">      @user = User.where(:api_token =&gt; params[:api_key]).first</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="115">
-          
-          
-          <code class="ruby">    else</code>
-        </li>
-      
-        <li class="covered" data-hits="21" data-linenumber="116">
-          <span class="hits">21</span>
-          
-          <code class="ruby">      @user = current_user</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="117">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="covered" data-hits="28" data-linenumber="118">
-          <span class="hits">28</span>
-          
-          <code class="ruby">    params.delete :api_key</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="119">
+        <li class="never" data-hits="" data-linenumber="112">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="120">
+        <li class="never" data-hits="" data-linenumber="113">
           
           
           <code class="ruby"></code>
         </li>
       
+        <li class="covered" data-hits="1" data-linenumber="114">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def destroy</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="115">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="117">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="118">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def set_user</code>
+        </li>
+      
+        <li class="covered" data-hits="27" data-linenumber="119">
+          <span class="hits">27</span>
+          
+          <code class="ruby">    if request.format.json? and params.include? :api_key</code>
+        </li>
+      
+        <li class="covered" data-hits="7" data-linenumber="120">
+          <span class="hits">7</span>
+          
+          <code class="ruby">      @user = User.where(:api_token =&gt; params[:api_key]).first</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="121">
+          
+          
+          <code class="ruby">    else</code>
+        </li>
+      
+        <li class="covered" data-hits="20" data-linenumber="122">
+          <span class="hits">20</span>
+          
+          <code class="ruby">      @user = current_user</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="123">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="27" data-linenumber="124">
+          <span class="hits">27</span>
+          
+          <code class="ruby">    params.delete :api_key</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="125">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="126">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="127">
           
           
           <code class="ruby">end</code>
@@ -1918,8 +1954,8 @@
           <code class="ruby">  def self.has_many_associations</code>
         </li>
       
-        <li class="covered" data-hits="2266" data-linenumber="30">
-          <span class="hits">2266</span>
+        <li class="covered" data-hits="2255" data-linenumber="30">
+          <span class="hits">2255</span>
           
           <code class="ruby">    Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym }</code>
         </li>
@@ -1942,8 +1978,8 @@
           <code class="ruby">  def self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="covered" data-hits="34" data-linenumber="34">
-          <span class="hits">34</span>
+        <li class="covered" data-hits="29" data-linenumber="34">
+          <span class="hits">29</span>
           
           <code class="ruby">    return {:audiences =&gt; resource.audiences, :availabilities =&gt; resource.availabilities,</code>
         </li>
@@ -1996,8 +2032,8 @@
           <code class="ruby">  def self.filter(params)</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="43">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="18" data-linenumber="43">
+          <span class="hits">18</span>
           
           <code class="ruby">    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h # convert ActiveRecord::Controller params into hash with symbol keys</code>
         </li>
@@ -2014,32 +2050,32 @@
           <code class="ruby">    # has_many_hash = {k =&gt; [v1,v2,v3]} ; ex. {audiences =&gt; [undergrad, grad, alumni]}</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="46">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="10" data-linenumber="46">
+          <span class="hits">10</span>
           
           <code class="ruby">    has_many_hash = {}</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="47">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="10" data-linenumber="47">
+          <span class="hits">10</span>
           
           <code class="ruby">    params.each_key do |key|</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="48">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="8" data-linenumber="48">
+          <span class="hits">8</span>
           
           <code class="ruby">      if self.has_many_associations.include?(key)</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="49">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="3" data-linenumber="49">
+          <span class="hits">3</span>
           
           <code class="ruby">        has_many_hash[key] = params[key].split(&#39;,&#39;).map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="50">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="50">
+          <span class="hits">1</span>
           
           <code class="ruby">        params.delete(key) # remove has_many key from params</code>
         </li>
@@ -2062,8 +2098,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="54">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="10" data-linenumber="54">
+          <span class="hits">10</span>
           
           <code class="ruby">    resources = Resource.where(params) # filter by singular parameters first</code>
         </li>
@@ -2074,8 +2110,8 @@
           <code class="ruby">    # return early if there are no has_many fields</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="56">
-          <span class="hits">11</span>
+        <li class="covered" data-hits="10" data-linenumber="56">
+          <span class="hits">10</span>
           
           <code class="ruby">    if has_many_hash.empty?</code>
         </li>
@@ -2092,8 +2128,8 @@
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="59">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
           
           <code class="ruby">      return self.filter_has_many_helper(resources, has_many_hash)</code>
         </li>
@@ -2146,26 +2182,26 @@
           <code class="ruby">    # for each of the candidate resources filtered by the singular parameters, check if it matches the has_many queries</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="68">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="68">
+          <span class="hits">1</span>
           
           <code class="ruby">    filtered = [] # list of returned records</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="69">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
           
           <code class="ruby">    resources.find_each do |resource|</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="70">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="4" data-linenumber="70">
+          <span class="hits">4</span>
           
           <code class="ruby">      associations_hash = self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="71">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="4" data-linenumber="71">
+          <span class="hits">4</span>
           
           <code class="ruby">      bool_arr = []</code>
         </li>
@@ -2176,14 +2212,14 @@
           <code class="ruby">      # for each has_many query, check if the current record&#39;s has_many field contains all values in the query</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="73">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="4" data-linenumber="73">
+          <span class="hits">4</span>
           
           <code class="ruby">      has_many_hash.each do |field, values|</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="74">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="4" data-linenumber="74">
+          <span class="hits">4</span>
           
           <code class="ruby">        bool_arr.append (associations_hash[field].records.collect(&amp;:val) &amp; values).sort == values.sort</code>
         </li>
@@ -2200,8 +2236,8 @@
           <code class="ruby">      # if all queries return true, append the record to the returned value</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="77">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="4" data-linenumber="77">
+          <span class="hits">4</span>
           
           <code class="ruby">      if bool_arr.all?</code>
         </li>
@@ -2230,8 +2266,8 @@
           <code class="ruby">    # return ActiveRecord::Relation instead of array so that ActiveRecord calls can be chained outside this function</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="82">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="1" data-linenumber="82">
+          <span class="hits">1</span>
           
           <code class="ruby">    return Resource.where(id: filtered.map(&amp;:id))</code>
         </li>
@@ -2680,14 +2716,14 @@
           <code class="ruby">  def self.location_helper(params)</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="157">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="6" data-linenumber="157">
+          <span class="hits">6</span>
           
           <code class="ruby">    exclusive = (params[:exclusive] == true)</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="158">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="6" data-linenumber="158">
+          <span class="hits">6</span>
           
           <code class="ruby">    params.delete :exclusive</code>
         </li>
@@ -2698,20 +2734,20 @@
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="160">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="6" data-linenumber="160">
+          <span class="hits">6</span>
           
           <code class="ruby">    location = params[:location]</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="161">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="6" data-linenumber="161">
+          <span class="hits">6</span>
           
           <code class="ruby">    if location.nil? or exclusive</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="162">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="3" data-linenumber="162">
+          <span class="hits">3</span>
           
           <code class="ruby">      return self.filter(params)</code>
         </li>
@@ -6382,8 +6418,8 @@
     <h3>spec/controller/resources_controller_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>65</b> relevant lines. 
-      <span class="green"><b>65</b> lines covered</span> and
+      <b>60</b> relevant lines. 
+      <span class="green"><b>60</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -6589,421 +6625,403 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="34">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="34">
           
-          <code class="ruby">  describe &quot;admin PUT to change resource&quot; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="35">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;calls the correct model method&#39; do</code>
+          <code class="ruby">  describe &quot;PATCH update&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="36">
           <span class="hits">1</span>
           
+          <code class="ruby">    it &#39;calls the correct model method&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="37">
+          <span class="hits">1</span>
+          
           <code class="ruby">      resource = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="never" data-hits="" data-linenumber="38">
           
           
           <code class="ruby">                               &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="38">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
-          <code class="ruby">      params = ActionController::Parameters.new({title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;})</code>
+          <code class="ruby">      User.delete_all</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
-          <code class="ruby">      params.permit!</code>
+          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="41">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(Resource).to receive(:update).with(resource.id.to_s, params)</code>
+          <code class="ruby">      params = ActionController::Parameters.new({title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;})</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="42">
           <span class="hits">1</span>
           
-          <code class="ruby">      puts &quot;Antonio test&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="43">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      puts resource.id</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="44">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      puts resource.title</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="45">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      patch :update, params: {id: resource.id, title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;, api_key: &quot;example&quot;}, :format =&gt; :json</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="46">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      puts resource.title</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="47">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      getThing = get :index, params: {:types =&gt; &#39;scholarship,funding&#39;, :sort_by =&gt; &#39;title&#39;}</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="48">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="49">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="50">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="51">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  describe &quot;PATCH update&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="52">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &#39;calls the correct model method&#39; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="53">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      resource = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="54">
-          
-          
-          <code class="ruby">                               &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="55">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      User.delete_all</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="56">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="57">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      params = ActionController::Parameters.new({title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;})</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="58">
-          <span class="hits">1</span>
-          
           <code class="ruby">      params.permit!</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="43">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="60">
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby">      # test allowed to update</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="61">
+        <li class="covered" data-hits="1" data-linenumber="45">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(Resource).to receive(:update).with(resource.id.to_s, params)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="62">
+        <li class="covered" data-hits="1" data-linenumber="46">
           <span class="hits">1</span>
           
           <code class="ruby">      patch :update, params: {id: resource.id, title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;, api_key: &quot;example&quot;}, :format =&gt; :json</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="63">
+        <li class="never" data-hits="" data-linenumber="47">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="64">
+        <li class="never" data-hits="" data-linenumber="48">
           
           
           <code class="ruby">      # test not allowed to update without valid api key</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="65">
+        <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(Resource).not_to receive(:update)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="66">
+        <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
           <code class="ruby">      patch :update, params: {id: resource.id, api_key: &#39;invalid&#39;, flagged: 0}, :format =&gt; :json</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="67">
+        <li class="never" data-hits="" data-linenumber="51">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="68">
+        <li class="never" data-hits="" data-linenumber="52">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="69">
+        <li class="covered" data-hits="1" data-linenumber="53">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;doesn&#39;t call update for guests who try to update values they are not permitted to&quot; do</code>
+          <code class="ruby">    it &#39;calls the correct model method but for an unassigned attribute&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="70">
+        <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
           <code class="ruby">      resource = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="never" data-hits="" data-linenumber="55">
           
           
-          <code class="ruby">                                          &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+          <code class="ruby">                               &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="72">
+        <li class="covered" data-hits="1" data-linenumber="56">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      User.delete_all</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="57">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
           <code class="ruby">      params = ActionController::Parameters.new({title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;})</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="73">
+        <li class="covered" data-hits="1" data-linenumber="59">
           <span class="hits">1</span>
           
           <code class="ruby">      params.permit!</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="74">
+        <li class="never" data-hits="" data-linenumber="60">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="never" data-hits="" data-linenumber="61">
           
           
-          <code class="ruby">      # test not allowed to update values</code>
+          <code class="ruby">      # test allowed to update</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="76">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="77">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      patch :update, params: {id: resource.id, title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;}, :format =&gt; :json</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="78">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="79">
-          
-          
-          <code class="ruby">      # test not allowed to unflag</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="80">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="81">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      patch :update, params: {id: resource.id, flagged: 0}, :format =&gt; :json</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="82">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="83">
-          
-          
-          <code class="ruby">      # test not allowed to insert garbage values into flagged</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="84">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="85">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      patch :update, params: {id: resource.id, flagged: &#39;asdfasdf&#39;}, :format =&gt; :json</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="86">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="87">
-          
-          
-          <code class="ruby">      # test not allowed without a valid api_key</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="88">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="89">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      patch :update, params: {id: resource.id, api_key: &#39;invalid&#39;, flagged: 0}, :format =&gt; :json</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="90">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="91">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="92">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &#39;lets guests flag resources&#39; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="93">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      resource = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="94">
-          
-          
-          <code class="ruby">                                          &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="95">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      params = ActionController::Parameters.new({&quot;flagged&quot; =&gt; 1})</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="96">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      params.permit!</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="97">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="98">
-          
-          
-          <code class="ruby">      # test allowed to flag without api key</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="99">
+        <li class="covered" data-hits="1" data-linenumber="62">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(Resource).to receive(:update).with(resource.id.to_s, params)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="100">
+        <li class="covered" data-hits="1" data-linenumber="63">
           <span class="hits">1</span>
           
-          <code class="ruby">      patch :update, params: {id: resource.id, flagged: 1}</code>
+          <code class="ruby">      patch :update, params: {id: resource.id, title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;, api_key: &quot;example&quot;}, :format =&gt; :json</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="never" data-hits="" data-linenumber="64">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="65">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;doesn&#39;t call update for guests who try to update values they are not permitted to&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      resource = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="68">
+          
+          
+          <code class="ruby">                                          &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      params = ActionController::Parameters.new({title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;})</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="70">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      params.permit!</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
+          <code class="ruby">      # test not allowed to update values</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      patch :update, params: {id: resource.id, title: &quot;something&quot;, url: &quot;something.com&quot; ,contact_email: &quot;something@gmail.com&quot;, location: &quot;someplace&quot;, types: &#39;scholarship,funding&#39;, audiences: &#39;grad,undergrad&#39;, desc: &quot;descriptions&quot;}, :format =&gt; :json</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">      # test not allowed to unflag</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="77">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="78">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      patch :update, params: {id: resource.id, flagged: 0}, :format =&gt; :json</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
+          
+          
+          <code class="ruby">      # test not allowed to insert garbage values into flagged</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="81">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="82">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      patch :update, params: {id: resource.id, flagged: &#39;asdfasdf&#39;}, :format =&gt; :json</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="84">
+          
+          
+          <code class="ruby">      # test not allowed without a valid api_key</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="85">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(Resource).not_to receive(:update)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="86">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      patch :update, params: {id: resource.id, api_key: &#39;invalid&#39;, flagged: 0}, :format =&gt; :json</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="88">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="89">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &#39;lets guests flag resources&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="90">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      resource = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="91">
+          
+          
+          <code class="ruby">                                          &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="92">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      params = ActionController::Parameters.new({&quot;flagged&quot; =&gt; 1})</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="93">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      params.permit!</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="94">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby">      # test allowed to flag without api key</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="96">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(Resource).to receive(:update).with(resource.id.to_s, params)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="97">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      patch :update, params: {id: resource.id, flagged: 1}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="98">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="99">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="103">
+        <li class="never" data-hits="" data-linenumber="100">
           
           
           <code class="ruby">end</code>

@@ -29,17 +29,15 @@ end
 Then /I should receive a JSON object/ do
   begin
     json = JSON.parse(@response.body)
-    puts "json"
-    puts JSON.pretty_generate(json)
+    puts json
     true
   rescue JSON::ParserError => e
-    puts @response.body
+    false
   end
 end
 
 Then /I should receive all the resources/ do
    json = JSON.parse(@response.body)
-   puts(json)
    expect(Resource.all.count).to eq json.length
 end
 
@@ -50,6 +48,11 @@ end
 
 Then /the resource should have the attribute "(.*)" equal to "(.*)"/ do |attribute, value|
   json = JSON.parse(@response.body)
+  expect(json[attribute.to_s].to_s).to match value.to_s
+end
+
+Then /the first resource should have the attribute "(.*)" equal to "(.*)"/ do |attribute, value|
+  json = JSON.parse(@response.body)[0]
   expect(json[attribute.to_s].to_s).to match value.to_s
 end
 
@@ -96,7 +99,9 @@ end
 
 Then /the following users exist/ do |users_table|
   users_table.hashes.each do |user|
-    User.create user
+    # User.create!(user)
+    User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+    puts "added"
   end
 end
 
