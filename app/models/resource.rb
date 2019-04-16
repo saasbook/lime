@@ -18,7 +18,11 @@ class Resource < ActiveRecord::Base
   # end
 
   def self.guest_update_params_allowed?(resource_params)
-    return (resource_params.keys.size == 1 and resource_params.keys[0] == "flagged" and resource_params["flagged"] == '1')
+     update_allowed = (((resource_params.keys.size <= 1) and
+         (resource_params.keys[0] == "flagged" ) and (resource_params["flagged"] == '1')) or
+         ((resource_params.keys[0] == "flagged" or resource_params.keys[0] == "flagged_comment") and
+         (resource_params.keys[1] == "flagged" or resource_params.keys[1] == "flagged_comment") and resource_params["flagged"] == '1'))
+    return update_allowed
   end
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
@@ -79,8 +83,21 @@ class Resource < ActiveRecord::Base
   end
 
   def self.create_resource(params)
-    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h
+    params, resource_hash = Resource.separate_params(params)
+    resource = Resource.create!(resource_hash)
+    Resource.create_associations(resource, params)
+    return resource
+  end
 
+  def self.update_resource(id, params)
+    params, resource_hash = Resource.separate_params(params)
+    resource = Resource.update(id, resource_hash)
+    Resource.create_associations(resource, params)
+    return resource
+  end
+
+  def self.separate_params(params)
+    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h
     resource_hash = {}
     params.each do |field, val|
       if self.has_many_associations.include? field
@@ -89,18 +106,19 @@ class Resource < ActiveRecord::Base
         resource_hash[field] = val
       end
     end
+    return params, resource_hash
+  end
 
-    resource = Resource.create!(resource_hash)
-    
+  def self.create_associations(resource, params)
     fields_hash = self.get_associations_hash(resource)
     fields_hash.each do |field, association|
+      association.delete_all
       if params[field] != nil
         params[field].each do |val|
           association.create(:val => val)
         end
       end
     end
-    return resource
   end
 
   # this method is here

@@ -31,7 +31,7 @@ RSpec.describe 'Resource management', :type => :request do
   end
 
   describe 'create' do
-    it "receive a valid post request via create" do
+    it "adds add resource to the database given valid parameters in a post request" do
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       expect(Resource.where(title: "something")).to exist
       resource = Resource.find_by(title: "something")
@@ -46,40 +46,76 @@ RSpec.describe 'Resource management', :type => :request do
       expect(resource.approval_status).to eq 0
     end
 
-    it "receive an invalid post request via create" do
+    it "doesn't add a resource to the database given invalid parameters in a post request" do
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       post '/resources?title=something2&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
 
       expect(Resource.where(title: "something")).to exist
       expect(Resource.where(title: "something2")).not_to exist
     end
+
+    it "adds an approved resource to the database if requester is an admin" do
+      User.delete_all
+      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description&api_key=example'
+      expect(Resource.where(title: "something")).to exist
+      resource = Resource.find_by(title: "something")
+      expect(resource.title).to eq "something"
+      expect(resource.url).to eq "something.com"
+      expect(resource.contact_email).to eq "something@gmail.com"
+      expect(resource.location).to eq "someplace"
+      expect(resource.audiences).to exist
+      expect(resource.types).to exist
+      expect(resource.desc).to eq "description"
+      expect(resource.approval_status).to eq 1
+    end
   end
 
   describe 'update' do
     it 'properly updates values for admins' do
+      User.delete_all
       # seed with a resource
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
-      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
+      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description&client_tags=BearX'
       expect(Resource.where(title: "something")).to exist
+
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "something.com"
+      expect(resource.location).to eq 'someplace'
+      expect(resource.types.collect(&:val)).to eq ['Scholarship', 'Funding']
+      expect(resource.client_tags.collect(&:val)).to eq ['BearX']
 
       # patch as admin changes values
-      patch '/resources/' + resource.id.to_s + '/?url=somethingelse.com&flagged=1&api_key=example'
+      patch '/resources/' + resource.id.to_s + '/?url=somethingelse.com&flagged=1&api_key=example&client_tags=WITI,CITRIS&location=anotherplace&desc=another description'
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "somethingelse.com"
       expect(resource.flagged).to eq 1
-
-      patch '/resources/' + resource.id.to_s + '/?location=anotherplace&desc=another description&flagged=1&api_key=example'
-      resource = Resource.find_by(title: "something")
       expect(resource.location).to eq "anotherplace"
       expect(resource.desc).to eq "another description"
+      expect(resource.client_tags.collect(&:val)).to eq ['WITI','CITRIS']
 
       # make sure change is reflected in future HTTP request
       get '/resources/' + resource.id.to_s
       assert response.body.to_s.include?('anotherplace')
       assert response.body.to_s.include?('another description')
       assert response.body.to_s.include?('somethingelse.com')
+      assert response.body.to_s.include?('WITI')
+
+      # make sure this doesn't clear the rest of the values
+      patch '/resources/' + resource.id.to_s + '/?client_tags=BearX&api_key=example'
+      resource = Resource.find_by(title: "something")
+      expect(resource.url).to eq "somethingelse.com"
+      expect(resource.flagged).to eq 1
+      expect(resource.location).to eq "anotherplace"
+      expect(resource.desc).to eq "another description"
+      expect(resource.client_tags.collect(&:val)).to eq ['BearX']
+
+      # make sure change is reflected in future HTTP request
+      get '/resources/' + resource.id.to_s
+      assert response.body.to_s.include?('anotherplace')
+      assert response.body.to_s.include?('another description')
+      assert response.body.to_s.include?('somethingelse.com')
+      assert response.body.to_s.include?('BearX')
     end
 
     it "doesn't let guests update values they are not allowed to" do
