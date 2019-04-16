@@ -107,49 +107,6 @@ class Resource < ActiveRecord::Base
     return resource
   end
 
-  def self.update_resource(params)
-    # extract the new parameters
-    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h
-
-    # map new params
-    resource_hash = {}
-    params.each do |field, val|
-      if self.has_many_associations.include? field
-        params[field] = val.split(',')
-      else
-        resource_hash[field] = val
-      end
-    end
-
-    # find the resource
-    resource = Resource.where(params)
-
-    # get the old params
-    old_resource_hash = self.get_associations_hash(resource)
-
-    #cmp old and new params to add updates
-    resource_hash.each do |field, association|
-      # if field has new assoc, then update
-      if resource_hash[field] != old_resource_hash[field]
-        # append the new assoc
-        resource_hash[field].each_index do |index|
-          # find diffs
-          if (resource_hash[field].size > old_resource_hash[field].size)
-            diff = resource_hash[field].to_a - old_resource_hash[field].to_a
-          else
-            diff = old_resource_hash[field].to_a - resource_hash[field].to_a
-          end
-          # this is the diff
-          Hash[*diff.flatten] # => {field => val}
-          # TODO: **append** the new associations or destory ones that were deleted in the update 
-        end
-      end
-    end
-
-    return resource
-
-  end
-
   # this method is here
   # if filtering by location, filtering should behave as the following
   # if the location has no resources, find the parent location, and return resources for the parent location
