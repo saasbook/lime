@@ -68,4 +68,4 @@ Feature: admin edits list of unapproved resources
     When I approve resources "1,2,%5" with api key "123456789"
     Then I should receive a JSON object
     And the JSON should be empty
-    And the response status code should be 400
+    And the response status should be "400"

@@ -43,7 +43,6 @@ end
 
 Then /the JSON should contain all the resources/ do
    json = JSON.parse(@response.body)
-   puts(json)
    expect(Resource.all.count).to eq json.length
 end
 
@@ -192,4 +191,8 @@ end
 
 Then /the response status should be "(.*)"/ do |code|
   expect(@response.status).to eq code.to_i
+end
+
+When /I approve resources "(.*)" with api key "(.*)"/ do |ids, api_key|
+  @response = page.driver.put('/resources/approve/many', {:approve_list => ids, :api_key => api_key})
 end
