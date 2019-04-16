@@ -71,8 +71,8 @@ Feature: update a resource given certain params
 
     Scenario: make a post, update its attributes, then get
         When I make a POST request to "/resources" with parameters: 
-          | title                 | url | contact_email | location | types | audiences | desc| population_focuses | approval_status |
-          | Coaching Fellowship   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women | 1 |
+          | title                 | url | contact_email | location | types | audiences | desc| population_focuses | approval_status | api_key |
+          | Coaching Fellowship   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women | 1 | example |
         Then I should receive a JSON object
         And the JSON should contain "Coaching Fellowship"
         When I make a PUT request to "/resources/5" with parameters:
