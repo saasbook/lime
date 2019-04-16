@@ -2,7 +2,7 @@ class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment)
+                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment, :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, :address, :deadline, :notes, :funding_amount, :approved_by)
   end
   
   before_action :set_user
@@ -63,7 +63,7 @@ class ResourcesController < ApplicationController
     end
 
     flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
-    #https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
+    # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
     rp[:approval_status] = @user == nil ? 0 : 1
     @resource = Resource.create_resource(rp)
@@ -79,6 +79,7 @@ class ResourcesController < ApplicationController
     # Don't let guests update anything unless the params are "allowed"
     if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
       flash[:notice] = "You don't have permissions to update records"
+      # puts "You don't have permissions to update records"
       return
     end
     if params[:flagged]
@@ -90,9 +91,8 @@ class ResourcesController < ApplicationController
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
     end
-
+    
     Resource.update(params[:id], resource_params)
-
     @resource = Resource.find(params[:id])
 
     respond_to do |format|
