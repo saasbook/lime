@@ -17,6 +17,12 @@ Then /the following resource_types exist/ do |resource_types_table|
   end
 end
 
+Then /the following users exist/ do |users_table|
+  users_table.hashes.each do |user|
+    User.create user
+  end
+end
+
 Then /the following locations exist/ do |locations_table|
   global = Location.create :val => "Global"
   global.save :validate => false
@@ -29,6 +35,7 @@ end
 Then /I should receive a JSON object/ do
   begin
     json = JSON.parse(@response.body)
+    puts JSON.pretty_generate(json)
     true
   rescue JSON::ParserError => e
     false
@@ -38,6 +45,10 @@ end
 Then /I should receive all the resources/ do
    json = JSON.parse(@response.body)
    expect(Resource.all.count).to eq json.length
+end
+
+Then /I should receive one edit/ do
+  expect(Edit.all.count).to eq 1
 end
 
 Then /the JSON should contain "(.*)"/ do |res|
@@ -148,13 +159,4 @@ Then /I should not see the message "(.*)"/ do |text|
   else
     assert !page.has_content?(text)
   end
-end
-
-# Timecop steps
-Given 'the time is $time' do |time|
-  Timecop.freeze Time.parse(time)
-end
-
-When 'time stands still' do
-  Timecop.freeze Time.now
 end
