@@ -99,10 +99,6 @@ class ResourcesController < ApplicationController
       @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:approval_status])
       @edit.save!
     end
-<<<<<<< HEAD
-
-    Resource.update_resource(params[:id], resource_params)
-=======
     if params[:title]
       params[:title] = params[:title].to_s
       @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:title])
@@ -123,9 +119,8 @@ class ResourcesController < ApplicationController
       @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
       @edit.save!
     end
-    
-    Resource.update(params[:id], resource_params)
->>>>>>> 7ddd160d58cd269f686d178ba59579a1ff4f1c1f
+
+    Resource.update_resource(params[:id], resource_params)
     @resource = Resource.find(params[:id])
 
     respond_to do |format|
