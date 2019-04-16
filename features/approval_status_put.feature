@@ -40,8 +40,8 @@ Feature: admin edits list of unapproved resources
 
   Scenario: admin user can approve all resources
     When I make a PUT request to "/resources/approve/many" with parameters:
-      | approve_list |
-      |     all      |
+      | approve_list |  api_key  |
+      |     all      | 123456789 |
     Then all the resources should be approved
     And I should receive a JSON object
     And the JSON should contain all the resources

@@ -99,25 +99,22 @@ class ResourcesController < ApplicationController
 
   def approve_many
     if @user.nil?
-      flash[:notice] = "This action is unauthorized."
-      respond_to do |format|
-        format.html { redirect_to "/resources" }
-        format.json { render status: 401, json: {}.to_json }
-      end
+      approve_many_sad_path("This action is unauthorized.", 401)
       return
     end
+
     lst = params[:approve_list]
-    status = params[:approval_status] ||= 1
+    status = params[:approval_status]
+    if not status.nil?
+      status = status.to_i
+    else
+      status = 1
+    end
     if not [0, 1].include? status
-      respond_to do |format|
-        format.html {
-          flash[:notice] = "Approval status must be either 0 or 1."
-          redirect_to "/resources/approve/many.html"
-        }
-        format.json { render status: 403, json: {}.to_json }
-      end
+      approve_many_sad_path("Approval status must be either 0 or 1.", 403)
       return
     end
+
     if lst == 'all'
       Resource.where(:approval_status => 0).each do |resource|
         Resource.update(resource.id, :approval_status => status)
@@ -128,11 +125,8 @@ class ResourcesController < ApplicationController
     else
       lst = lst.split(',')
       if (lst.length <= 1 or lst.any? {|id| not id.scan(/\D/).empty?})
-        flash[:notice] = "Approval list not formatted correctly."
-        respond_to do |format|
-          format.html { redirect_to "/resources" }
-          format.json { render status: 400, json: {}.to_json }
-        end
+        approve_many_sad_path("Approval list not formatted correctly.", 400)
+        return
       else
         @resources = []
         lst.each do |id|
@@ -142,7 +136,7 @@ class ResourcesController < ApplicationController
     end
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.has_many_associations) }
-      format.html
+      format.html {redirect_to "/resources"}
     end
   end
 
@@ -168,7 +162,7 @@ class ResourcesController < ApplicationController
   def approve_many_sad_path(notice, code)
     respond_to do |format|
       format.html {
-        flash[:notice] = notice"
+        flash[:notice] = notice
         redirect_to "/resources/approve/many.html"
       }
       format.json { render status: code, json: {}.to_json }
