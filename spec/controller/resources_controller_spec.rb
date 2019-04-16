@@ -52,6 +52,7 @@ RSpec.describe ResourcesController, :type => :controller do
     it 'calls the correct model method' do
       resource = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
                                "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+      User.delete_all
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
       params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions"})
       params.permit!

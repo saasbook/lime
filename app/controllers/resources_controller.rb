@@ -2,7 +2,7 @@ class ResourcesController < ApplicationController
   def resource_params
     params.permit(:title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged)
+                  :types, :audiences, :desc, :approval_status, :exclusive, :api_key, :flagged, :flagged_comment)
   end
   
   before_action :set_user
@@ -65,7 +65,7 @@ class ResourcesController < ApplicationController
     flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
-    rp[:approval_status] = 0
+    rp[:approval_status] = @user == nil ? 0 : 1
     @resource = Resource.create_resource(rp)
 
     respond_to do |format|
@@ -76,21 +76,29 @@ class ResourcesController < ApplicationController
   end
 
   def update
+    puts "update"
     # Don't let guests update anything unless the params are "allowed"
-    if @user == nil and !Resource.guest_update_params_allowed?(resource_params)
-      flash[:notice] = "You don't have permissions to update records"
-      return
-    end
+    # if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
+    #   flash[:notice] = "You don't have permissions to update records"
+    #   puts "flash"
+    #   return
+    # end
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
+    end
+    if params[:flagged_comment]
+      params[:flagged_comment] = params[:flagged_comment].to_s
     end
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
     end
 
+    puts "about to update"
     Resource.update(params[:id], resource_params)
-
+    puts "updated"
+    puts params
     @resource = Resource.find(params[:id])
+
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
       format.html
