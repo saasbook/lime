@@ -43,6 +43,7 @@ end
 
 Then /the JSON should contain all the resources/ do
    json = JSON.parse(@response.body)
+   puts(json)
    expect(Resource.all.count).to eq json.length
 end
 
@@ -53,6 +54,11 @@ Then /the JSON should contain "(.*)"/ do |res|
   else
     expect(json["title"] == res).to be true
   end
+end
+
+Then /the resource should have the attribute "(.*)" equal to "(.*)"/ do |attribute, value|
+  json = JSON.parse(@response.body)
+  expect(json[attribute.to_s].to_s).to match value.to_s
 end
 
 Then /the JSON should not contain resources other than "(.*)"/ do |resource|
@@ -79,6 +85,7 @@ Then /the JSON should be empty/ do
 end
 
 When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ do |method, url, params|
+
   case method
     when "GET"
       @response = page.driver.get(url, params.hashes.first)
@@ -161,7 +168,6 @@ Then /I should not see the message "(.*)"/ do |text|
 end
 
 Then /the "(.*)" resource should be unapproved/ do |resource|
-#  expect(Resource.where(:title => resource).first.approval_status).to eq 0
   resource = Resource.find_by(:title => resource)
   expect(resource.approval_status).to eq 0
 end

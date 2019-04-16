@@ -18,7 +18,11 @@ class Resource < ActiveRecord::Base
   # end
 
   def self.guest_update_params_allowed?(resource_params)
-    return (resource_params.keys.size == 1 and resource_params.keys[0] == "flagged" and resource_params["flagged"] == '1')
+     update_allowed = (((resource_params.keys.size <= 1) and
+         (resource_params.keys[0] == "flagged" ) and (resource_params["flagged"] == '1')) or
+         ((resource_params.keys[0] == "flagged" or resource_params.keys[0] == "flagged_comment") and
+         (resource_params.keys[1] == "flagged" or resource_params.keys[1] == "flagged_comment") and resource_params["flagged"] == '1'))
+    return update_allowed
   end
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
@@ -67,7 +71,7 @@ class Resource < ActiveRecord::Base
       bool_arr = []
       # for each has_many query, check if the current record's has_many field contains all values in the query
       has_many_hash.each do |field, values|
-        bool_arr.append (associations_hash[field].records.map { |x| x.val } & values).sort == values.sort
+        bool_arr.append (associations_hash[field].records.collect(&:val) & values).sort == values.sort
       end
       # if all queries return true, append the record to the returned value
       if bool_arr.all?
