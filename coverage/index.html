@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-15T17:40:02-07:00">2019-04-15T17:40:02-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-15T17:43:00-07:00">2019-04-15T17:43:00-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">92.88%</span></span>
+    (<span class="covered_percent"><span class="green">93.23%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         8.2
+         8.25
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>38</b> files in total.
-    <b>520</b> relevant lines. 
-    <span class="green"><b>483</b> lines covered</span> and
-    <span class="red"><b>37</b> lines missed </span>
+    <b>517</b> relevant lines. 
+    <span class="green"><b>482</b> lines covered</span> and
+    <span class="red"><b>35</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -62,12 +62,12 @@
       
       <tr>
         <td class="strong"><a href="#a275ab9922d0b5f183fbb67ab3aa092f055dcf6a" class="src_link" title="app/controllers/resources_controller.rb">app/controllers/resources_controller.rb</a></td>
-        <td class="red strong">64.29 %</td>
-        <td>176</td>
-        <td>98</td>
-        <td>63</td>
-        <td>35</td>
-        <td>3.4</td>
+        <td class="red strong">65.26 %</td>
+        <td>172</td>
+        <td>95</td>
+        <td>62</td>
+        <td>33</td>
+        <td>3.5</td>
       </tr>
       
       <tr>
@@ -492,11 +492,11 @@
         <div class="source_table" id="a275ab9922d0b5f183fbb67ab3aa092f055dcf6a">
   <div class="header">
     <h3>app/controllers/resources_controller.rb</h3>
-    <h4><span class="red">64.29 %</span> covered</h4>
+    <h4><span class="red">65.26 %</span> covered</h4>
     <div>
-      <b>98</b> relevant lines. 
-      <span class="green"><b>63</b> lines covered</span> and
-      <span class="red"><b>35</b> lines missed.</span>
+      <b>95</b> relevant lines. 
+      <span class="green"><b>62</b> lines covered</span> and
+      <span class="red"><b>33</b> lines missed.</span>
     </div>
   </div>
   
@@ -1076,7 +1076,7 @@
         <li class="covered" data-hits="5" data-linenumber="96">
           <span class="hits">5</span>
           
-          <code class="ruby">    Resource.update(params[:id], resource_params)</code>
+          <code class="ruby">    @resource = Resource.update(params[:id], resource_params)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="97">
@@ -1088,265 +1088,265 @@
         <li class="covered" data-hits="5" data-linenumber="98">
           <span class="hits">5</span>
           
-          <code class="ruby">    @resource = Resource.find(params[:id])</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="99">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="5" data-linenumber="100">
-          <span class="hits">5</span>
-          
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="101">
+        <li class="covered" data-hits="9" data-linenumber="99">
           <span class="hits">9</span>
           
           <code class="ruby">      format.json {render :json =&gt; @resource.to_json(:include =&gt; Resource.has_many_associations) }</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="102">
+        <li class="covered" data-hits="5" data-linenumber="100">
           <span class="hits">5</span>
           
           <code class="ruby">      format.html</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="103">
+        <li class="never" data-hits="" data-linenumber="101">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="104">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
+        <li class="never" data-hits="" data-linenumber="103">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="106">
+        <li class="covered" data-hits="1" data-linenumber="104">
           <span class="hits">1</span>
           
           <code class="ruby">  def approve_many</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="107">
+        <li class="missed" data-hits="0" data-linenumber="105">
           
           
           <code class="ruby">    if @user.nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="108">
+        <li class="missed" data-hits="0" data-linenumber="106">
           
           
           <code class="ruby">      approve_many_sad_path(&quot;This action is unauthorized.&quot;, 401)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="109">
+        <li class="missed" data-hits="0" data-linenumber="107">
           
           
           <code class="ruby">      return</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="110">
+        <li class="never" data-hits="" data-linenumber="108">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="111">
+        <li class="never" data-hits="" data-linenumber="109">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="112">
+        <li class="missed" data-hits="0" data-linenumber="110">
           
           
           <code class="ruby">    lst = params[:approve_list]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="113">
+        <li class="missed" data-hits="0" data-linenumber="111">
           
           
           <code class="ruby">    status = params[:approval_status]</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="114">
+        <li class="missed" data-hits="0" data-linenumber="112">
           
           
           <code class="ruby">    if not status.nil?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="115">
+        <li class="missed" data-hits="0" data-linenumber="113">
           
           
           <code class="ruby">      status = status.to_i</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
+        <li class="never" data-hits="" data-linenumber="114">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="117">
+        <li class="missed" data-hits="0" data-linenumber="115">
           
           
           <code class="ruby">      status = 1</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="118">
+        <li class="never" data-hits="" data-linenumber="116">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="119">
+        <li class="missed" data-hits="0" data-linenumber="117">
           
           
           <code class="ruby">    if not [0, 1].include? status</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="120">
+        <li class="missed" data-hits="0" data-linenumber="118">
           
           
           <code class="ruby">      approve_many_sad_path(&quot;Approval status must be either 0 or 1.&quot;, 403)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="121">
+        <li class="missed" data-hits="0" data-linenumber="119">
           
           
           <code class="ruby">      return</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="120">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="123">
+        <li class="never" data-hits="" data-linenumber="121">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="124">
+        <li class="missed" data-hits="0" data-linenumber="122">
           
           
           <code class="ruby">    if lst == &#39;all&#39;</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="125">
+        <li class="missed" data-hits="0" data-linenumber="123">
           
           
           <code class="ruby">      Resource.where(:approval_status =&gt; 0).each do |resource|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="126">
+        <li class="missed" data-hits="0" data-linenumber="124">
           
           
           <code class="ruby">        Resource.update(resource.id, :approval_status =&gt; status)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="127">
+        <li class="never" data-hits="" data-linenumber="125">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="128">
+        <li class="missed" data-hits="0" data-linenumber="126">
           
           
           <code class="ruby">      @resources = Resource.all</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="129">
-          
-          
-          <code class="ruby">    elsif lst.scan(/\D/).empty?</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="130">
-          
-          
-          <code class="ruby">      @resources = Resource.update(lst.to_i, :approval_status =&gt; status)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="131">
+        <li class="never" data-hits="" data-linenumber="127">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="132">
+        <li class="missed" data-hits="0" data-linenumber="128">
           
           
           <code class="ruby">      lst = lst.split(&#39;,&#39;)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="133">
+        <li class="missed" data-hits="0" data-linenumber="129">
           
           
           <code class="ruby">      if (lst.length &lt;= 1 or lst.any? {|id| not id.scan(/\D/).empty?})</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="134">
+        <li class="missed" data-hits="0" data-linenumber="130">
           
           
           <code class="ruby">        approve_many_sad_path(&quot;Approval list not formatted correctly.&quot;, 400)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="135">
+        <li class="missed" data-hits="0" data-linenumber="131">
           
           
           <code class="ruby">        return</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="136">
+        <li class="never" data-hits="" data-linenumber="132">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="137">
+        <li class="missed" data-hits="0" data-linenumber="133">
           
           
           <code class="ruby">        @resources = []</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="138">
+        <li class="missed" data-hits="0" data-linenumber="134">
           
           
           <code class="ruby">        lst.each do |id|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="139">
+        <li class="missed" data-hits="0" data-linenumber="135">
           
           
           <code class="ruby">          @resources &lt;&lt; Resource.update(id, :approval_status =&gt; status)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="140">
+        <li class="never" data-hits="" data-linenumber="136">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="141">
+        <li class="never" data-hits="" data-linenumber="137">
           
           
           <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="138">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="139">
+          
+          
+          <code class="ruby">    respond_to do |format|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="140">
+          
+          
+          <code class="ruby">      format.json {render :json =&gt; @resources.to_json(:include =&gt; Resource.has_many_associations) }</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="141">
+          
+          
+          <code class="ruby">      format.html {redirect_to &quot;/resources&quot;}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="142">
@@ -1355,28 +1355,28 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="143">
+        <li class="never" data-hits="" data-linenumber="143">
           
           
-          <code class="ruby">    respond_to do |format|</code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="144">
+        <li class="never" data-hits="" data-linenumber="144">
           
           
-          <code class="ruby">      format.json {render :json =&gt; @resources.to_json(:include =&gt; Resource.has_many_associations) }</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="145">
+        <li class="covered" data-hits="1" data-linenumber="145">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      format.html {redirect_to &quot;/resources&quot;}</code>
+          <code class="ruby">  def edit</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="146">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="147">
@@ -1394,7 +1394,7 @@
         <li class="covered" data-hits="1" data-linenumber="149">
           <span class="hits">1</span>
           
-          <code class="ruby">  def edit</code>
+          <code class="ruby">  def destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="150">
@@ -1412,148 +1412,124 @@
         <li class="never" data-hits="" data-linenumber="152">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  </code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="153">
           <span class="hits">1</span>
           
-          <code class="ruby">  def destroy</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="154">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="155">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="156">
-          
-          
-          <code class="ruby">  </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="157">
-          <span class="hits">1</span>
-          
           <code class="ruby">  private</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="158">
+        <li class="covered" data-hits="1" data-linenumber="154">
           <span class="hits">1</span>
           
           <code class="ruby">  def set_user</code>
         </li>
       
-        <li class="covered" data-hits="26" data-linenumber="159">
+        <li class="covered" data-hits="26" data-linenumber="155">
           <span class="hits">26</span>
           
           <code class="ruby">    if request.format.json? and params.include? :api_key</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="160">
+        <li class="covered" data-hits="6" data-linenumber="156">
           <span class="hits">6</span>
           
           <code class="ruby">      @user = User.where(:api_token =&gt; params[:api_key]).first</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="161">
+        <li class="never" data-hits="" data-linenumber="157">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="162">
+        <li class="covered" data-hits="20" data-linenumber="158">
           <span class="hits">20</span>
           
           <code class="ruby">      @user = current_user</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="163">
+        <li class="never" data-hits="" data-linenumber="159">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="26" data-linenumber="164">
+        <li class="covered" data-hits="26" data-linenumber="160">
           <span class="hits">26</span>
           
           <code class="ruby">    params.delete :api_key</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="165">
+        <li class="never" data-hits="" data-linenumber="161">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="166">
+        <li class="never" data-hits="" data-linenumber="162">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="167">
+        <li class="covered" data-hits="1" data-linenumber="163">
           <span class="hits">1</span>
           
           <code class="ruby">  def approve_many_sad_path(notice, code)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="168">
+        <li class="missed" data-hits="0" data-linenumber="164">
           
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="169">
+        <li class="missed" data-hits="0" data-linenumber="165">
           
           
           <code class="ruby">      format.html {</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="170">
+        <li class="missed" data-hits="0" data-linenumber="166">
           
           
           <code class="ruby">        flash[:notice] = notice</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="171">
+        <li class="missed" data-hits="0" data-linenumber="167">
           
           
           <code class="ruby">        redirect_to &quot;/resources/approve/many.html&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="172">
+        <li class="never" data-hits="" data-linenumber="168">
           
           
           <code class="ruby">      }</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="173">
+        <li class="missed" data-hits="0" data-linenumber="169">
           
           
           <code class="ruby">      format.json { render status: code, json: {}.to_json }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="174">
+        <li class="never" data-hits="" data-linenumber="170">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="175">
+        <li class="never" data-hits="" data-linenumber="171">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="176">
+        <li class="never" data-hits="" data-linenumber="172">
           
           
           <code class="ruby">end</code>
