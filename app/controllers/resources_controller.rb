@@ -93,9 +93,7 @@ class ResourcesController < ApplicationController
       params[:approval_status] = params[:approval_status].to_i
     end
 
-    Resource.update(params[:id], resource_params)
-
-    @resource = Resource.find(params[:id])
+    @resource = Resource.update(params[:id], resource_params)
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
@@ -126,8 +124,6 @@ class ResourcesController < ApplicationController
         Resource.update(resource.id, :approval_status => status)
       end
       @resources = Resource.all
-    elsif lst.scan(/\D/).empty?
-      @resources = Resource.update(lst.to_i, :approval_status => status)
     else
       lst = lst.split(',')
       if (lst.length <= 1 or lst.any? {|id| not id.scan(/\D/).empty?})
