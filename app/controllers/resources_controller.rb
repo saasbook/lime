@@ -3,10 +3,12 @@ class ResourcesController < ApplicationController
     params.permit(
                   :title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :flagged, :flagged_comment
+                  :types, :audiences, :desc, :approval_status, :flagged, :flagged_comment, 
+                  :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, 
+                  :address, :deadline, :notes, :funding_amount, :approved_by
                  )
   end
-  
+
   before_action :set_user
 
   # assumes API GET request in this format :
@@ -49,7 +51,7 @@ class ResourcesController < ApplicationController
 
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
-    #otherwise add a new object to the database 
+    #otherwise add a new object to the database
     @desc_too_long = false
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if params[:desc] != nil and params[:desc].length > 500
@@ -65,7 +67,7 @@ class ResourcesController < ApplicationController
     end
 
     flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
-    #https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
+    # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
     rp[:approval_status] = @user == nil ? 0 : 1
     @resource = Resource.create_resource(rp)
@@ -78,22 +80,50 @@ class ResourcesController < ApplicationController
   end
 
   def update
+    @resource = Resource.find(params[:id])
     # Don't let guests update anything unless the params are "allowed"
     if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
       flash[:notice] = "You don't have permissions to update records"
+      # puts "You don't have permissions to update records"
       return
     end
+
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:flagged])
+      @edit.save!
     end
     if params[:flagged_comment]
       params[:flagged_comment] = params[:flagged_comment].to_s
     end
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:approval_status])
+      @edit.save!
+    end
+    if params[:title]
+      params[:title] = params[:title].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:title])
+      @edit.save!
+    end
+    if params[:url]
+      params[:url] = params[:url].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:url])
+      @edit.save!
+    end
+    if params[:contact_email]
+      params[:contact_email] = params[:contact_email].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:contact_email])
+      @edit.save!
+    end
+    if params[:location]
+      params[:location] = params[:location].to_s
+      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
+      @edit.save!
     end
 
-    @resource = Resource.update(params[:id], resource_params)
+    Resource.update_resource(params[:id], resource_params)
+    @resource = Resource.find(params[:id])
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }

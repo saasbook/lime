@@ -23,6 +23,12 @@ Then /the following resource_types exist/ do |resource_types_table|
   end
 end
 
+Then /the following users exist/ do |users_table|
+  users_table.hashes.each do |user|
+    User.create user
+  end
+end
+
 Then /the following locations exist/ do |locations_table|
   global = Location.create :val => "Global"
   global.save :validate => false
@@ -35,6 +41,7 @@ end
 Then /I should receive a JSON object/ do
   begin
     json = JSON.parse(@response.body)
+    puts JSON.pretty_generate(json)
     true
   rescue JSON::ParserError => e
     false
@@ -44,6 +51,10 @@ end
 Then /the JSON should contain all the resources/ do
    json = JSON.parse(@response.body)
    expect(Resource.all.count).to eq json.length
+end
+
+Then /I should receive one edit/ do
+  expect(Edit.all.count).to eq 1
 end
 
 Then /the JSON should contain "(.*)"/ do |res|
@@ -57,6 +68,11 @@ end
 
 Then /the resource should have the attribute "(.*)" equal to "(.*)"/ do |attribute, value|
   json = JSON.parse(@response.body)
+  expect(json[attribute.to_s].to_s).to match value.to_s
+end
+
+Then /the first resource should have the attribute "(.*)" equal to "(.*)"/ do |attribute, value|
+  json = JSON.parse(@response.body)[0]
   expect(json[attribute.to_s].to_s).to match value.to_s
 end
 
@@ -100,6 +116,13 @@ When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with parameters:$/ 
       false
   end
 end
+
+# Then /the following users exist/ do |users_table|
+#   users_table.hashes.each do |user|
+#     # User.create!(user)
+#     User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+#   end
+# end
 
 When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with no parameters$/ do |method, url|
   case method
