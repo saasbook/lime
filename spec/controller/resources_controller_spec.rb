@@ -97,4 +97,72 @@ RSpec.describe ResourcesController, :type => :controller do
       patch :update, params: {id: resource.id, flagged: 1}
     end
   end
+
+  describe "PUT approve many" do
+    before(:each) do
+      Resource.destroy_all
+      @resource1 = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+                                          "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+
+      @resource2 = Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+                                          "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+
+      @resource3 = Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+                                          "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+
+      User.delete_all
+      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+    end
+    it 'calls the correct model method' do
+      #Resource.destroy_all
+      #resource1 = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+      #                                    "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+      #
+      #resource2 = Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+      #                                    "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+      #
+      #resource3 = Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+      #                                    "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+      #
+      #User.delete_all
+      #User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+
+      # test allowed to approve only one
+      expect(Resource).not_to receive(:update_resource)
+      response = put :approve_many, params: {id: @resource1.id}, :format => :json
+      expect(response.status).to eq 401
+
+      # test incorrect approval status set
+      response = put :approve_many, params: {id: @resource1.id, approval_status: 2, api_key: 'example'}, :format => :json
+      expect(response.status).to eq 403
+
+      # test approve all method
+      response = put :approve_many, params: {:approve_list => 'all', approval_status: 1, api_key: 'example'}, :format => :json
+      expect(response.status).to eq 200
+      expect(Resource.where(:approval_status => 0)).to be_empty
+      expect {
+        expect(JSON.parse(response.body).length).to eq 3
+      }.not_to raise_error
+      
+      # test approve multiple 
+      response = put :approve_many, params: {:approve_list => "#{@resource1.id},#{@resource2.id}", approval_status: 0, api_key: 'example'}, :format => :json
+      expect(response.status).to eq 200
+      expect(Resource.where(:approval_status => 1).length).to eq 1
+      expect(Resource.where(:approval_status => 1).first).to eq @resource3
+      expect {
+        json = JSON.parse(response.body)
+        expect(json.length).to eq 2
+        expect(json.any? {|r| r["id"] == @resource3.id}).to be false
+      }.not_to raise_error
+
+     # test approve multiple, bad format
+     response = put :approve_many, params: {:approve_list => "1,2,$,", approval_status: 1, api_key: 'example'}, :format => :json
+     expect(response.status).to eq 400
+
+     # test approve multiple, ids not found
+     response = put :approve_many, params: {:approve_list => "100,200", approval_status: 1, api_key: 'example'}, :format => :json
+     expect(JSON.parse(response.body)).to be_empty
+    end
+  end
+
 end

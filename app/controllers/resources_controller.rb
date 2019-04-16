@@ -162,7 +162,9 @@ class ResourcesController < ApplicationController
       else
         @resources = []
         lst.each do |id|
-          @resources << Resource.update(id, :approval_status => status)
+          if Resource.exists? :id => id
+            @resources << Resource.update(id, :approval_status => status)
+          end
         end
       end
     end
