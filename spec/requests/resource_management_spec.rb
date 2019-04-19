@@ -33,7 +33,12 @@ RSpec.describe 'Resource management', :type => :request do
   end
 
   describe 'create' do
-    it "adds add resource to the database given valid parameters in a post request" do
+    before(:each) do
+      User.delete_all
+      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+    end
+
+    it "adds resources to the database given valid parameters in a post request" do
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       expect(Resource.where(title: "something")).to exist
       resource = Resource.find_by(title: "something")
@@ -51,14 +56,11 @@ RSpec.describe 'Resource management', :type => :request do
     it "doesn't add a resource to the database given invalid parameters in a post request" do
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       post '/resources?title=something2&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111'
-
       expect(Resource.where(title: "something")).to exist
       expect(Resource.where(title: "something2")).not_to exist
     end
 
     it "adds an approved resource to the database if requester is an admin" do
-      User.delete_all
-      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description&api_key=example'
       expect(Resource.where(title: "something")).to exist
       resource = Resource.find_by(title: "something")
@@ -74,10 +76,12 @@ RSpec.describe 'Resource management', :type => :request do
   end
 
   describe 'update' do
-    it 'properly updates values for admins' do
+    before(:each) do
       User.delete_all
-      # seed with a resource
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
+    end
+
+    it 'properly updates values for admins' do
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description&client_tags=BearX'
       expect(Resource.where(title: "something")).to exist
       expect(User.where(api_token: "example")).to exist
@@ -122,10 +126,6 @@ RSpec.describe 'Resource management', :type => :request do
     end
 
     it 'properly adds to edit table' do
-      User.delete_all
-
-      # seed with a resource
-      User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       resource = Resource.find_by(title: "something")
       patch '/resources/' + resource.id.to_s + '/?location=anotherplace&desc=another description&flagged=1&approval_status=1&title=blasd&url=weqweqwe.com&contact_email=ssds&api_key=example'
