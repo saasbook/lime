@@ -138,7 +138,6 @@ RSpec.describe 'Resource management', :type => :request do
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&desc=description'
       expect(Resource.where(title: "something")).to exist
       resource = Resource.find_by(title: "something")
-      resource_id_str = resource.id.to_s
 
       # patch as guest does nothing
       patch '/resources/' + resource.id.to_s + '/?url=guest.com&description=guestupdatedescription&contact_email=guest@gmail.com&location=anotherplace&types=Networking&audiences=Grad'
@@ -152,7 +151,7 @@ RSpec.describe 'Resource management', :type => :request do
       expect(resource.audiences.collect(&:val)).to eq ["Grad","Undergrad"]
 
       # make sure no changes are reflected in http request
-      get '/resources/' + resource_id_str + '/?api_key=example'
+      get '/resources/' + resource.id.to_s + '/?api_key=example'
       expect(User.where(api_token: 'example')).to exist
       assert response.body.to_s.include?('something.com')
       assert response.body.to_s.include?('description')
