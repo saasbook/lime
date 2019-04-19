@@ -5,7 +5,7 @@ class ResourcesController < ApplicationController
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
                   :types, :audiences, :desc, :approval_status, :flagged, :flagged_comment, 
                   :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, 
-                  :address, :deadline, :notes, :funding_amount, :approved_by,
+                  :address, :deadline, :notes, :funding_amount, :approved_by, :order_by,
 
                   types: [], colleges: [], audiences: [], campuses: [], client_tags: [], innovation_stages: [],
                   population_focuses: [], availabilities: [], topics: [], technologies: []
