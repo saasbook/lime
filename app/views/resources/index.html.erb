@@ -18,7 +18,7 @@
               <div id="association-name">
                 <%= association.capitalize %>
               </div>
-              <div class="content">
+              <div class="content filters">
                 <% values.each do |val| %>
                   <%= val %>
                   <%= check_box_tag association+'[]', val %>

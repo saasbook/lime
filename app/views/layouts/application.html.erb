@@ -17,10 +17,15 @@
 
       <%= link_to('Admin Registration', new_user_registration_path, class: 'btn btn-success admin-button') %>
       <% if user_signed_in? %>
-        <%= link_to('Admin Login', new_user_session_path, class: 'btn btn-success admin-button')  %>
-      <% else %>
         <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-warning admin-button') %>
+      <% else %>
+        <%= link_to('Admin Login', new_user_session_path, class: 'btn btn-success admin-button')  %>
       <% end %>
+
+      <% if user_signed_in? %>
+        <%= link_to('Edit Account', edit_user_registration_path, method: :get, class: 'btn btn-secondary admin-button') %>
+      <% end %>
+
     </nav>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
