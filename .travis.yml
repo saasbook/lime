@@ -12,12 +12,12 @@ bundler_args:
 
 before_install:
   - gem install bundler -v 1.17.2
+  - bundle update rails
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - bundle update rails
   - bundle exec rake db:rollback
   - bundle exec rake db:migrate --trace RAILS_ENV=test
 
