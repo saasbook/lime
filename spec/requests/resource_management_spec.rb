@@ -153,6 +153,7 @@ RSpec.describe 'Resource management', :type => :request do
 
       # make sure no changes are reflected in http request
       get '/resources/' + resource_id_str + '/?api_key=example'
+      expect(User.where(api_token: 'example')).to exist
       assert response.body.to_s.include?('something.com')
       assert response.body.to_s.include?('description')
       assert !response.body.to_s.include?('guest.com')
