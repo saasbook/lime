@@ -1,0 +1,47 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background-color: lightyellow !important;
+}
+
+nav {
+  background-color: #7C7C7C;
+}
+.nav-link {
+  color: white;
+  margin: 0.5rem;
+}
+
+.admin-button {
+  justify-content: right;
+  padding: 10px;
+  margin: 10px;
+}
+
+.title-container {
+  margin-top: 10rem;
+  border-radius: 10px;
+}
+#title {
+  font-family: Georgia;
+  font-size: 5rem;
+  text-align: center;
+}
+
+.logo-container {
+  margin-top: 7.5rem;
+  align-content: center;
+}
+.logo {
+  width: 15rem;
+  padding: 2rem;
+  margin: auto;
+  border-radius: 20%;
+}
+#logo-row {
+  align-items: center;
+}
+#berkeley-row {
+  justify: center;
+}

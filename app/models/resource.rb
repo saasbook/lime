@@ -17,6 +17,20 @@ class Resource < ActiveRecord::Base
   #   [:flagged, :approval_status, :approved_by]
   # end
 
+  def self.include_has_many_params
+    {:types => {:only => [:val]},
+     :audiences => {:only => [:val]},
+     :client_tags => {:only => [:val]},
+     :population_focuses => {:only => [:val]},
+     :campuses => {:only => [:val]},
+     :colleges => {:ony => [:val]},
+     :availabilities => {:only => [:val]},
+     :innovation_stages => {:only => [:val]},
+     :topics => {:only => [:val]},
+     :technologies => {:only => [:val]}
+    }
+  end
+
   def self.guest_update_params_allowed?(resource_params)
      update_allowed = (((resource_params.keys.size <= 1) and
          (resource_params.keys[0] == "flagged" ) and (resource_params["flagged"] == '1')) or
@@ -41,30 +55,34 @@ class Resource < ActiveRecord::Base
 
   def self.filter(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h # convert ActiveRecord::Controller params into hash with symbol keys
+    puts 'inside filter - ' + params.to_s
     # Partition params into has_many fields and normal fields
     # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
     has_many_hash = {}
     params.each_key do |key|
       if self.has_many_associations.include?(key)
-        has_many_hash[key] = params[key].split(',').map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace
+        # String variation (JSON request)
+        if params[key].is_a?(String)
+          has_many_hash[key] = params[key].split(',').map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace
+        # List variation (HTML request)
+        elsif params[key].is_a?(Array)
+          has_many_hash[key] = params[key]
+        end
         params.delete(key) # remove has_many key from params
       end
     end
 
-    resources = Resource.where(params) # filter by singular parameters first
+    puts 'has-many-hash : ' + has_many_hash.to_s
     # return early if there are no has_many fields
     if has_many_hash.empty?
-      return resources
+      return Resource.where(params)
     else
+      resources = Resource.where(params).includes(*Resource.has_many_associations)
       return self.filter_has_many_helper(resources, has_many_hash)
     end
   end
 
   def self.filter_has_many_helper(resources, has_many_hash)
-    #matching the has_many queries is a potential bottleneck! O(NK) sorts and set operations
-    # where N = # records and K = # fields (max 10)]
-    # alternative is to do a 11 way join, and check the existence of each value of the query
-    # for each of the candidate resources filtered by the singular parameters, check if it matches the has_many queries
     filtered = [] # list of returned records
     resources.find_each do |resource|
       associations_hash = self.get_associations_hash(resource)

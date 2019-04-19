@@ -10,7 +10,9 @@ env:
 bundler_args:
     --without production
 
-before_install: gem install bundler -v 1.17.2
+before_install:
+  - gem install bundler -v 1.17.2
+  - bundle update rails
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

@@ -1,0 +1,46 @@
+#title {
+  font-family: "Arial Black", Arial, sans-serif;
+}
+
+#resource-container-wrapper {
+  margin-top: 2.5rem;
+ // border: solid red 1px;
+}
+
+.resource-container {
+  border: solid grey .5px;
+  border-radius: 15px;
+  box-shadow: 1px 1px;
+  margin-bottom: 1rem;
+}
+
+#filter-button {
+  width: 50%;
+}
+#filter-column {
+  border: solid black 1px;
+  border-radius: 10px;
+  margin: .5rem;
+}
+#filter-header {
+  font-size: 2rem;
+  text-align: center;
+}
+#association-name {
+  font-size: 1.25rem;
+  text-decoration: underline;
+}
+
+#resource-column {
+  border: solid black 1px;
+  border-radius: 10px;
+  margin: .5rem;
+}
+#result-header {
+  font-size: 2rem;
+  text-align: center;
+}
+.resource-title {
+  font-size: 1.5rem;
+  color: orange;
+}
