@@ -1,5 +1,20 @@
+@import "bootstrap";
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  src: url('../fonts/Poppins/Poppins-Light.ttf') format('truetype');
+  src: url('../fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+}
+
+#invoice-wrapper {
+  font-family: 'SourceSansPro';
+}
+body {
+  font-family: "Poppins", Arial, sans-serif;
+}
 #title {
-  font-family: "Arial Black", Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 #resource-container-wrapper {
