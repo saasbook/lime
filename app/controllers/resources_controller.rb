@@ -5,16 +5,34 @@ class ResourcesController < ApplicationController
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
                   :types, :audiences, :desc, :approval_status, :flagged, :flagged_comment, 
                   :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, 
-                  :address, :deadline, :notes, :funding_amount, :approved_by
+                  :address, :deadline, :notes, :funding_amount, :approved_by,
+
+                  types: [], colleges: [], audiences: [], campuses: [], client_tags: [], innovation_stages: [],
+                  population_focuses: [], availabilities: [], topics: [], technologies: []
                  )
   end
 
   before_action :set_user
 
+  def has_many_value_hash
+    {
+        'types' => Type.get_values,
+        'audiences' => Audience.get_values,
+        'campuses' => Campus.get_values,
+        'client_tags' => ClientTag.get_values,
+        'innovation_stages' => InnovationStage.get_values,
+        'population_focuses' => PopulationFocus.get_values,
+        'availabilities' => Availability.get_values,
+        'topics' => Topic.get_values,
+        'technologies' => Technology.get_values
+    }
+  end
+
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
+    puts params
     if @user.nil?
       params[:approval_status] = 1 # only admins can view unapproved resources
     end
@@ -27,8 +45,10 @@ class ResourcesController < ApplicationController
        @resources = @resources.order(sort_by)
     end
 
+    @has_many_hash = self.has_many_value_hash
+
     respond_to do |format|
-      format.json {render :json => @resources.to_json(:include => Resource.has_many_associations) }
+      format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params)}
       format.html
     end
   end
@@ -36,9 +56,13 @@ class ResourcesController < ApplicationController
   def show
     id = params[:id]
     @resource = Resource.find_by_id(id)
+    # only admins can see unapproved resources
+    if @user.nil? and @resource&.approval_status == 0
+      @resource = nil
+    end
 
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
+      format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html
     end
   end
@@ -73,7 +97,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.create_resource(rp)
 
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
+      format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html
     end
 
@@ -130,7 +154,7 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(params[:id])
 
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.has_many_associations) }
+      format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html
     end
   end
@@ -173,13 +197,16 @@ class ResourcesController < ApplicationController
       end
     end
     respond_to do |format|
-      format.json {render :json => @resources.to_json(:include => Resource.has_many_associations) }
+      format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
       format.html {redirect_to "/resources"}
     end
   end
 
   def edit
-
+    respond_to do |format|
+      format.json {redirect_to "/resources/" + params[:id] + "/edit.html" }
+      format.html {}
+    end
   end
 
   def destroy
