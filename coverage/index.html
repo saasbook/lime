@@ -14,26 +14,26 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-18T22:34:00-07:00">2019-04-18T22:34:00-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-04-19T00:57:11-07:00">2019-04-19T00:57:11-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">97.7%</span></span>
+    (<span class="covered_percent"><span class="green">97.72%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         12.66
+         17.28
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>40</b> files in total.
-    <b>652</b> relevant lines. 
-    <span class="green"><b>637</b> lines covered</span> and
+    <b>659</b> relevant lines. 
+    <span class="green"><b>644</b> lines covered</span> and
     <span class="red"><b>15</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -177,7 +177,7 @@
         <td>13</td>
         <td>13</td>
         <td>0</td>
-        <td>2.2</td>
+        <td>5.8</td>
       </tr>
       
       <tr>
@@ -197,7 +197,7 @@
         <td>95</td>
         <td>93</td>
         <td>2</td>
-        <td>75.2</td>
+        <td>107.0</td>
       </tr>
       
       <tr>
@@ -413,11 +413,11 @@
       <tr>
         <td class="strong"><a href="#7f4da2d2c0b857302f6ae226c1c225a9fe6eb97d" class="src_link" title="spec/model/resource_spec.rb">spec/model/resource_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>104</td>
-        <td>62</td>
-        <td>62</td>
+        <td>122</td>
+        <td>69</td>
+        <td>69</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>1.6</td>
       </tr>
       
       <tr>
@@ -437,7 +437,7 @@
         <td>117</td>
         <td>117</td>
         <td>0</td>
-        <td>1.0</td>
+        <td>1.1</td>
       </tr>
       
       <tr>
@@ -568,7 +568,7 @@
         <li class="never" data-hits="" data-linenumber="8">
           
           
-          <code class="ruby">                  :address, :deadline, :notes, :funding_amount, :approved_by,</code>
+          <code class="ruby">                  :address, :deadline, :notes, :funding_amount, :approved_by, :order_by,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="9">
@@ -2490,8 +2490,8 @@
           <code class="ruby">  def self.seed</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="7">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="7">
+          <span class="hits">3</span>
           
           <code class="ruby">    location_hashes = [{&#39;location&#39; =&gt; &#39;USA&#39;, &#39;parent&#39; =&gt; &#39;Global&#39;},</code>
         </li>
@@ -2532,32 +2532,32 @@
           <code class="ruby">                  ]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="14">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="14">
+          <span class="hits">3</span>
           
           <code class="ruby">    global = Location.create :val =&gt; &quot;Global&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="15">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="15">
+          <span class="hits">3</span>
           
           <code class="ruby">    global.save :validate =&gt; false</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="16">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="16">
+          <span class="hits">3</span>
           
           <code class="ruby">    location_hashes.each do |location|</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="17">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="18" data-linenumber="17">
+          <span class="hits">18</span>
           
           <code class="ruby">      parent = Location.where(:val =&gt; location[&#39;parent&#39;].to_s).first</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="18">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="18" data-linenumber="18">
+          <span class="hits">18</span>
           
           <code class="ruby">      Location.create! :val =&gt; location[&#39;location&#39;], :parent_id =&gt; parent.id</code>
         </li>
@@ -2586,8 +2586,8 @@
           <code class="ruby">  def parent_presence</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="23">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="21" data-linenumber="23">
+          <span class="hits">21</span>
           
           <code class="ruby">    (not parent.blank?) or (val == &quot;Global&quot; and Location.where(:val =&gt; &quot;Global&quot;).empty?)</code>
         </li>
@@ -2948,8 +2948,8 @@
           <code class="ruby">  def self.has_many_associations</code>
         </li>
       
-        <li class="covered" data-hits="3971" data-linenumber="44">
-          <span class="hits">3971</span>
+        <li class="covered" data-hits="5742" data-linenumber="44">
+          <span class="hits">5742</span>
           
           <code class="ruby">    Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym }</code>
         </li>
@@ -2972,8 +2972,8 @@
           <code class="ruby">  def self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="covered" data-hits="52" data-linenumber="48">
-          <span class="hits">52</span>
+        <li class="covered" data-hits="72" data-linenumber="48">
+          <span class="hits">72</span>
           
           <code class="ruby">    return {:audiences =&gt; resource.audiences, :availabilities =&gt; resource.availabilities,</code>
         </li>
@@ -3308,26 +3308,26 @@
           <code class="ruby">  def self.create_resource(params)</code>
         </li>
       
-        <li class="covered" data-hits="44" data-linenumber="104">
-          <span class="hits">44</span>
+        <li class="covered" data-hits="64" data-linenumber="104">
+          <span class="hits">64</span>
           
           <code class="ruby">    params, resource_hash = Resource.separate_params(params)</code>
         </li>
       
-        <li class="covered" data-hits="44" data-linenumber="105">
-          <span class="hits">44</span>
+        <li class="covered" data-hits="64" data-linenumber="105">
+          <span class="hits">64</span>
           
           <code class="ruby">    resource = Resource.create!(resource_hash)</code>
         </li>
       
-        <li class="covered" data-hits="44" data-linenumber="106">
-          <span class="hits">44</span>
+        <li class="covered" data-hits="64" data-linenumber="106">
+          <span class="hits">64</span>
           
           <code class="ruby">    Resource.create_associations(resource, params)</code>
         </li>
       
-        <li class="covered" data-hits="44" data-linenumber="107">
-          <span class="hits">44</span>
+        <li class="covered" data-hits="64" data-linenumber="107">
+          <span class="hits">64</span>
           
           <code class="ruby">    return resource</code>
         </li>
@@ -3392,32 +3392,32 @@
           <code class="ruby">  def self.separate_params(params)</code>
         </li>
       
-        <li class="covered" data-hits="398" data-linenumber="118">
-          <span class="hits">398</span>
+        <li class="covered" data-hits="579" data-linenumber="118">
+          <span class="hits">579</span>
           
           <code class="ruby">    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h</code>
         </li>
       
-        <li class="covered" data-hits="48" data-linenumber="119">
-          <span class="hits">48</span>
+        <li class="covered" data-hits="68" data-linenumber="119">
+          <span class="hits">68</span>
           
           <code class="ruby">    resource_hash = {}</code>
         </li>
       
-        <li class="covered" data-hits="48" data-linenumber="120">
-          <span class="hits">48</span>
+        <li class="covered" data-hits="68" data-linenumber="120">
+          <span class="hits">68</span>
           
           <code class="ruby">    params.each do |field, val|</code>
         </li>
       
-        <li class="covered" data-hits="350" data-linenumber="121">
-          <span class="hits">350</span>
+        <li class="covered" data-hits="511" data-linenumber="121">
+          <span class="hits">511</span>
           
           <code class="ruby">      if self.has_many_associations.include? field</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="122">
-          <span class="hits">91</span>
+        <li class="covered" data-hits="131" data-linenumber="122">
+          <span class="hits">131</span>
           
           <code class="ruby">        params[field] = val.split(&#39;,&#39;)</code>
         </li>
@@ -3428,8 +3428,8 @@
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="259" data-linenumber="124">
-          <span class="hits">259</span>
+        <li class="covered" data-hits="380" data-linenumber="124">
+          <span class="hits">380</span>
           
           <code class="ruby">        resource_hash[field] = val</code>
         </li>
@@ -3446,8 +3446,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="48" data-linenumber="127">
-          <span class="hits">48</span>
+        <li class="covered" data-hits="68" data-linenumber="127">
+          <span class="hits">68</span>
           
           <code class="ruby">    return params, resource_hash</code>
         </li>
@@ -3470,38 +3470,38 @@
           <code class="ruby">  def self.create_associations(resource, params)</code>
         </li>
       
-        <li class="covered" data-hits="48" data-linenumber="131">
-          <span class="hits">48</span>
+        <li class="covered" data-hits="68" data-linenumber="131">
+          <span class="hits">68</span>
           
           <code class="ruby">    fields_hash = self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="covered" data-hits="48" data-linenumber="132">
-          <span class="hits">48</span>
+        <li class="covered" data-hits="68" data-linenumber="132">
+          <span class="hits">68</span>
           
           <code class="ruby">    fields_hash.each do |field, association|</code>
         </li>
       
-        <li class="covered" data-hits="480" data-linenumber="133">
-          <span class="hits">480</span>
+        <li class="covered" data-hits="680" data-linenumber="133">
+          <span class="hits">680</span>
           
           <code class="ruby">      association.delete_all</code>
         </li>
       
-        <li class="covered" data-hits="480" data-linenumber="134">
-          <span class="hits">480</span>
+        <li class="covered" data-hits="680" data-linenumber="134">
+          <span class="hits">680</span>
           
           <code class="ruby">      if params[field] != nil</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="135">
-          <span class="hits">91</span>
+        <li class="covered" data-hits="131" data-linenumber="135">
+          <span class="hits">131</span>
           
           <code class="ruby">        params[field].each do |val|</code>
         </li>
       
-        <li class="covered" data-hits="241" data-linenumber="136">
-          <span class="hits">241</span>
+        <li class="covered" data-hits="348" data-linenumber="136">
+          <span class="hits">348</span>
           
           <code class="ruby">          association.create(:val =&gt; val)</code>
         </li>
@@ -8415,8 +8415,8 @@
     <h3>spec/model/resource_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>62</b> relevant lines. 
-      <span class="green"><b>62</b> lines covered</span> and
+      <b>69</b> relevant lines. 
+      <span class="green"><b>69</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -8547,451 +8547,451 @@
         <li class="covered" data-hits="1" data-linenumber="21">
           <span class="hits">1</span>
           
-          <code class="ruby">    Resource.destroy_all</code>
+          <code class="ruby">    before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="22">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="4" data-linenumber="22">
+          <span class="hits">4</span>
           
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;someplace&quot;,</code>
+          <code class="ruby">      Resource.destroy_all</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="23">
+        <li class="covered" data-hits="4" data-linenumber="23">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+          <code class="ruby">      @resource1 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="24">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="24">
           
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing2&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;someplace&quot;,</code>
+          
+          <code class="ruby">                                            &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;approval_status&quot; =&gt; 0</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="25">
           
           
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Scholarship,Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="26">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="4" data-linenumber="26">
+          <span class="hits">4</span>
           
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing3&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;someplace&quot;,</code>
+          <code class="ruby">      @resource2 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing2&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="27">
           
           
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Scholarship,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+          <code class="ruby">                                            &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;approval_status&quot; =&gt; 0</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="28">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="28">
           
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing4&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;someplace&quot;,</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="covered" data-hits="4" data-linenumber="29">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+          <code class="ruby">      @resource3 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing3&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
+          <code class="ruby">                                            &quot;types&quot; =&gt; &#39;Scholarship,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;approval_status&quot; =&gt; 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="31">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="4" data-linenumber="32">
+          <span class="hits">4</span>
           
-          <code class="ruby">    it &#39;can do a simple filter by column name&#39; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="32">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      result = Resource.filter({&quot;title&quot; =&gt; &quot;thing3&quot;})</code>
+          <code class="ruby">      @resource4 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing4&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;someplace&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="33">
           
           
-          <code class="ruby">      # print result.pretty_print_inspect</code>
+          <code class="ruby">                               &quot;types&quot; =&gt; &#39;Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="34">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="34">
           
-          <code class="ruby">      expect(result.count).to eq 1</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="35">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="4" data-linenumber="35">
+          <span class="hits">4</span>
           
-          <code class="ruby">      expect(result.first.title).to eq &quot;thing3&quot;</code>
+          <code class="ruby">      User.delete_all</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="36">
+        <li class="covered" data-hits="4" data-linenumber="36">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="37">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="38">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="38">
           
-          <code class="ruby">    it &#39;returns the flagged resources if flagged is specified&#39; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="39">
           <span class="hits">1</span>
           
-          <code class="ruby">      Resource.create_resource &quot;title&quot; =&gt; &quot;thing5&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;someplace&quot;,</code>
+          <code class="ruby">    it &#39;can do a simple filter by column name&#39; do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="40">
-          
-          
-          <code class="ruby">                               &quot;types&quot; =&gt; &#39;Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;flagged&quot; =&gt; 1</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="41">
+        <li class="covered" data-hits="1" data-linenumber="40">
           <span class="hits">1</span>
           
-          <code class="ruby">      result = Resource.filter({&quot;flagged&quot; =&gt; 1})</code>
+          <code class="ruby">      result = Resource.filter({&quot;title&quot; =&gt; &quot;thing3&quot;})</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="never" data-hits="" data-linenumber="41">
           
           
           <code class="ruby">      # print result.pretty_print_inspect</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="43">
+        <li class="covered" data-hits="1" data-linenumber="42">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(result.count).to eq 1</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="44">
+        <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(result.first.title).to eq &quot;thing5&quot;</code>
+          <code class="ruby">      expect(result.first.title).to eq &quot;thing3&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="45">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="46">
+        <li class="covered" data-hits="1" data-linenumber="46">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    it &#39;returns the flagged resources if flagged is specified&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="47">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;splits has_many associations correctly and returns the right thing&#39; do</code>
+          <code class="ruby">      Resource.create_resource &quot;title&quot; =&gt; &quot;thing5&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;someplace&quot;,</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="48">
+        <li class="never" data-hits="" data-linenumber="48">
+          
+          
+          <code class="ruby">                               &quot;types&quot; =&gt; &#39;Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;flagged&quot; =&gt; 1</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
-          <code class="ruby">      result = Resource.filter({:types=&gt;&quot;Scholarship,Funding&quot;})</code>
+          <code class="ruby">      result = Resource.filter({&quot;flagged&quot; =&gt; 1})</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="49">
+        <li class="never" data-hits="" data-linenumber="50">
           
           
           <code class="ruby">      # print result.pretty_print_inspect</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="50">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(result.count).to eq 2</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="51">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(result.where(title: &quot;thing1&quot;)).to exist</code>
+          <code class="ruby">      expect(result.count).to eq 1</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="52">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(result.where(title: &quot;thing2&quot;)).to exist</code>
+          <code class="ruby">      expect(result.first.title).to eq &quot;thing5&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="53">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(result.where(title: &quot;thing3&quot;)).not_to exist</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="54">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(result.where(title: &quot;thing4&quot;)).not_to exist</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="56">
+        <li class="never" data-hits="" data-linenumber="54">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="57">
+        <li class="covered" data-hits="1" data-linenumber="55">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;returns all resources if no filter is specified&#39; do</code>
+          <code class="ruby">    it &#39;splits has_many associations correctly and returns the right thing&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="58">
+        <li class="covered" data-hits="1" data-linenumber="56">
           <span class="hits">1</span>
           
-          <code class="ruby">      result = Resource.filter({})</code>
+          <code class="ruby">      result = Resource.filter({:types=&gt;&quot;Scholarship,Funding&quot;})</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="59">
+        <li class="never" data-hits="" data-linenumber="57">
           
           
           <code class="ruby">      # print result.pretty_print_inspect</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="60">
+        <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(result.count).to eq 4</code>
+          <code class="ruby">      expect(result.count).to eq 2</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="61">
+        <li class="covered" data-hits="1" data-linenumber="59">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(result.where(title: &quot;thing1&quot;)).to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="62">
+        <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(result.where(title: &quot;thing2&quot;)).to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="63">
+        <li class="covered" data-hits="1" data-linenumber="61">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(result.where(title: &quot;thing3&quot;)).to exist</code>
+          <code class="ruby">      expect(result.where(title: &quot;thing3&quot;)).not_to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="64">
+        <li class="covered" data-hits="1" data-linenumber="62">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(result.where(title: &quot;thing4&quot;)).to exist</code>
+          <code class="ruby">      expect(result.where(title: &quot;thing4&quot;)).not_to exist</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="66">
+        <li class="never" data-hits="" data-linenumber="64">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &#39;returns all resources if no filter is specified&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      result = Resource.filter({})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="67">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      # print result.pretty_print_inspect</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="68">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &#39;location functionality&#39; do</code>
+          <code class="ruby">      expect(result.count).to eq 4</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="69">
           <span class="hits">1</span>
           
-          <code class="ruby">    Resource.destroy_all</code>
+          <code class="ruby">      expect(result.where(title: &quot;thing1&quot;)).to exist</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="70">
           <span class="hits">1</span>
           
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
+          <code class="ruby">      expect(result.where(title: &quot;thing2&quot;)).to exist</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
-          
-          
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="72">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing2&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Berkeley&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="73">
-          
-          
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Scholarship,Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="74">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing3&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;USA&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="75">
-          
-          
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Scholarship,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="76">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    Resource.create_resource &quot;title&quot; =&gt; &quot;thing4&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;California&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="77">
-          
-          
-          <code class="ruby">                             &quot;types&quot; =&gt; &#39;Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="78">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="79">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    Location.seed</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="80">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="81">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &#39;gets parent locations&#39; do</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="82">
-          
-          
-          <code class="ruby">      # puts Resource.all.pretty_print_inspect</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="83">
-          
-          
-          <code class="ruby">      # puts Location.all.pretty_print_inspect</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="84">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      result = Resource.location_helper({:location =&gt; &quot;California&quot;})</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="85">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="86">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(result.count).to eq 3</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="87">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(result.where(title: &quot;thing1&quot;)).to exist</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="88">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(result.where(title: &quot;thing2&quot;)).not_to exist</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="89">
+        <li class="covered" data-hits="1" data-linenumber="71">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(result.where(title: &quot;thing3&quot;)).to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="90">
+        <li class="covered" data-hits="1" data-linenumber="72">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(result.where(title: &quot;thing4&quot;)).to exist</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="91">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="92">
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="76">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;returns no results given an invalid location&#39; do</code>
+          <code class="ruby">  describe &#39;location functionality&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="94">
+        <li class="covered" data-hits="1" data-linenumber="77">
           <span class="hits">1</span>
           
-          <code class="ruby">      result = Resource.location_helper({:location =&gt; &quot;fake location&quot;})</code>
+          <code class="ruby">    before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="95">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="78">
+          <span class="hits">3</span>
           
-          <code class="ruby">      expect(result.count).to eq 0</code>
+          <code class="ruby">      Resource.destroy_all</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="79">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      @resource1 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing1&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Global&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
+          
+          
+          <code class="ruby">                                            &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;approval_status&quot; =&gt; 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="81">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="82">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      @resource2 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing2&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;Berkeley&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby">                                            &quot;types&quot; =&gt; &#39;Scholarship,Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;approval_status&quot; =&gt; 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="84">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="85">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      @resource3 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing3&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;USA&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="86">
+          
+          
+          <code class="ruby">                                            &quot;types&quot; =&gt; &#39;Scholarship,Funding,Events,Networking&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;, &quot;approval_status&quot; =&gt; 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="88">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      @resource4 = Resource.create_resource &quot;title&quot; =&gt; &quot;thing4&quot;, &quot;url&quot; =&gt; &quot;something.com&quot;, &quot;contact_email&quot; =&gt; &quot;something@gmail.com&quot;, &quot;location&quot; =&gt; &quot;California&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="89">
+          
+          
+          <code class="ruby">                                            &quot;types&quot; =&gt; &#39;Funding,Mentoring&#39;, &quot;audiences&quot; =&gt; &#39;Grad,Undergrad&#39;, &quot;desc&quot; =&gt; &quot;descriptions&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="90">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="91">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      User.delete_all</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="92">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="93">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="94">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      Location.delete_all</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="95">
+          <span class="hits">3</span>
+          
+          <code class="ruby">      Location.seed</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="96">
@@ -9006,43 +9006,151 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="98">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="98">
           
-          <code class="ruby">    it &#39;does not null pointer given global&#39; do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="99">
           <span class="hits">1</span>
           
-          <code class="ruby">      result = Resource.location_helper({:location =&gt; &quot;Global&quot;})</code>
+          <code class="ruby">    it &#39;gets parent locations&#39; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="100">
+        <li class="never" data-hits="" data-linenumber="100">
+          
+          
+          <code class="ruby">      # puts Resource.all.pretty_print_inspect</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="101">
+          
+          
+          <code class="ruby">      # puts Location.all.pretty_print_inspect</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="102">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(result.count).to eq 1</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="101">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(result.where(title: &quot;thing1&quot;)).to exist</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="102">
-          
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">      result = Resource.location_helper({:location =&gt; &quot;California&quot;})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="103">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="104">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.count).to eq 3</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="105">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.where(title: &quot;thing1&quot;)).to exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="106">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.where(title: &quot;thing2&quot;)).not_to exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="107">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.where(title: &quot;thing3&quot;)).to exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="108">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.where(title: &quot;thing4&quot;)).to exist</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="110">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="111">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &#39;returns no results given an invalid location&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="112">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      result = Resource.location_helper({:location =&gt; &quot;fake location&quot;})</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="113">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.count).to eq 0</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="114">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="115">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="116">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &#39;does not null pointer given global&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="117">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      result = Resource.location_helper({:location =&gt; &quot;Global&quot;})</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="118">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.count).to eq 1</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="119">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(result.where(title: &quot;thing1&quot;)).to exist</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="120">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="121">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="104">
+        <li class="never" data-hits="" data-linenumber="122">
           
           
           <code class="ruby">end</code>
@@ -9719,25 +9827,25 @@
         <li class="covered" data-hits="1" data-linenumber="36">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &quot;adds add resource to the database given valid parameters in a post request&quot; do</code>
+          <code class="ruby">    before(:each) do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="37">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="37">
+          <span class="hits">3</span>
           
-          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&#39;</code>
+          <code class="ruby">      User.delete_all</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="38">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="38">
+          <span class="hits">3</span>
           
-          <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
+          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="39">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="39">
           
-          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
@@ -9749,529 +9857,529 @@
         <li class="covered" data-hits="1" data-linenumber="41">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.title).to eq &quot;something&quot;</code>
+          <code class="ruby">    it &quot;adds resources to the database given valid parameters in a post request&quot; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="42">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.url).to eq &quot;something.com&quot;</code>
+          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&#39;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="43">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.contact_email).to eq &quot;something@gmail.com&quot;</code>
+          <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="44">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.location).to eq &quot;someplace&quot;</code>
+          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="45">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="45">
           
-          <code class="ruby">      expect(resource.audiences).to exist</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="46">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.types).to exist</code>
+          <code class="ruby">      expect(resource.title).to eq &quot;something&quot;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="47">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.desc).to eq &quot;description&quot;</code>
+          <code class="ruby">      expect(resource.url).to eq &quot;something.com&quot;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="48">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.approval_status).to eq 0</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="49">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="50">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="51">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;doesn&#39;t add a resource to the database given invalid parameters in a post request&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="52">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="53">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      post &#39;/resources?title=something2&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111&#39;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="54">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="55">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="56">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(Resource.where(title: &quot;something2&quot;)).not_to exist</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="57">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="58">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="59">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    it &quot;adds an approved resource to the database if requester is an admin&quot; do</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="60">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      User.delete_all</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="61">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="62">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&amp;api_key=example&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="63">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="64">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="65">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.title).to eq &quot;something&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="66">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.url).to eq &quot;something.com&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="67">
-          <span class="hits">1</span>
-          
           <code class="ruby">      expect(resource.contact_email).to eq &quot;something@gmail.com&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="68">
+        <li class="covered" data-hits="1" data-linenumber="49">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.location).to eq &quot;someplace&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="69">
+        <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.audiences).to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="70">
+        <li class="covered" data-hits="1" data-linenumber="51">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.types).to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="71">
+        <li class="covered" data-hits="1" data-linenumber="52">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.desc).to eq &quot;description&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="72">
+        <li class="covered" data-hits="1" data-linenumber="53">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.approval_status).to eq 1</code>
+          <code class="ruby">      expect(resource.approval_status).to eq 0</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="73">
+        <li class="never" data-hits="" data-linenumber="54">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="74">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="never" data-hits="" data-linenumber="55">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="76">
+        <li class="covered" data-hits="1" data-linenumber="56">
           <span class="hits">1</span>
           
-          <code class="ruby">  describe &#39;update&#39; do</code>
+          <code class="ruby">    it &quot;doesn&#39;t add a resource to the database given invalid parameters in a post request&quot; do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="77">
+        <li class="covered" data-hits="1" data-linenumber="57">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;properly updates values for admins&#39; do</code>
+          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="78">
+        <li class="covered" data-hits="1" data-linenumber="58">
           <span class="hits">1</span>
           
-          <code class="ruby">      User.delete_all</code>
+          <code class="ruby">      post &#39;/resources?title=something2&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111&#39;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="79">
-          
-          
-          <code class="ruby">      # seed with a resource</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="80">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="81">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&amp;client_tags=BearX&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="82">
+        <li class="covered" data-hits="1" data-linenumber="59">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="83">
+        <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(User.where(api_token: &quot;example&quot;)).to exist</code>
+          <code class="ruby">      expect(Resource.where(title: &quot;something2&quot;)).not_to exist</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="84">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="85">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="86">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.url).to eq &quot;something.com&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="87">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.location).to eq &#39;someplace&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="88">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.types.collect(&amp;:val)).to eq [&#39;Scholarship&#39;, &#39;Funding&#39;]</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="89">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to eq [&#39;BearX&#39;]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="90">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="91">
-          
-          
-          <code class="ruby">      # patch as admin changes values</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="92">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      patch &#39;/resources/&#39; + resource.id.to_s + &#39;/?url=somethingelse.com&amp;flagged=1&amp;api_key=example&amp;client_tags=WITI,CITRIS&amp;location=anotherplace&amp;desc=another description&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="93">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="94">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.url).to eq &quot;somethingelse.com&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="95">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.flagged).to eq 1</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="96">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.location).to eq &quot;anotherplace&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="97">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.desc).to eq &quot;another description&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="98">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to eq [&#39;WITI&#39;,&#39;CITRIS&#39;]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="99">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="100">
-          
-          
-          <code class="ruby">      # make sure change is reflected in future HTTP request</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="101">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      get &#39;/resources/&#39; + resource.id.to_s + &#39;/?api_key=example&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="102">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;anotherplace&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="103">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;another description&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="104">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;somethingelse.com&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="105">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;WITI&#39;)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="106">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="107">
-          
-          
-          <code class="ruby">      # make sure this doesn&#39;t clear the rest of the values</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="108">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      patch &#39;/resources/&#39; + resource.id.to_s + &#39;/?client_tags=BearX&amp;api_key=example&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="109">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="110">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.url).to eq &quot;somethingelse.com&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="111">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.flagged).to eq 1</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="112">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.location).to eq &quot;anotherplace&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="113">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.desc).to eq &quot;another description&quot;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="114">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to eq [&#39;BearX&#39;]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="115">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="116">
-          
-          
-          <code class="ruby">      # make sure change is reflected in future HTTP request</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="117">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      get &#39;/resources/&#39; + resource.id.to_s + &#39;?api_key=example&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="118">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;anotherplace&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="119">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;another description&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="120">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;somethingelse.com&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="121">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      assert response.body.to_s.include?(&#39;BearX&#39;)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="61">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="123">
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="63">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;adds an approved resource to the database if requester is an admin&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="64">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&amp;api_key=example&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.title).to eq &quot;something&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="68">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.url).to eq &quot;something.com&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.contact_email).to eq &quot;something@gmail.com&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="70">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.location).to eq &quot;someplace&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.audiences).to exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="72">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.types).to exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.desc).to eq &quot;description&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.approval_status).to eq 1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="75">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="76">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="77">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="78">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &#39;update&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="79">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    before(:each) do</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="80">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      User.delete_all</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="81">
+          <span class="hits">4</span>
+          
+          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="82">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="83">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="84">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &#39;properly updates values for admins&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="85">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      post &#39;/resources?title=something&amp;url=something.com&amp;contact_email=something@gmail.com&amp;location=someplace&amp;types=Scholarship,Funding&amp;audiences=Grad,Undergrad&amp;desc=description&amp;client_tags=BearX&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="86">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="87">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(User.where(api_token: &quot;example&quot;)).to exist</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="88">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="89">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="90">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.url).to eq &quot;something.com&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="91">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.location).to eq &#39;someplace&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="92">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.types.collect(&amp;:val)).to eq [&#39;Scholarship&#39;, &#39;Funding&#39;]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="93">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to eq [&#39;BearX&#39;]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="94">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby">      # patch as admin changes values</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="96">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      patch &#39;/resources/&#39; + resource.id.to_s + &#39;/?url=somethingelse.com&amp;flagged=1&amp;api_key=example&amp;client_tags=WITI,CITRIS&amp;location=anotherplace&amp;desc=another description&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="97">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="98">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.url).to eq &quot;somethingelse.com&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="99">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.flagged).to eq 1</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="100">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.location).to eq &quot;anotherplace&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="101">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.desc).to eq &quot;another description&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="102">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to eq [&#39;WITI&#39;,&#39;CITRIS&#39;]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="103">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="104">
+          
+          
+          <code class="ruby">      # make sure change is reflected in future HTTP request</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="105">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      get &#39;/resources/&#39; + resource.id.to_s + &#39;/?api_key=example&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="106">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      assert response.body.to_s.include?(&#39;anotherplace&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="107">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      assert response.body.to_s.include?(&#39;another description&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="108">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      assert response.body.to_s.include?(&#39;somethingelse.com&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="109">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      assert response.body.to_s.include?(&#39;WITI&#39;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="110">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="111">
+          
+          
+          <code class="ruby">      # make sure this doesn&#39;t clear the rest of the values</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="112">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      patch &#39;/resources/&#39; + resource.id.to_s + &#39;/?client_tags=BearX&amp;api_key=example&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="113">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="114">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.url).to eq &quot;somethingelse.com&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="115">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.flagged).to eq 1</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="116">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.location).to eq &quot;anotherplace&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="117">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.desc).to eq &quot;another description&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="118">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to eq [&#39;BearX&#39;]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="119">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="120">
+          
+          
+          <code class="ruby">      # make sure change is reflected in future HTTP request</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="121">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      get &#39;/resources/&#39; + resource.id.to_s + &#39;?api_key=example&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="122">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      assert response.body.to_s.include?(&#39;anotherplace&#39;)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="123">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      assert response.body.to_s.include?(&#39;another description&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="124">
           <span class="hits">1</span>
           
-          <code class="ruby">    it &#39;properly adds to edit table&#39; do</code>
+          <code class="ruby">      assert response.body.to_s.include?(&#39;somethingelse.com&#39;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="125">
           <span class="hits">1</span>
           
-          <code class="ruby">      User.delete_all</code>
+          <code class="ruby">      assert response.body.to_s.include?(&#39;BearX&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="126">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="127">
           
           
-          <code class="ruby">      # seed with a resource</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="128">
           <span class="hits">1</span>
           
-          <code class="ruby">      User.create!(:email =&gt; &#39;example@gmail.com&#39;, :password =&gt; &#39;password&#39;, :api_token =&gt; &#39;example&#39;)</code>
+          <code class="ruby">    it &#39;properly adds to edit table&#39; do</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="129">
@@ -10346,94 +10454,94 @@
           <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="141">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="141">
           
-          <code class="ruby">      resource_id_str = resource.id.to_s</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="142">
           
           
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="143">
-          
-          
           <code class="ruby">      # patch as guest does nothing</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="144">
+        <li class="covered" data-hits="1" data-linenumber="143">
           <span class="hits">1</span>
           
           <code class="ruby">      patch &#39;/resources/&#39; + resource.id.to_s + &#39;/?url=guest.com&amp;description=guestupdatedescription&amp;contact_email=guest@gmail.com&amp;location=anotherplace&amp;types=Networking&amp;audiences=Grad&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="145">
+        <li class="covered" data-hits="1" data-linenumber="144">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(Resource.where(title: &quot;something&quot;)).to exist</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="146">
+        <li class="covered" data-hits="1" data-linenumber="145">
           <span class="hits">1</span>
           
           <code class="ruby">      resource = Resource.find_by(title: &quot;something&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="147">
+        <li class="covered" data-hits="1" data-linenumber="146">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.url).to eq &quot;something.com&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="148">
+        <li class="covered" data-hits="1" data-linenumber="147">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.desc).to eq &quot;description&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="149">
+        <li class="covered" data-hits="1" data-linenumber="148">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.contact_email).to eq &quot;something@gmail.com&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="150">
+        <li class="covered" data-hits="1" data-linenumber="149">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.location).to eq &quot;someplace&quot;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="151">
+        <li class="covered" data-hits="1" data-linenumber="150">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.types.collect(&amp;:val)).to eq [&#39;Scholarship&#39;,&#39;Funding&#39;]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="152">
+        <li class="covered" data-hits="1" data-linenumber="151">
           <span class="hits">1</span>
           
           <code class="ruby">      expect(resource.audiences.collect(&amp;:val)).to eq [&quot;Grad&quot;,&quot;Undergrad&quot;]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="153">
+        <li class="never" data-hits="" data-linenumber="152">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="154">
+        <li class="never" data-hits="" data-linenumber="153">
           
           
           <code class="ruby">      # make sure no changes are reflected in http request</code>
         </li>
       
+        <li class="covered" data-hits="1" data-linenumber="154">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      get &#39;/resources/&#39; + resource.id.to_s + &#39;/?api_key=example&#39;</code>
+        </li>
+      
         <li class="covered" data-hits="1" data-linenumber="155">
           <span class="hits">1</span>
           
-          <code class="ruby">      get &#39;/resources/&#39; + resource_id_str + &#39;/?api_key=example&#39;</code>
+          <code class="ruby">      expect(User.where(api_token: &#39;example&#39;)).to exist</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="156">
