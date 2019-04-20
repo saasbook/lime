@@ -5,13 +5,25 @@
 <%= form_tag("/resources", method: "post") do %>
 
     <div class="input_field">
-        <%= label_tag(:contact, "Your name") %>
-        <%= text_field_tag(:contact) %>
+        <%= label_tag(:contact_name, "Your name") %>
+        <% if flash[:notice] %>
+            <%= text_field_tag(:contact_name, @session[:contact_name]) %>
+        <% else %>
+            <%= text_field_tag(:contact_name, "addddd") %>
+
+        <% end %>
+        
     </div>
 
     <div class="input_field">
         <%= label_tag(:contact_email, "Your Email") %>
-        <%= text_field_tag(:contact_email) %>
+        
+        <% if flash[:notice] %>
+            <%= text_field_tag(:contact_email, @session[:contact_email]) %>
+        <% else %>
+            <%= text_field_tag(:contact_email) %>
+
+        <% end %>
     </div>
 
     <div class="input_field">
@@ -44,6 +56,20 @@
         <%= text_field_tag(:desc) %>
     </div>
 
+    <% @locations.each do |association, values| %>
+        <div id="association-name">
+          <%= association.capitalize %>
+        </div>
+        <div class="content filters">
+          <% values.each do |val| %>
+            <%= val %>
+            <%= check_box_tag association+'[]', val %>
+            <br/>
+          <% end %>
+        </div>
+        <br/>
+    <% end %>
+
     <% @has_many_hash.each do |association, values| %>
         <div id="association-name">
           <%= association.capitalize %>
@@ -51,26 +77,29 @@
         <div class="content filters">
           <% values.each do |val| %>
             <%= val %>
-            <%= check_box_tag association, val %>
+            <% if flash[:notice] && @session[association][0]%>
+                <%= check_box_tag association+'[]', val, true %>
+            <% else %>
+                <%= check_box_tag association+'[]', val %>
+
+            <% end %>
+            
             <br/>
           <% end %>
         </div>
         <br/>
     <% end %>
 
-
-
-    <div class="input_field">
-    <%= label_tag(:location, "Location") %>
-    <%= select_tag(:location, options_for_select(['Global', 'United States'])) %>
-    </div>
     
 
-    <%= submit_tag("Submit", :class => "submit") %>
 
     <% if flash[:notice] %>
         <div class="notice"><%= flash[:notice] %></div>
     <% end %>
+
+    <%= submit_tag("Submit", :class => "submit") %>
+
+    
 
 <% end %>
 </div>

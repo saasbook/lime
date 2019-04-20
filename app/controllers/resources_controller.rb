@@ -38,7 +38,6 @@ class ResourcesController < ApplicationController
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
-    puts params
     if @user.nil?
       params[:approval_status] = 1 # only admins can view unapproved resources
     end
@@ -63,9 +62,9 @@ class ResourcesController < ApplicationController
     id = params[:id]
     @resource = Resource.find_by_id(id)
     # only admins can see unapproved resources
-    if @user.nil? and @resource&.approval_status == 0
-      @resource = nil
-    end
+    # if @user.nil? and @resource&.approval_status == 0
+    #   @resource = nil
+    # end
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
@@ -75,8 +74,13 @@ class ResourcesController < ApplicationController
 
 
   def new
+    puts "n ew1"
+    puts session[:contact_email]
+    puts session
+    puts "new"
     @has_many_hash = self.has_many_value_hash
     @locations = self.get_locations
+    @session = session
     render template: "resources/new.html.erb"
     # render "resources/new"
   end
@@ -89,9 +93,19 @@ class ResourcesController < ApplicationController
     if params[:desc] != nil and params[:desc].length > 500
       @desc_too_long = true
     end
-
+    puts "create1"
     if @missing
+      puts "create2"
       flash[:notice] = "Please fill in the required fields."
+      puts "create1"
+      session[:contact_email] = params[:contact_email]
+      session[:types] = params[:types]
+      puts "session"
+      puts session[:contact_name]
+      puts "session2"
+      puts session[:contact_email]
+      puts session
+      redirect_to :controller => 'resources', :action => 'new'
       return
     elsif @desc_too_long
       flash[:notice] = "Description was too long."
