@@ -13,9 +13,6 @@
 body {
   font-family: "Poppins", Arial, sans-serif;
 }
-#title {
-  font-family: "Poppins", Arial, sans-serif;
-}
 
 #resource-container-wrapper {
   margin-top: 2.5rem;
@@ -62,3 +59,51 @@ body {
   font-size: 1.5rem;
   color: orange;
 }
+
+
+// new.html styles
+
+form {
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_field {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  // flex: 1 0 40%;
+}
+
+input {
+  width: 256px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+  border: 1px, solid, gray;
+}
+
+select {
+  width: 256px;
+  margin-bottom: 24px;
+}
+
+.submit {
+  color: white;
+  background-color: #198BCC;
+  border: none;
+  width: 256px;
+  height: 64px;
+  font-size: 32px;
+  border-radius: 100px;
+  transition: 500ms;
+}
+
+.submit:hover {
+  background-color: #006D9D;
+  transition: 500ms;
+}
+
+

@@ -28,6 +28,12 @@ class ResourcesController < ApplicationController
     }
   end
 
+  def get_locations
+    {
+        'location' => Location.get_values,
+    }
+  end
+
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
@@ -69,6 +75,8 @@ class ResourcesController < ApplicationController
 
 
   def new
+    @has_many_hash = self.has_many_value_hash
+    @locations = self.get_locations
     render template: "resources/new.html.erb"
     # render "resources/new"
   end
