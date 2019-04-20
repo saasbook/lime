@@ -1,30 +1,76 @@
 <h1>Suggest a Resource for our Database </h1>
 
+<div class="form">
+
 <%= form_tag("/resources", method: "post") do %>
-    <%= label_tag(:title, "Resource name") %>
-    <%= text_field_tag(:title) %>
 
-    <%= label_tag(:url, "Resource URL") %>
-    <%= text_field_tag(:url) %>
+    <div class="input_field">
+        <%= label_tag(:contact, "Your name") %>
+        <%= text_field_tag(:contact) %>
+    </div>
 
-    <%= label_tag(:contact_email, "Email-Contact") %>
-    <%= text_field_tag(:contact_email) %>
+    <div class="input_field">
+        <%= label_tag(:contact_email, "Your Email") %>
+        <%= text_field_tag(:contact_email) %>
+    </div>
 
-    <%= label_tag(:desc, "Resource Description") %>
-    <%= text_field_tag(:desc) %>
+    <div class="input_field">
+        <%= label_tag(:contact_phone, "Your Phone") %>
+        <%= text_field_tag(:contact_phone) %>
+    </div>
 
-    <%= label_tag(:types, "Resource Type") %>
-    <%= select_tag(:types, options_for_select([['Networks', 'Networks'], ['Fellowships & Scholarships', 'Fellowships & Scholarships']])) %>
+    <div class="input_field">
+        <%= label_tag(:title, "Resource name") %>
+        <%= text_field_tag(:title) %>
+    </div>
+    
+    <div class="input_field">
+        <%= label_tag(:url, "Resource URL") %>
+        <%= text_field_tag(:url) %>
+    </div>
 
-    <%= label_tag(:audiences, "Audience") %>
-    <%= select_tag(:audiences, options_for_select([['Undergraduate Students', 'Undergraduate Students'], ['Graduate Students', 'Graduate Students']])) %>
+    <div class="input_field">
+        <%= label_tag(:resource_email, "Resource Email") %>
+        <%= text_field_tag(:resource_email) %>
+    </div>
 
+    <div class="input_field">
+        <%= label_tag(:resource_address, "Resource Address") %>
+        <%= text_field_tag(:resource_address) %>
+    </div>
+
+    <div class="input_field">
+        <%= label_tag(:desc, "Resource Description") %>
+        <%= text_field_tag(:desc) %>
+    </div>
+
+    <% @has_many_hash.each do |association, values| %>
+        <div id="association-name">
+          <%= association.capitalize %>
+        </div>
+        <div class="content filters">
+          <% values.each do |val| %>
+            <%= val %>
+            <%= check_box_tag association, val %>
+            <br/>
+          <% end %>
+        </div>
+        <br/>
+    <% end %>
+
+
+
+    <div class="input_field">
     <%= label_tag(:location, "Location") %>
     <%= select_tag(:location, options_for_select(['Global', 'United States'])) %>
+    </div>
+    
 
-    <%= submit_tag("Submit") %>
+    <%= submit_tag("Submit", :class => "submit") %>
 
     <% if flash[:notice] %>
         <div class="notice"><%= flash[:notice] %></div>
     <% end %>
+
 <% end %>
+</div>
