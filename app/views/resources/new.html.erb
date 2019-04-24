@@ -9,7 +9,7 @@
         <% if flash[:notice] %>
             <%= text_field_tag(:contact_name, @session[:contact_name]) %>
         <% else %>
-            <%= text_field_tag(:contact_name, "addddd") %>
+            <%= text_field_tag(:contact_name) %>
 
         <% end %>
         
@@ -69,7 +69,7 @@
         </div>
         <br/>
     <% end %>
-
+    has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
     <% @has_many_hash.each do |association, values| %>
         <div id="association-name">
           <%= association.capitalize %>
@@ -77,11 +77,10 @@
         <div class="content filters">
           <% values.each do |val| %>
             <%= val %>
-            <% if flash[:notice] && @session[association][0]%>
+            <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
                 <%= check_box_tag association+'[]', val, true %>
             <% else %>
                 <%= check_box_tag association+'[]', val %>
-
             <% end %>
             
             <br/>

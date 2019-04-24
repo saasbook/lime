@@ -74,11 +74,8 @@ class ResourcesController < ApplicationController
 
 
   def new
-    puts "n ew1"
-    puts session[:contact_email]
-    puts session
-    puts "new"
     @has_many_hash = self.has_many_value_hash
+    puts @has_many_hash
     @locations = self.get_locations
     @session = session
     render template: "resources/new.html.erb"
@@ -93,21 +90,17 @@ class ResourcesController < ApplicationController
     if params[:desc] != nil and params[:desc].length > 500
       @desc_too_long = true
     end
-    puts "create1"
+    
     if @missing
-      puts "create2"
+     
       flash[:notice] = "Please fill in the required fields."
-      puts "create1"
-      session[:contact_email] = params[:contact_email]
-      session[:types] = params[:types]
-      puts "session"
-      puts session[:contact_name]
-      puts "session2"
-      puts session[:contact_email]
-      puts session
+      params.each do |key, val|
+        session[key] = params[key]
+      end
       redirect_to :controller => 'resources', :action => 'new'
       return
-    elsif @desc_too_long
+    end
+    if @desc_too_long
       flash[:notice] = "Description was too long."
       return
     end
