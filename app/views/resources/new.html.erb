@@ -1,8 +1,16 @@
-<h1>Suggest a Resource for our Database </h1>
+<div id="suggest_top">
+    <h1>Suggest a Resource for our Database </h1>
+</div>
 
-<div class="form">
+<div id="instructions">
+    <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable. If you are an Admin, the resource will automatically be approved.<p>
+</div>
+
+
+<div class="form" id="suggest_form">
 
 <%= form_tag("/resources", method: "post") do %>
+
 
     <div class="input_field">
         <%= label_tag(:contact_name, "Your name") %>

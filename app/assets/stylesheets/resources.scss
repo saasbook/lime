@@ -1,11 +1,11 @@
 @import "bootstrap";
 
-@font-face {
-  font-family: 'Poppins';
-  src: url('../fonts/Poppins/Poppins-Regular.ttf') format('truetype');
-  src: url('../fonts/Poppins/Poppins-Light.ttf') format('truetype');
-  src: url('../fonts/Poppins/Poppins-Medium.ttf') format('truetype');
-}
+// @font-face {
+//   font-family: 'Poppins';
+//   src: url('https://fonts.googleapis.com/css?family=Poppins');
+//   // src: url('../fonts/Poppins/Poppins-Light.ttf') format('truetype');
+//   // src: url('../fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+// }
 
 #invoice-wrapper {
   font-family: 'SourceSansPro';
@@ -63,7 +63,29 @@ body {
 
 // new.html styles
 
-form {
+#suggest_top{
+  width: 100%;
+  height: 300px;
+  background-color:#006D9D; 
+  margin-bottom: 72px;
+}
+
+#suggest_top h1 {
+  color: white;
+  font-weight: 100;
+  font-family: "Poppins-Light", Arial, sans-serif;
+  font-size: 72px;
+  padding: 48px 96px;
+  width: 900px;
+}
+
+#instructions p {
+  font-size: 24px;
+  padding-left: 20%;
+  width: 80%;
+}
+
+#suggest_form {
   display: flex;
   flex-direction: column;
   // flex-wrap: wrap;
