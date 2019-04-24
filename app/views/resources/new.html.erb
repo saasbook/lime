@@ -4,92 +4,106 @@
 
 <div id="instructions">
     <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable. If you are an Admin, the resource will automatically be approved.<p>
+    <p>Required fields are marked with an *<p>
 </div>
-
 
 <div class="form" id="suggest_form">
 
 <%= form_tag("/resources", method: "post") do %>
+    <div class="form_step" id="contact_info">
+        <h2>Contact info for person maintaining resource (not public facing)</h2>
+        <div class="contact_row">
+            <div class="input_field">
+                <%= label_tag(:contact_email, "Contact Email *") %>
+                
+                <% if flash[:notice] %>
+                    <%= text_field_tag(:contact_email, @session[:contact_email]) %>
+                <% else %>
+                    <%= text_field_tag(:contact_email) %>
 
+                <% end %>
+            </div>
+            <div class="input_field">
+                <%= label_tag(:contact_name, "Contact name") %>
+                <% if flash[:notice] %>
+                    <%= text_field_tag(:contact_name, @session[:contact_name]) %>
+                <% else %>
+                    <%= text_field_tag(:contact_name) %>
+                <% end %>
+            </div>
+            <div class="input_field">
+                <%= label_tag(:contact_phone, "Contact Phone") %>
+                <%= text_field_tag(:contact_phone) %>
+            </div>
+        </div>
 
-    <div class="input_field">
-        <%= label_tag(:contact_name, "Your name") %>
-        <% if flash[:notice] %>
-            <%= text_field_tag(:contact_name, @session[:contact_name]) %>
-        <% else %>
-            <%= text_field_tag(:contact_name, "addddd") %>
-
-        <% end %>
         
     </div>
 
-    <div class="input_field">
-        <%= label_tag(:contact_email, "Your Email") %>
-        
-        <% if flash[:notice] %>
-            <%= text_field_tag(:contact_email, @session[:contact_email]) %>
-        <% else %>
-            <%= text_field_tag(:contact_email) %>
+    <div class="form_step" id="resource_info">
+        <h2>Basic information about the resource</h2>
+        <div class="resource_row">
+            <div class="input_field">
+                <%= label_tag(:title, "Resource name *") %>
+                <%= text_field_tag(:title) %>
+            </div>
+            <div class="input_field">
+                <%= label_tag(:url, "Resource URL * ") %>
+                <%= text_field_tag(:url) %>
+            </div>
+        </div>
 
-        <% end %>
-    </div>
+        <div class="resource_row">
+            <div class="input_field">
+                <%= label_tag(:desc, "Resource Description *") %>
+                <%= text_area_tag(:desc) %>
+            </div>
+        </div>
 
-    <div class="input_field">
-        <%= label_tag(:contact_phone, "Your Phone") %>
-        <%= text_field_tag(:contact_phone) %>
-    </div>
-
-    <div class="input_field">
-        <%= label_tag(:title, "Resource name") %>
-        <%= text_field_tag(:title) %>
+        <div class="resource_row" id="location_row">
+            <% @locations.each do |association, values| %>
+                <div id="location">
+                    <%= association.capitalize + "*" %>
+                </div>
+                <div class="resource_checkboxes">
+                    <% values.each do |val| %>
+                        <div class="single_checkbox">
+                            <p><%= val %></p>
+                            <%= check_box_tag association+'[]', val %>
+                        </div>
+                    <% end %>
+                </div>
+                <br/>
+            <% end %>
+        </div>
     </div>
     
-    <div class="input_field">
-        <%= label_tag(:url, "Resource URL") %>
-        <%= text_field_tag(:url) %>
-    </div>
 
     <div class="input_field">
-        <%= label_tag(:resource_email, "Resource Email") %>
+        <%= label_tag(:resource_email, "Email for the resource") %>
         <%= text_field_tag(:resource_email) %>
     </div>
 
     <div class="input_field">
-        <%= label_tag(:resource_address, "Resource Address") %>
+        <%= label_tag(:resource_address, "Physical Address of resource") %>
         <%= text_field_tag(:resource_address) %>
     </div>
 
-    <div class="input_field">
-        <%= label_tag(:desc, "Resource Description") %>
-        <%= text_field_tag(:desc) %>
-    </div>
+    
 
-    <% @locations.each do |association, values| %>
-        <div id="association-name">
-          <%= association.capitalize %>
-        </div>
-        <div class="content filters">
-          <% values.each do |val| %>
-            <%= val %>
-            <%= check_box_tag association+'[]', val %>
-            <br/>
-          <% end %>
-        </div>
-        <br/>
-    <% end %>
-
+    
+    has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
     <% @has_many_hash.each do |association, values| %>
-        <div id="association-name">
+        <div>
           <%= association.capitalize %>
         </div>
         <div class="content filters">
           <% values.each do |val| %>
             <%= val %>
-            <% if flash[:notice] && @session[association][0]%>
+            <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
                 <%= check_box_tag association+'[]', val, true %>
             <% else %>
                 <%= check_box_tag association+'[]', val %>
-
             <% end %>
             
             <br/>
