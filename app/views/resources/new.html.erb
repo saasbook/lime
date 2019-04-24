@@ -1,3 +1,5 @@
+<div id="new">
+
 <div id="suggest_top">
     <h1>Suggest a Resource for our Database </h1>
 </div>
@@ -13,7 +15,7 @@
     <div class="form_step" id="contact_info">
         <h2>Contact info for person maintaining resource (not public facing)</h2>
         <div class="contact_row">
-            <div class="input_field">
+            <div class="input_field col">
                 <%= label_tag(:contact_email, "Contact Email *") %>
                 
                 <% if flash[:notice] %>
@@ -23,7 +25,7 @@
 
                 <% end %>
             </div>
-            <div class="input_field">
+            <div class="input_field col">
                 <%= label_tag(:contact_name, "Contact name") %>
                 <% if flash[:notice] %>
                     <%= text_field_tag(:contact_name, @session[:contact_name]) %>
@@ -31,7 +33,7 @@
                     <%= text_field_tag(:contact_name) %>
                 <% end %>
             </div>
-            <div class="input_field">
+            <div class="input_field col">
                 <%= label_tag(:contact_phone, "Contact Phone") %>
                 <%= text_field_tag(:contact_phone) %>
             </div>
@@ -77,40 +79,51 @@
             <% end %>
         </div>
     </div>
-    
 
-    <div class="input_field">
-        <%= label_tag(:resource_email, "Email for the resource") %>
-        <%= text_field_tag(:resource_email) %>
-    </div>
-
-    <div class="input_field">
-        <%= label_tag(:resource_address, "Physical Address of resource") %>
-        <%= text_field_tag(:resource_address) %>
-    </div>
-
-    
-
-    
-    has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
-    <% @has_many_hash.each do |association, values| %>
-        <div>
-          <%= association.capitalize %>
+    <div class="form_step" id="resource_info">
+        <h2>Other information about the resource</h2>
+        <div class="input_field">
+            <%= label_tag(:resource_email, "Email for the resource") %>
+            <%= text_field_tag(:resource_email) %>
         </div>
-        <div class="content filters">
-          <% values.each do |val| %>
-            <%= val %>
-            <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                <%= check_box_tag association+'[]', val, true %>
-            <% else %>
-                <%= check_box_tag association+'[]', val %>
-            <% end %>
-            
+
+        <div class="input_field">
+            <%= label_tag(:resource_address, "Physical Address of resource") %>
+            <%= text_field_tag(:resource_address) %>
+        </div>
+
+        
+        <% @has_many_hash.each do |association, values| %>
+            <div class="association">
+                <%= association.capitalize %>
+            </div>
+            <div class="other_checkboxes resource_row" id="association_row">
+                <% values.each do |val| %>
+                    <div class="single_checkbox">
+                        <%= val %>
+                        <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
+                            <%= check_box_tag association+'[]', val, true %>
+                        <% else %>
+                            <%= check_box_tag association+'[]', val %>
+                        <% end %>
+                        <br/>
+                    </div>
+                <% end %>
+            </div>
             <br/>
-          <% end %>
-        </div>
-        <br/>
-    <% end %>
+        <% end %>
+    </div>
+</div>
+    
+
+    
+
+    # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
+
+    
+
+    
+    
 
     
 
@@ -124,4 +137,5 @@
     
 
 <% end %>
+</div>
 </div>
