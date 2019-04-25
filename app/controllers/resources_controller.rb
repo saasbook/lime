@@ -8,7 +8,7 @@ class ResourcesController < ApplicationController
                   :address, :deadline, :notes, :funding_amount, :approved_by, :order_by,
 
                   types: [], colleges: [], audiences: [], campuses: [], client_tags: [], innovation_stages: [],
-                  population_focuses: [], availabilities: [], topics: [], technologies: [], location: []
+                  population_focuses: [], availabilities: [], topics: [], technologies: []
                  )
   end
 

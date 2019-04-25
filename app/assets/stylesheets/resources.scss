@@ -63,8 +63,7 @@ body {
 
 // new.html styles
 #new {
-  background: rgb(253,181,21);
-  background: radial-gradient(circle, rgba(253,181,21,1) 0%, rgba(255,255,255,1) 100%);
+  background: rgb(250, 250, 250);
   width: 100%;
 }
 
@@ -168,20 +167,30 @@ select {
   margin-bottom: 24px;
 }
 
-.submit {
-  color: white;
-  background-color: #198BCC;
-  border: none;
-  width: 256px;
-  height: 64px;
-  font-size: 32px;
-  border-radius: 100px;
-  transition: 500ms;
-}
-
 // #contact_info {
   
 // }
+
+#new label {
+  font-size: 24px;
+}
+
+#new input {
+  margin: 0px;
+}
+
+#new input[type=checkbox] {
+  margin: 8px 0px 24px 0px;
+}
+
+.form p {
+  color: gray;
+}
+
+.required:after { 
+  content:" *";
+  color: red;
+ }
 
 .contact_row {
   display: flex;
@@ -200,6 +209,7 @@ select {
 .resource_row #title {
   font-size: 16px;
   text-align: left;
+  font-family: "Poppins", "Arial"
 }
 
 .contact_row .input_field {
@@ -212,21 +222,33 @@ select {
 
 
 
-#location_row {
-  flex-direction: column;
+.resource_row {
+  flex-direction: row;
+  justify-content: center;;
+  align-items: center;
 }
 
-#location {
-  margin: 24px 0px;
+.checkbox {
+  margin: 4px 0px 16px 0px;
+  padding: 0;
+  width: 20px;
 }
 
 .association {
   margin: 24px 0px;
 }
 
-.resource_checkboxes {
-  width:50%;
+.association_row {
   display: flex;
+  flex-direction: column;
+  justify-content: center;;
+  align-items: center;
+}
+
+.resource_checkboxes {
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -243,18 +265,15 @@ select {
   padding: 0;
 }
 
-.other_checkboxes {
-  width:1%;
+#other_location {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.other_checkboxes input[type=checkbox] {
-  margin: 0;
-  padding: 0;
-  width: 50px;
+#other_location p {
+  margin: 0px 16px;
 }
 
 .single_checkbox {
@@ -264,7 +283,26 @@ select {
   align-items: center;
 }
 
-.submit:hover {
+#new #form_submit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#new #submit {
+  color: white;
+  background-color: #198BCC;
+  border: none;
+  width: 256px;
+  height: 64px;
+  font-size: 32px;
+  border-radius: 100px;
+  transition: 500ms;
+  margin: 0px 0px 96px 0px;
+}
+
+#new #submit:hover {
   background-color: #006D9D;
   transition: 500ms;
 }

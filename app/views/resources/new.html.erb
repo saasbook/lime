@@ -6,7 +6,7 @@
 
 <div id="instructions">
     <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable. If you are an Admin, the resource will automatically be approved.<p>
-    <p>Required fields are marked with an *<p>
+    <p class="required">Required fields are marked with an <p>
 </div>
 
 <div class="form" id="suggest_form">
@@ -16,7 +16,8 @@
         <h2>Contact info for person maintaining resource (not public facing)</h2>
         <div class="contact_row">
             <div class="input_field col">
-                <%= label_tag(:contact_email, "Contact Email *") %>
+                <%= label_tag(:contact_email, "Contact Email", class: "required") %>
+                <p> How to contact for more information </p>
                 
                 <% if flash[:notice] %>
                     <%= text_field_tag(:contact_email, @session[:contact_email]) %>
@@ -46,93 +47,103 @@
         <h2>Basic information about the resource</h2>
         <div class="resource_row">
             <div class="input_field">
-                <%= label_tag(:title, "Resource name *") %>
+                <%= label_tag(:title, "Resource name", class: "required") %>
+                <p> Title of the resource </p>
                 <%= text_field_tag(:title) %>
             </div>
             <div class="input_field">
-                <%= label_tag(:url, "Resource URL * ") %>
+                <%= label_tag(:url, "Resource URL", class: "required") %>
+                <p> Webpage for resource </p>
                 <%= text_field_tag(:url) %>
             </div>
         </div>
 
         <div class="resource_row">
             <div class="input_field">
-                <%= label_tag(:desc, "Resource Description *") %>
+                <%= label_tag(:desc, "Resource Description", class: "required") %>
                 <%= text_area_tag(:desc) %>
             </div>
         </div>
 
-        <div class="resource_row" id="location_row">
+        <div class="resource_row association_row">
             <% @locations.each do |association, values| %>
                 <div id="location">
-                    <%= association.capitalize + "*" %>
+                    <%= label_tag(:location, association.capitalize, class: "required")%>
                 </div>
                 <div class="resource_checkboxes">
                     <% values.each do |val| %>
                         <div class="single_checkbox">
                             <p><%= val %></p>
-                            <%= check_box_tag association+'[]', val %>
+                            <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
                         </div>
                     <% end %>
                 </div>
-                <br/>
             <% end %>
+            <div id="other_location">
+                <p>Other </p>
+                <%= text_field_tag(:other) %>
+            </div>
         </div>
+
+        <% @has_many_hash.each do |association, values| %>
+            <% if (association ==  "types" || association == "audiences")%>
+                <div class="association_row">
+                    <div class="association">
+                        <%= label_tag(:association, association.capitalize, class: "required") %>
+                    </div>
+                    <div class="resource_checkboxes">
+                        <% values.each do |val| %>
+                            <div class="single_checkbox">
+                                <p><%= val %></p>
+                                <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
+                                    <%= check_box_tag association+'[]', val, true, class: "checkbox" %>
+                                <% else %>
+                                    <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
     </div>
 
     <div class="form_step" id="resource_info">
         <h2>Other information about the resource</h2>
-        <div class="input_field">
-            <%= label_tag(:resource_email, "Email for the resource") %>
-            <%= text_field_tag(:resource_email) %>
-        </div>
-
-        <div class="input_field">
-            <%= label_tag(:resource_address, "Physical Address of resource") %>
-            <%= text_field_tag(:resource_address) %>
-        </div>
-
-        
-        <% @has_many_hash.each do |association, values| %>
-            <div class="association">
-                <%= association.capitalize %>
-            </div>
-            <div class="other_checkboxes resource_row" id="association_row">
-                <% values.each do |val| %>
-                    <div class="single_checkbox">
-                        <%= val %>
-                        <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                            <%= check_box_tag association+'[]', val, true %>
-                        <% else %>
-                            <%= check_box_tag association+'[]', val %>
+        <div class="association_row">
+            <% @has_many_hash.each do |association, values| %>
+                <% if (association !=  "types" && association != "audiences")%>
+                    <div class="association">
+                        <%= label_tag(:association, association.capitalize) %>
+                    </div>
+                    <div class="resource_checkboxes">
+                        <% values.each do |val| %>
+                            <div class="single_checkbox">
+                                <p><%= val %></p>
+                                <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
+                                    <%= check_box_tag association+'[]', val, true, class: "checkbox" %>
+                                <% else %>
+                                    <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
+                                <% end %>
+                            </div>
                         <% end %>
-                        <br/>
                     </div>
                 <% end %>
-            </div>
-            <br/>
-        <% end %>
+            <% end %>
+        </div>
     </div>
-</div>
     
 
+    <!-- # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]} -->
+
+
+    <div id="form_submit">
+        <% if flash[:notice] %>
+            <div class="notice"><%= flash[:notice] %></div>
+        <% end %>
+        <%= submit_tag("Submit", :id => "submit") %>
+    </div>
     
-
-    # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
-
-    
-
-    
-    
-
-    
-
-
-    <% if flash[:notice] %>
-        <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
-
-    <%= submit_tag("Submit", :class => "submit") %>
 
     
 
