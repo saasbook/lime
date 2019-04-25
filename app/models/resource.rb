@@ -102,8 +102,6 @@ class Resource < ActiveRecord::Base
 
   def self.create_resource(params)
     params, resource_hash = Resource.separate_params(params)
-    puts "create"
-    puts params
     resource = Resource.create!(resource_hash)
     Resource.create_associations(resource, params)
     return resource
