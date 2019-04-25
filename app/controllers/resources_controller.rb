@@ -84,12 +84,9 @@ class ResourcesController < ApplicationController
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database
+    reset_session
     @desc_too_long = false
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
-    if params[:desc] != nil and params[:desc].length > 500
-      @desc_too_long = true
-    end
-    
     if @missing
       flash[:notice] = "Please fill in the required fields."
       params.each do |key, val|
@@ -98,12 +95,20 @@ class ResourcesController < ApplicationController
       redirect_to :controller => 'resources', :action => 'new'
       return
     end
+    if params[:desc] != nil and params[:desc].length > 500
+      @desc_too_long = true
+    end
     if @desc_too_long
       flash[:notice] = "Description was too long."
+      params.each do |key, val|
+        session[key] = params[key]
+      end
+      redirect_to :controller => 'resources', :action => 'new'
       return
     end
 
     flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
+
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
     rp[:approval_status] = @user == nil ? 0 : 1

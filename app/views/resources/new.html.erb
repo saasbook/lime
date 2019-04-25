@@ -36,7 +36,11 @@
             </div>
             <div class="input_field col">
                 <%= label_tag(:contact_phone, "Contact Phone") %>
-                <%= text_field_tag(:contact_phone) %>
+                <% if flash[:notice] %>
+                    <%= text_field_tag(:contact_phone, @session[:contact_phone]) %>
+                <% else %>
+                    <%= text_field_tag(:contact_phone) %>
+                <% end %>
             </div>
         </div>
 
@@ -49,19 +53,31 @@
             <div class="input_field">
                 <%= label_tag(:title, "Resource name", class: "required") %>
                 <p> Title of the resource </p>
-                <%= text_field_tag(:title) %>
+                <% if flash[:notice] %>
+                    <%= text_field_tag(:title, @session[:title]) %>
+                <% else %>
+                    <%= text_field_tag(:title) %>
+                <% end %>
             </div>
             <div class="input_field">
                 <%= label_tag(:url, "Resource URL", class: "required") %>
                 <p> Webpage for resource </p>
-                <%= text_field_tag(:url) %>
+                <% if flash[:notice] %>
+                    <%= text_field_tag(:url, @session[:url]) %>
+                <% else %>
+                    <%= text_field_tag(:url) %>
+                <% end %>
             </div>
         </div>
 
         <div class="resource_row">
             <div class="input_field">
                 <%= label_tag(:desc, "Resource Description", class: "required") %>
-                <%= text_area_tag(:desc) %>
+                <% if flash[:notice] %>
+                    <%= text_field_tag(:desc, @session[:desc]) %>
+                <% else %>
+                    <%= text_field_tag(:desc) %>
+                <% end %>
             </div>
         </div>
 
@@ -134,7 +150,7 @@
     </div>
     
 
-    <!-- # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]} -->
+   
 
 
     <div id="form_submit">
