@@ -95,6 +95,7 @@ class ResourcesController < ApplicationController
     rp = resource_params
     rp[:approval_status] = @user == nil ? 0 : 1
     @resource = Resource.create_resource(rp)
+    Location.nest_location("University of Oregon")
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
@@ -155,6 +156,23 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
+      format.html
+    end
+  end
+
+  def show_locs
+
+    @resources = Locations.all
+
+
+    if @resources != nil
+      @resources = @resources.order(sort_by)
+    end
+
+    @has_many_hash = self.has_many_value_hash
+
+    respond_to do |format|
+      format.json {render :json => @resources.to_json()}
       format.html
     end
   end
