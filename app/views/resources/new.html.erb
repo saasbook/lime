@@ -74,7 +74,7 @@
                     <% values.each do |val| %>
                         <div class="single_checkbox">
                             <p><%= val %></p>
-                            <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
+                            <%= check_box_tag association, val, false, class: "checkbox", id: val %>
                         </div>
                     <% end %>
                 </div>
@@ -96,9 +96,9 @@
                             <div class="single_checkbox">
                                 <p><%= val %></p>
                                 <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                                    <%= check_box_tag association+'[]', val, true, class: "checkbox" %>
+                                    <%= check_box_tag association+'[]', val, true, class: "checkbox", id: val %>
                                 <% else %>
-                                    <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
+                                    <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
                                 <% end %>
                             </div>
                         <% end %>

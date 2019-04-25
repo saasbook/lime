@@ -143,7 +143,7 @@ When /I fill in "(.*)" with "(.*)"/ do |field, value|
 end
 
 When /I select "(.*)" for "(.*)"/ do |value, field|
-  select(value, :from => field)
+  check(:id => value);
 end
 
 When /I press "(.*)"/ do |button|

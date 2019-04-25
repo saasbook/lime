@@ -75,7 +75,6 @@ class ResourcesController < ApplicationController
 
   def new
     @has_many_hash = self.has_many_value_hash
-    puts @has_many_hash
     @locations = self.get_locations
     @session = session
     render template: "resources/new.html.erb"
@@ -92,7 +91,6 @@ class ResourcesController < ApplicationController
     end
     
     if @missing
-     
       flash[:notice] = "Please fill in the required fields."
       params.each do |key, val|
         session[key] = params[key]
