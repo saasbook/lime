@@ -111,7 +111,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html
+      format.html {redirect_to :controller => 'resources', :action => 'new'}
     end
 
   end

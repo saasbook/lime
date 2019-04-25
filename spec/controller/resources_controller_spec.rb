@@ -9,7 +9,8 @@ RSpec.describe ResourcesController, :type => :controller do
       get :show, params: {format: :json, id: 1}
       expect(response.status).to eq 200
       post :create, params: {format: :html}
-      expect(response.status). to eq 204
+      # expect(response.status). to eq 204
+      expect(response.status). to eq 302
     end
   end
 
