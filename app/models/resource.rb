@@ -167,6 +167,7 @@ class Resource < ActiveRecord::Base
       return []
     end
     parent = Location.find_by_val(location).parent
+
     return [location] + self.ancestor_locations(parent&.val)
   end
 

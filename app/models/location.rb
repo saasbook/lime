@@ -19,6 +19,19 @@ class Location < ActiveRecord::Base
     end
   end
 
+  def self.child_locations(location)
+    if location == nil or !Location.exists?(:val => location)
+      return []
+    end
+    location = Location.where(:val => location).first
+    children = Location.where(:parent_id => location.__id__)
+    child_list = []
+    children.each do |child|
+      child_list += [child.val]
+    end
+    return child_list
+  end
+
   def parent_presence
     (not parent.blank?) or (val == "Global" and Location.where(:val => "Global").empty?)
   end
