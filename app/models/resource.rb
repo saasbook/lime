@@ -161,16 +161,6 @@ class Resource < ActiveRecord::Base
     return resources
   end
 
-  # returns list of locations that match given location, including the location and all of its ancestors
-  def self.ancestor_locations(location)
-    if location == nil or !Location.exists?(:val => location)
-      return []
-    end
-    parent = Location.find_by_val(location).parent
-
-    return [location] + self.ancestor_locations(parent&.val)
-  end
-
   def self.get_required_resources
     return ["title", "url", "contact_email", "location", "types", "audiences", "desc"]
   end
