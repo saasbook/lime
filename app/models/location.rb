@@ -20,16 +20,25 @@ class Location < ActiveRecord::Base
   end
 
   def self.child_locations(location)
+
     if location == nil or !Location.exists?(:val => location)
+      # location does not exist
       return []
     end
-    location = Location.where(:val => location).first
-    children = Location.where(:parent_id => location.id)
-    child_list = []
-    children.each do |child|
-      child_list += [child.val]
+
+    loc = Location.where(:val => location).first
+    # just extract the names so we can do a normal loop
+    children = Location.where(:parent_id => loc.id).map {|location| location.val}.flatten
+
+    all_descendents = []
+    i = 0
+    while i < children.count do
+      child = children[i]
+      all_descendents.concat(self.child_locations(child))
+      i += 1
     end
-    return child_list + [location]
+
+    return all_descendents.push(location)
   end
 
   def parent_presence

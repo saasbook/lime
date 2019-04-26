@@ -18,10 +18,12 @@ Feature: display list of resources filtered by any combination of available tags
       | location    | parent    |
       | USA         | Global    |
       | California  | USA       |
-      | Berkeley    | California|
+      | Alameda     | California|
+      | Berkeley    | Alameda   |
       | Davis       | California|
       | Stanfurd    | California|
       | Siberia     | Global    |
+
 
 
   Scenario: search for all resources within California
@@ -29,10 +31,10 @@ Feature: display list of resources filtered by any combination of available tags
       |  location  |
       | California |
     Then I should receive a JSON object
-#    And the JSON should contain "Girls in Engineering of California"
-#    And the JSON should contain "Girls in Engineering"
-#    And the JSON should contain "Society of Women Engineers"
-#    And the JSON should not contain "UC Davis Feminist Research Institute"
+    And the JSON should contain "Girls in Engineering of California"
+    And the JSON should contain "Girls in Engineering"
+    And the JSON should contain "Society of Women Engineers"
+    And the JSON should not contain "UC Davis Feminist Research Institute"
 
   Scenario: search for all resources within California and Berkeley
     When I make a GET request to "/resources" with parameters:
@@ -40,45 +42,42 @@ Feature: display list of resources filtered by any combination of available tags
       | California |
       |  Berkeley  |
     Then I should receive a JSON object
-#    And the JSON should contain "Girls in Engineering of California"
-#    And the JSON should contain "Girls in Engineering"
-#    And the JSON should contain "Society of Women Engineers"
-#    And the JSON should not contain "UC Davis Feminist Research Institute"
+    And the JSON should contain "Girls in Engineering of California"
+    And the JSON should contain "Girls in Engineering"
+    And the JSON should contain "Society of Women Engineers"
+    And the JSON should not contain "UC Davis Feminist Research Institute"
 
-  Scenario: if no resources available, return parent locations resources
+  Scenario: if no resources available, return child locations resources
     When I make a GET request to "/resources" with parameters:
       | location |
-      | Stanfurd |
+      | Alameda  |
     Then I should receive a JSON object
-#    And the JSON should contain "Girls in Engineering of California"
-#    And the JSON should not contain resources other than "Girls of Engineering of California"
+    And the JSON should contain "Girls in Engineering"
+    And the JSON should contain "Society of Women Engineers"
 
   Scenario: search for resources in a location with no children
     When I make a GET request to "/resources" with parameters:
       | location |
       | Berkeley |
     Then I should receive a JSON object
-#    And the JSON should contain "Girls in Engineering of California"
-#    And the JSON should contain "Girls in Engineering"
-#    And the JSON should contain "Society of Women Engineers"
-#    And the JSON should not contain "UC Davis Feminist Research Institute"
+    And the JSON should contain "Girls in Engineering"
+    And the JSON should contain "Society of Women Engineers"
 
-  Scenario: search for resources at a location with no resources or parent
+  Scenario: search for resources at a location with no resources or children
     When I make a GET request to "/resources" with parameters:
       |  location |
       | Roseville |
     Then I should receive a JSON object
-#    And the JSON should be empty
+    And the JSON should be empty
 
   Scenario: search for resources at only one location
     When I make a GET request to "/resources" with parameters:
       | location | exclusive |
       |   Davis  |   true    |
     Then I should receive a JSON object
-    And the JSON should be empty
-  #  And the JSON should contain "UC Davis Feminist Research Institute"
-#    And the JSON should not contain resources other than "UC Davis Feminist Research Institute"
-    
+    And the JSON should contain "UC Davis Feminist Research Institute"
+    And the JSON should not contain resources other than "UC Davis Feminist Research Institute"
+
   Scenario: search for a resource with no resources exclusively
     When I make a GET request to "/resources" with parameters:
       |  location |
