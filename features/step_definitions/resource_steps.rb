@@ -167,6 +167,7 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
+  
   if page.respond_to? :should
     page.should have_content(text)
   else
@@ -175,6 +176,7 @@ Then /I should see the message "(.*)"/ do |text|
 end
 
 Then /I should not see the message "(.*)"/ do |text|
+  
   if page.respond_to? :should
     page.should_not have_content(text)
   else
