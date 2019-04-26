@@ -74,9 +74,9 @@
             <div class="input_field">
                 <%= label_tag(:desc, "Resource Description", class: "required") %>
                 <% if flash[:notice] %>
-                    <%= text_field_tag(:desc, @session[:desc]) %>
+                    <%= text_area_tag(:desc, @session[:desc]) %>
                 <% else %>
-                    <%= text_field_tag(:desc) %>
+                    <%= text_area_tag(:desc) %>
                 <% end %>
             </div>
         </div>
@@ -126,6 +126,7 @@
 
     <div class="form_step" id="resource_info">
         <h2>Other information about the resource</h2>
+
         <div class="association_row">
             <% @has_many_hash.each do |association, values| %>
                 <% if (association !=  "types" && association != "audiences")%>
@@ -146,6 +147,36 @@
                     </div>
                 <% end %>
             <% end %>
+        </div>
+
+        <div class="resource_row">
+            <div class="input_field" id="deadline_input">
+                <%= label_tag(:deadline, "Deadline") %>
+                <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
+                <% if flash[:notice] %>
+                    <%= text_field_tag(:deadline, @session[:deadline]) %>
+                <% else %>
+                    <%= text_field_tag(:deadline, nil) %>
+                <% end %>
+                <script> $('#deadline').datepicker({
+                        orientation: 'left left',
+                        todayBtn: true,
+                        todayHighlight: true
+                    });
+                </script>
+            </div>
+        </div>
+
+        <div class="resource_row">
+            <div class="input_field">
+                <%= label_tag(:notes, "Notes") %>
+                <p> Note any other details on eligibility, deadlines, and process. </p>
+                <% if flash[:notice] %>
+                    <%= text_area_tag(:notes, @session[:notes]) %>
+                <% else %>
+                    <%= text_area_tag(:notes) %>
+                <% end %>
+            </div>
         </div>
     </div>
     

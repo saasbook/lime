@@ -86,6 +86,10 @@ class ResourcesController < ApplicationController
     #otherwise add a new object to the database
     reset_session
     @desc_too_long = false
+    puts "create"
+    puts Resource.get_required_resources
+    puts "params"
+    puts params
     @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if @missing
       flash[:notice] = "Please fill in the required fields."
@@ -250,4 +254,6 @@ class ResourcesController < ApplicationController
       format.json { render status: code, json: {}.to_json }
     end
   end
+
+  
 end

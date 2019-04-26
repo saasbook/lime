@@ -220,8 +220,6 @@ select {
   margin: 24px;
 }
 
-
-
 .resource_row {
   flex-direction: row;
   justify-content: center;;
@@ -281,6 +279,10 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#deadline_input {
+  width: 500px;
 }
 
 #new #form_submit {

@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'rspec'
 
 gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
