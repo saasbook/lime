@@ -151,7 +151,7 @@ class Resource < ActiveRecord::Base
       return self.filter(params)
     end
 
-    locations = Resource.ancestor_locations(location)
+    locations = Location.child_locations(location)
     resources = Resource.none
 
     locations.each do |location|
@@ -159,15 +159,6 @@ class Resource < ActiveRecord::Base
       resources = resources.or(self.filter(params))
     end
     return resources
-  end
-
-  # returns list of locations that match given location, including the location and all of its ancestors
-  def self.ancestor_locations(location)
-    if location == nil or !Location.exists?(:val => location)
-      return []
-    end
-    parent = Location.find_by_val(location).parent
-    return [location] + self.ancestor_locations(parent&.val)
   end
 
   def self.get_required_resources

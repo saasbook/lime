@@ -96,15 +96,13 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     end
 
 
-    it 'gets parent locations' do
+    it 'gets child locations' do
       # puts Resource.all.pretty_print_inspect
       # puts Location.all.pretty_print_inspect
       result = Resource.location_helper({:location => "California"})
 
-      expect(result.count).to eq 3
-      expect(result.where(title: "thing1")).to exist
-      expect(result.where(title: "thing2")).not_to exist
-      expect(result.where(title: "thing3")).to exist
+      expect(result.count).to eq 2
+      expect(result.where(title: "thing2")).to exist
       expect(result.where(title: "thing4")).to exist
     end
 
@@ -113,10 +111,19 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       expect(result.count).to eq 0
     end
 
+    it 'does not null pointer given location with no children' do
+      result = Resource.location_helper({:location => "Berkeley"})
+      expect(result.count).to eq 1
+      expect(result.where(title: "thing2")).to exist
+    end
+
     it 'does not null pointer given global' do
       result = Resource.location_helper({:location => "Global"})
-      expect(result.count).to eq 1
+      expect(result.count).to eq 4
       expect(result.where(title: "thing1")).to exist
+      expect(result.where(title: "thing2")).to exist
+      expect(result.where(title: "thing3")).to exist
+      expect(result.where(title: "thing4")).to exist
     end
   end
 end

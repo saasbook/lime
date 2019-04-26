@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/andrewlaw/cs169/proj/lime/spec/application_spec.rb": [
+      "/Users/elizabeth/cs169/lime/spec/application_spec.rb": [
         1,
         1,
         1,
@@ -10,7 +10,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/rails_helper.rb": [
+      "/Users/elizabeth/cs169/lime/spec/rails_helper.rb": [
         null,
         1,
         1,
@@ -82,7 +82,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/support/factory_girl.rb": [
+      "/Users/elizabeth/cs169/lime/spec/support/factory_girl.rb": [
         1,
         null,
         1,
@@ -98,13 +98,13 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/environment.rb": [
+      "/Users/elizabeth/cs169/lime/config/environment.rb": [
         null,
         1,
         null,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/application.rb": [
+      "/Users/elizabeth/cs169/lime/config/application.rb": [
         1,
         null,
         1,
@@ -139,13 +139,13 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/boot.rb": [
+      "/Users/elizabeth/cs169/lime/config/boot.rb": [
         1,
         null,
         1,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/environments/test.rb": [
+      "/Users/elizabeth/cs169/lime/config/environments/test.rb": [
         1,
         null,
         null,
@@ -193,7 +193,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/application_controller_renderer.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/application_controller_renderer.rb": [
         null,
         null,
         null,
@@ -203,7 +203,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/assets.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -219,7 +219,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/backtrace_silencers.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -228,7 +228,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/content_security_policy.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/content_security_policy.rb": [
         null,
         null,
         null,
@@ -255,14 +255,14 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/cookies_serializer.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/cookies_serializer.rb": [
         null,
         null,
         null,
         null,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/devise.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/devise.rb": [
         null,
         null,
         null,
@@ -563,13 +563,13 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/filter_parameter_logging.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/inflections.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -593,13 +593,13 @@
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/mime_types.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/mime_types.rb": [
         null,
         null,
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/initializers/wrap_parameters.rb": [
+      "/Users/elizabeth/cs169/lime/config/initializers/wrap_parameters.rb": [
         null,
         null,
         null,
@@ -615,7 +615,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/config/routes.rb": [
+      "/Users/elizabeth/cs169/lime/config/routes.rb": [
         1,
         1,
         1,
@@ -626,7 +626,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/user.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/user.rb": [
         1,
         null,
         null,
@@ -634,26 +634,26 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/application_record.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/helpers/application_helper.rb": [
+      "/Users/elizabeth/cs169/lime/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/helpers/welcome_helper.rb": [
+      "/Users/elizabeth/cs169/lime/app/helpers/welcome_helper.rb": [
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/controllers/application_controller.rb": [
+      "/Users/elizabeth/cs169/lime/app/controllers/application_controller.rb": [
         1,
         null,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/controller/resources_controller_spec.rb": [
+      "/Users/elizabeth/cs169/lime/spec/controller/resources_controller_spec.rb": [
         1,
         1,
         null,
@@ -821,7 +821,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/controllers/resources_controller.rb": [
+      "/Users/elizabeth/cs169/lime/app/controllers/resources_controller.rb": [
         1,
         1,
         31,
@@ -1058,7 +1058,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/model/resource_spec.rb": [
+      "/Users/elizabeth/cs169/lime/spec/model/resource_spec.rb": [
         1,
         1,
         null,
@@ -1136,34 +1136,32 @@
         null,
         1,
         1,
-        3,
-        3,
+        4,
+        4,
         null,
         null,
-        3,
+        4,
         null,
         null,
-        3,
+        4,
         null,
         null,
-        3,
+        4,
         null,
         null,
-        3,
-        3,
+        4,
+        4,
         null,
-        3,
-        3,
+        4,
+        4,
         null,
-        null,
-        null,
-        1,
         null,
         null,
         1,
         null,
+        null,
         1,
-        1,
+        null,
         1,
         1,
         1,
@@ -1174,6 +1172,15 @@
         1,
         null,
         null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
         1,
         1,
         1,
@@ -1182,7 +1189,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/spec/requests/resource_management_spec.rb": [
+      "/Users/elizabeth/cs169/lime/spec/requests/resource_management_spec.rb": [
         1,
         1,
         null,
@@ -1359,7 +1366,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/resource.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/resource.rb": [
         1,
         1,
         1,
@@ -1403,11 +1410,11 @@
         null,
         null,
         1,
-        5742,
+        6171,
         null,
         null,
         1,
-        72,
+        76,
         null,
         null,
         null,
@@ -1416,13 +1423,13 @@
         null,
         null,
         1,
-        20,
-        10,
+        36,
+        18,
         null,
         null,
-        10,
-        10,
-        10,
+        18,
+        18,
+        18,
         null,
         1,
         3,
@@ -1434,10 +1441,10 @@
         null,
         null,
         null,
-        10,
+        18,
         null,
-        10,
-        9,
+        18,
+        17,
         null,
         1,
         1,
@@ -1463,10 +1470,10 @@
         null,
         null,
         1,
-        64,
-        64,
-        64,
-        64,
+        68,
+        68,
+        68,
+        68,
         null,
         null,
         1,
@@ -1477,58 +1484,49 @@
         null,
         null,
         1,
-        579,
-        68,
-        68,
-        511,
-        131,
+        614,
+        72,
+        72,
+        542,
+        139,
         null,
-        380,
-        null,
-        null,
-        68,
+        403,
         null,
         null,
-        1,
-        68,
-        68,
-        680,
-        680,
-        131,
-        348,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+        72,
         null,
         null,
         1,
-        6,
-        6,
+        72,
+        72,
+        720,
+        720,
+        139,
+        369,
         null,
-        6,
-        6,
-        3,
         null,
         null,
-        3,
-        3,
         null,
-        3,
-        4,
-        4,
         null,
-        3,
         null,
         null,
         null,
         1,
         7,
+        7,
+        null,
+        7,
+        7,
         3,
         null,
+        null,
         4,
+        4,
+        null,
+        4,
+        12,
+        12,
+        null,
         4,
         null,
         null,
@@ -1540,7 +1538,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/type.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/type.rb": [
         1,
         1,
         null,
@@ -1553,7 +1551,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/audience.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/audience.rb": [
         1,
         1,
         null,
@@ -1567,7 +1565,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/campus.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/campus.rb": [
         1,
         1,
         null,
@@ -1576,7 +1574,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/client_tag.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/client_tag.rb": [
         1,
         1,
         null,
@@ -1585,7 +1583,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/innovation_stage.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/innovation_stage.rb": [
         1,
         1,
         null,
@@ -1594,39 +1592,7 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/population_focus.rb": [
-        1,
-        1,
-        null,
-        1,
-        3,
-        null,
-        null,
-        null
-      ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/availability.rb": [
-        1,
-        1,
-        null,
-        1,
-        3,
-        null,
-        null
-      ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/topic.rb": [
-        1,
-        1,
-        null,
-        1,
-        3,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/technology.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/population_focus.rb": [
         1,
         1,
         null,
@@ -1636,43 +1602,104 @@
         null,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/college.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/availability.rb": [
+        1,
+        1,
+        null,
+        1,
+        3,
+        null,
+        null
+      ],
+      "/Users/elizabeth/cs169/lime/app/models/topic.rb": [
+        1,
+        1,
+        null,
+        1,
+        3,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/elizabeth/cs169/lime/app/models/technology.rb": [
+        1,
+        1,
+        null,
+        1,
+        3,
+        null,
+        null,
+        null
+      ],
+      "/Users/elizabeth/cs169/lime/app/models/college.rb": [
         1,
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/edit.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/edit.rb": [
         1,
         null
       ],
-      "/Users/andrewlaw/cs169/proj/lime/app/models/location.rb": [
+      "/Users/elizabeth/cs169/lime/app/models/location.rb": [
         1,
         1,
         1,
         1,
         null,
         1,
-        3,
+        4,
         null,
         null,
         null,
         null,
         null,
         null,
-        3,
-        3,
-        3,
-        18,
-        18,
+        4,
+        4,
+        4,
+        24,
+        24,
+        null,
         null,
         null,
         null,
         1,
+        13,
+        1,
+        null,
+        null,
+        12,
         21,
+        12,
+        12,
+        12,
+        9,
+        9,
+        9,
+        null,
+        null,
+        12,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        1,
+        28,
         null,
         null
       ]
     },
-    "timestamp": 1555688400
+    "timestamp": 1556245284
   }
 }
