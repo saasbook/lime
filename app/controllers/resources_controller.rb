@@ -86,8 +86,14 @@ class ResourcesController < ApplicationController
     #otherwise add a new object to the database
     reset_session
     @desc_too_long = false
-    @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
-    if @missing
+    @missing = []
+    Resource.get_required_resources.each do |r|
+      if !params.include?(r) or params[r] == ""
+        @missing.append r
+      end
+    end
+    #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
+    if @missing.length > 0
       flash[:notice] = "Please fill in the required fields."
       params.each do |key, val|
         session[key] = params[key]
