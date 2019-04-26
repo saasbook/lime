@@ -24,12 +24,12 @@ class Location < ActiveRecord::Base
       return []
     end
     location = Location.where(:val => location).first
-    children = Location.where(:parent_id => location.__id__)
+    children = Location.where(:parent_id => location.id)
     child_list = []
     children.each do |child|
       child_list += [child.val]
     end
-    return child_list
+    return child_list + [location]
   end
 
   def parent_presence

@@ -151,7 +151,7 @@ class Resource < ActiveRecord::Base
       return self.filter(params)
     end
 
-    locations = Resource.ancestor_locations(location)
+    locations = Location.child_locations(location)
     resources = Resource.none
 
     locations.each do |location|
