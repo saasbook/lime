@@ -140,6 +140,27 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       expect(result.count).to eq 1
       expect(result.where(title: "thing5")).to exist
     end
-    
+
+    it 'allows for the adding of new locations' do
+      Location.nest_location("Hawaii")
+      result = Resource.location_helper({:location => "Global"})
+      expect(result.count).to eq 5
+      expect(result.where(title: "thing1")).to exist
+      expect(result.where(title: "thing2")).to exist
+      expect(result.where(title: "thing3")).to exist
+      expect(result.where(title: "thing4")).to exist
+      expect(result.where(title: "thing5")).to exist
+    end
+
+    it 'finds all of the child locations' do
+      result = Location.child_locations("California")
+      expect(result.count).to eq 4
+    end
+
+    it 'successfully manually adds a single location' do
+      Location.add_location("foo", "Global")
+      result = Location.child_locations("foo")
+      expect(result.count).to eq 1
+    end
   end
 end
