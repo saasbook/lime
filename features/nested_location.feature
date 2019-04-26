@@ -25,7 +25,6 @@ Feature: display list of resources filtered by any combination of available tags
       | Siberia     | Global    |
 
 
-
   Scenario: search for all resources within California
     When I make a GET request to "/resources" with parameters:
       |  location  |
@@ -84,3 +83,6 @@ Feature: display list of resources filtered by any combination of available tags
       | Roseville |
     Then I should receive a JSON object
     And the JSON should be empty
+
+
+    
