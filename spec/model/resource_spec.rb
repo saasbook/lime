@@ -88,23 +88,29 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       @resource4 = Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "California",
                                             "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
 
+      @resource5 = Resource.create_resource "title" => "thing5", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Seattle",
+                                            "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+
       User.delete_all
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
 
       Location.delete_all
       Location.seed
+      Location.nest_location("Global")
+      Location.nest_location("Berkeley")
+      Location.nest_location("USA")
+      Location.nest_location("California")
+      Location.nest_location("Seattle")
     end
 
 
-    it 'gets parent locations' do
+    it 'gets child locations' do
       # puts Resource.all.pretty_print_inspect
       # puts Location.all.pretty_print_inspect
       result = Resource.location_helper({:location => "California"})
 
-      expect(result.count).to eq 3
-      expect(result.where(title: "thing1")).to exist
-      expect(result.where(title: "thing2")).not_to exist
-      expect(result.where(title: "thing3")).to exist
+      expect(result.count).to eq 2
+      expect(result.where(title: "thing2")).to exist
       expect(result.where(title: "thing4")).to exist
     end
 
@@ -113,10 +119,27 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       expect(result.count).to eq 0
     end
 
+    it 'does not null pointer given location with no children' do
+      result = Resource.location_helper({:location => "Berkeley"})
+      expect(result.count).to eq 1
+      expect(result.where(title: "thing2")).to exist
+    end
+
     it 'does not null pointer given global' do
       result = Resource.location_helper({:location => "Global"})
-      expect(result.count).to eq 1
+      expect(result.count).to eq 5
       expect(result.where(title: "thing1")).to exist
+      expect(result.where(title: "thing2")).to exist
+      expect(result.where(title: "thing3")).to exist
+      expect(result.where(title: "thing4")).to exist
+      expect(result.where(title: "thing5")).to exist
     end
+
+    it 'finds children for a location not explicitly added to the database' do
+      result = Resource.location_helper({:location => "Washington"})
+      expect(result.count).to eq 1
+      expect(result.where(title: "thing5")).to exist
+    end
+    
   end
 end

@@ -89,15 +89,6 @@ class Location < ActiveRecord::Base
     return all_descendents.push(location)
   end
 
-  # returns list of locations that match given location, including the location and all of its ancestors
-  def self.ancestor_locations(location)
-    if location == nil or !Location.exists?(:val => location)
-      return []
-    end
-    parent = Location.find_by_val(location).parent
-    return [location] + self.ancestor_locations(parent&.val)
-  end
-
   def parent_presence
     (not parent.blank?) or (val == "Global" and Location.where(:val => "Global").empty?)
   end
