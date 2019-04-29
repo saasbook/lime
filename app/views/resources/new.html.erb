@@ -9,38 +9,25 @@
     <p class="required">Required fields are marked with an <p>
 </div>
 
-<div class="form" id="suggest_form">
+<div id="suggest_form">
 
-<%= form_tag("/resources.html", method: "post") do %>
+<%= form_tag("/resources.html", method: "post", id: "form_section", remote: true) do %>
     <div class="form_step" id="contact_info">
         <h2>Contact info for person maintaining resource (not public facing)</h2>
         <div class="contact_row">
             <div class="input_field col">
                 <%= label_tag(:contact_email, "Contact Email", class: "required") %>
                 <p> How to contact for more information </p>
-                
-                <% if flash[:notice] %>
-                    <%= text_field_tag(:contact_email, @session[:contact_email]) %>
-                <% else %>
-                    <%= text_field_tag(:contact_email) %>
-
-                <% end %>
+                <%= text_field_tag(:contact_email) %>
             </div>
             <div class="input_field col">
                 <%= label_tag(:contact_name, "Contact name") %>
-                <% if flash[:notice] %>
-                    <%= text_field_tag(:contact_name, @session[:contact_name]) %>
-                <% else %>
-                    <%= text_field_tag(:contact_name) %>
-                <% end %>
+                <%= text_field_tag(:contact_name) %>
             </div>
             <div class="input_field col">
                 <%= label_tag(:contact_phone, "Contact Phone") %>
-                <% if flash[:notice] %>
-                    <%= text_field_tag(:contact_phone, @session[:contact_phone]) %>
-                <% else %>
-                    <%= text_field_tag(:contact_phone) %>
-                <% end %>
+                <%= text_field_tag(:contact_phone) %>
+
             </div>
         </div>
 
@@ -53,31 +40,19 @@
             <div class="input_field">
                 <%= label_tag(:title, "Resource name", class: "required") %>
                 <p> Title of the resource </p>
-                <% if flash[:notice] %>
-                    <%= text_field_tag(:title, @session[:title]) %>
-                <% else %>
-                    <%= text_field_tag(:title) %>
-                <% end %>
+                <%= text_field_tag(:title) %>
             </div>
             <div class="input_field">
                 <%= label_tag(:url, "Resource URL", class: "required") %>
                 <p> Webpage for resource </p>
-                <% if flash[:notice] %>
-                    <%= text_field_tag(:url, @session[:url]) %>
-                <% else %>
-                    <%= text_field_tag(:url) %>
-                <% end %>
+                <%= text_field_tag(:url) %>
             </div>
         </div>
 
         <div class="resource_row">
             <div class="input_field">
                 <%= label_tag(:desc, "Resource Description", class: "required") %>
-                <% if flash[:notice] %>
-                    <%= text_area_tag(:desc, @session[:desc]) %>
-                <% else %>
-                    <%= text_area_tag(:desc) %>
-                <% end %>
+                <%= text_area_tag(:desc) %>
             </div>
         </div>
 
@@ -90,11 +65,7 @@
                     <% values.each do |val| %>
                         <div class="single_checkbox">
                             <p><%= val %></p>
-                            <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                                <%= check_box_tag association, val, true, class: "checkbox", id: val %>
-                            <% else %>
-                                <%= check_box_tag association, val, false, class: "checkbox", id: val %>
-                            <% end %>
+                            <%= check_box_tag association, val, false, class: "checkbox", id: val %>
                         </div>
                     <% end %>
                 </div>
@@ -115,11 +86,8 @@
                         <% values.each do |val| %>
                             <div class="single_checkbox">
                                 <p><%= val %></p>
-                                <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                                    <%= check_box_tag association+'[]', val, true, class: "checkbox", id: val %>
-                                <% else %>
-                                    <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
-                                <% end %>
+                                <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
+
                             </div>
                         <% end %>
                     </div>
@@ -157,11 +125,7 @@
             <div class="input_field" id="deadline_input">
                 <%= label_tag(:deadline, "Deadline") %>
                 <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
-                <% if flash[:notice] %>
-                    <%= text_field_tag(:deadline, @session[:deadline]) %>
-                <% else %>
-                    <%= text_field_tag(:deadline, nil) %>
-                <% end %>
+                <%= text_field_tag(:deadline, nil) %>
 
             </div>
         </div>
@@ -170,11 +134,8 @@
             <div class="input_field">
                 <%= label_tag(:notes, "Notes") %>
                 <p> Note any other details on eligibility, deadlines, and process. </p>
-                <% if flash[:notice] %>
-                    <%= text_area_tag(:notes, @session[:notes]) %>
-                <% else %>
-                    <%= text_area_tag(:notes) %>
-                <% end %>
+                <%= text_area_tag(:notes) %>
+
             </div>
         </div>
     </div>
@@ -184,11 +145,11 @@
 
 
     <div id="form_submit">
-        <% if flash[:notice] %>
-            <div class="notice"><%= flash[:notice] %></div>
-        <% end %>
-        <%= submit_tag("Submit", :id => "submit") %>
+        <%= button_tag("Submit", :id => "submit_button") %>
+        <p id="message"> Please fill in the required fields. <p>
     </div>
+
+    
     
 
     

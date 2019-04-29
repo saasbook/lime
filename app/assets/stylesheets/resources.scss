@@ -183,7 +183,7 @@ select {
   margin: 8px 0px 24px 0px;
 }
 
-.form p {
+#suggest_form p {
   color: gray;
 }
 
@@ -290,9 +290,10 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 96px;
 }
 
-#new #submit {
+#new #submit_button {
   color: white;
   background-color: #198BCC;
   border: none;
@@ -301,12 +302,17 @@ select {
   font-size: 32px;
   border-radius: 100px;
   transition: 500ms;
-  margin: 0px 0px 96px 0px;
+  margin-bottom: 12px;
 }
 
-#new #submit:hover {
+#new #submit_button:hover {
   background-color: #006D9D;
   transition: 500ms;
 }
+
+#message {
+  display: none;
+}
+
 
 

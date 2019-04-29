@@ -94,26 +94,26 @@ class ResourcesController < ApplicationController
     end
     #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if @missing.length > 0
-      flash[:notice] = "Please fill in the required fields."
+      # flash[:notice] = "Please fill in the required fields."
       params.each do |key, val|
         session[key] = params[key]
       end
-      redirect_to :controller => 'resources', :action => 'new'
+      # redirect_to :controller => 'resources', :action => 'new'
       return
     end
     if params[:desc] != nil and params[:desc].length > 500
       @desc_too_long = true
     end
     if @desc_too_long
-      flash[:notice] = "Description was too long."
+      # flash[:notice] = "Description was too long."
       params.each do |key, val|
         session[key] = params[key]
       end
-      redirect_to :controller => 'resources', :action => 'new'
+      # redirect_to :controller => 'resources', :action => 'new'
       return
     end
 
-    flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
+    # flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
 
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
@@ -125,7 +125,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html {redirect_to :controller => 'resources', :action => 'new'}
+      # format.html {redirect_to :controller => 'resources', :action => 'new'}
     end
 
   end
