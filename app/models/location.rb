@@ -43,7 +43,7 @@ class Location < ActiveRecord::Base
         add_location(name, "Global")
       elsif name == result.state
         add_location(name, result.country)
-      if name == result.county
+      elsif name == result.county
         add_location(name, result.state)
       end
     elsif type == "city" || type == "village" || type == "town"
