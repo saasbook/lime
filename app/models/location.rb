@@ -39,12 +39,12 @@ class Location < ActiveRecord::Base
     # check in top - down manner, country to curr type
     if type == "administrative"
       # separate counties, states, and countries
-      if name == result.county
-        add_location(name, result.state)
+      if name == result.country
+        add_location(name, "Global")
       elsif name == result.state
         add_location(name, result.country)
-      elsif name == result.country
-        add_location(name, "Global")
+      if name == result.county
+        add_location(name, result.state)
       end
     elsif type == "city" || type == "village" || type == "town"
       add_location(name, result.state)
