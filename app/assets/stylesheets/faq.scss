@@ -1,0 +1,36 @@
+// Place all the styles related to the FAQ controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.section-title{
+  text-align: center;
+  padding-top: .8em;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: .8em;
+  margin-bottom: 1em;
+}
+
+.faq-list {
+  overflow: hidden;
+  width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-item-name {
+  float: left;
+  margin-right: 5%;
+  width: 30%;
+  color: blue;
+}
+
+.faq-item-text {
+  float: left;
+  width: 55%;
+  margin-bottom: 2em;
+
+  p {
+    margin: 0;
+  }
+}

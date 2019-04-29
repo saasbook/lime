@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'faq/index'
   get 'welcome/index'
   resources :resources, :defaults => {:format => 'json'}
   match 'resources/approve/many' => 'resources#approve_many', via: [:put, :patch, :post], :defaults => {:format => 'json'}
