@@ -101,49 +101,25 @@ class Resource < ActiveRecord::Base
   end
 
   def self.cast_param_vals(params)
+    params.values_at(
+        :flagged_comment,:title,:url,:contact_email,:location)
+        .compact.each { |field| params[field] = params[field].to_s }
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
     end
-    if params[:flagged_comment]
-      params[:flagged_comment] = params[:flagged_comment].to_s
-    end
+
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
     end
-    if params[:title]
-      params[:title] = params[:title].to_s
-    end
-    if params[:url]
-      params[:url] = params[:url].to_s
-    end
-    if params[:contact_email]
-      params[:contact_email] = params[:contact_email].to_s
-    end
-    if params[:location]
-      params[:location] = params[:location].to_s
-    end
+
     return params
   end
 
   def self.log_edits(params)
-    if params[:flagged]
-      self.edit_helper(params[:id], params[:flagged])
-    end
-    if params[:approval_status]
-      self.edit_helper(params[:id], params[:approval_status])
-    end
-    if params[:title]
-      self.edit_helper(params[:id], params[:title])
-    end
-    if params[:url]
-      self.edit_helper(params[:id], params[:url])
-    end
-    if params[:contact_email]
-      self.edit_helper(params[:id], params[:contact_email])
-    end
-    if params[:location]
-      self.edit_helper(params[:id], params[:location])
-    end
+    # if the field exists, then create and Edit
+    params.values_at(
+        :flagged,:approval_status,:title,:url,:contact_email,:location)
+        .compact.each { |field| self.edit_helper(params[:id], field) }
   end
 
   def self.edit_helper(id, param)
