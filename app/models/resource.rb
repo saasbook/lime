@@ -111,7 +111,7 @@ class Resource < ActiveRecord::Base
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
     end
-  
+
     return params
   end
 
