@@ -143,42 +143,11 @@ class ResourcesController < ApplicationController
       return
     end
 
-    if params[:flagged]
-      params[:flagged] = params[:flagged].to_i
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:flagged])
-      @edit.save!
-    end
-    if params[:flagged_comment]
-      params[:flagged_comment] = params[:flagged_comment].to_s
-    end
-    if params[:approval_status]
-      params[:approval_status] = params[:approval_status].to_i
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:approval_status])
-      @edit.save!
-    end
-    if params[:title]
-      params[:title] = params[:title].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:title])
-      @edit.save!
-    end
-    if params[:url]
-      params[:url] = params[:url].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:url])
-      @edit.save!
-    end
-    if params[:contact_email]
-      params[:contact_email] = params[:contact_email].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:contact_email])
-      @edit.save!
-    end
-    if params[:location]
-      params[:location] = params[:location].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
-      @edit.save!
-    end
+    new_params = Resource.cast_param_vals(params)
+    Resource.log_edits(new_params)
 
-    Resource.update_resource(params[:id], resource_params)
-    @resource = Resource.find(params[:id])
+    Resource.update_resource(new_params[:id], resource_params)
+    @resource = Resource.find(new_params[:id])
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
@@ -187,42 +156,28 @@ class ResourcesController < ApplicationController
   end
 
   def approve_many
+    status = approve_many_status
+
     if @user.nil?
       approve_many_sad_path("This action is unauthorized.", 401)
       return
-    end
-
-    lst = params[:approve_list]
-    status = params[:approval_status]
-    if not status.nil?
-      status = status.to_i
-    else
-      status = 1
-    end
-    if not [0, 1].include? status
+    elsif not [0, 1].include? status
       approve_many_sad_path("Approval status must be either 0 or 1.", 403)
       return
-    end
-
-    if lst == 'all'
+    elsif params[:approve_list] == 'all'
       Resource.where(:approval_status => 0).each do |resource|
         Resource.update(resource.id, :approval_status => status)
       end
       @resources = Resource.all
     else
-      lst = lst.split(',')
+      lst = params[:approve_list].split(',')
       if (lst.length <= 1 or lst.any? {|id| not id.scan(/\D/).empty?})
         approve_many_sad_path("Approval list not formatted correctly.", 400)
         return
-      else
-        @resources = []
-        lst.each do |id|
-          if Resource.exists? :id => id
-            @resources << Resource.update(id, :approval_status => status)
-          end
-        end
       end
+      @resources = update_approvals_in_list(lst)
     end
+
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
       format.html {redirect_to "/resources"}
@@ -260,5 +215,23 @@ class ResourcesController < ApplicationController
     end
   end
 
-  
+  def approve_many_status
+    status = params[:approval_status]
+    if not status.nil?
+      status = status.to_i
+    else
+      status = 1
+    end
+    return status
+  end
+
+  def update_approvals_in_list(lst)
+    @resources = []
+    lst.each do |id|
+      if Resource.exists? :id => id
+        @resources << Resource.update(id, :approval_status => status)
+      end
+    end
+    return @resources
+  end
 end
