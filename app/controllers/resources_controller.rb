@@ -119,48 +119,18 @@ class ResourcesController < ApplicationController
       return
     end
 
-    if params[:flagged]
-      params[:flagged] = params[:flagged].to_i
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:flagged])
-      @edit.save!
-    end
-    if params[:flagged_comment]
-      params[:flagged_comment] = params[:flagged_comment].to_s
-    end
-    if params[:approval_status]
-      params[:approval_status] = params[:approval_status].to_i
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:approval_status])
-      @edit.save!
-    end
-    if params[:title]
-      params[:title] = params[:title].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:title])
-      @edit.save!
-    end
-    if params[:url]
-      params[:url] = params[:url].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:url])
-      @edit.save!
-    end
-    if params[:contact_email]
-      params[:contact_email] = params[:contact_email].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:contact_email])
-      @edit.save!
-    end
-    if params[:location]
-      params[:location] = params[:location].to_s
-      @edit = Edit.new(:resource_id => params[:id], :user => @user, :parameter => params[:location])
-      @edit.save!
-    end
+    new_params = Resource.cast_param_vals(params)
+    Resource.log_edits(new_params)
 
-    Resource.update_resource(params[:id], resource_params)
-    @resource = Resource.find(params[:id])
+    Resource.update_resource(new_params[:id], resource_params)
+    @resource = Resource.find(new_params[:id])
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html
     end
   end
+
 
   def approve_many
     if @user.nil?

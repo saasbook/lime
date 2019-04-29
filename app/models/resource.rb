@@ -100,6 +100,57 @@ class Resource < ActiveRecord::Base
     return Resource.where(id: filtered.map(&:id))
   end
 
+  def self.cast_param_vals(params)
+    if params[:flagged]
+      params[:flagged] = params[:flagged].to_i
+    end
+    if params[:flagged_comment]
+      params[:flagged_comment] = params[:flagged_comment].to_s
+    end
+    if params[:approval_status]
+      params[:approval_status] = params[:approval_status].to_i
+    end
+    if params[:title]
+      params[:title] = params[:title].to_s
+    end
+    if params[:url]
+      params[:url] = params[:url].to_s
+    end
+    if params[:contact_email]
+      params[:contact_email] = params[:contact_email].to_s
+    end
+    if params[:location]
+      params[:location] = params[:location].to_s
+    end
+    return params
+  end
+
+  def self.log_edits(params)
+    if params[:flagged]
+      self.edit_helper(params[:id], params[:flagged])
+    end
+    if params[:approval_status]
+      self.edit_helper(params[:id], params[:approval_status])
+    end
+    if params[:title]
+      self.edit_helper(params[:id], params[:title])
+    end
+    if params[:url]
+      self.edit_helper(params[:id], params[:url])
+    end
+    if params[:contact_email]
+      self.edit_helper(params[:id], params[:contact_email])
+    end
+    if params[:location]
+      self.edit_helper(params[:id], params[:location])
+    end
+  end
+
+  def self.edit_helper(id, param)
+    @edit = Edit.new(:resource_id => id, :user => @user, :parameter => param)
+    @edit.save!
+  end
+
   def self.create_resource(params)
     params, resource_hash = Resource.separate_params(params)
     resource = Resource.create!(resource_hash)
