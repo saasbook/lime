@@ -143,7 +143,7 @@ When /I fill in "(.*)" with "(.*)"/ do |field, value|
 end
 
 When /I select "(.*)" for "(.*)"/ do |value, field|
-  check(:id => value);
+  check(:id => value)
 end
 
 When /I press "(.*)"/ do |button|
@@ -167,21 +167,11 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
-  
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
+  page.should have_content(text)
 end
 
 Then /I should not see the message "(.*)"/ do |text|
-  
-  if page.respond_to? :should
-    page.should_not have_content(text)
-  else
-    assert !page.has_content?(text)
-  end
+  page.should_not have_content(text)
 end
 
 Then /the "(.*)" resource should be unapproved/ do |resource|

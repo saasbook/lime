@@ -111,6 +111,7 @@ body {
   border-radius: 0px 50px 0px 0px;
   margin-bottom: 48px;
   box-shadow: 0 8px 6px -6px gray;
+  width: 1000px;
 }
 
 .input_field {
@@ -312,6 +313,28 @@ select {
 
 #message {
   display: none;
+}
+
+.invalid-text {
+  display:none;
+}
+
+#new .contact_row #email-valid, #new .contact_row #phone-valid {
+  color: red;
+}
+
+
+.required_field {
+  border: 1px solid red;
+  background-color: rgb(252, 189, 189);
+}
+
+#new .required_field:hover {
+  background-color: rgb(250, 159, 159);
+}
+
+#new .required_field:focus {
+  background-color: rgb(250, 159, 159);
 }
 
 
