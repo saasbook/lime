@@ -35,17 +35,16 @@ class Location < ActiveRecord::Base
     nesting_helper(result, result.type, name)
   end
 
-
   def self.nesting_helper(result, type, name)
     # check in top - down manner, country to curr type
     if type == "administrative"
       # separate counties, states, and countries
-      if name == result.country
-        add_location(name, "Global")
+      if name == result.county
+        add_location(name, result.state)
       elsif name == result.state
         add_location(name, result.country)
       elsif name == result.country
-        add_location(name, result.state)
+        add_location(name, "Global")
       end
     elsif type == "city" || type == "village" || type == "town"
       add_location(name, result.state)
