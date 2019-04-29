@@ -119,6 +119,9 @@ class ResourcesController < ApplicationController
     rp = resource_params
     rp[:approval_status] = @user == nil ? 0 : 1
     @resource = Resource.create_resource(rp)
+    if params[:location] != nil
+      Location.nest_location(params[:location])
+    end
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
