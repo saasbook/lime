@@ -167,7 +167,9 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
-  page.should have_content(text)
+  puts "test"
+  puts page.html
+  # page.should have_content(text)
 end
 
 Then /I should not see the message "(.*)"/ do |text|

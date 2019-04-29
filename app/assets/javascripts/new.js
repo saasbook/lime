@@ -25,12 +25,12 @@ $(document).ready(function() {
             $("#message").css("color", "red");
         } else {
             $("#form_section").submit();
-            $("#message").show();
-            $("#message").text("Your resource has been successfully submitted and will be reviewed!");
-            $("#message").css("color", "green");
-            $("#submit_button").attr("disabled", true);
-            $("#submit_button").text("Submitted!");
-            $("#submit_button").css("background-color", "green");
+            // $("#message").show();
+            // $("#message").text("Your resource has been successfully submitted and will be reviewed!");
+            // $("#message").css("color", "green");
+            // $("#submit_button").attr("disabled", true);
+            // $("#submit_button").text("Submitted!");
+            // $("#submit_button").css("background-color", "green");
         }
     }
 

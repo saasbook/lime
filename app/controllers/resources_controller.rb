@@ -113,7 +113,7 @@ class ResourcesController < ApplicationController
       return
     end
 
-    # flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
+    flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
 
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
@@ -125,7 +125,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      # format.html {redirect_to :controller => 'resources', :action => 'new'}
+      format.html {redirect_to :controller => 'resources', :action => 'new'}
     end
 
   end
