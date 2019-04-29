@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'digest'
+require 'securerandom'
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
@@ -14,8 +15,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     @user = current_user
-    @user.api_token = Digest::SHA256.hexdigest @user.email + @user.created_at.to_s  
-    @user.save!
+    if not @user.nil?
+      temp = Digest::SHA256.hexdigest @user.email + SecureRandom.hex
+      @user.api_token = temp[0, temp.size / 2]
+      @user.save!
+    end
   end
 
   # GET /resource/edit

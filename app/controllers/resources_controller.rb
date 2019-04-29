@@ -101,7 +101,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html
+      format.html {redirect_to "/resources.html"}
     end
 
   end
@@ -186,8 +186,7 @@ class ResourcesController < ApplicationController
       end
       @resources = Resource.all
     else
-      lst = lst.split(',')
-      if (lst.length <= 1 or lst.any? {|id| not id.scan(/\D/).empty?})
+      if (lst.blank? or lst.any? {|id| not id.scan(/\D/).empty?})
         approve_many_sad_path("Approval list not formatted correctly.", 400)
         return
       else
@@ -201,7 +200,10 @@ class ResourcesController < ApplicationController
     end
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
-      format.html {redirect_to "/resources"}
+      format.html do
+        flash[:notice] = (@resources.size > 1 ? "Resources have" : "Resource has") + " been successfully approved."
+        redirect_to "/resources.html"
+      end
     end
   end
 
@@ -214,6 +216,23 @@ class ResourcesController < ApplicationController
 
   def destroy
 
+  end
+
+  def unapproved
+    if @user.nil?
+      if request.format.json?
+        render status: 400, json: {}.to_json
+      else
+        redirect_to "/resources.html"
+      end
+    else
+      @resources = Resource.where(:approval_status => 0)
+      @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
+      respond_to do |format|
+        format.json {@resource.to_json(:include => Resource.include_has_many_params)}
+        format.html
+      end
+    end
   end
   
   private
@@ -230,7 +249,7 @@ class ResourcesController < ApplicationController
     respond_to do |format|
       format.html {
         flash[:notice] = notice
-        redirect_to "/resources/approve/many.html"
+        redirect_to "/resources/unapproved.html"
       }
       format.json { render status: code, json: {}.to_json }
     end

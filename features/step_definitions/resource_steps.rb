@@ -198,10 +198,10 @@ Then /all the resources should be approved/ do
 end
 
 When /I approve the following resources with api key "(.*)":/ do |api_key, params|
-  resources = params.hashes.map {|r| Resource.where(:title => r["title"]).first.id}
+  resources = params.hashes.map {|r| Resource.where(:title => r["title"]).first.id.to_s}
   if resources.length > 1
-    ids = resources * ","
-    @response = page.driver.put('/resources/approve/many', {:approve_list => ids, :api_key => api_key, :approval_status => 1})
+    # ids = resources * ","
+    @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key, :approval_status => 1})
   else
     @response = page.driver.put("/resources/approve/#{resources[0]}", {:api_key => api_key, :approval_status => 1})
   end
@@ -212,5 +212,6 @@ Then /the response status should be "(.*)"/ do |code|
 end
 
 When /I approve resources "(.*)" with api key "(.*)"/ do |ids, api_key|
-  @response = page.driver.put('/resources/approve/many', {:approve_list => ids, :api_key => api_key})
+  resources = ids.split(',')
+  @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key})
 end
