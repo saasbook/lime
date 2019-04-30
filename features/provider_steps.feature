@@ -48,8 +48,10 @@ Scenario: adding a resource called "Women Techmakers" with all its fields but de
     And I select "Networks" for "Resource Type"
     And I select "Undergraduate Student" for "Audience"
     And I select "Global" for "Location"
+    
     When I press "submit_button"
-    Then I should see the message "Description was too long." 
+    Then I should see the message "Description was too long."
+     
 
 
 

@@ -18,17 +18,16 @@ $(document).ready(function() {
             $("#message").show();
             $("#message").text("Description was too long.");
             $("#message").css("color", "red");
-        } else if($("#contact_email").val() === "" || $("#title").val().length === "" || $("#url").val().length === "" || $("#desc").val() === ""){
+        } else if($("#contact_email").val() === "" || $("#title").val() === "" || $("#url").val() === "" || $("#desc").val() === ""){
             findRequiredFields();
             $("#message").show();
             $("#message").text("Please fill in the required fields.");
             $("#message").css("color", "red");
         } else {
-            $("#form_section").submit();
+            // $("#form_section").submit();
             // $("#message").show();
             // $("#message").text("Your resource has been successfully submitted and will be reviewed!");
             // $("#message").css("color", "green");
-            // $("#submit_button").attr("disabled", true);
             // $("#submit_button").text("Submitted!");
             // $("#submit_button").css("background-color", "green");
         }

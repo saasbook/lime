@@ -11,7 +11,7 @@
 
 <div id="suggest_form">
 
-<%= form_tag("/resources.html", method: "post", id: "form_section") do %>
+<%= form_tag("/resources.html", method: "post", id: "form_section", remote: true) do %>
     <div class="form_step" id="contact_info">
         <h2>Contact info for person maintaining resource (not public facing)</h2>
         <div class="contact_row">
@@ -146,7 +146,7 @@
 
     <div id="form_submit">
         <%= submit_tag("Submit", :id => "submit_button") %>
-        <p id="message"> Please fill in the required fields. <p>
+        <p id="message"> Description was too long. <p>
     </div>
 
 <% end %>

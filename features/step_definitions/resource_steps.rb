@@ -147,6 +147,7 @@ When /I select "(.*)" for "(.*)"/ do |value, field|
 end
 
 When /I press "(.*)"/ do |button|
+  puts page.html
   click_button(button)
 end
 
@@ -167,9 +168,9 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
-  puts "test"
-  puts page.html
-  # page.should have_content(text)
+  # puts page.html
+  # puts "see message"
+  page.should have_content(text)
 end
 
 Then /I should not see the message "(.*)"/ do |text|

@@ -98,7 +98,7 @@ class ResourcesController < ApplicationController
       params.each do |key, val|
         session[key] = params[key]
       end
-      # redirect_to :controller => 'resources', :action => 'new'
+      redirect_to :controller => 'resources', :action => 'new'
       return
     end
     if params[:desc] != nil and params[:desc].length > 500
