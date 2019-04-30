@@ -143,11 +143,15 @@ When /I fill in "(.*)" with "(.*)"/ do |field, value|
 end
 
 When /I select "(.*)" for "(.*)"/ do |value, field|
-  select(value, :from => field)
+  check(:id => value)
 end
 
 When /I press "(.*)"/ do |button|
   click_button(button)
+end
+
+When /I choose "(.*)" for "(.*)"/ do |value, field|
+  choose(:id => value)
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
