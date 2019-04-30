@@ -139,7 +139,7 @@ RSpec.describe ResourcesController, :type => :controller do
 
     it 'approves multiple resources if provided as a comma separated list' do
       # test approve multiple 
-      response = put :approve_many, params: {:approve_list => "#{@resource1.id},#{@resource2.id}", approval_status: 1, api_key: 'example'}, :format => :json
+      response = put :approve_many, params: {:approve_list => ["#{@resource1.id}","#{@resource2.id}"], approval_status: 1, api_key: 'example'}, :format => :json
       expect(response.status).to eq 200
       expect(Resource.where(:approval_status => 0).length).to eq 1
       expect(Resource.where(:approval_status => 0).first).to eq @resource3
@@ -152,13 +152,13 @@ RSpec.describe ResourcesController, :type => :controller do
 
     it 'does not approve multiple if an incorrectly formatted list is provided' do
      # test approve multiple, bad format
-     response = put :approve_many, params: {:approve_list => "1,2,$,", approval_status: 1, api_key: 'example'}, :format => :json
+     response = put :approve_many, params: {:approve_list => ["1","2","$"], approval_status: 1, api_key: 'example'}, :format => :json
      expect(response.status).to eq 400
     end
 
     it 'does not error out when ids are provided for resources that do not exist' do
      # test approve multiple, ids not found
-     response = put :approve_many, params: {:approve_list => "100,200", approval_status: 1, api_key: 'example'}, :format => :json
+     response = put :approve_many, params: {:approve_list => ["100","200"], approval_status: 1, api_key: 'example'}, :format => :json
      expect(JSON.parse(response.body)).to be_empty
     end
   end

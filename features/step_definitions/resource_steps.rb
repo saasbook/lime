@@ -135,19 +135,23 @@ When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with no parameters$
   end
 end
 
-Given /^(?:|I )am on (.+)$/ do |page_name|
-  visit 'resources/new'
+Given /^(?:|I )am on "(.+)"$/ do |page_name|
+  visit page_name
 end
 When /I fill in "(.*)" with "(.*)"/ do |field, value|
   fill_in(field, :with => value)
 end
 
 When /I select "(.*)" for "(.*)"/ do |value, field|
-  select(value, :from => field)
+  check(:id => value)
 end
 
 When /I press "(.*)"/ do |button|
   click_button(button)
+end
+
+When /I choose "(.*)" for "(.*)"/ do |value, field|
+  choose(:id => value)
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
@@ -167,7 +171,6 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
-  visit "/resources/new"
   if page.respond_to? :should
     page.should have_content(text)
   else
@@ -176,7 +179,6 @@ Then /I should see the message "(.*)"/ do |text|
 end
 
 Then /I should not see the message "(.*)"/ do |text|
-  visit "/resources/new"
   if page.respond_to? :should
     page.should_not have_content(text)
   else
@@ -198,10 +200,10 @@ Then /all the resources should be approved/ do
 end
 
 When /I approve the following resources with api key "(.*)":/ do |api_key, params|
-  resources = params.hashes.map {|r| Resource.where(:title => r["title"]).first.id}
+  resources = params.hashes.map {|r| Resource.where(:title => r["title"]).first.id.to_s}
   if resources.length > 1
-    ids = resources * ","
-    @response = page.driver.put('/resources/approve/many', {:approve_list => ids, :api_key => api_key, :approval_status => 1})
+    # ids = resources * ","
+    @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key, :approval_status => 1})
   else
     @response = page.driver.put("/resources/approve/#{resources[0]}", {:api_key => api_key, :approval_status => 1})
   end
@@ -212,5 +214,25 @@ Then /the response status should be "(.*)"/ do |code|
 end
 
 When /I approve resources "(.*)" with api key "(.*)"/ do |ids, api_key|
-  @response = page.driver.put('/resources/approve/many', {:approve_list => ids, :api_key => api_key})
+  resources = ids.split(',')
+  @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key})
+end
+
+Then /I should not see the "(.*)" button inside the "(.*)" (.*)/ do |button_name, class_name, element|
+  page.first("#{element}.#{class_name}").should_not have_content button_name  
+end
+
+Then /I should be redirected to the page titled "(.*)"/ do |page_title|
+  expect(page.first("div#title").text).to eq page_title
+end
+
+Given /I am logged in with user "(.*)" and password "(.*)"/ do |user, pass|
+  visit "/users/sign_in"
+  fill_in("Email", :with => user)
+  fill_in("Password", :with => pass)
+  click_button("Log in")
+end
+
+Then /I should see all the unapproved resources/ do
+  expect(Resource.where(:approval_status => 0).all? {|r| page.should have_content r.title}).to be true
 end

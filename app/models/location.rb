@@ -91,4 +91,8 @@ class Location < ActiveRecord::Base
   def parent_presence
     (not parent.blank?) or (val == "Global" and Location.where(:val => "Global").empty?)
   end
+
+  def self.get_values 
+    ['Global', 'USA', 'California', 'Berkeley', 'Davis', 'Stanfurd', 'Siberia']
+  end
 end

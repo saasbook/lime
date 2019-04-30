@@ -28,11 +28,16 @@ class ResourcesController < ApplicationController
     }
   end
 
+  def get_locations
+    {
+        'location' => Location.get_values,
+    }
+  end
+
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
-    puts params
     if @user.nil?
       params[:approval_status] = 1 # only admins can view unapproved resources
     end
@@ -57,9 +62,9 @@ class ResourcesController < ApplicationController
     id = params[:id]
     @resource = Resource.find_by_id(id)
     # only admins can see unapproved resources
-    if @user.nil? and @resource&.approval_status == 0
-      @resource = nil
-    end
+    # if @user.nil? and @resource&.approval_status == 0
+    #   @resource = nil
+    # end
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
@@ -69,6 +74,9 @@ class ResourcesController < ApplicationController
 
 
   def new
+    @has_many_hash = self.has_many_value_hash
+    @locations = self.get_locations
+    @session = session
     render template: "resources/new.html.erb"
     # render "resources/new"
   end
@@ -76,21 +84,37 @@ class ResourcesController < ApplicationController
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database
+    reset_session
     @desc_too_long = false
-    @missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
+    @missing = []
+    Resource.get_required_resources.each do |r|
+      if !params.include?(r) or params[r] == ""
+        @missing.append r
+      end
+    end
+    #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
+    if @missing.length > 0
+      # flash[:notice] = "Please fill in the required fields."
+      params.each do |key, val|
+        session[key] = params[key]
+      end
+      # redirect_to :controller => 'resources', :action => 'new'
+      return
+    end
     if params[:desc] != nil and params[:desc].length > 500
       @desc_too_long = true
     end
-
-    if @missing
-      flash[:notice] = "Please fill in the required fields."
-      return
-    elsif @desc_too_long
-      flash[:notice] = "Description was too long."
+    if @desc_too_long
+      # flash[:notice] = "Description was too long."
+      params.each do |key, val|
+        session[key] = params[key]
+      end
+      # redirect_to :controller => 'resources', :action => 'new'
       return
     end
 
     flash[:notice] = "Your resource has been successfully submitted and will be reviewed!"
+
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
     rp[:approval_status] = @user == nil ? 0 : 1
@@ -101,7 +125,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html
+      format.html {redirect_to :controller => 'resources', :action => 'new'}
     end
 
   end
@@ -133,21 +157,20 @@ class ResourcesController < ApplicationController
 
   def approve_many
     status = approve_many_status
-
+    lst = params[:approve_list]
     if @user.nil?
       approve_many_sad_path("This action is unauthorized.", 401)
       return
     elsif not [0, 1].include? status
       approve_many_sad_path("Approval status must be either 0 or 1.", 403)
       return
-    elsif params[:approve_list] == 'all'
+    elsif lst == 'all'
       Resource.where(:approval_status => 0).each do |resource|
         Resource.update(resource.id, :approval_status => status)
       end
       @resources = Resource.all
     else
-      lst = params[:approve_list].split(',')
-      if (lst.length <= 1 or lst.any? {|id| not id.scan(/\D/).empty?})
+      if (lst.blank? or lst.any? {|id| not id.scan(/\D/).empty?})
         approve_many_sad_path("Approval list not formatted correctly.", 400)
         return
       end
@@ -156,7 +179,10 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
-      format.html {redirect_to "/resources"}
+      format.html do
+        flash[:notice] = (@resources.size > 1 ? "Resources have" : "Resource has") + " been successfully approved."
+        redirect_to "/resources.html"
+      end
     end
   end
 
@@ -169,6 +195,23 @@ class ResourcesController < ApplicationController
 
   def destroy
 
+  end
+
+  def unapproved
+    if @user.nil?
+      if request.format.json?
+        render status: 400, json: {}.to_json
+      else
+        redirect_to "/resources.html"
+      end
+    else
+      @resources = Resource.where(:approval_status => 0)
+      @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
+      respond_to do |format|
+        format.json {@resource.to_json(:include => Resource.include_has_many_params)}
+        format.html
+      end
+    end
   end
   
   private
@@ -185,7 +228,7 @@ class ResourcesController < ApplicationController
     respond_to do |format|
       format.html {
         flash[:notice] = notice
-        redirect_to "/resources/approve/many.html"
+        redirect_to "/resources/unapproved.html"
       }
       format.json { render status: code, json: {}.to_json }
     end
