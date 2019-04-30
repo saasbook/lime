@@ -16,7 +16,7 @@ Background: database already has other resources
 
 
 Scenario: adding a resource called "Women Techmakers" with its other fields
-    Given I am on the "new resource page"
+    Given I am on "/resources/new.html"
     When I fill in "Resource name" with "Women Techmakers"
     And I fill in "Resource URL" with "https://www.womentechmakers.com/"
     And I fill in "Email-Contact" with "WTMScholars@google.com"
@@ -30,7 +30,7 @@ Scenario: adding a resource called "Women Techmakers" with its other fields
 
 
 Scenario: adding a resource called "The Coaching Fellowship" with certain fields missing
-    Given I am on the "new resource page"
+    Given I am on "/resources/new.html"
     When I fill in "Resource name" with "The Coaching Fellowship"
     And I select "Networks" for "Resource Type"
     And I select "Undergraduate Students" for "Audience"

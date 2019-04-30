@@ -1,0 +1,51 @@
+<div id="title">
+  Approval Queue
+</div>
+<div class="container"  id="resource-container-wrapper">
+  <div class="row">
+    <div class="col" id="resource-column">
+      <%= form_tag("/resources/approve/many.html", method: :post) do %>
+      <div class="row">
+        <div class="col" id = "result-header">
+          <%= @resource_count %> awaiting approval
+        </div>
+        <%= submit_tag 'Approve', class: 'btn btn-outline-dark approve-button' %>
+      </div>
+      <% @resources.each do |resource| %>
+        <div class="row resource-container">
+          <div class="col">
+            <div class="row">
+              <div class="resource-title">
+                <%= resource.title %>
+              </div>
+              <div class="ml-auto checkboxes">
+                <%= check_box_tag 'approve_list[]', resource.id %>
+              </div> 
+           </div>
+            <div class="resource-url">
+              URL: <a href="<%= resource.url %>"><%= resource.url %></a>
+            </div>
+            <div class="resource-desc">
+              Description: <%= resource.desc %>
+            </div>
+            <div class="resource-location">
+              Location: <%= resource.location %>
+            </div>
+            <div class="resource-email">
+              Contact Email: <%= resource.contact_email %>
+            </div>
+            <div class="resource-types">
+              Types: <%= resource.types.collect(&:val) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+  <form action=<%=resources_approve_many_path %>, method="post">
+    <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
+      Approve All
+    </button>
+  </form>
+</div>

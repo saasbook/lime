@@ -30,8 +30,8 @@ Feature: admin edits list of unapproved resources
 
   Scenario: guest users cannot approve multiple resources
     When I make a PUT request to "/resources/approve/many" with parameters:
-      | approve_list |
-      |     1,2      |
+      | approve_list[] | approve_list[] |
+      |       1        |        2       |
     Then the "Girls in Engineering" resource should be unapproved
     And the "Google Scholars" resource should be unapproved
     And I should receive a JSON object 
