@@ -135,8 +135,8 @@ When /I make a (GET|POST|PATCH|PUT|DELETE) request to "(.*)" with no parameters$
   end
 end
 
-Given /^(?:|I )am on (.+)$/ do |page_name|
-  visit 'resources/new'
+Given /^(?:|I )am on "(.+)"$/ do |page_name|
+  visit page_name
 end
 When /I fill in "(.*)" with "(.*)"/ do |field, value|
   fill_in(field, :with => value)
@@ -214,4 +214,23 @@ end
 When /I approve resources "(.*)" with api key "(.*)"/ do |ids, api_key|
   resources = ids.split(',')
   @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key})
+end
+
+Then /I should not see the "(.*)" button inside the "(.*)" div/ do |button_name, class_name|
+  page.first("nav.navbar").should_not have_content button_name  
+end
+
+Then /I should be redirected to the page titled "(.*)"/ do |page_title|
+  expect(page.first("div#title").text).to eq page_title
+end
+
+Given /I am logged in with user "(.*)" and password "(.*)"/ do |user, pass|
+  visit "/users/sign_in"
+  fill_in("Email", :with => user)
+  fill_in("Password", :with => pass)
+  click_button("Log in")
+end
+
+Then /I should see all the unapproved resources/ do
+  expect(Resource.where(:approval_status => 0).all? {|r| page.should have_content r.title}).to be true
 end

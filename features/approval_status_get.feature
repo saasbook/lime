@@ -43,3 +43,13 @@ Feature: admin gets list of unapproved resources
       | 123456789 |
     Then I should receive a JSON object
     And the JSON should contain all the resources
+
+  Scenario: guest users cannot view unapproved resources (HTML, direct)
+    Given I am on "/resources/unapproved.html"
+    Then I should be redirected to the page titled "Resources"
+    And I should not see the "Approval Queue" button inside the "navbar" div
+
+  Scenario: admin users can view approval queue html page
+    Given I am logged in with user "swe@google.com" and password "password"
+    And I am on "/resources/unapproved.html"
+    Then I should see all the unapproved resources
