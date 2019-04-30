@@ -30,7 +30,7 @@ Scenario: adding a resource called "Women Techmakers" with its other fields
 
 
 Scenario: adding a resource called "The Coaching Fellowship" with certain fields missing
-    Given I am on the "/resources/new.html"
+    Given I am on "/resources/new.html"
     When I fill in "Resource name" with "The Coaching Fellowship"
     And I select "Networks" for "Resource Type"
     And I select "Undergraduate Students" for "Audience"
