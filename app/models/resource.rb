@@ -100,6 +100,33 @@ class Resource < ActiveRecord::Base
     return Resource.where(id: filtered.map(&:id))
   end
 
+  def self.cast_param_vals(params)
+    params.values_at(
+        :flagged_comment,:title,:url,:contact_email,:location)
+        .compact.each { |field| params[field] = params[field].to_s }
+    if params[:flagged]
+      params[:flagged] = params[:flagged].to_i
+    end
+
+    if params[:approval_status]
+      params[:approval_status] = params[:approval_status].to_i
+    end
+
+    return params
+  end
+
+  def self.log_edits(params)
+    # if the field exists, then create and Edit
+    params.values_at(
+        :flagged,:approval_status,:title,:url,:contact_email,:location)
+        .compact.each { |field| self.edit_helper(params[:id], field) }
+  end
+
+  def self.edit_helper(id, param)
+    @edit = Edit.new(:resource_id => id, :user => @user, :parameter => param)
+    @edit.save!
+  end
+
   def self.create_resource(params)
     params, resource_hash = Resource.separate_params(params)
     resource = Resource.create!(resource_hash)
