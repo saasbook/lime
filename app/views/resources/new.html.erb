@@ -11,7 +11,7 @@
 
 <div id="suggest_form">
 
-<%= form_tag("/resources.html", method: "post", id: "form_section", remote: true) do %>
+<%= form_tag("/resources.html", method: "post", id: "form_section") do %>
     <div class="form_step" id="contact_info">
         <h2>Contact info for person maintaining resource (not public facing)</h2>
         <div class="contact_row">
@@ -67,9 +67,9 @@
                 </div>
                 <div class="resource_checkboxes">
                     <% values.each do |val| %>
-                        <div class="single_checkbox">
+                        <div class="single_checkbox location_radio">
                             <p><%= val %></p>
-                            <%= check_box_tag association, val, false, class: "checkbox", id: val %>
+                            <%= radio_button_tag association, val, false, class: "radio", id: val %>
                         </div>
                     <% end %>
                 </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="resource_checkboxes">
                         <% values.each do |val| %>
-                            <div class="single_checkbox">
+                            <div class="single_checkbox type_checkbox">
                                 <p><%= val %></p>
                                 <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
 
@@ -129,7 +129,7 @@
             <div class="input_field" id="deadline_input">
                 <%= label_tag(:deadline, "Deadline") %>
                 <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
-                <%= text_field_tag(:deadline, nil) %>
+                <%= date_field_tag(:deadline, nil) %>
 
             </div>
         </div>

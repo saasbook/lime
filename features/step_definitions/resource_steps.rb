@@ -147,8 +147,11 @@ When /I select "(.*)" for "(.*)"/ do |value, field|
 end
 
 When /I press "(.*)"/ do |button|
-  puts page.html
   click_button(button)
+end
+
+When /I choose "(.*)" for "(.*)"/ do |value, field|
+  choose(:id => value)
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
@@ -168,8 +171,6 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
-  # puts page.html
-  # puts "see message"
   page.should have_content(text)
 end
 

@@ -180,7 +180,7 @@ select {
   margin: 0px;
 }
 
-#new input[type=checkbox] {
+#new input[type=checkbox], #new input[type=radio] {
   margin: 8px 0px 24px 0px;
 }
 
@@ -227,7 +227,7 @@ select {
   align-items: center;
 }
 
-.checkbox {
+.checkbox, .radio {
   margin: 4px 0px 16px 0px;
   padding: 0;
   width: 20px;
@@ -312,7 +312,7 @@ select {
 }
 
 #message {
-  // display: none;
+  display: none;
 }
 
 .invalid-text {
@@ -335,6 +335,10 @@ select {
 
 #new .required_field:focus {
   background-color: rgb(250, 159, 159);
+}
+
+.checkbox_missing {
+  background-color: rgb(252, 189, 189);
 }
 
 

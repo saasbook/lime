@@ -1,37 +1,35 @@
 $(document).ready(function() {
 
-    $( function() {
-        $( "#deadline" ).datepicker({
+    // $( function() {
+    //     $( "#deadline" ).datepicker({
 
-        });
-    } );
+    //     });
+    // } );
 
-    let form_button = document.getElementById("submit_button");
-    if (form_button.addEventListener){
-        form_button.addEventListener("click", validate, false);  //Modern browsers
-    }else if(form_button.attachEvent){
-        form_sbutton.attachEvent('onsubmit', validate);            //Old IE
-    }
-
-    function validate(e) {
+    function validate() {
         if ($("#desc").val() != "" && $("#desc").val().match(/(\w+)/g).length > 500) {
             $("#message").show();
             $("#message").text("Description was too long.");
             $("#message").css("color", "red");
+            return false;
         } else if($("#contact_email").val() === "" || $("#title").val() === "" || $("#url").val() === "" || $("#desc").val() === ""){
             findRequiredFields();
             $("#message").show();
             $("#message").text("Please fill in the required fields.");
             $("#message").css("color", "red");
+            return false;
         } else {
-            // $("#form_section").submit();
-            // $("#message").show();
-            // $("#message").text("Your resource has been successfully submitted and will be reviewed!");
-            // $("#message").css("color", "green");
-            // $("#submit_button").text("Submitted!");
-            // $("#submit_button").css("background-color", "green");
+            return true;
         }
     }
+
+    $("#form_section").submit(function () {
+        if (validate()) {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     function findRequiredFields() {
         if($("#contact_email").val() === "") {
@@ -53,6 +51,42 @@ $(document).ready(function() {
             $("#desc").addClass("required_field");
         } else {
             $("#desc").removeClass("required_field");
+        }
+
+        let no_location = true;
+        $("input[type='radio'][name='location']").each(function() {
+            if (this.checked) {
+                no_location = false;
+            }
+        });
+        if($("#other").val() != "") {
+            no_location = false;
+        }
+        if (no_location) {
+            $("#other_location").addClass("checkbox_missing");
+            $(".location_radio").each(function () {
+                $(this).addClass("checkbox_missing");
+            });
+        } else {
+            $(".location_radio").each(function () {
+                $(this).removeClass("checkbox_missing");
+            });
+        }
+
+        let no_type = true;
+        $("input[type='checkbox'][name='types[]']").each(function() {
+            if (this.checked) {
+                no_type = false;
+            }
+        });
+        if (no_type) {
+            $(".type_checkbox").each(function () {
+                $(this).addClass("checkbox_missing");
+            });
+        } else {
+            $(".type_checkbox").each(function () {
+                $(this).removeClass("checkbox_missing");
+            });
         }
     }
 
