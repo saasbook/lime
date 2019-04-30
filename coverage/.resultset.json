@@ -1,16 +1,36 @@
 {
   "RSpec": {
     "coverage": {
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/spec/application_spec.rb": [
         1,
         1,
         1,
         1,
+=======
+      "/home/nick/Desktop/cs169/lime/spec/controller/users/registrations_controller_spec.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+>>>>>>> origin
         null,
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/spec/rails_helper.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/spec/rails_helper.rb": [
+>>>>>>> origin
         null,
         1,
         1,
@@ -82,7 +102,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/spec/support/factory_girl.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/spec/support/factory_girl.rb": [
+>>>>>>> origin
         1,
         null,
         1,
@@ -98,13 +122,21 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/environment.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/environment.rb": [
+>>>>>>> origin
         null,
         1,
         null,
         1
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/application.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/application.rb": [
+>>>>>>> origin
         1,
         null,
         1,
@@ -136,17 +168,28 @@
         null,
         null,
         1,
+<<<<<<< HEAD
         1,
         null,
         null
       ],
       "/Users/antonio/Documents/2019/lime/config/boot.rb": [
+=======
+        null,
+        null
+      ],
+      "/home/nick/Desktop/cs169/lime/config/boot.rb": [
+>>>>>>> origin
         1,
         null,
         1,
         1
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/environments/test.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/environments/test.rb": [
+>>>>>>> origin
         1,
         null,
         null,
@@ -194,7 +237,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/application_controller_renderer.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/application_controller_renderer.rb": [
+>>>>>>> origin
         null,
         null,
         null,
@@ -204,7 +251,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/assets.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/assets.rb": [
+>>>>>>> origin
         null,
         null,
         null,
@@ -220,7 +271,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/backtrace_silencers.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/backtrace_silencers.rb": [
+>>>>>>> origin
         null,
         null,
         null,
@@ -229,7 +284,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/content_security_policy.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/content_security_policy.rb": [
+>>>>>>> origin
         null,
         null,
         null,
@@ -256,14 +315,22 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/cookies_serializer.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/cookies_serializer.rb": [
+>>>>>>> origin
         null,
         null,
         null,
         null,
         1
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/devise.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/devise.rb": [
+>>>>>>> origin
         null,
         null,
         null,
@@ -564,13 +631,21 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/filter_parameter_logging.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/filter_parameter_logging.rb": [
+>>>>>>> origin
         null,
         null,
         null,
         1
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/inflections.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/inflections.rb": [
+>>>>>>> origin
         null,
         null,
         null,
@@ -594,13 +669,21 @@
         1,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/mime_types.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/mime_types.rb": [
+>>>>>>> origin
         null,
         null,
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/initializers/wrap_parameters.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/initializers/wrap_parameters.rb": [
+>>>>>>> origin
         null,
         null,
         null,
@@ -616,7 +699,12 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/config/routes.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/config/routes.rb": [
+        1,
+>>>>>>> origin
         1,
         1,
         1,
@@ -628,7 +716,11 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/app/models/user.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/app/models/user.rb": [
+>>>>>>> origin
         1,
         null,
         null,
@@ -636,11 +728,16 @@
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/app/models/application_record.rb": [
+=======
+      "/home/nick/Desktop/cs169/lime/app/models/application_record.rb": [
+>>>>>>> origin
         1,
         1,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/app/helpers/application_helper.rb": [
         1,
         null
@@ -710,6 +807,76 @@
         null,
         1,
         1,
+=======
+      "/home/nick/Desktop/cs169/lime/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/nick/Desktop/cs169/lime/app/helpers/faq_helper.rb": [
+        1,
+        null
+      ],
+      "/home/nick/Desktop/cs169/lime/app/helpers/welcome_helper.rb": [
+        1,
+        null
+      ],
+      "/home/nick/Desktop/cs169/lime/app/controllers/users/registrations_controller.rb": [
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+>>>>>>> origin
+        null,
+        null,
+        1,
+        0,
+<<<<<<< HEAD
+        null,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+=======
+        0,
+        0,
+        0,
+>>>>>>> origin
+        0,
+        0,
+        null,
+        null,
+<<<<<<< HEAD
+        1,
+        0,
+        null,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
         null,
         null,
         1,
@@ -717,42 +884,6 @@
         null,
         0,
         0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        0,
-        0,
         null,
         null,
         0,
@@ -771,48 +902,6 @@
         null,
         0,
         null,
-        null,
-        0,
-        0,
-        null,
-        null,
-        1,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
-        null,
-        0,
-        0,
-        null,
-        null,
-        1,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        null,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
         null,
         0,
         0,
@@ -822,11 +911,99 @@
         null,
         0,
         0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        0,
+        0,
+        null,
+        null,
+        1,
+        null,
+        0,
+        0,
+=======
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+>>>>>>> origin
         null,
         null,
         null,
         null
       ],
+<<<<<<< HEAD
       "/Users/antonio/Documents/2019/lime/app/controllers/resources_controller.rb": [
         1,
         1,
@@ -1817,5 +1994,15 @@
       ]
     },
     "timestamp": 1556592364
+=======
+      "/home/nick/Desktop/cs169/lime/app/controllers/application_controller.rb": [
+        1,
+        null,
+        1,
+        null
+      ]
+    },
+    "timestamp": 1556574917
+>>>>>>> origin
   }
 }

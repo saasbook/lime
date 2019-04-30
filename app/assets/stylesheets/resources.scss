@@ -60,6 +60,16 @@ body {
   color: orange;
 }
 
+.approve-button {
+  margin: 5px;
+}
+.checkboxes {
+  margin-top: .5rem;
+  margin-right: .75rem;
+}
+#approve-all-button {
+  float: right;
+}
 
 // new.html styles
 #new {
@@ -340,6 +350,3 @@ select {
 .checkbox_missing {
   background-color: rgb(252, 189, 189);
 }
-
-
-
