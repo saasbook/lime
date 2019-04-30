@@ -16,7 +16,7 @@ Background: database already has other resources
 
 
 Scenario: adding a resource called "Women Techmakers" with its other fields
-    Given I am on the "new resource page"
+    Given I am on "/resources/new.html"
     When I fill in "title" with "Women Techmakers"
     And I fill in "url" with "https://www.womentechmakers.com/"
     And I fill in "Contact Email" with "WTMScholars@google.com"
@@ -30,7 +30,7 @@ Scenario: adding a resource called "Women Techmakers" with its other fields
 
 
 Scenario: adding a resource called "The Coaching Fellowship" with certain fields missing
-    Given I am on the "new resource page"
+    Given I am on "/resources/new.html"
     When I fill in "title" with "The Coaching Fellowship"
     And I select "Networks" for "Resource Type"
     And I select "Undergraduate Student" for "Audience"
@@ -40,7 +40,7 @@ Scenario: adding a resource called "The Coaching Fellowship" with certain fields
     # And I should see the message "Please fill in the required fields."
 
 Scenario: adding a resource called "Women Techmakers" with all its fields but description is too long
-    Given I am on the "new resource page"
+    Given I am on "/resources/new.html"
     When I fill in "title" with "Women Techmakers"
     And I fill in "url" with "https://www.womentechmakers.com/"
     And I fill in "Contact Email" with "WTMScholars@google.com"
