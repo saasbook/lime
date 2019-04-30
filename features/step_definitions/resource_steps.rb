@@ -167,7 +167,6 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
-  visit "/resources/new"
   if page.respond_to? :should
     page.should have_content(text)
   else
@@ -176,7 +175,6 @@ Then /I should see the message "(.*)"/ do |text|
 end
 
 Then /I should not see the message "(.*)"/ do |text|
-  visit "/resources/new"
   if page.respond_to? :should
     page.should_not have_content(text)
   else
@@ -216,8 +214,8 @@ When /I approve resources "(.*)" with api key "(.*)"/ do |ids, api_key|
   @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key})
 end
 
-Then /I should not see the "(.*)" button inside the "(.*)" div/ do |button_name, class_name|
-  page.first("nav.navbar").should_not have_content button_name  
+Then /I should not see the "(.*)" button inside the "(.*)" (.*)/ do |button_name, class_name, element|
+  page.first("#{element}.#{class_name}").should_not have_content button_name  
 end
 
 Then /I should be redirected to the page titled "(.*)"/ do |page_title|
