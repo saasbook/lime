@@ -129,8 +129,12 @@ class Resource < ActiveRecord::Base
 
   def self.create_resource(params)
     params, resource_hash = Resource.separate_params(params)
-    resource = Resource.create!(resource_hash)
-    Resource.create_associations(resource, params)
+    puts 'PARAMS - ' + params.to_s
+    puts 'RESOURCE HASH - ' + resource_hash.to_s
+    resource = Resource.create(resource_hash)
+    if resource.valid?
+      Resource.create_associations(resource, params)
+    end
     return resource
   end
 
