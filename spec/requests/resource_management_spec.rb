@@ -19,6 +19,10 @@ RSpec.describe 'Resource management', :type => :request do
       assert (response.body).to_s.include?('something.com')
       assert (response.body).to_s.include?('thing3')
       assert (response.body).to_s.include?('something@gmail.com')
+
+      get '/resources?types=Events'
+      puts response.body.to_s
+      assert (response.body).to_s.include?('thing3')
     end
   end
 

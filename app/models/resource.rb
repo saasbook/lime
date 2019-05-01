@@ -129,8 +129,6 @@ class Resource < ActiveRecord::Base
 
   def self.create_resource(params)
     params, resource_hash = Resource.separate_params(params)
-    puts 'PARAMS - ' + params.to_s
-    puts 'RESOURCE HASH - ' + resource_hash.to_s
     resource = Resource.create(resource_hash)
     if resource.valid?
       Resource.create_associations(resource, params)
@@ -150,8 +148,11 @@ class Resource < ActiveRecord::Base
     resource_hash = {}
     params.each do |field, val|
       if self.has_many_associations.include? field
-        params[field] = val.split(',')
+        if val.is_a?(String)
+          params[field] = val.split(',')
+        end
       else
+        params.delete field
         resource_hash[field] = val
       end
     end
@@ -161,6 +162,7 @@ class Resource < ActiveRecord::Base
   def self.create_associations(resource, params)
     fields_hash = self.get_associations_hash(resource)
     fields_hash.each do |field, association|
+      # puts params[field].to_s
       association.delete_all
       if params[field] != nil
         params[field].each do |val|
