@@ -9,7 +9,11 @@ body {
 
 nav {
   background-color: #005b85;
+  position: fixed;
+  width: 100%;
 }
+
+
 .nav-link {
   color: white;
   margin: 0.5rem;

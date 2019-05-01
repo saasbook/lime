@@ -1,8 +1,9 @@
 <div id="new">
-
 <div class="top">
     <h1>Suggest a Resource for our Database </h1>
 </div>
+
+<%= javascript_include_tag "new" %>
 
 <div id="instructions">
     <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable. If you are an Admin, the resource will automatically be approved.<p>
@@ -11,144 +12,144 @@
 
 <div id="suggest_form">
 
-<%= form_tag("/resources.html", method: "post", id: "form_section") do %>
-    <div class="form_step" id="contact_info">
-        <h2>Contact info for person maintaining resource (not public facing)</h2>
-        <div class="contact_row">
-            <div class="input_field col">
-                <%= label_tag(:contact_email, "Contact Email", class: "required") %>
-                <p> Email for the contact person above to be sent requests to update resource information. </p>
-                <%= text_field_tag(:contact_email) %>
-                <p id="email-valid" class="invalid-text"> Invalid Email </p>
-            </div>
-            <div class="input_field col">
-                <%= label_tag(:contact_name, "Contact Name") %>
-                <p> A specific person who can speak for the organization and keep the resource information updated? </p>
-                <%= text_field_tag(:contact_name) %>
-            </div>
-            <div class="input_field col">
-                <%= label_tag(:contact_phone, "Contact Phone") %>
-                <p> What number can we call if we have a question about the resource? </p>
-                <%= text_field_tag(:contact_phone) %>
-                <p id="phone-valid" class="invalid-text"> Invalid Phone </p>
-
-            </div>
-        </div>
-
-        
-    </div>
-
-    <div class="form_step" id="resource_info">
-        <h2>Basic information about the resource</h2>
-        <div class="resource_row">
-            <div class="input_field">
-                <%= label_tag(:title, "Resource name", class: "required") %>
-                <p> Title of the resource </p>
-                <%= text_field_tag(:title) %>
-            </div>
-            <div class="input_field">
-                <%= label_tag(:url, "Resource URL", class: "required") %>
-                <p> Webpage for resource </p>
-                <%= text_field_tag(:url) %>
-            </div>
-        </div>
-
-        <div class="resource_row">
-            <div class="input_field">
-                <%= label_tag(:desc, "Resource Description", class: "required") %>
-                <%= text_area_tag(:desc) %>
-            </div>
-        </div>
-
-        <div class="resource_row association_row">
-            <% @locations.each do |association, values| %>
-                <div id="location">
-                    <%= label_tag(:location, association.capitalize, class: "required")%>
+    <%= form_tag("/resources.html", method: "post", id: "form_section") do %>
+        <div class="form_step" id="contact_info">
+            <h2>Contact info for person maintaining resource (not public facing)</h2>
+            <div class="contact_row">
+                <div class="input_field col">
+                    <%= label_tag(:contact_email, "Contact Email", class: "required") %>
+                    <p> Email for the contact person above to be sent requests to update resource information. </p>
+                    <%= text_field_tag(:contact_email) %>
+                    <p id="email-valid" class="invalid-text"> Invalid Email </p>
                 </div>
-                <div class="resource_checkboxes">
-                    <% values.each do |val| %>
-                        <div class="single_checkbox location_radio">
-                            <p><%= val %></p>
-                            <%= radio_button_tag association, val, false, class: "radio", id: val %>
-                        </div>
-                    <% end %>
+                <div class="input_field col">
+                    <%= label_tag(:contact_name, "Contact Name") %>
+                    <p> A specific person who can speak for the organization and keep the resource information updated? </p>
+                    <%= text_field_tag(:contact_name) %>
                 </div>
-            <% end %>
-            <div id="other_location">
-                <p>Other </p>
-                <%= text_field_tag(:other) %>
+                <div class="input_field col">
+                    <%= label_tag(:contact_phone, "Contact Phone") %>
+                    <p> What number can we call if we have a question about the resource? </p>
+                    <%= text_field_tag(:contact_phone) %>
+                    <p id="phone-valid" class="invalid-text"> Invalid Phone </p>
+
+                </div>
             </div>
+
+            
         </div>
 
-        <% @has_many_hash.each do |association, values| %>
-            <% if (association ==  "types" || association == "audiences")%>
-                <div class="association_row">
-                    <div class="association">
-                        <%= label_tag(:association, association.capitalize, class: "required") %>
+        <div class="form_step" id="resource_info">
+            <h2>Basic information about the resource</h2>
+            <div class="resource_row">
+                <div class="input_field">
+                    <%= label_tag(:title, "Resource name", class: "required") %>
+                    <p> Title of the resource </p>
+                    <%= text_field_tag(:title) %>
+                </div>
+                <div class="input_field">
+                    <%= label_tag(:url, "Resource URL", class: "required") %>
+                    <p> Webpage for resource </p>
+                    <%= text_field_tag(:url) %>
+                </div>
+            </div>
+
+            <div class="resource_row">
+                <div class="input_field">
+                    <%= label_tag(:desc, "Resource Description", class: "required") %>
+                    <%= text_area_tag(:desc) %>
+                </div>
+            </div>
+
+            <div class="resource_row association_row">
+                <% @locations.each do |association, values| %>
+                    <div id="location">
+                        <%= label_tag(:location, association.capitalize, class: "required")%>
                     </div>
                     <div class="resource_checkboxes">
                         <% values.each do |val| %>
-                            <div class="single_checkbox type_checkbox">
+                            <div class="single_checkbox location_radio">
                                 <p><%= val %></p>
-                                <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
-
+                                <%= radio_button_tag association, val, false, class: "radio", id: val %>
                             </div>
                         <% end %>
                     </div>
+                <% end %>
+                <div id="other_location">
+                    <p>Other </p>
+                    <%= text_field_tag(:other) %>
                 </div>
-            <% end %>
-        <% end %>
-    </div>
+            </div>
 
-    <div class="form_step" id="resource_info">
-        <h2>Other information about the resource</h2>
-
-        <div class="association_row">
             <% @has_many_hash.each do |association, values| %>
-                <% if (association !=  "types" && association != "audiences")%>
-                    <div class="association">
-                        <%= label_tag(:association, association.capitalize) %>
-                    </div>
-                    <div class="resource_checkboxes">
-                        <% values.each do |val| %>
-                            <div class="single_checkbox">
-                                <p><%= val %></p>
-                                <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                                    <%= check_box_tag association+'[]', val, true, class: "checkbox" %>
-                                <% else %>
-                                    <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
-                                <% end %>
-                            </div>
-                        <% end %>
+                <% if (association ==  "types" || association == "audiences")%>
+                    <div class="association_row">
+                        <div class="association">
+                            <%= label_tag(:association, association.capitalize, class: "required") %>
+                        </div>
+                        <div class="resource_checkboxes">
+                            <% values.each do |val| %>
+                                <div class="single_checkbox type_checkbox">
+                                    <p><%= val %></p>
+                                    <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
+
+                                </div>
+                            <% end %>
+                        </div>
                     </div>
                 <% end %>
             <% end %>
         </div>
 
-        <div class="resource_row">
-            <div class="input_field" id="deadline_input">
-                <%= label_tag(:deadline, "Deadline") %>
-                <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
-                <%= date_field_tag(:deadline, nil) %>
+        <div class="form_step" id="resource_info">
+            <h2>Other information about the resource</h2>
 
+            <div class="association_row">
+                <% @has_many_hash.each do |association, values| %>
+                    <% if (association !=  "types" && association != "audiences")%>
+                        <div class="association">
+                            <%= label_tag(:association, association.capitalize) %>
+                        </div>
+                        <div class="resource_checkboxes">
+                            <% values.each do |val| %>
+                                <div class="single_checkbox">
+                                    <p><%= val %></p>
+                                    <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
+                                        <%= check_box_tag association+'[]', val, true, class: "checkbox" %>
+                                    <% else %>
+                                        <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+
+            <div class="resource_row">
+                <div class="input_field" id="deadline_input">
+                    <%= label_tag(:deadline, "Deadline") %>
+                    <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
+                    <%= date_field_tag(:deadline, nil) %>
+
+                </div>
+            </div>
+
+            <div class="resource_row">
+                <div class="input_field">
+                    <%= label_tag(:notes, "Notes") %>
+                    <p> Note any other details on eligibility, deadlines, and process. </p>
+                    <%= text_area_tag(:notes) %>
+
+                </div>
             </div>
         </div>
 
-        <div class="resource_row">
-            <div class="input_field">
-                <%= label_tag(:notes, "Notes") %>
-                <p> Note any other details on eligibility, deadlines, and process. </p>
-                <%= text_area_tag(:notes) %>
-
-            </div>
+        <div id="form_submit">
+            <%= submit_tag("Submit", :id => "submit_button") %>
+            <p id="message"> Description was too long. <p>
         </div>
-    </div>
 
-    <div id="form_submit">
-        <%= submit_tag("Submit", :id => "submit_button") %>
-        <p id="message"> Description was too long. <p>
-    </div>
-
-<% end %>
+    <% end %>
 </div>
 </div>

@@ -16,10 +16,7 @@ body {
 
 #resource-container-wrapper {
   margin-top: 2.5rem;
- // border: solid red 1px;
- display: flex;
- flex-direction: row;
- justify-content: center;
+  display: inline;
 }
 
 .resource-container {
@@ -36,6 +33,7 @@ body {
 .resource-container:hover {
   background-color: rgb(255, 238, 203);
   transition: 250ms;
+  cursor: pointer;
 }
 
 .resource-container .text {
@@ -56,15 +54,42 @@ body {
 
 #filter-column {
   border-radius: 10px;
-  margin: 0px 24px;
+  margin: 0px 1vw 32px 10vw;
   background-color: #FDB515;
   box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
   width: 25vw;
   display: flex;
   flex-flow: wrap;
-  height: 1800px;
-  /* todo: make this height not a fixed amount */
+  float: left;
 }
+
+#resource-column {
+  // background-color: #198BCC;
+  background-color: white;
+  margin: 0px 10vw 32px 1vw;
+  box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
+  padding: 0px;
+  width: 50vw;
+  float: right;
+}
+
+#approval-column {
+  // background-color: #198BCC;
+  background-color: white;
+  margin: 32px 10vw 32px 10vw;
+  box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
+  padding: 0px;
+  width: 80vw;
+}
+
+#approval-title {
+  height: 200px;
+} 
+
+.approval-checkbox {
+  display: none;
+}
+
 #filter-header {
   font-size: 2rem;
   text-align: center;
@@ -94,19 +119,13 @@ body {
   color: black;
 }
 
-
-
-#resource-column {
-  // background-color: #198BCC;
-  background-color: white;
-  margin: 0px 32px 32px 32px;
-  box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
-  padding: 0px;
-  width: 60vw;
-}
 #result-header {
   font-size: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0px;
 }
 .resource-title {
   font-size: 1.5rem;
@@ -152,7 +171,7 @@ input[type=checkbox], input[type=radio] {
   margin-bottom: 72px;
 }
 
-#resources_index {
+#resources-index {
   height: 200px;
 } 
 

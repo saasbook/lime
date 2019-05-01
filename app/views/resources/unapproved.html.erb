@@ -1,47 +1,43 @@
-<div id="title">
-  Approval Queue
+<div class="top" id="approval-title">
+  <h1>Approval Queue</h1>
 </div>
-<div class="container"  id="resource-container-wrapper">
-  <div class="row">
-    <div class="col" id="resource-column">
+
+<%= javascript_include_tag "unapproved" %>
+
+<div class="index"  id="resource-container-wrapper">
+    <div class="col" id="approval-column">
       <%= form_tag("/resources/approve/many.html", method: :post) do %>
-      <div class="row">
-        <div class="col" id = "result-header">
+        <div id="result-header">
           <%= @resource_count %> awaiting approval
+          <%= submit_tag 'Approve selected resources', class: 'btn btn-outline-dark approve-button' %>
         </div>
-        <%= submit_tag 'Approve', class: 'btn btn-outline-dark approve-button' %>
-      </div>
+        
       <% @resources.each do |resource| %>
-        <div class="row resource-container">
-          <div class="col">
-            <div class="row">
-              <div class="resource-title">
+        <div class="row resource-container unapproved-resource">
+            <div class="resource-title text">
                 <%= resource.title %>
-              </div>
-              <div class="ml-auto checkboxes">
-                <%= check_box_tag 'approve_list[]', resource.id %>
-              </div> 
-           </div>
-            <div class="resource-url">
+            </div>
+            <div class="approval-checkbox">
+              <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
+            </div>
+            <div class="resource-url text">
               URL: <a href="<%= resource.url %>"><%= resource.url %></a>
             </div>
-            <div class="resource-desc">
+            <div class="resource-desc text">
               Description: <%= resource.desc %>
             </div>
-            <div class="resource-location">
+            <div class="resource-location text">
               Location: <%= resource.location %>
             </div>
-            <div class="resource-email">
+            <div class="resource-email text">
               Contact Email: <%= resource.contact_email %>
             </div>
-            <div class="resource-types">
+            <div class="resource-types text">
               Types: <%= resource.types.collect(&:val) %>
             </div>
-          </div>
         </div>
       <% end %>
       <% end %>
-    </div>
   </div>
   <form action=<%=resources_approve_many_path %>, method="post">
     <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
