@@ -2,15 +2,34 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body {
-  background-color: lightyellow !important;
+  // background-color: lightyellow !important;
+  background: rgb(250, 250, 250) !important;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 nav {
-  background-color: #7C7C7C;
+  background-color: #005b85;
+  position: fixed;
+  width: 100%;
 }
+
+
 .nav-link {
   color: white;
   margin: 0.5rem;
+}
+
+#left-nav, #right-nav {
+  display: flex;
+  flex-direction: row;
+}
+
+#left-nav{
+  float: left;
+}
+
+#right-nav {
+  float: right;
 }
 
 .admin-button {
@@ -20,28 +39,38 @@ nav {
 }
 
 .title-container {
-  margin-top: 10rem;
+  padding-top: 10rem;
+  padding-bottom: 7.5rem;
   border-radius: 10px;
+  background-color: #fdf8ef;
+  text-align: center;
 }
-#title {
+#welcome-title {
   font-family: Georgia;
   font-size: 5rem;
   text-align: center;
+  width: 80vw;
+  margin: 0 10vw;
 }
 
 .logo-container {
-  margin-top: 7.5rem;
+  margin-top: 0;
   align-content: center;
+  padding: 0;
+  
 }
 .logo {
-  width: 15rem;
+  width: 20vw;
   padding: 2rem;
   margin: auto;
   border-radius: 20%;
 }
 #logo-row {
   align-items: center;
+  width: 100vw;
+  border-top:8px #006D9D solid;
 }
 #berkeley-row {
   justify: center;
 }
+

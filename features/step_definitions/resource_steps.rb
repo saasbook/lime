@@ -223,7 +223,7 @@ Then /I should not see the "(.*)" button inside the "(.*)" (.*)/ do |button_name
 end
 
 Then /I should be redirected to the page titled "(.*)"/ do |page_title|
-  expect(page.first("div#title").text).to eq page_title
+  expect(page.first("h1").text).to eq page_title
 end
 
 Given /I am logged in with user "(.*)" and password "(.*)"/ do |user, pass|

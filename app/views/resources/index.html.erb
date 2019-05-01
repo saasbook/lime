@@ -1,68 +1,59 @@
-<div id="title">
-  Resources
+<div class="top" id="resources-index">
+    <h1>Resources </h1>
 </div>
-<div class="container"  id="resource-container-wrapper">
-  <div class="row">
-    <div class="col-3" id="filter-column">
-
+<div class="index"  id="resource-container-wrapper">
+  <div id="filter-column">
+    <%= form_tag("/resources.html", method: :get) do %>
+      
       <div class="row">
-        <div class="col-12">
-          <%= form_tag("/resources.html", method: :get) do %>
-            <div class="row">
-              <div class="col-12" id="filter-header">
-                <%= submit_tag 'Filter', class: 'btn btn-outline-dark btn-lg', id: 'filter-button'%>
-              </div>
-            </div>
+        <div id="filter-header">
+          <%= submit_tag 'Filter', class: 'btn btn-outline-dark btn-lg', id: 'filter-button'%>
+        </div>
+      </div>
 
-            <% @has_many_hash.each do |association, values| %>
-              <div id="association-name">
-                <%= association.capitalize %>
+      <% @has_many_hash.each do |association, values| %>
+        <div class="association">
+          <h2><%= association.capitalize %></h2>
+          <div class="filters">
+            <% values.each do |val| %>
+              <div class="single_checkbox">
+                
+                <%= check_box_tag association+'[]', val %>
+                <%= val %>
               </div>
-              <div class="content filters">
-                <% values.each do |val| %>
-                  <%= val %>
-                  <%= check_box_tag association+'[]', val %>
-                  <br/>
-                <% end %>
-              </div>
-              <br/>
             <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-8" id="resource-column">
-      <div class="row">
-        <div class="col-12" id = "result-header">
-          Results
-        </div>
-
-      </div>
-      <% @resources.each do |resource| %>
-        <div class="row resource-container">
-          <div class="col">
-            <div class="resource-title">
-              <%= resource.title %>
-            </div>
-            <div class="resource-url">
-              URL: <a href="<%= resource.url %>"><%= resource.url %></a>
-            </div>
-            <div class="resource-desc">
-              Description: <%= resource.desc %>
-            </div>
-            <div class="resource-location">
-              Location: <%= resource.location %>
-            </div>
-            <div class="resource-email">
-              Contact Email: <%= resource.contact_email %>
-            </div>
-            <div class="resource-types">
-              Types: <%= resource.types.collect(&:val) %>
-            </div>
           </div>
         </div>
       <% end %>
+    <% end %>
+  </div>
+
+  <div id="resource-column">
+    <div class="row">
+      <div class="col-12" id = "result-header">
+        <h2>Results</h2>
+      </div>
+
     </div>
+    <% @resources.each do |resource| %>
+      <div class="row resource-container">
+        <div class="resource-title text">
+          <%= resource.title %>
+        </div>
+        <div class="resource-url text">
+          URL: <a href="<%= resource.url %>"><%= resource.url %></a>
+        </div>
+        <div class="resource-desc text">
+          Description: <%= resource.desc %>
+        </div>
+        <div class="resource-location text">
+          Location: <%= resource.location %>
+        </div>
+
+        <div class="resource-types text">
+          Types: <%= resource.types.collect(&:val) %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
