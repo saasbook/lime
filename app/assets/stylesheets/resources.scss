@@ -100,10 +100,10 @@ body {
   font-size: .8rem;
 }
 
-.association {
+.association, #location {
   display: flex;
   flex-direction: column;
-  margin: 32px;
+  margin: 48px 0px 16px 0px;
 }
 
 .index h2 {
@@ -141,16 +141,35 @@ body {
 }
 
 
-input[type=checkbox], input[type=radio] {
+#new input[type=checkbox], input[type=radio] {
   margin: 4px;
   width: 12px;
+  display: none;
 }
 
-.single_checkbox {
-  display: flex;
-  flex-direction: row;
+.index input[type=checkbox], .index input[type=radio] {
   margin: 4px;
-  float: left;
+  width: 12px;
+  display: none;
+}
+
+#new .ui.label {
+  background-color: #D8DFEB;
+  transition: 100ms;
+}
+
+#new .ui.label:hover {
+  background-color: #96CAE7;
+  cursor: pointer;
+  transition: 100ms;
+}
+
+#new .single_checkbox, #new .single_radio {
+  margin: 8px;
+}
+
+.index .single_checkbox, .index .single_radio {
+  margin: 4px;
 }
 
 #approve-all-button {
@@ -276,9 +295,9 @@ select {
   margin: 0px;
 }
 
-#new input[type=checkbox], #new input[type=radio] {
-  margin: 8px 0px 24px 0px;
-}
+// #new input[type=checkbox], #new input[type=radio] {
+//   margin: 8px 0px 24px 0px;
+// }
 
 #suggest_form p {
   color: gray;
@@ -366,12 +385,6 @@ select {
 
 #other_location p {
   margin: 0px 16px;
-}
-
-#new .single_checkbox {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 #deadline_input {

@@ -68,8 +68,8 @@
                     </div>
                     <div class="resource_checkboxes">
                         <% values.each do |val| %>
-                            <div class="single_checkbox location_radio">
-                                <p><%= val %></p>
+                            <div class="single_radio location_radio">
+                            <div class="ui label loc-radio"><%= val %></div>
                                 <%= radio_button_tag association, val, false, class: "radio", id: val %>
                             </div>
                         <% end %>
@@ -90,7 +90,7 @@
                         <div class="resource_checkboxes">
                             <% values.each do |val| %>
                                 <div class="single_checkbox type_checkbox">
-                                    <p><%= val %></p>
+                                <div class="ui label"><%= val %></div>
                                     <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
 
                                 </div>
@@ -113,12 +113,8 @@
                         <div class="resource_checkboxes">
                             <% values.each do |val| %>
                                 <div class="single_checkbox">
-                                    <p><%= val %></p>
-                                    <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                                        <%= check_box_tag association+'[]', val, true, class: "checkbox" %>
-                                    <% else %>
-                                        <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
-                                    <% end %>
+                                    <div class="ui label"><%= val %></div>
+                                    <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
                                 </div>
                             <% end %>
                         </div>

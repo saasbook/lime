@@ -31,6 +31,7 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'geocoder'
