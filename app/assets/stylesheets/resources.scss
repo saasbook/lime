@@ -153,12 +153,24 @@ body {
   display: none;
 }
 
-#new .ui.label {
+#new .label {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: baseline;
+  margin: 0em 0.14285714em;
+  background-image: none;
+  padding: 0.5833em 0.833em;
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: none;
+  font-weight: bold;
+  border: 0px solid transparent;
+  border-radius: 0.28571429rem;
   background-color: #D8DFEB;
   transition: 100ms;
+  font-size: 12px;
 }
 
-#new .ui.label:hover {
+#new .label:hover {
   background-color: #96CAE7;
   cursor: pointer;
   transition: 100ms;

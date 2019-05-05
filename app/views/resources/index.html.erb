@@ -17,7 +17,7 @@
           <div class="filters">
             <% values.each do |val| %>
               <div class="single_checkbox">
-                <div class="ui label"><%= val %></div>
+                <div class="label"><%= val %></div>
                 <%= check_box_tag association+'[]', val %>
               </div>
             <% end %>
