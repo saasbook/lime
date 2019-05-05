@@ -4,6 +4,7 @@
 </div>
 
 <%= javascript_include_tag "new" %>
+<%= javascript_include_tag "filter" %>
 
 <div id="instructions">
     <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable. If you are an Admin, the resource will automatically be approved.<p>
@@ -68,8 +69,8 @@
                     </div>
                     <div class="resource_checkboxes">
                         <% values.each do |val| %>
-                            <div class="single_radio location_radio">
-                            <div class="label loc-radio"><%= val %></div>
+                            <div class="single_radio">
+                                <div class="label loc-radio"><%= val %></div>
                                 <%= radio_button_tag association, val, false, class: "radio", id: val %>
                             </div>
                         <% end %>

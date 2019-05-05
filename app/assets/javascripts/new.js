@@ -4,35 +4,6 @@ $(document).ready(function() {
 
     //     });
     // } );
-
-    let unchecked = document.querySelectorAll(".single_checkbox");
-    for (var i = 0; i < unchecked.length; i++) {
-        unchecked[i].addEventListener("click", function() {
-            if($(this).find('input[type="checkbox"]').prop("checked") == true){
-            $(this).find('input[type="checkbox"]').prop({"checked": false});
-            $(this).children(".label").css({"background-color":"#D8DFEB"});
-            } else {
-            $(this).find('input[type="checkbox"]').prop({"checked": true});
-            $(this).children(".label").css({"background-color":"#96CAE7"});
-            }
-        });
-    }
-    let unradio = document.querySelectorAll(".single_radio");
-    for (var i = 0; i < unchecked.length; i++) {
-        unradio[i].addEventListener("click", function() {
-            if($(this).find('input[type="radio"]').prop("checked") == true){
-            $(this).find('input[type="radio"]').prop({"checked": false});
-            $(this).children(".label").css({"background-color":"#D8DFEB"});
-            } else {
-            $(this).find('input[type="radio"]').prop({"checked": true});
-            $(".loc-radio").css({"background-color":"#D8DFEB"});
-            $(this).children(".loc-radio").css({"background-color":"#96CAE7"});
-            }
-        });
-    }
-
-
-
     function validate() {
         if ($("#desc").val() != "" && $("#desc").val().match(/(\w+)/g).length > 500) {
             $("#message").show();

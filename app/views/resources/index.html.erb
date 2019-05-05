@@ -1,6 +1,9 @@
 <div class="top" id="resources-index">
     <h1>Resources </h1>
 </div>
+
+<%= javascript_include_tag "filter" %>
+
 <div class="index"  id="resource-container-wrapper">
   <div id="filter-column">
     <%= form_tag("/resources.html", method: :get) do %>

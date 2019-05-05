@@ -97,13 +97,16 @@ body {
   margin-top: 24px;
 }
 .filters {
-  font-size: .8rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
 }
 
 .association, #location {
   display: flex;
   flex-direction: column;
-  margin: 48px 0px 16px 0px;
+  margin: 48px 32px 16px 32px;
 }
 
 .index h2 {
@@ -141,19 +144,15 @@ body {
 }
 
 
-#new input[type=checkbox], input[type=radio] {
-  margin: 4px;
-  width: 12px;
+#new input[type=checkbox], #new input[type=radio] {
   display: none;
 }
 
 .index input[type=checkbox], .index input[type=radio] {
-  margin: 4px;
-  width: 12px;
   display: none;
 }
 
-#new .label {
+.label {
   display: inline-block;
   line-height: 1;
   vertical-align: baseline;
@@ -165,15 +164,29 @@ body {
   font-weight: bold;
   border: 0px solid transparent;
   border-radius: 0.28571429rem;
-  background-color: #D8DFEB;
   transition: 100ms;
   font-size: 12px;
 }
 
-#new .label:hover {
-  background-color: #96CAE7;
+#new .label {
+  background-color: #D8DFEB;
+}
+
+.index .label {
+  background-color: rgb(255, 240, 209);
+}
+
+.label:hover {
   cursor: pointer;
   transition: 100ms;
+}
+
+#new .label:hover {
+  background-color: #96CAE7;
+}
+
+.index .label:hover {
+  background-color: #96CAE7;
 }
 
 #new .single_checkbox, #new .single_radio {
