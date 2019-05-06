@@ -16,7 +16,7 @@
 
       <% @has_many_hash.each do |association, values| %>
         <div class="association">
-          <h2><%= association.capitalize %></h2>
+          <h2><%= association.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ") %></h2>
           <div class="filters">
             <% values.each do |val| %>
               <div class="single_checkbox gold_label">
@@ -57,11 +57,13 @@
           Audiences: <%= resource.audiences.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
         </div>
 
-        <% if user_signed_in? %>
-          <div class="resource-types text edit" %>
-            <%= link_to('Edit', edit_resource_path(resource)) %>
-          </div>
-        <% end %>
+       
+        <div class="text links" %>
+          <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
+          <% if user_signed_in? %>
+            <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+          <% end %>
+        </div>
         
       </div>
     <% end %>

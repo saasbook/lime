@@ -33,6 +33,9 @@ body {
 .resource-container:hover {
   background-color: rgb(255, 238, 203);
   transition: 250ms;
+}
+
+#unapproved .resource-container:hover {
   cursor: pointer;
 }
 
@@ -133,6 +136,16 @@ body {
 .resource-title {
   font-size: 1.5rem;
   color: rgb(0, 0, 0);
+}
+
+.resource-title a:link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.resource-title a:visited {
+  text-decoration: inherit;
+  color: inherit;
 }
 
 .approve-button {
@@ -513,8 +526,6 @@ select {
   background-color: rgb(236, 238, 245);
 }
 
-
-
 #show p {
   padding: 0;
   margin: 0;
@@ -525,5 +536,16 @@ select {
 }
 
 #show-title{
-  margin: 32px;
+  margin-top: 32px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#show .links {
+  margin-bottom: 32px;
+  width: 50vw;
 }

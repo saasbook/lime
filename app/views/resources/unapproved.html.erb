@@ -4,7 +4,7 @@
 
 <%= javascript_include_tag "unapproved" %>
 
-<div class="index"  id="resource-container-wrapper">
+<div id="unapproved"  id="resource-container-wrapper">
     <div class="col" id="approval-column">
       <%= form_tag("/resources/approve/many.html", method: :post) do %>
         <div id="result-header">
@@ -25,21 +25,28 @@
             <div class="approval-checkbox">
               <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
             </div>
-            <div class="resource-url text">
-              URL: <a href="<%= resource.url %>"><%= resource.url %></a>
-            </div>
-            <div class="resource-desc text">
-              Description: <%= resource.desc %>
-            </div>
-            <div class="resource-location text">
-              Location: <%= resource.location %>
-            </div>
-            <div class="resource-email text">
-              Contact Email: <%= resource.contact_email %>
-            </div>
-            <div class="resource-types text">
-              Types: <%= resource.types.collect(&:val) %>
-            </div>
+
+            <div>
+              <% i = 0 %>
+              <% @all_values_hash.map do |key, value| %>
+                  <% text = resource[value]%>
+                  <% if (@has_many_hash.key?(value)) %>
+                      <% text = resource.send(value).collect(&:val) %>
+                      <% text = text.to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
+                  <% end %>
+                  <% if (text != nil && text.to_s.length != 0) %>
+                      <% if (i % 2 == 1) %>
+                          <div class="text colored">
+                      <% else %>
+                          <div class="text">
+                      <% end %>
+                          <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
+                      </div>
+                      <% i += 1 %>
+                  <% end %>
+                  
+              <% end %>
+          </div>
         </div>
       <% end %>
       <% end %>

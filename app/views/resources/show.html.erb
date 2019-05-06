@@ -4,6 +4,13 @@
     <h2><%= @resource.title %></h2>
 </div>
 
+<div class="links" %>
+    <%= link_to("Back", :back , class: "btn btn-outline-primary") %>
+    <% if user_signed_in? %>
+        <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
+    <% end %> 
+</div>
+
 <div id="resource_info">
     <% i = 0 %>
     <% @all_values_hash.map do |key, value| %>
@@ -27,11 +34,5 @@
 </div>
 
 
-<div class="show-links">
-    <% if user_signed_in? %>
-        <%= link_to('Edit', edit_resource_path(@resource)) %>
-    <% end %>
-    <%= link_to "Back", :back %>
-</div>
 
 </div>

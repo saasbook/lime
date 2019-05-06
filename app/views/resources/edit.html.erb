@@ -99,7 +99,7 @@
               <% @has_many_hash.each do |association, values| %>
                   <% if (association !=  "types" && association != "audiences")%>
                       <div class="association">
-                          <%= label_tag(:association, association.capitalize) %>
+                          <%= label_tag(:association, association.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ")) %>
                       </div>
                       <div class="resource_checkboxes">
                           <% values.each do |val| %>
