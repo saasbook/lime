@@ -479,3 +479,51 @@ select {
   align-items: center;
   margin: 32px;
 }
+
+/* show */
+
+#show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#resource_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 48px;
+  box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
+  width: 50vw;
+}
+
+#show .text {
+  padding: 24px;
+  background-color: white;
+  width: 100%;
+  border: 1px solid lightgray;
+}
+
+#show .text.colored {
+  background-color: rgb(236, 238, 245);
+}
+
+
+
+#show p {
+  padding: 0;
+  margin: 0;
+}
+
+#show .text:hover {
+  background-color: #96CAE7;
+}
+
+#show-title{
+  margin: 32px;
+}

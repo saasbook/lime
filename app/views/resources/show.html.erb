@@ -1,3 +1,37 @@
-<h1> Show </h1>
+<div id="show">
 
-<% @resource %>
+<div id="show-title">
+    <h2><%= @resource.title %></h2>
+</div>
+
+<div id="resource_info">
+    <% i = 0 %>
+    <% @all_values_hash.map do |key, value| %>
+        <% text = @resource[value]%>
+        <% if (@has_many_hash.key?(value)) %>
+            <% text = @resource.send(value).collect(&:val) %>
+            <% text = text.to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
+        <% end %>
+        <% if (text != nil && text.to_s.length != 0) %>
+            <% if (i % 2 == 1) %>
+                <div class="text colored">
+            <% else %>
+                <div class="text">
+            <% end %>
+                <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
+            </div>
+            <% i += 1 %>
+        <% end %>
+        
+    <% end %>
+</div>
+
+
+<div class="show-links">
+    <% if user_signed_in? %>
+        <%= link_to('Edit', edit_resource_path(@resource)) %>
+    <% end %>
+    <%= link_to "Back", :back %>
+</div>
+
+</div>

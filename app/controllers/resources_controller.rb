@@ -34,6 +34,36 @@ class ResourcesController < ApplicationController
     }
   end
 
+  def all_values_hash 
+    {
+      "Contact Email" => "contact_email",
+      "Contact Name" => "contact_name",
+      "Contact Phone" => "contact_phone",
+      "URL" => "url",
+      "Description" => "desc",
+      "Location" => "location",
+      "Resource Email" => "resource_email",
+      "Resource Phone" => "resource_phone",
+      "Address" => "address",
+      "Funding Amount" => "funding_amount",
+      "Deadline" => "deadline",
+      "Notes" => "notes",
+      'Types' => "types",
+      'Audiences' => "audiences",
+      'Campuses' => "campuses",
+      'Innovation Stages' => "innovation_stages",
+      'Population Focuses' => "population_focuses",
+      'Availabilities' => "availabilities",
+      'Topics' => "topics",
+      'Technologies' => "technologies",
+      'Client tags' => "client_tags",
+      "Approval Status" => "approval_status",
+      "Approved By" => "approved_by"
+    }
+  end
+
+
+
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
@@ -61,6 +91,8 @@ class ResourcesController < ApplicationController
   def show
     id = params[:id]
     @resource = Resource.find_by_id(id)
+    @all_values_hash = self.all_values_hash 
+    @has_many_hash = self.has_many_value_hash
     # only admins can see unapproved resources
     # if @user.nil? and @resource&.approval_status == 0
     #   @resource = nil
@@ -68,7 +100,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html
+      format.html  
     end
   end
 
@@ -129,8 +161,6 @@ class ResourcesController < ApplicationController
 
   def update
     @resource = Resource.find_by(id: params[:id])
-    puts "update"
-    puts @resource.location
     if @resource == nil
       flash[:notice] = "This resource does not exist"
       return
