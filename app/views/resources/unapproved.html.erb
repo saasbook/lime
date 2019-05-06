@@ -10,12 +10,13 @@
         <div id="result-header">
           <%= @resource_count %> awaiting approval
           <%= submit_tag 'Approve selected resources', class: 'btn btn-outline-dark approve-button' %>
+          <form action=<%=resources_approve_many_path %>, method="post">
+            <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
+              Approve All
+            </button>
+          </form>
         </div>
-        <form action=<%=resources_approve_many_path %>, method="post">
-          <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
-            Approve All
-          </button>
-        </form>
+        
         
       <% @resources.each do |resource| %>
         <div class="row resource-container unapproved-resource">

@@ -1,4 +1,18 @@
 $(document).ready(function() {
+    
+    $(".single_checkbox").each(function () {
+        if($(this).find('input[type="checkbox"]').prop("checked") == true){
+            $(this).children(".label").css({"background-color":"#96CAE7"});
+        }
+    });
+    
+    $(".single_radio").each(function () {
+        if($(this).find('input[type="radio"]').prop("checked") == true){
+            $(this).children(".label").css({"background-color":"#96CAE7"});
+        }
+    });
+
+
     $(".single_checkbox").click(function() {
         if($(this).find('input[type="checkbox"]').prop("checked") == true){
             $(this).find('input[type="checkbox"]').prop({"checked": false});
@@ -7,7 +21,7 @@ $(document).ready(function() {
             } else {
                 $(this).children(".label").css({"background-color":"#D8DFEB"});
             }
-            } else {
+        } else {
             $(this).find('input[type="checkbox"]').prop({"checked": true});
             $(this).children(".label").css({"background-color":"#96CAE7"});
         }

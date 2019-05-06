@@ -87,10 +87,6 @@ class ResourcesController < ApplicationController
       'Topics' => "topics",
       'Technologies' => "technologies",
       'Client tags' => "client_tags",
-      "Approval Status" => "approval_status",
-      "Approved By" => "approved_by",
-      "Flagged" => "flagged",
-      "Flagged Comment" => "flagged_comment",
       "Created At" => "created_at",
       "Updated At" => "updated_at"
     }
@@ -125,7 +121,8 @@ class ResourcesController < ApplicationController
   def show
     id = params[:id]
     @resource = Resource.find_by_id(id)
-    @all_values_hash = self.all_values_hash 
+    @all_values_hash = self.all_values_hash
+    @all_public_values_hash = self.all_public_values_hash
     @has_many_hash = self.has_many_value_hash
     # only admins can see unapproved resources
     # if @user.nil? and @resource&.approval_status == 0

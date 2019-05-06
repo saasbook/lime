@@ -1,9 +1,4 @@
 $(document).ready(function() {
-    // $( function() {
-    //     $( "#deadline" ).datepicker({
-
-    //     });
-    // } );
     function validate() {
         if ($("#desc").val() != "" && $("#desc").val().match(/(\w+)/g).length > 500) {
             $("#message").show();

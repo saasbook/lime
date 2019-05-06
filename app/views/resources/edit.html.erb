@@ -8,7 +8,7 @@
             <h1>Edit: <%= @resource.title%></h1>
         </div>
         <div class="links" %>
-            <%= link_to("Back", :back, class: "btn btn-outline-primary") %>
+            <%= link_to("View Resource", "/resources/" + @resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
         </div>
     </div>
 
@@ -70,11 +70,13 @@
                       <% values.each do |val| %>
                             <div class="single_radio">
                                 <% if @resource.location == val%>
-                                    <div class="label loc-radio"><%= val %>
+                                    <div class="label loc-radio">
+                                    <%= val %>
                                         <%= radio_button_tag association, val, true, class: "radio", id: val %>
                                     </div>
                                 <% else %>
-                                    <div class="label loc-radio"><%= val %>
+                                    <div class="label loc-radio">
+                                        <%= val %>
                                         <%= radio_button_tag association, val, false, class: "radio", id: val %>
                                     </div>
                                 <% end %>
@@ -96,11 +98,16 @@
                       </div>
                       <div class="resource_checkboxes">
                           <% values.each do |val| %>
-                              <div class="single_checkbox type_checkbox">
-                              <div class="label"><%= val %></div>
-                                  <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
-
-                              </div>
+                                <div class="single_checkbox type_checkbox">
+                                <% if @resource.send(association).collect(&:val).include?(val)%>
+                                    <div class="label"><%= val %></div>
+                                        <%= check_box_tag association+'[]', val, true, class: "checkbox", id: val %>
+                                    </div>
+                                <% else %>
+                                    <div class="label"><%= val %></div>
+                                        <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
+                                    </div>
+                                <% end %>
                           <% end %>
                       </div>
                   </div>
@@ -112,6 +119,36 @@
       <div class="form_step">
           <h2>Other information about the resource</h2>
 
+          <div class="contact_row">
+                <div class="input_field col">
+                    <%= label_tag(:resource_email, "Email - General") %>
+                    <p class="label-desc-other">Email associated with this resource. </p>
+                    <%= text_field_tag(:resource_email, @resource.resource_email) %>
+                </div>
+                <div class="input_field col">
+                    <%= label_tag(:resource_phone, "Phone - General") %>
+                    <p class="label-desc-other">Phone associated with this resource. </p>
+                    <%= text_field_tag(:resource_phone, @resource.resource_phone) %>
+                </div>
+                <div class="input_field col">
+                    <%= label_tag(:address, "Address") %>
+                    <p class="label-desc-other">Useful if you host events at your physical location. </p>
+                    <%= text_field_tag(:address, @resource.address) %>
+                </div>
+            </div>
+
+            <div class="resource_row">
+                <div class="input_field other-info">
+                    <%= label_tag(:deadline, "Deadline") %>
+                    <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
+                    <% if @resource.deadline != nil %>
+                        <%= date_field_tag(:deadline, @resource.deadline.to_date()) %>
+                    <% else %>
+                        <%= date_field_tag(:deadline, nil) %>
+                    <% end %>
+                </div>
+            </div>
+
           <div class="association_row">
               <% @has_many_hash.each do |association, values| %>
                   <% if (association !=  "types" && association != "audiences")%>
@@ -119,32 +156,28 @@
                           <%= label_tag(:association, association.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ")) %>
                       </div>
                       <div class="resource_checkboxes">
-                          <% values.each do |val| %>
-                              <div class="single_checkbox">
-                                  <div class="label"><%= val %></div>
-                                  <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
-                              </div>
-                          <% end %>
+                      <% values.each do |val| %>
+                        <div class="single_checkbox type_checkbox">
+                        <% if @resource.send(association).collect(&:val).include?(val)%>
+                            <div class="label"><%= val %></div>
+                                <%= check_box_tag association+'[]', val, true, class: "checkbox", id: val %>
+                            </div>
+                        <% else %>
+                            <div class="label"><%= val %></div>
+                                <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
+                            </div>
+                        <% end %>
+                  <% end %>
                       </div>
                   <% end %>
               <% end %>
           </div>
 
           <div class="resource_row">
-              <div class="input_field" id="deadline_input">
-                  <%= label_tag(:deadline, "Deadline") %>
-                  <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
-                  <%= date_field_tag(:deadline, nil) %>
-
-              </div>
-          </div>
-
-          <div class="resource_row">
               <div class="input_field">
                   <%= label_tag(:notes, "Notes") %>
                   <p> Note any other details on eligibility, deadlines, and process. </p>
-                  <%= text_area_tag(:notes) %>
-
+                  <%= text_area_tag(:notes, @resource.notes) %>
               </div>
           </div>
       </div>

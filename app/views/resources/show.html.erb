@@ -8,24 +8,36 @@
     <%= link_to("Back", "/resources.html/" , class: "btn btn-outline-primary") %>
     <% if user_signed_in? %>
         <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
+        <% all_values = @all_values_hash %>
+    <% else %>
+        <% all_values = @all_public_values_hash %>
     <% end %> 
 </div>
 
 <div id="resource_info">
     <% i = 0 %>
-    <% @all_values_hash.map do |key, value| %>
+    <% all_values.map do |key, value| %>
         <% text = @resource[value]%>
         <% if (@has_many_hash.key?(value)) %>
             <% text = @resource.send(value).collect(&:val) %>
             <% text = text.to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
         <% end %>
         <% if (text != nil && text.to_s.length != 0) %>
-            <% if (i % 2 == 1) %>
+            <% if (i % 2 === 1) %>
                 <div class="text colored">
             <% else %>
                 <div class="text">
             <% end %>
-                <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
+                <p>
+                    <b><%= key.to_s + ": "%></b> 
+                    <% if (key.to_s === "URL") %>
+                        <a href="<%= text.to_s %>"><%= text.to_s %></a>
+                    <% elsif (key.to_s === "Deadline") %>
+                        <%= text.to_s.to_date() %>
+                    <% else %>
+                        <%= text.to_s %>
+                    <% end %>
+                </p>
             </div>
             <% i += 1 %>
         <% end %>
