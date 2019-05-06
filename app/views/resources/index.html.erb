@@ -51,10 +51,11 @@
         <div class="resource-location text">
           Location: <%= resource.location %>
         </div>
-
         <div class="resource-types text">
           Types: <%= resource.types.collect(&:val) %>
         </div>
+
+        <%= link_to('Edit', edit_resource_path(resource)) %>
       </div>
     <% end %>
   </div>
