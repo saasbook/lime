@@ -5,7 +5,7 @@
 </div>
 
 <div class="links" %>
-    <%= link_to("Back", :back , class: "btn btn-outline-primary") %>
+    <%= link_to("Back", "/resources.html/" , class: "btn btn-outline-primary") %>
     <% if user_signed_in? %>
         <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
     <% end %> 

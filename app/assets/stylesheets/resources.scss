@@ -158,8 +158,9 @@ body {
 
 
 #new input[type=checkbox], #new input[type=radio] {
-  display: none;
+  // display: none;
 }
+
 
 .index input[type=checkbox], .index input[type=radio] {
   display: none;
@@ -181,7 +182,7 @@ body {
   font-size: 12px;
 }
 
-#new .label {
+#new .label{
   background-color: #D8DFEB;
 }
 
@@ -548,4 +549,22 @@ select {
 #show .links {
   margin-bottom: 32px;
   width: 50vw;
+}
+
+#edit-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-bottom: 32px;
+  width: 1000px;
+}
+
+#edit-title {
+  display: flex;
+  justify-content: center;
+}
+
+.edit .form_step {
+  background-color: #fdf8ef;
 }

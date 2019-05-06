@@ -1,7 +1,16 @@
-
-<h2>Edit <%= @resource.title%></h2>
+<div id="new" class="edit">
+<%= javascript_include_tag "new" %>
+<%= javascript_include_tag "filter" %>
 
 <div id="suggest_form">
+    <div id="edit-top">
+        <div id="edit-title" %>
+            <h1>Edit: <%= @resource.title%></h1>
+        </div>
+        <div class="links" %>
+            <%= link_to("Back", :back, class: "btn btn-outline-primary") %>
+        </div>
+    </div>
 
   <%= form_tag("/resources/" + @resource.id.to_s + ".html", method: "patch", id: "form_section") do %>
       <div class="form_step" id="contact_info">
@@ -59,10 +68,17 @@
                   </div>
                   <div class="resource_checkboxes">
                       <% values.each do |val| %>
-                          <div class="single_radio">
-                              <div class="label loc-radio"><%= val %></div>
-                              <%= radio_button_tag association, val, false, class: "radio", id: val %>
-                          </div>
+                            <div class="single_radio">
+                                <% if @resource.location == val%>
+                                    <div class="label loc-radio"><%= val %>
+                                        <%= radio_button_tag association, val, true, class: "radio", id: val %>
+                                    </div>
+                                <% else %>
+                                    <div class="label loc-radio"><%= val %>
+                                        <%= radio_button_tag association, val, false, class: "radio", id: val %>
+                                    </div>
+                                <% end %>
+                            </div>
                       <% end %>
                   </div>
               <% end %>
@@ -91,6 +107,7 @@
               <% end %>
           <% end %>
       </div>
+      
 
       <div class="form_step">
           <h2>Other information about the resource</h2>
@@ -133,9 +150,10 @@
       </div>
 
       <div id="form_submit">
-          <%= submit_tag("Submit", :id => "submit_button") %>
+          <%= submit_tag("Update", :id => "submit_button") %>
           <p id="message"> Description was too long. <p>
       </div>
 
   <% end %>
+</div>
 </div>
