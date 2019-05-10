@@ -3,7 +3,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div id="sign-up">
+  <div class="account" id="sign-up">
     <h2>Sign up</h2>
     <div class="field">
       <%= f.label :email %><br />
@@ -26,7 +26,8 @@
     <div class="actions">
       <%= f.submit "Sign up" %>
     </div>
+    <%= render "users/shared/links" %>
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+

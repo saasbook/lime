@@ -4,6 +4,7 @@
 </div>
 
 <%= javascript_include_tag "new" %>
+<%= javascript_include_tag "filter" %>
 
 <div id="instructions">
     <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable. If you are an Admin, the resource will automatically be approved.<p>
@@ -18,28 +19,27 @@
             <div class="contact_row">
                 <div class="input_field col">
                     <%= label_tag(:contact_email, "Contact Email", class: "required") %>
-                    <p> Email for the contact person above to be sent requests to update resource information. </p>
+                    <p class="label-desc"> Email for the contact person above to be sent requests to update resource information. </p>
                     <%= text_field_tag(:contact_email) %>
                     <p id="email-valid" class="invalid-text"> Invalid Email </p>
                 </div>
                 <div class="input_field col">
                     <%= label_tag(:contact_name, "Contact Name") %>
-                    <p> A specific person who can speak for the organization and keep the resource information updated? </p>
+                    <p class="label-desc"> A specific person who can speak for the organization and keep the resource information updated? </p>
                     <%= text_field_tag(:contact_name) %>
                 </div>
                 <div class="input_field col">
                     <%= label_tag(:contact_phone, "Contact Phone") %>
-                    <p> What number can we call if we have a question about the resource? </p>
+                    <p class="label-desc"> What number can we call if we have a question about the resource? </p>
                     <%= text_field_tag(:contact_phone) %>
                     <p id="phone-valid" class="invalid-text"> Invalid Phone </p>
-
                 </div>
             </div>
 
             
         </div>
 
-        <div class="form_step" id="resource_info">
+        <div class="form_step">
             <h2>Basic information about the resource</h2>
             <div class="resource_row">
                 <div class="input_field">
@@ -68,15 +68,15 @@
                     </div>
                     <div class="resource_checkboxes">
                         <% values.each do |val| %>
-                            <div class="single_checkbox location_radio">
-                                <p><%= val %></p>
+                            <div class="single_radio">
+                                <div class="label loc-radio"><%= val %></div>
                                 <%= radio_button_tag association, val, false, class: "radio", id: val %>
                             </div>
                         <% end %>
                     </div>
                 <% end %>
                 <div id="other_location">
-                    <p>Other </p>
+                    <p>Other: </p>
                     <%= text_field_tag(:other) %>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                         <div class="resource_checkboxes">
                             <% values.each do |val| %>
                                 <div class="single_checkbox type_checkbox">
-                                    <p><%= val %></p>
+                                <div class="label"><%= val %></div>
                                     <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
 
                                 </div>
@@ -101,38 +101,54 @@
             <% end %>
         </div>
 
-        <div class="form_step" id="resource_info">
+        <div class="form_step">
             <h2>Other information about the resource</h2>
 
-            <div class="association_row">
-                <% @has_many_hash.each do |association, values| %>
-                    <% if (association !=  "types" && association != "audiences")%>
-                        <div class="association">
-                            <%= label_tag(:association, association.capitalize) %>
-                        </div>
-                        <div class="resource_checkboxes">
-                            <% values.each do |val| %>
-                                <div class="single_checkbox">
-                                    <p><%= val %></p>
-                                    <% if flash[:notice] && !@session[association].nil? && @session[association].include?(val) %>
-                                        <%= check_box_tag association+'[]', val, true, class: "checkbox" %>
-                                    <% else %>
-                                        <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
-                                    <% end %>
-                                </div>
-                            <% end %>
-                        </div>
-                    <% end %>
-                <% end %>
+            <div class="contact_row">
+                <div class="input_field col">
+                    <%= label_tag(:resource_email, "Email - General") %>
+                    <p class="label-desc-other">Email associated with this resource. </p>
+                    <%= text_field_tag(:resource_email, nil) %>
+                </div>
+                <div class="input_field col">
+                    <%= label_tag(:resource_phone, "Phone - General") %>
+                    <p class="label-desc-other">Phone associated with this resource. </p>
+                    <%= text_field_tag(:resource_phone, nil) %>
+                </div>
+                <div class="input_field col">
+                    <%= label_tag(:address, "Address") %>
+                    <p class="label-desc-other">Useful if you host events at your physical location. </p>
+                    <%= text_field_tag(:address, nil) %>
+                </div>
             </div>
 
             <div class="resource_row">
-                <div class="input_field" id="deadline_input">
+                <div class="input_field other-info">
                     <%= label_tag(:deadline, "Deadline") %>
                     <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
                     <%= date_field_tag(:deadline, nil) %>
 
                 </div>
+            </div>
+
+            
+
+            <div class="association_row">
+                <% @has_many_hash.each do |association, values| %>
+                    <% if (association !=  "types" && association != "audiences")%>
+                        <div class="association">
+                            <%= label_tag(:association, association.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ")) %>
+                        </div>
+                        <div class="resource_checkboxes">
+                            <% values.each do |val| %>
+                                <div class="single_checkbox">
+                                    <div class="label"><%= val %></div>
+                                    <%= check_box_tag association+'[]', val, false, class: "checkbox" %>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                <% end %>
             </div>
 
             <div class="resource_row">

@@ -8,3 +8,11 @@ input {
     outline: none;
     transition: 500ms;
   }
+
+.account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 32px;
+}

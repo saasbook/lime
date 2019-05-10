@@ -34,6 +34,66 @@ class ResourcesController < ApplicationController
     }
   end
 
+
+  def all_values_hash 
+    {
+      "Contact Email" => "contact_email",
+      "Contact Name" => "contact_name",
+      "Contact Phone" => "contact_phone",
+      "URL" => "url",
+      "Description" => "desc",
+      "Location" => "location",
+      "Resource Email" => "resource_email",
+      "Resource Phone" => "resource_phone",
+      "Address" => "address",
+      "Funding Amount" => "funding_amount",
+      "Deadline" => "deadline",
+      "Notes" => "notes",
+      'Types' => "types",
+      'Audiences' => "audiences",
+      'Campuses' => "campuses",
+      'Innovation Stages' => "innovation_stages",
+      'Population Focuses' => "population_focuses",
+      'Availabilities' => "availabilities",
+      'Topics' => "topics",
+      'Technologies' => "technologies",
+      'Client tags' => "client_tags",
+      "Approval Status" => "approval_status",
+      "Approved By" => "approved_by",
+      "Flagged" => "flagged",
+      "Flagged Comment" => "flagged_comment",
+      "Created At" => "created_at",
+      "Updated At" => "updated_at"
+    }
+  end
+
+  def all_public_values_hash 
+    {
+      "URL" => "url",
+      "Description" => "desc",
+      "Location" => "location",
+      "Resource Email" => "resource_email",
+      "Resource Phone" => "resource_phone",
+      "Address" => "address",
+      "Funding Amount" => "funding_amount",
+      "Deadline" => "deadline",
+      "Notes" => "notes",
+      'Types' => "types",
+      'Audiences' => "audiences",
+      'Campuses' => "campuses",
+      'Innovation Stages' => "innovation_stages",
+      'Population Focuses' => "population_focuses",
+      'Availabilities' => "availabilities",
+      'Topics' => "topics",
+      'Technologies' => "technologies",
+      'Client tags' => "client_tags",
+      "Created At" => "created_at",
+      "Updated At" => "updated_at"
+    }
+  end
+
+
+
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
@@ -61,6 +121,9 @@ class ResourcesController < ApplicationController
   def show
     id = params[:id]
     @resource = Resource.find_by_id(id)
+    @all_values_hash = self.all_values_hash
+    @all_public_values_hash = self.all_public_values_hash
+    @has_many_hash = self.has_many_value_hash
     # only admins can see unapproved resources
     # if @user.nil? and @resource&.approval_status == 0
     #   @resource = nil
@@ -68,7 +131,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html
+      format.html  
     end
   end
 
@@ -78,7 +141,6 @@ class ResourcesController < ApplicationController
     @locations = self.get_locations
     @session = session
     render template: "resources/new.html.erb"
-    # render "resources/new"
   end
 
   def create
@@ -94,7 +156,6 @@ class ResourcesController < ApplicationController
     end
     #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if @missing.length > 0
-      # flash[:notice] = "Please fill in the required fields."
       params.each do |key, val|
         session[key] = params[key]
       end
@@ -105,7 +166,6 @@ class ResourcesController < ApplicationController
       @desc_too_long = true
     end
     if @desc_too_long
-      # flash[:notice] = "Description was too long."
       params.each do |key, val|
         session[key] = params[key]
       end
@@ -140,6 +200,7 @@ class ResourcesController < ApplicationController
     if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
       flash[:notice] = "You don't have permissions to update records"
       # puts "You don't have permissions to update records"
+      redirect_to :controller => 'resources', :action => 'edit'
       return
     end
 
@@ -150,8 +211,12 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(new_params[:id])
 
     respond_to do |format|
+      
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html
+      format.html do
+        flash[:notice] = "Resource updated."
+        redirect_to :controller => 'resources', :action => 'edit'
+      end
     end
   end
 
@@ -187,9 +252,20 @@ class ResourcesController < ApplicationController
   end
 
   def edit
+    if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
+      flash[:notice] = "You don't have permissions to update records"
+      redirect_to '/resources.html'
+      return
+    end
+
     respond_to do |format|
       format.json {redirect_to "/resources/" + params[:id] + "/edit.html" }
-      format.html {}
+      format.html do
+        @resource = Resource.find(params[:id]) 
+        @locations = self.get_locations
+        @session = session
+        @has_many_hash = self.has_many_value_hash
+      end
     end
   end
 
@@ -207,6 +283,8 @@ class ResourcesController < ApplicationController
     else
       @resources = Resource.where(:approval_status => 0)
       @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
+      @all_values_hash = self.all_values_hash
+      @has_many_hash = self.has_many_value_hash
       respond_to do |format|
         format.json {@resource.to_json(:include => Resource.include_has_many_params)}
         format.html
