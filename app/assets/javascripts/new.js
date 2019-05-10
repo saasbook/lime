@@ -25,27 +25,18 @@ $(document).ready(function() {
     });
 
     function findRequiredFields() {
-        if($("#contact_email").val() === "") {
-            $("#contact_email").addClass("required_field");
-        } else {
-            $("#contact_email").removeClass("required_field");
-        }
-        if($("#title").val() === "") {
-            $("#title").addClass("required_field");
-        } else{
-            $("#title").removeClass("required_field");
-        }
-        if($("#url").val() === "") {
-            $("#url").addClass("required_field");
-        } else {
-            $("#url").removeClass("required_field");
-        }
-        if($("#desc").val() === "") {
-            $("#desc").addClass("required_field");
-        } else {
-            $("#desc").removeClass("required_field");
-        }
+        $(".required_input").each(function() {
+            if($(this).val() === "") {
+                $(this).addClass("required_field");
+            } else {
+                $(this).removeClass("required_field");
+            }
+        });
+        findRequiredLocation();
+        findRequiredTypes();
+    }
 
+    function findRequiredLocation() {
         let no_location = true;
         $("input[type='radio'][name='location']").each(function() {
             if (this.checked) {
@@ -65,7 +56,9 @@ $(document).ready(function() {
                 $(this).removeClass("checkbox_missing");
             });
         }
+    }
 
+    function findRequiredTypes() {
         let no_type = true;
         $("input[type='checkbox'][name='types[]']").each(function() {
             if (this.checked) {
