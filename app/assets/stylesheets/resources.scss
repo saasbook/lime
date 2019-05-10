@@ -589,3 +589,18 @@ select {
 .hidden-resource{
   display: none;
 }
+
+.page-item, .page-arrow {
+  cursor: pointer;
+}
+
+.page-item.disabled, .page-arrow.disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.page-item.disabled p , .page-arrow.disabled p {
+  cursor: default;
+  pointer-events: none;
+  color: gray;
+}

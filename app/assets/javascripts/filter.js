@@ -43,31 +43,92 @@ $(document).ready(function() {
     /* pagination */
 
     let numResources = $(".resource-container").length
-    console.log(numResources);
-    let numPages = Math.ceil(numResources / 10);
-    console.log(numPages);
-
-    for (let i = 2; i <= numPages; i++) {
-        $(".pagination").append('<li class="page-item"><a class="page-link" href="#' + i + '">' + i + '</a></li>');
-    }
-    if (numPages === 1) {
-        $(".pagination").append('<li class="page-item disabled"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>')
-    } else {
-        $(".pagination").append('<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>')
+    let itemsPerPage = 15;
+    let numPages = Math.ceil(numResources / itemsPerPage);
+    if (numPages > 10) {
+        itemsPerPage = Math.ceil(numResources / 10);
+        numPages = Math.ceil(numResources / itemsPerPage);
     }
 
+    for (let i = 1; i <= numPages; i++) {
+        $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
+    }
+    $(".pagination").append('<li class="page-arrow next disabled" id="next"><p id="nextLink" class="page-link nextLink">Next</p></li>');
+    if (numPages > 1) {
+        $(".next").removeClass("disabled")
+    }
     $(".resource-container").addClass("hidden-resource");
-    let count = 0;
-    $(".resource-container").each(function() {
-        if (count < 10) {
-            console.log($(this));
-            $(this).removeClass("hidden-resource");
+
+    let openPage = function(pageNum) {
+        currentPage = pageNum;
+        let start = ((pageNum - 1) * itemsPerPage) + 1;
+        let end = (pageNum * itemsPerPage);
+        let count = 1;
+        $(".resource-container").each(function() {
+            if (count >= start && count <= end) {
+                $(this).removeClass("hidden-resource");
+            } else {
+                $(this).addClass("hidden-resource");
+            }
             count++;
+        });
+    }
+
+    let setActive = function() {
+        let count = 1;
+        $(".page-item").each(function() {
+            if (count === Number(currentPage)) {
+                $(this).addClass("active"); 
+            }
+            count++;
+            if (count > numPages) {
+                count = 1;
+            }
+        });
+    }
+
+    openPage(1);
+    setActive(1);
+    var currentPage = 1;
+
+    $(".page-link").click(function() {
+        if($(this).hasClass("nextLink")) {
+            openPage(Number(currentPage) + 1);
+        } else if ($(this).hasClass("prevLink")){
+            openPage(Number(currentPage) - 1);
+        } else {
+            openPage($(this).text());
         }
+        
     });
 
+    $(".page-item").click(function() {
+        $(".page-item").removeClass("active");
+        setActive();
 
+        if (currentPage < numPages) {
+            $(".next").removeClass("disabled");
+        } else {
+            $(".next").addClass("disabled");
+        }
+        if ((currentPage >= 2)) {
+            $(".prev").removeClass("disabled");
+        } else {
+            $(".prev").addClass("disabled");
+        }    
+    });
 
+    $(".page-arrow").click(function() {
+        $(".page-item").removeClass("active"); 
+        if ($(this).hasClass("next") && currentPage >= numPages) {
+            $(".next").addClass("disabled");
+        } else if ($(this).hasClass("prev") && currentPage <= 1) {
+            $(".prev").addClass("disabled");
+        } else {
+            $(".page-arrow").removeClass("disabled")
+        }
 
+        setActive();
+    });
 
 });
