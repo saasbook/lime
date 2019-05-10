@@ -6,9 +6,6 @@ $(document).ready(function() {
         if($(this).find('input[type="checkbox"]').prop("checked") == true){
             $(this).children(".label").css({"background-color":"#96CAE7"});
         }
-    });
-    
-    $(".single_radio").each(function () {
         if($(this).find('input[type="radio"]').prop("checked") == true){
             $(this).children(".label").css({"background-color":"#96CAE7"});
         }
@@ -23,16 +20,15 @@ $(document).ready(function() {
             } else {
                 $(this).children(".label").css({"background-color":"#D8DFEB"});
             }
-        } else {
+        } else if ($(this).find('input[type="checkbox"]').prop("checked") == false){
             $(this).find('input[type="checkbox"]').prop({"checked": true});
             $(this).children(".label").css({"background-color":"#96CAE7"});
         }
-    });
-    $(".single_radio").click(function() {
-        if($(this).find('input[type="radio"]').prop("checked") == true){
+
+        if ($(this).find('input[type="radio"]').prop("checked") == true){
             $(this).find('input[type="radio"]').prop({"checked": false});
             $(this).children(".label").css({"background-color":"#D8DFEB"});
-        } else {
+        } else if ($(this).find('input[type="radio"]').prop("checked") == false){
             $(this).find('input[type="radio"]').prop({"checked": true});
             $(".loc-radio").css({"background-color":"#D8DFEB"});
             $(this).children(".loc-radio").css({"background-color":"#96CAE7"});

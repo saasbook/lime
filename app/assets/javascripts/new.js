@@ -84,7 +84,7 @@ $(document).ready(function() {
     }
 
     document.getElementById("contact_email").addEventListener("change", function(e) {
-        if (!validateEmail($("#contact_email").val())) {
+        if (!validateInput($("#contact_email").val(), "email")) {
             $("#email-valid").show();
         } else {
             $("#email-valid").hide();
@@ -92,20 +92,20 @@ $(document).ready(function() {
     });
 
     document.getElementById("contact_phone").addEventListener("change", function(e) {
-        if (!validatePhone($("#contact_phone").val())) {
+        if (!validateInput($("#contact_phone").val(), "phone")) {
             $("#phone-valid").show();
         } else {
             $("#phone-valid").hide();
         }
     });
     
-    function validateEmail(email) {
-        let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-        return pattern.test(email);
-    }
-
-    function validatePhone(phone) {
-        let pattern = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i);
-        return pattern.test(phone);
+    function validateInput(input, type) {
+        if (type === "email") {
+            let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+            return pattern.test(input);
+        } else if (type === "phone") {
+            let pattern = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i);
+            return pattern.test(input);
+        } 
     }
 });
