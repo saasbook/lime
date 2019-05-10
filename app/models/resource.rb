@@ -172,6 +172,16 @@ class Resource < ActiveRecord::Base
     end
   end
 
+  def self.find_missing_params(params)
+    missing = []
+    Resource.get_required_resources.each do |r|
+      if !params.include?(r) or params[r] == ""
+        missing.append r
+      end
+    end
+    return missing
+  end
+
   # this method is here
   # if filtering by location, filtering should behave as the following
   # if the location has no resources, find the parent location, and return resources for the parent location

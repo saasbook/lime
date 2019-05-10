@@ -28,11 +28,6 @@ class ResourcesController < ApplicationController
     }
   end
 
-  def get_locations
-    {
-        'location' => Location.get_values,
-    }
-  end
 
 
   def all_values_hash 
@@ -92,8 +87,6 @@ class ResourcesController < ApplicationController
     }
   end
 
-
-
   # assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
@@ -138,7 +131,7 @@ class ResourcesController < ApplicationController
 
   def new
     @has_many_hash = self.has_many_value_hash
-    @locations = self.get_locations
+    @locations = Location.get_locations
     @session = session
     render template: "resources/new.html.erb"
   end
@@ -148,23 +141,15 @@ class ResourcesController < ApplicationController
     #otherwise add a new object to the database
     reset_session
     @desc_too_long = false
-    @missing = []
-    Resource.get_required_resources.each do |r|
-      if !params.include?(r) or params[r] == ""
-        @missing.append r
-      end
-    end
+    @missing = Resource.find_missing_params(params)
+
     #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
     if @missing.length > 0
-      params.each do |key, val|
-        session[key] = params[key]
-      end
+      params.each {|key, val| session[key] = params[key]}
       # redirect_to :controller => 'resources', :action => 'new'
       return
     end
-    if params[:desc] != nil and params[:desc].length > 500
-      @desc_too_long = true
-    end
+    if params[:desc] != nil and params[:desc].length > 500 then @desc_too_long = true end
     if @desc_too_long
       params.each do |key, val|
         session[key] = params[key]
@@ -179,15 +164,12 @@ class ResourcesController < ApplicationController
     rp = resource_params
     rp[:approval_status] = @user == nil ? 0 : 1
     @resource = Resource.create_resource(rp)
-    if params[:location] != nil
-      Location.nest_location(params[:location])
-    end
+    if params[:location] != nil then Location.nest_location(params[:location]) end
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html {redirect_to :controller => 'resources', :action => 'new'}
     end
-
   end
 
   def update
@@ -211,7 +193,6 @@ class ResourcesController < ApplicationController
     @resource = Resource.find(new_params[:id])
 
     respond_to do |format|
-      
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html do
         flash[:notice] = "Resource updated."
@@ -262,7 +243,7 @@ class ResourcesController < ApplicationController
       format.json {redirect_to "/resources/" + params[:id] + "/edit.html" }
       format.html do
         @resource = Resource.find(params[:id]) 
-        @locations = self.get_locations
+        @locations = Location.get_locations
         @session = session
         @has_many_hash = self.has_many_value_hash
       end
@@ -313,11 +294,9 @@ class ResourcesController < ApplicationController
   end
 
   def approve_many_status
-    status = params[:approval_status]
-    if not status.nil?
-      status = status.to_i
-    else
-      status = 1
+    status = 1
+    if not params[:approval_status].nil?
+      status = params[:approval_status].to_i
     end
     return status
   end
@@ -331,4 +310,7 @@ class ResourcesController < ApplicationController
     end
     return @resources
   end
+
 end
+
+
