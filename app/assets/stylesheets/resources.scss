@@ -496,13 +496,7 @@ select {
   background-color: rgb(252, 189, 189);
 }
 
-#sign-up, #login-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 32px;
-}
+
 
 /* show */
 
@@ -577,4 +571,21 @@ select {
 
 .edit .form_step {
   background-color: #fdf8ef;
+}
+
+/* pagination */
+
+#pages {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination {
+  margin: 16px;
+}
+
+.hidden-resource{
+  display: none;
 }
