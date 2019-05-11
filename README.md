@@ -8,21 +8,22 @@
 
 * Api Usage
     * Getting an API key
+    * Api call response format
     * Basic Resource Search
     * Resource Attributes
     * Filtering searches
         * available resource types
         * location search
     * Creating new resources
-
-## Getting an API key
+## Api Usage
+### Getting an API key
 TODO : fill in
 
-## Api Calls
+### Api Call response format
 The innovation resources API supports a data response in JSON format.
 ### Basic Resource Search -- /resources
-To retrieve the total list of resources from the innovation resources database, make a GET request to the url TODO: insert full url here
-/resources?api_key="yourkey"
+To retrieve the total list of resources from the innovation resources database, make a GET request to the url 
+https://berkeley-innovation-resources.herokuapp.com/resources?api_key="yourkey"
 
 the response will be JSON in the following format
 
@@ -72,6 +73,7 @@ the response will be JSON in the following format
 * types - resource type tags
 * location - where the resource is available
 * audiences - who the resource is for 
+* contact_email - who should be contacted if there are problems with the resource
 
 **Resources may also contain the following optional attributes**
 * campuses - college campuses the resource is available to
@@ -89,13 +91,17 @@ the response will be JSON in the following format
 * notes 
 
 For more information on the values each attribute can hold, please visit
-TODOURL /resources/new.html
+https://berkeley-innovation-resources.herokuapp.com/resources/new.html
 
 ### Filtering Searches
 The API response for filtered requests will still be in JSON format.
 
 Filtered Requests should be made in the format
+https://berkeley-innovation-resources.herokuapp.com/resources?api_key="your api key"&{resource attr 1}={desired values seperated by commas}&&{resource attr 2}={desired values seperated by commas}
 
-TODO-FILL IN URL/resources?api_key="your api key"&{resource attr 1}={desired values seperated by commas}&&{resource attr 2}={desired values seperated by commas}
+### Creating new resources
+To create a new resource, make a POST request to the API in the format:
 
+https://berkeley-innovation-resources.herokuapp.com/resources?url={resource url}&title={title}&desc={description}&types="type1, type2, ..."&location="loc1, loc2"&audiences="audience1, audience2, ..."&contact_email="contact email here"
 
+you MUST have the required resource fields listed above, but may add any of the optional fields as well.
