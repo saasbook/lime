@@ -95,4 +95,10 @@ class Location < ActiveRecord::Base
   def self.get_values 
     ['Global', 'USA', 'California', 'Berkeley', 'Davis', 'Stanfurd', 'Siberia']
   end
+
+  def self.get_locations
+    {
+        'location' => Location.get_values,
+    }
+  end
 end

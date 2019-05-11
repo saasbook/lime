@@ -33,6 +33,9 @@ body {
 .resource-container:hover {
   background-color: rgb(255, 238, 203);
   transition: 250ms;
+}
+
+#unapproved .resource-container:hover {
   cursor: pointer;
 }
 
@@ -97,13 +100,16 @@ body {
   margin-top: 24px;
 }
 .filters {
-  font-size: .8rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
 }
 
-.association {
+.association, #location {
   display: flex;
   flex-direction: column;
-  margin: 32px;
+  margin: 48px 32px 16px 32px;
 }
 
 .index h2 {
@@ -132,29 +138,82 @@ body {
   color: rgb(0, 0, 0);
 }
 
+.resource-title a:link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.resource-title a:visited {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 .approve-button {
   margin: 5px;
-}
+} 
 .checkboxes {
   margin-top: .5rem;
   margin-right: .75rem;
 }
 
 
-input[type=checkbox], input[type=radio] {
-  margin: 4px;
-  width: 12px;
+#new input[type=checkbox], #new input[type=radio] {
+  display: none;
 }
 
-.single_checkbox {
-  display: flex;
-  flex-direction: row;
+
+.index input[type=checkbox], .index input[type=radio] {
+  display: none;
+}
+
+.label {
+  display: inline-block;
+  line-height: 1;
+  vertical-align: baseline;
+  margin: 0em 0.14285714em;
+  background-image: none;
+  padding: 0.5833em 0.833em;
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: none;
+  font-weight: bold;
+  border: 0px solid transparent;
+  border-radius: 0.28571429rem;
+  transition: 100ms;
+  font-size: 12px;
+}
+
+#new .label{
+  background-color: #D8DFEB;
+}
+
+.index .label {
+  background-color: rgb(255, 240, 209);
+}
+
+.label:hover {
+  cursor: pointer;
+  transition: 100ms;
+}
+
+#new .label:hover {
+  background-color: #96CAE7;
+}
+
+.index .label:hover {
+  background-color: #96CAE7;
+}
+
+#new .single_checkbox, #new .single_radio {
+  margin: 8px;
+}
+
+.index .single_checkbox, .index .single_radio {
   margin: 4px;
-  float: left;
 }
 
 #approve-all-button {
   float: right;
+  margin: 24px;
 }
 
 // new.html styles
@@ -276,9 +335,9 @@ select {
   margin: 0px;
 }
 
-#new input[type=checkbox], #new input[type=radio] {
-  margin: 8px 0px 24px 0px;
-}
+// #new input[type=checkbox], #new input[type=radio] {
+//   margin: 8px 0px 24px 0px;
+// }
 
 #suggest_form p {
   color: gray;
@@ -323,6 +382,18 @@ select {
   align-items: center;
 }
 
+.other-info {
+  width: 500px;
+}
+
+.label-desc {
+  height: 5em;
+}
+
+.label-desc-other {
+  height: 3em;
+}
+
 .checkbox, .radio {
   margin: 4px 0px 16px 0px;
   padding: 0;
@@ -362,21 +433,13 @@ select {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 8px;
 }
 
 #other_location p {
   margin: 0px 16px;
 }
 
-#new .single_checkbox {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#deadline_input {
-  width: 500px;
-}
 
 #new #form_submit {
   display: flex;
@@ -433,10 +496,111 @@ select {
   background-color: rgb(252, 189, 189);
 }
 
-#sign-up, #login-page {
+
+
+/* show */
+
+#show {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 32px;
+}
+
+#resource_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 48px;
+  box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
+  width: 50vw;
+}
+
+#show .text {
+  padding: 24px;
+  background-color: white;
+  width: 100%;
+  border: 1px solid lightgray;
+}
+
+#show .text.colored {
+  background-color: rgb(236, 238, 245);
+}
+
+#show p {
+  padding: 0;
+  margin: 0;
+}
+
+#show .text:hover {
+  background-color: #96CAE7;
+}
+
+#show-title{
+  margin-top: 32px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#show .links {
+  margin-bottom: 32px;
+  width: 50vw;
+}
+
+#edit-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  margin-bottom: 32px;
+  width: 1000px;
+}
+
+#edit-title {
+  display: flex;
+  justify-content: center;
+}
+
+.edit .form_step {
+  background-color: #fdf8ef;
+}
+
+/* pagination */
+
+#pages {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination {
+  margin: 16px;
+}
+
+.hidden-resource{
+  display: none;
+}
+
+.page-item, .page-arrow {
+  cursor: pointer;
+}
+
+.page-item.disabled, .page-arrow.disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.page-item.disabled p , .page-arrow.disabled p {
+  cursor: default;
+  pointer-events: none;
+  color: gray;
 }

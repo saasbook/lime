@@ -33,5 +33,6 @@ module Lime
 
     config.assets.precompile += %w( unapproved.js )
     config.assets.precompile += %w( new.js )
+    config.assets.precompile += %w( filter.js )
   end
 end
