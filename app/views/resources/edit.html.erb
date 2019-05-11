@@ -19,7 +19,7 @@
               <div class="input_field col">
                   <%= label_tag(:contact_email, "Contact Email", class: "required") %>
                   <p> Email for the contact person above to be sent requests to update resource information. </p>
-                  <%= text_field_tag(:contact_email, @resource.contact_email) %>
+                  <%= text_field_tag(:contact_email, @resource.contact_email, class: "required_input") %>
                   <p id="email-valid" class="invalid-text"> Invalid Email </p>
               </div>
               <div class="input_field col">
@@ -45,19 +45,19 @@
               <div class="input_field">
                   <%= label_tag(:title, "Resource name", class: "required") %>
                   <p> Title of the resource </p>
-                  <%= text_field_tag(:title, @resource.title) %>
+                  <%= text_field_tag(:title, @resource.title, class: "required_input") %>
               </div>
               <div class="input_field">
                   <%= label_tag(:url, "Resource URL", class: "required") %>
                   <p> Webpage for resource </p>
-                  <%= text_field_tag(:url, @resource.url) %>
+                  <%= text_field_tag(:url, @resource.url, class: "required_input") %>
               </div>
           </div>
 
           <div class="resource_row">
               <div class="input_field">
                   <%= label_tag(:desc, "Resource Description", class: "required") %>
-                  <%= text_area_tag(:desc, @resource.desc) %>
+                  <%= text_area_tag(:desc, @resource.desc, class: "required_input") %>
               </div>
           </div>
 
@@ -68,7 +68,7 @@
                   </div>
                   <div class="resource_checkboxes">
                       <% values.each do |val| %>
-                            <div class="single_radio">
+                            <div class="single_checkbox">
                                 <% if @resource.location == val%>
                                     <div class="label loc-radio">
                                     <%= val %>

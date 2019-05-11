@@ -25,27 +25,18 @@ $(document).ready(function() {
     });
 
     function findRequiredFields() {
-        if($("#contact_email").val() === "") {
-            $("#contact_email").addClass("required_field");
-        } else {
-            $("#contact_email").removeClass("required_field");
-        }
-        if($("#title").val() === "") {
-            $("#title").addClass("required_field");
-        } else{
-            $("#title").removeClass("required_field");
-        }
-        if($("#url").val() === "") {
-            $("#url").addClass("required_field");
-        } else {
-            $("#url").removeClass("required_field");
-        }
-        if($("#desc").val() === "") {
-            $("#desc").addClass("required_field");
-        } else {
-            $("#desc").removeClass("required_field");
-        }
+        $(".required_input").each(function() {
+            if($(this).val() === "") {
+                $(this).addClass("required_field");
+            } else {
+                $(this).removeClass("required_field");
+            }
+        });
+        findRequiredLocation();
+        findRequiredTypes();
+    }
 
+    function findRequiredLocation() {
         let no_location = true;
         $("input[type='radio'][name='location']").each(function() {
             if (this.checked) {
@@ -65,7 +56,9 @@ $(document).ready(function() {
                 $(this).removeClass("checkbox_missing");
             });
         }
+    }
 
+    function findRequiredTypes() {
         let no_type = true;
         $("input[type='checkbox'][name='types[]']").each(function() {
             if (this.checked) {
@@ -84,7 +77,7 @@ $(document).ready(function() {
     }
 
     document.getElementById("contact_email").addEventListener("change", function(e) {
-        if (!validateEmail($("#contact_email").val())) {
+        if (!validateInput($("#contact_email").val(), "email")) {
             $("#email-valid").show();
         } else {
             $("#email-valid").hide();
@@ -92,20 +85,20 @@ $(document).ready(function() {
     });
 
     document.getElementById("contact_phone").addEventListener("change", function(e) {
-        if (!validatePhone($("#contact_phone").val())) {
+        if (!validateInput($("#contact_phone").val(), "phone")) {
             $("#phone-valid").show();
         } else {
             $("#phone-valid").hide();
         }
     });
     
-    function validateEmail(email) {
-        let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-        return pattern.test(email);
-    }
-
-    function validatePhone(phone) {
-        let pattern = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i);
-        return pattern.test(phone);
+    function validateInput(input, type) {
+        if (type === "email") {
+            let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+            return pattern.test(input);
+        } else if (type === "phone") {
+            let pattern = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i);
+            return pattern.test(input);
+        } 
     }
 });

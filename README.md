@@ -91,7 +91,7 @@ the response will be JSON in the following format
 * notes 
 
 For more information on the values each attribute can hold, please visit
-TODOURL /resources/new.html
+https://berkeley-innovation-resources.herokuapp.com/resources/new.html
 
 ### Filtering Searches
 The API response for filtered requests will still be in JSON format.
