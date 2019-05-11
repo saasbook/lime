@@ -46,7 +46,13 @@ RSpec.describe ResourcesController, :type => :controller do
       response = get :new, params: {}
       expect(response.status).to eq 200
     end
+  end
 
+  describe "GET edit" do
+    it "does not allow guests to visit the edit page for a resource" do
+      response = get :edit, params: {id: 1}
+      response.should redirect_to '/resources.html'
+    end
   end
 
   describe "PATCH update" do
