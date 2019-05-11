@@ -1,0 +1,3 @@
+class BugReport < ApplicationRecord
+
+end

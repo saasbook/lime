@@ -23,8 +23,9 @@
         <a class="btn btn-info nav-link nav-item" href="/faq/index.html">FAQ</a>     
       </div>
       <div id="right-nav">
-        
+        <%= link_to('Submit a Bug Report', new_bug_report_path, method: :get, class: 'btn btn-success admin-button') %>
         <% if user_signed_in? %>
+          <%= link_to('See Bug Reports', bug_reports_path, method: :get, class: 'btn btn-success admin-button') %>
           <%= link_to('Edit Account', edit_user_registration_path, method: :get, class: 'btn btn-success admin-button') %>
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-warning admin-button') %>
         <% else %>

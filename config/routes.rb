@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bug_reports
   get 'faq/index'
   get 'welcome/index'
   get 'resources/unapproved', to: 'resources#unapproved'
