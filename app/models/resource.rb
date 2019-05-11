@@ -208,6 +208,62 @@ class Resource < ActiveRecord::Base
     return ["title", "url", "contact_email", "location", "types", "audiences", "desc"]
   end
 
+  def self.all_values_hash
+    {
+        "Contact Email" => "contact_email",
+        "Contact Name" => "contact_name",
+        "Contact Phone" => "contact_phone",
+        "URL" => "url",
+        "Description" => "desc",
+        "Location" => "location",
+        "Resource Email" => "resource_email",
+        "Resource Phone" => "resource_phone",
+        "Address" => "address",
+        "Funding Amount" => "funding_amount",
+        "Deadline" => "deadline",
+        "Notes" => "notes",
+        'Types' => "types",
+        'Audiences' => "audiences",
+        'Campuses' => "campuses",
+        'Innovation Stages' => "innovation_stages",
+        'Population Focuses' => "population_focuses",
+        'Availabilities' => "availabilities",
+        'Topics' => "topics",
+        'Technologies' => "technologies",
+        'Client tags' => "client_tags",
+        "Approval Status" => "approval_status",
+        "Approved By" => "approved_by",
+        "Flagged" => "flagged",
+        "Flagged Comment" => "flagged_comment",
+        "Created At" => "created_at",
+        "Updated At" => "updated_at"
+    }
+  end
+
+  def self.all_public_values_hash
+    {
+        "URL" => "url",
+        "Description" => "desc",
+        "Location" => "location",
+        "Resource Email" => "resource_email",
+        "Resource Phone" => "resource_phone",
+        "Address" => "address",
+        "Funding Amount" => "funding_amount",
+        "Deadline" => "deadline",
+        "Notes" => "notes",
+        'Types' => "types",
+        'Audiences' => "audiences",
+        'Campuses' => "campuses",
+        'Innovation Stages' => "innovation_stages",
+        'Population Focuses' => "population_focuses",
+        'Availabilities' => "availabilities",
+        'Topics' => "topics",
+        'Technologies' => "technologies",
+        'Client tags' => "client_tags",
+        "Created At" => "created_at",
+        "Updated At" => "updated_at"
+    }
+  end
 end
 
 
