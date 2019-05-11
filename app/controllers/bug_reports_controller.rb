@@ -1,5 +1,6 @@
 class BugReportsController < ApplicationController
   before_action :set_bug_report, only: [:show, :edit, :update, :destroy]
+  before_action :access_control, only: [:index, :show, :edit, :update, :destroy]
 
   # GET /bug_reports
   # GET /bug_reports.json
@@ -67,6 +68,13 @@ class BugReportsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_bug_report
       @bug_report = BugReport.find(params[:id])
+    end
+
+    def access_control
+      if !user_signed_in?
+        flash[:alert] = "You must be logged in to access this page"
+        redirect_to welcome_index_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
