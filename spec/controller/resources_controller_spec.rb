@@ -22,6 +22,16 @@ RSpec.describe ResourcesController, :type => :controller do
     end
   end
 
+  describe 'only allows admins to GET unapproved resources' do
+
+    it 'doesnt allows guests to view GET unapproved resources' do
+      User.delete_all
+      response = get :unapproved, params: {}, :format => :json
+      expect(response.status).to eq 400
+    end
+
+  end
+
   describe "POST create" do
     it 'calls the correct model method' do
       params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions", approval_status: 0})
@@ -31,6 +41,13 @@ RSpec.describe ResourcesController, :type => :controller do
     end
   end
 
+  describe "GET new" do
+    it 'succeeds' do
+      response = get :new, params: {}
+      expect(response.status).to eq 200
+    end
+
+  end
 
   describe "PATCH update" do
     it 'calls the correct model method' do
@@ -62,6 +79,8 @@ RSpec.describe ResourcesController, :type => :controller do
       expect(Resource).to receive(:update_resource).with(resource.id.to_s, params)
       patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', desc: "descriptions", contact_name: "contact", api_key: "example"}, :format => :json
     end
+
+
 
     it "doesn't call update for guests who try to update values they are not permitted to" do
       resource = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
