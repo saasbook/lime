@@ -150,6 +150,10 @@ When /I press "(.*)"/ do |button|
   click_button(button)
 end
 
+When /I follow "(.*)"/ do |link|
+  click_link link
+end
+
 When /I choose "(.*)" for "(.*)"/ do |value, field|
   choose(:id => value)
 end
@@ -171,6 +175,14 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
+end
+
+Then /I should see the text "(.*)"/ do |text|
   if page.respond_to? :should
     page.should have_content(text)
   else
