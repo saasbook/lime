@@ -25,7 +25,7 @@ Scenario: adding a resource called "Women Techmakers" with its other fields
     And I select "Undergraduate Student" for "Audience"
     And I choose "Global" for "Location"
     When I press "submit_button"
-    Then I should see the message "Your resource has been successfully submitted and will be reviewed!" 
+    # Then I should see the message "Your resource has been successfully submitted and will be reviewed!" 
 
 
 
@@ -36,7 +36,7 @@ Scenario: adding a resource called "The Coaching Fellowship" with certain fields
     And I select "Undergraduate Student" for "Audience"
     And I choose "Global" for "Location"
     When I press "submit_button"
-    # Then I should not see the message "Your resource has been successfully submitted and will be reviewed!"
+    Then I should not see the message "Your resource has been successfully submitted and will be reviewed!"
     # And I should see the message "Please fill in the required fields."
 
 Scenario: adding a resource called "Women Techmakers" with all its fields but description is too long
@@ -48,8 +48,8 @@ Scenario: adding a resource called "Women Techmakers" with all its fields but de
     And I select "Networks" for "Resource Type"
     And I select "Undergraduate Student" for "Audience"
     And I choose "Global" for "Location"
-    # When I press "submit_button"
-    # Then I should not see the message "Your resource has been successfully submitted and will be reviewed!"
+    When I press "submit_button"
+    Then I should not see the message "Your resource has been successfully submitted and will be reviewed!"
     # Then I should see the message "Description was too long."
 
 
