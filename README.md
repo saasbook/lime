@@ -60,8 +60,6 @@ the response will be JSON in the following format
  "client_tags":[{"val":"WITI"}],  
  "population_focuses":[{"val":"Women"},{"val":"Under-represented minority"}],   
  "campuses":[{"val":"Berkeley"}],   
- "colleges":[{"id":1,"resource_id":1,"val":"","created_at":"2019-05-06T19:48:21.057Z", 
- "updated_at":"2019-05-06T19:48:21.057Z"}],   
  "availabilities":[{"val":"Summer"}],   
  "innovation_stages":[{"val":""}],   
  "topics":[{"val":"Education", "Learning"}],   
