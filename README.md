@@ -85,6 +85,8 @@ https://berkeley-innovation-resources.herokuapp.com.
 To Make location searching for the API smarter, when filtering by location, the api will also return resources with 
 locations that are "children" of the location that is being filtered by. For instance, if you were to filter by "california", the api
 will also return resources that are located in "berkeley" or "davis", or any other location within California.
+
+This location nesting is done when resources are added, and is done using the geocoder gem : https://github.com/alexreisner/geocoder.
 ### Resource attributes
 **All Resources have the following required attributes**
 * id - database id of resource
