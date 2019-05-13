@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<h1 id="title">Bug Reports</h1>
+
+<br/>
+
+<div class= "container" id="bug-report-container">
+  <% @bug_reports.each do |bug_report| %>
+    <% unless bug_report.closed %>
+      <div class="row bug-report-description">
+        <%= bug_report.desc %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= link_to 'New Bug Report', new_bug_report_path %>
+</div>
+
+

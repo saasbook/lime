@@ -27,6 +27,7 @@ Scenario: adding a resource called "Women Techmakers" with its other fields
     When I press "submit_button"
     # Then I should see the message "Your resource has been successfully submitted and will be reviewed!" 
 
+<<<<<<< HEAD
 
 
 Scenario: adding a resource called "The Coaching Fellowship" with certain fields missing
@@ -53,6 +54,8 @@ Scenario: adding a resource called "Women Techmakers" with all its fields but de
     # Then I should see the message "Description was too long."
 
 
+=======
+>>>>>>> origin
 Scenario: adding a resource called "Society of Women Engineers" with its fields
     When I make a POST request to "/resources" with parameters: 
       | title                        | url | contact_email | location | types | audiences | desc| population_focuses |

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_181847) do
+ActiveRecord::Schema.define(version: 2019_05_11_182046) do
 
   create_table "audiences", force: :cascade do |t|
     t.integer "resource_id"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 2019_04_15_181847) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_availabilities_on_resource_id"
+  end
+
+  create_table "bug_reports", force: :cascade do |t|
+    t.string "desc"
+    t.boolean "closed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "campuses", force: :cascade do |t|

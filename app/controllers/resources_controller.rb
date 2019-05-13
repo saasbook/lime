@@ -150,17 +150,11 @@ class ResourcesController < ApplicationController
     elsif not [0, 1].include? status
       approve_many_sad_path("Approval status must be either 0 or 1.", 403)
       return
-    elsif lst == 'all'
-      Resource.where(:approval_status => 0).each do |resource|
-        Resource.update(resource.id, :approval_status => status)
-      end
-      @resources = Resource.all
+    elsif (lst != 'all') and (lst.blank? or lst.any? {|id| not id.scan(/\D/).empty?})
+      approve_many_sad_path("Approval list not formatted correctly.", 400)
+      return
     else
-      if (lst.blank? or lst.any? {|id| not id.scan(/\D/).empty?})
-        approve_many_sad_path("Approval list not formatted correctly.", 400)
-        return
-      end
-      @resources = update_approvals_in_list(lst)
+      @resources = get_resources(lst)
     end
 
     respond_to do |format|
@@ -170,6 +164,19 @@ class ResourcesController < ApplicationController
         redirect_to "/resources.html"
       end
     end
+  end
+
+  def get_resources(lst)
+    resources = []
+    if lst == 'all'
+      Resource.where(:approval_status => 0).each do |resource|
+        Resource.update(resource.id, :approval_status => status)
+      end
+      resources = Resource.all
+    else
+      resources = update_approvals_in_list(lst)
+    end
+    return resources
   end
 
   def edit
@@ -195,7 +202,6 @@ class ResourcesController < ApplicationController
   end
 
   def unapproved
-
     if @user.nil?
       if request.format.json?
         render status: 400, json: {}.to_json
