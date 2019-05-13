@@ -6,6 +6,7 @@
 
 ## Table of contents
 
+* Running up the app locally
 * Api Usage
     * Getting an API key
     * Api call response format
@@ -15,9 +16,15 @@
         * available resource types
         * location search
     * Creating new resources
+## Running up the app locally
+To set up and run the app locally, first run the command  
+rake db:reset  
+Then set up the app as normal, rake db:setup, and rails s. You MUST run rake db:reset first or you will encounter errors. 
 ## Api Usage
 ### Getting an API key
-TODO : fill in
+Login to your profile on the website at   
+https://berkeley-innovation-resources.herokuapp.com/users/sign_in  
+then press the "view api key" button, and an alert will flash with your API key
 
 ### Api Call response format
 The innovation resources API supports a data response in JSON format.
@@ -28,38 +35,38 @@ https://berkeley-innovation-resources.herokuapp.com/resources?api_key="yourkey"
 the response will be JSON in the following format
 
 [
-{"id":1,
- "title":"Resource Title", 
- "url":"www.exampleurl.com", 
- "contact_email":"foo@exampleurl.com", 
- "desc":"description string", 
- "resource_email":"foo@exampleurl.com", 
- "resource_phone":"(100) 100-1000", 
- "address":"101 Sproul Hall, Berkeley, CA 94720", 
- "contact_name":"name", 
- "contact_phone":"phone number", 
- "deadline":"2019-01-03T00:00:00.000Z", 
- "notes":"any notes on the resource", 
- "funding_amount":"10000", 
- "location":"Bay Area", 
- "approval_status":1, 
- "approved_by":"", 
- "flagged":null, 
- "flagged_comment":"", 
- "created_at":"2019-05-06T19:48:20.949Z", 
- "updated_at":"2019-05-06T19:48:20.949Z", 
- "types":[{"val":"Events"},{"val":"Mentoring"}], 
- "audiences":[{"val":"Other"}], 
- "client_tags":[{"val":"WITI"}],
- "population_focuses":[{"val":"Women"},{"val":"Under-represented minority"}], 
- "campuses":[{"val":"Berkeley"}], 
+{"id":1,  
+ "title":"Resource Title",   
+ "url":"www.exampleurl.com",   
+ "contact_email":"foo@exampleurl.com",   
+ "desc":"description string",   
+ "resource_email":"foo@exampleurl.com",   
+ "resource_phone":"(100) 100-1000",   
+ "address":"101 Sproul Hall, Berkeley, CA 94720",   
+ "contact_name":"name",   
+ "contact_phone":"phone number",   
+ "deadline":"2019-01-03T00:00:00.000Z",   
+ "notes":"any notes on the resource",   
+ "funding_amount":"10000",   
+ "location":"Bay Area",   
+ "approval_status":1,   
+ "approved_by":"",   
+ "flagged":null,   
+ "flagged_comment":"",   
+ "created_at":"2019-05-06T19:48:20.949Z",   
+ "updated_at":"2019-05-06T19:48:20.949Z",   
+ "types":[{"val":"Events"},{"val":"Mentoring"}],   
+ "audiences":[{"val":"Other"}],   
+ "client_tags":[{"val":"WITI"}],  
+ "population_focuses":[{"val":"Women"},{"val":"Under-represented minority"}],   
+ "campuses":[{"val":"Berkeley"}],   
  "colleges":[{"id":1,"resource_id":1,"val":"","created_at":"2019-05-06T19:48:21.057Z", 
- "updated_at":"2019-05-06T19:48:21.057Z"}], 
- "availabilities":[{"val":"Summer"}], 
- "innovation_stages":[{"val":""}], 
- "topics":[{"val":"Education \u0026 Learning"}], 
- "technologies":[{"val":""}]}
-{"id":2 
+ "updated_at":"2019-05-06T19:48:21.057Z"}],   
+ "availabilities":[{"val":"Summer"}],   
+ "innovation_stages":[{"val":""}],   
+ "topics":[{"val":"Education", "Learning"}],   
+ "technologies":[{"val":""}]}  
+{"id":2   
 ...
 }
  ]
