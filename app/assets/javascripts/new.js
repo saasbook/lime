@@ -75,30 +75,26 @@ $(document).ready(function() {
             });
         }
     }
-
-    document.getElementById("contact_email").addEventListener("change", function(e) {
-        if (!validateInput($("#contact_email").val(), "email")) {
-            $("#email-valid").show();
-        } else {
-            $("#email-valid").hide();
-        }
-    });
-
-    document.getElementById("contact_phone").addEventListener("change", function(e) {
-        if (!validateInput($("#contact_phone").val(), "phone")) {
-            $("#phone-valid").show();
-        } else {
-            $("#phone-valid").hide();
-        }
+    
+    $(".validate-input").each(function() {
+        $(this).change(function(e) {
+            let value = $(this).val();
+            let type = $(this).attr('id');
+            if(!validateInput(value, type)) {
+                $("#" + type.substring(8) + "-valid").show();
+            } else {
+                $("#" + type.substring(8) + "-valid").hide();
+            }
+        });
     });
     
     function validateInput(input, type) {
-        if (type === "email") {
+        if (type === "contact_email") {
             let pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
             return pattern.test(input);
-        } else if (type === "phone") {
+        } else if (type === "contact_phone") {
             let pattern = new RegExp(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/i);
             return pattern.test(input);
-        } 
+        }
     }
 });
