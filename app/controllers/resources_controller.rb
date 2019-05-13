@@ -202,7 +202,6 @@ class ResourcesController < ApplicationController
   end
 
   def unapproved
-
     if @user.nil?
       if request.format.json?
         render status: 400, json: {}.to_json

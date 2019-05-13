@@ -11,8 +11,8 @@ Feature: view extra info on a resource
 	      | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women | Research | 1 |
 
     Scenario: viewing more info on a resource
-    	Given I am on "/resources.html/"
-    	When I follow "More info"
-    	Then I should see the text "Innovation Stages:"
-    	Then I should see the text "Research"
+        Given I am on "/resources.html/"
+        When I follow "More info"
+        Then I should see the text "Innovation Stages:"
+        Then I should see the text "Research"
 
