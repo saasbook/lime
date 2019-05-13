@@ -27,6 +27,7 @@
         <% if user_signed_in? %>
           <%= link_to('See Bug Reports', bug_reports_path, method: :get, class: 'btn btn-success admin-button') %>
           <%= link_to('Edit Account', edit_user_registration_path, method: :get, class: 'btn btn-success admin-button') %>
+          <%= link_to('View API Key', showkey_user_path, method: :get, class: 'btn btn-success admin-button') %>
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-warning admin-button') %>
         <% else %>
           <%= link_to('Admin Login', new_user_session_path, class: 'btn btn-success admin-button')  %>

@@ -138,6 +138,11 @@ end
 Given /^(?:|I )am on "(.+)"$/ do |page_name|
   visit page_name
 end
+
+When /I (?:try to )visit "(.*)"$/ do |page_name|
+  visit page_name
+end
+
 When /I fill in "(.*)" with "(.*)"/ do |field, value|
   fill_in(field, :with => value)
 end
@@ -247,4 +252,8 @@ end
 
 Then /I should see all the unapproved resources/ do
   expect(Resource.where(:approval_status => 0).all? {|r| page.should have_content r.title}).to be true
+end
+
+Then /I should be on the welcome page/ do
+  expect(page.find('#welcome-title').text).to eq "UC Berkeley Innovation Resource Database"
 end
