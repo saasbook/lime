@@ -138,6 +138,11 @@ end
 Given /^(?:|I )am on "(.+)"$/ do |page_name|
   visit page_name
 end
+
+When /I (?:try to )visit "(.*)"$/ do |page_name|
+  visit page_name
+end
+
 When /I fill in "(.*)" with "(.*)"/ do |field, value|
   fill_in(field, :with => value)
 end
@@ -148,6 +153,10 @@ end
 
 When /I press "(.*)"/ do |button|
   click_button(button)
+end
+
+When /I follow "(.*)"/ do |link|
+  click_link link
 end
 
 When /I choose "(.*)" for "(.*)"/ do |value, field|
@@ -171,6 +180,14 @@ Then /I should not receive a JSON/ do
 end
 
 Then /I should see the message "(.*)"/ do |text|
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
+end
+
+Then /I should see the text "(.*)"/ do |text|
   if page.respond_to? :should
     page.should have_content(text)
   else
@@ -235,4 +252,8 @@ end
 
 Then /I should see all the unapproved resources/ do
   expect(Resource.where(:approval_status => 0).all? {|r| page.should have_content r.title}).to be true
+end
+
+Then /I should be on the welcome page/ do
+  expect(page.find('#welcome-title').text).to eq "UC Berkeley Innovation Resource Database"
 end

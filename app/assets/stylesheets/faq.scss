@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .section-title{
   text-align: center;
   padding-top: .8em;
@@ -11,26 +10,65 @@
   margin-bottom: 1em;
 }
 
-.faq-list {
-  overflow: hidden;
-  width: 520px;
-  margin-left: auto;
-  margin-right: auto;
+body {padding: 100px 20px;}
+.accordion {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
 }
 
-.faq-item-name {
+.accordion input[type="radio"] {
+  display: none;
+}
+.accordion input[type="radio"] ~ .accordionContent {display: none;}
+.accordion input[type="radio"]:checked ~ .accordionContent {display: block;}
+
+.accordion .accordionBlock {
+  margin-bottom: 5px;
+  display: block;
+  width: 100%;
   float: left;
-  margin-right: 5%;
-  width: 30%;
-  color: blue;
 }
 
-.faq-item-text {
+.accordion .accordionBlock .accordionContent {
+  border:1px solid #eee;
+  border-top: 0 none;
+  width: 100%;
   float: left;
-  width: 55%;
-  margin-bottom: 2em;
+  padding: 10px;
+  font-weight: 400;
+}
 
-  p {
-    margin: 0;
+.accordion .accordionBlock label {
+  background: #f5f5f5;
+  width: 100%;
+  border:1px solid #eee;
+  padding: 10px;
+  margin-bottom: 0;
+  float: left;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  cursor:pointer;}
+.accordion input[type="radio"]:checked ~ label {
+  border-bottom: 0 none;
+  background: #ccc;
+}
+
+.accordion .accordionBlock .accordionContent {
+  animation: 1s fadeInAccordion;
+  animation-fill-mode: forwards;
+  visibility: hidden;
+  font-size:13px;
+  line-height:18px}
+
+
+@keyframes fadeInAccordion {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
   }
 }
