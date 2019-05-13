@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @bug_report.desc %>
+</p>
+
+<p>
+  <strong>Closed:</strong>
+  <%= @bug_report.closed %>
+</p>
+
+<%= link_to 'Edit', edit_bug_report_path(@bug_report) %> |
+<%= link_to 'Back', bug_reports_path %>

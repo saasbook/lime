@@ -1,0 +1,29 @@
+// Place all the styles related to the bug_reports controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#title {
+  width: 15%;
+  margin: 0 auto;
+}
+#bug-report-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.bug-report-description:hover {
+  background-color: rgb(255, 238, 203);
+  transition: 250ms;
+}
+
+.bug-report-description {
+  justify-content: center;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  margin: .5rem 0 .5rem 0;
+}
+
+.resource-container:hover {
+  background-color: rgb(255, 238, 203);
+  transition: 250ms;
+}
