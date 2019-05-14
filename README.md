@@ -6,64 +6,87 @@
 
 ## Table of contents
 
+* Running up the app locally
 * Api Usage
     * Getting an API key
     * Api call response format
     * Basic Resource Search
-    * Resource Attributes
     * Filtering searches
-        * available resource types
-        * location search
+        * location filtering
+    * Resource Attributes    
     * Creating new resources
+## Running up the app locally
+To set up and run the app locally, first run the command  
+rake db:reset  
+Then set up the app as normal, rake db:setup, and rails s. You MUST run rake db:reset first or you will encounter errors. 
 ## Api Usage
 ### Getting an API key
-TODO : fill in
+Login to your profile on the website at   
+https://berkeley-innovation-resources.herokuapp.com/users/sign_in  
+then press the "view api key" button, and an alert will flash with your API key
 
 ### Api Call response format
 The innovation resources API supports a data response in JSON format.
 ### Basic Resource Search -- /resources
-To retrieve the total list of resources from the innovation resources database, make a GET request to the url 
-https://berkeley-innovation-resources.herokuapp.com/resources?api_key="yourkey"
+To retrieve the total list of resources from the innovation resources database, make a GET request 
+```
+GET /resources?api_key="yourkey"
+```
 
 the response will be JSON in the following format
 
-[
-{"id":1,
- "title":"Resource Title", 
- "url":"www.exampleurl.com", 
- "contact_email":"foo@exampleurl.com", 
- "desc":"description string", 
- "resource_email":"foo@exampleurl.com", 
- "resource_phone":"(100) 100-1000", 
- "address":"101 Sproul Hall, Berkeley, CA 94720", 
- "contact_name":"name", 
- "contact_phone":"phone number", 
- "deadline":"2019-01-03T00:00:00.000Z", 
- "notes":"any notes on the resource", 
- "funding_amount":"10000", 
- "location":"Bay Area", 
- "approval_status":1, 
- "approved_by":"", 
- "flagged":null, 
- "flagged_comment":"", 
- "created_at":"2019-05-06T19:48:20.949Z", 
- "updated_at":"2019-05-06T19:48:20.949Z", 
- "types":[{"val":"Events"},{"val":"Mentoring"}], 
- "audiences":[{"val":"Other"}], 
- "client_tags":[{"val":"WITI"}],
- "population_focuses":[{"val":"Women"},{"val":"Under-represented minority"}], 
- "campuses":[{"val":"Berkeley"}], 
- "colleges":[{"id":1,"resource_id":1,"val":"","created_at":"2019-05-06T19:48:21.057Z", 
- "updated_at":"2019-05-06T19:48:21.057Z"}], 
- "availabilities":[{"val":"Summer"}], 
- "innovation_stages":[{"val":""}], 
- "topics":[{"val":"Education \u0026 Learning"}], 
- "technologies":[{"val":""}]}
-{"id":2 
+```[
+{"id":1,  
+ "title":"Resource Title",   
+ "url":"www.exampleurl.com",   
+ "contact_email":"foo@exampleurl.com",   
+ "desc":"description string",   
+ "resource_email":"foo@exampleurl.com",   
+ "resource_phone":"(100) 100-1000",   
+ "address":"101 Sproul Hall, Berkeley, CA 94720",   
+ "contact_name":"name",   
+ "contact_phone":"phone number",   
+ "deadline":"2019-01-03T00:00:00.000Z",   
+ "notes":"any notes on the resource",   
+ "funding_amount":"10000",   
+ "location":"Bay Area",   
+ "approval_status":1,   
+ "approved_by":"",   
+ "flagged":null,   
+ "flagged_comment":"",   
+ "created_at":"2019-05-06T19:48:20.949Z",   
+ "updated_at":"2019-05-06T19:48:20.949Z",   
+ "types":[{"val":"Events"},{"val":"Mentoring"}],   
+ "audiences":[{"val":"Other"}],   
+ "client_tags":[{"val":"WITI"}],  
+ "population_focuses":[{"val":"Women"},{"val":"Under-represented minority"}],   
+ "campuses":[{"val":"Berkeley"}],   
+ "availabilities":[{"val":"Summer"}],   
+ "innovation_stages":[{"val":""}],   
+ "topics":[{"val":"Education", "Learning"}],   
+ "technologies":[{"val":""}]}  
+{"id":2   
 ...
 }
  ]
+ ```
 
+### Filtering Searches
+The API response for filtered requests will still be in JSON format.
+
+Filtered Requests should be made in the format
+```
+GET /resources?api_key="yourkey"&{resource attr 1}={desired values seperated by commas}&&{resource attr 2}={desired values seperated by commas}
+
+```
+to 
+https://berkeley-innovation-resources.herokuapp.com.
+#### Location filtering
+To Make location searching for the API smarter, when filtering by location, the api will also return resources with 
+locations that are "children" of the location that is being filtered by. For instance, if you were to filter by "california", the api
+will also return resources that are located in "berkeley" or "davis", or any other location within California.
+
+This location nesting is done when resources are added, and is done using the geocoder gem : https://github.com/alexreisner/geocoder.
 ### Resource attributes
 **All Resources have the following required attributes**
 * id - database id of resource
@@ -93,15 +116,12 @@ the response will be JSON in the following format
 For more information on the values each attribute can hold, please visit
 https://berkeley-innovation-resources.herokuapp.com/resources/new.html
 
-### Filtering Searches
-The API response for filtered requests will still be in JSON format.
-
-Filtered Requests should be made in the format
-https://berkeley-innovation-resources.herokuapp.com/resources?api_key="your api key"&{resource attr 1}={desired values seperated by commas}&&{resource attr 2}={desired values seperated by commas}
-
 ### Creating new resources
 To create a new resource, make a POST request to the API in the format:
+```
+POST /resources?url={resource url}&title={title}&desc={description}&types="type1, type2, ..."&location="loc1, loc2"&audiences="audience1, audience2, ..."&contact_email="contact email here"
 
-https://berkeley-innovation-resources.herokuapp.com/resources?url={resource url}&title={title}&desc={description}&types="type1, type2, ..."&location="loc1, loc2"&audiences="audience1, audience2, ..."&contact_email="contact email here"
-
+```
+to 
+https://berkeley-innovation-resources.herokuapp.com.
 you MUST have the required resource fields listed above, but may add any of the optional fields as well.
