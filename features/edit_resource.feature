@@ -15,7 +15,6 @@ Feature: edit a resource through view
 	      | email                        | api_token | password |
 	      | example@example.com          | example      | password |
 
-		@javascript
   	Scenario: edit a resource
   		Given I am logged in with user "example@example.com" and password "password"
   		And I am on "/resources.html/"
@@ -24,10 +23,8 @@ Feature: edit a resource through view
   		And I select "Events" for "Resource Type"
 			# Then show me the page
   		And I press "submit_button"
-			
-  		# Then I should see the message "Resource updated."
+  		Then I should see the message "Resource updated."
   		And when I follow "View Resource"
-			Then show me the page
   		Then I should see the text "swe@gmail.com"
   		Then I should see the text "Events"
 

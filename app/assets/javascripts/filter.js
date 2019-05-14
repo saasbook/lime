@@ -12,7 +12,11 @@ $(document).ready(function() {
 
     $(".single_checkbox").click(function() {
         if ($(this).find('input[type="radio"]').prop("checked") == false){
-            $(".loc-radio").css({"background-color":"#D8DFEB"});
+            if ($(this).hasClass("gold_label")) {
+                $(".loc-radio").css({"background-color":"rgb(255, 240, 209)"});
+            } else {
+                $(".loc-radio").css({"background-color":"#D8DFEB"});
+            }
         }
 
 

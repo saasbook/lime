@@ -14,6 +14,21 @@
         </div>
       </div>
 
+      <div class="association">
+        <h2>Location</h2>
+        <% @locations.each do |association, values| %>
+          <div class="filters">
+            <% values.each do |val| %>
+              <div class="single_checkbox gold_label">
+                <div class="label loc-radio"><%= val %></div>
+                <%= radio_button_tag association, val, false, class: "radio", id: val %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        
+      </div>
+
       <% @has_many_hash.each do |association, values| %>
         <div class="association">
           <h2><%= association.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ") %></h2>

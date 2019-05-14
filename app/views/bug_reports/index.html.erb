@@ -9,6 +9,7 @@
     <% unless bug_report.closed %>
       <div class="row bug-report-description">
         <%= bug_report.desc %>
+        <%= link_to("View", "/bug_reports/" + bug_report.id.to_s + ".html", class: "bug-btn") %>
       </div>
     <% end %>
   <% end %>

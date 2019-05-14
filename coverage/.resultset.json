@@ -919,6 +919,7 @@
         null,
         null,
         4,
+        4,
         null,
         4,
         6,
@@ -995,7 +996,6 @@
         null,
         13,
         6,
-        null,
         6,
         6,
         null,
@@ -1149,7 +1149,6 @@
         1,
         null,
         1,
-        null,
         1,
         1,
         1,
@@ -1244,8 +1243,6 @@
         null,
         null,
         1,
-        null,
-        null,
         1,
         null,
         1,
@@ -1327,7 +1324,6 @@
         1,
         1,
         null,
-        1,
         1,
         1,
         null,
@@ -1535,7 +1531,6 @@
         73,
         null,
         null,
-        null,
         36,
         36,
         37,
@@ -1547,7 +1542,6 @@
         0,
         null,
         2,
-        null,
         null,
         null,
         null,
@@ -1640,7 +1634,6 @@
         1,
         96,
         96,
-        null,
         960,
         960,
         187,
@@ -1842,11 +1835,6 @@
         null,
         null
       ],
-      "/Users/antonio/Documents/2019/lime/app/models/college.rb": [
-        1,
-        1,
-        null
-      ],
       "/Users/antonio/Documents/2019/lime/app/models/location.rb": [
         1,
         null,
@@ -1943,14 +1931,19 @@
         null,
         null,
         1,
-        1,
+        5,
         null,
         null,
         1,
         null,
+        5,
+        null,
+        null,
+        null
+      ],
+      "/Users/antonio/Documents/2019/lime/app/models/college.rb": [
         1,
-        null,
-        null,
+        1,
         null
       ],
       "/Users/antonio/Documents/2019/lime/app/models/edit.rb": [
@@ -1958,6 +1951,6 @@
         null
       ]
     },
-    "timestamp": 1557773377
+    "timestamp": 1557801817
   }
 }

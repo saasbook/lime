@@ -45,6 +45,7 @@ class ResourcesController < ApplicationController
     end
 
     @has_many_hash = self.has_many_value_hash
+    @locations = Location.get_locations
 
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params)}
@@ -121,7 +122,6 @@ class ResourcesController < ApplicationController
     # Don't let guests update anything unless the params are "allowed"
     if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
       flash[:notice] = "You don't have permissions to update records"
-      # puts "You don't have permissions to update records"
       redirect_to :controller => 'resources', :action => 'edit'
       return
     end

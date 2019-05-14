@@ -10,7 +10,6 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
                                "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
       result = Resource.all.order(:title)
-      # puts result.inspect
       expect(result.count).to eq 2
       expect(result.first.title).to eq "thing1"
       expect(result.second.title).to eq "thing2"
@@ -105,8 +104,6 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
 
 
     it 'gets child locations' do
-      # puts Resource.all.pretty_print_inspect
-      # puts Location.all.pretty_print_inspect
       result = Resource.location_helper({:location => "California"})
 
       expect(result.count).to eq 2

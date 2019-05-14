@@ -152,9 +152,7 @@ When /I select "(.*)" for "(.*)"/ do |value, field|
 end
 
 When /I press "(.*)"/ do |button|
-  # Capybara.default_driver = :selenium
   click_button(button)
-  page.execute_script("postSubmit()")
 end
 
 When /I follow "(.*)"/ do |link|
