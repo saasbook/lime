@@ -30,6 +30,20 @@ $(document).ready(function() {
         }
     });
 
+    function buttonPost() {
+        var form = $("#form_section");
+        if (validate()) {
+            $.ajax({ 
+                url   : form.attr('action'),
+                type  : form.attr('method'),
+                data  : form.serialize()
+           });
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function findRequiredFields() {
         $(".required_input").each(function() {
             if($(this).val() === "") {

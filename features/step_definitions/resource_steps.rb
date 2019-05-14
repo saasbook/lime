@@ -152,7 +152,9 @@ When /I select "(.*)" for "(.*)"/ do |value, field|
 end
 
 When /I press "(.*)"/ do |button|
+  # Capybara.default_driver = :selenium
   click_button(button)
+  page.execute_script("postSubmit()")
 end
 
 When /I follow "(.*)"/ do |link|
@@ -161,6 +163,10 @@ end
 
 When /I choose "(.*)" for "(.*)"/ do |value, field|
   choose(:id => value)
+end
+
+Then /show me the page/ do
+  save_and_open_page
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
