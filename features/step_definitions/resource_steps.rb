@@ -163,6 +163,10 @@ When /I choose "(.*)" for "(.*)"/ do |value, field|
   choose(:id => value)
 end
 
+Then /show me the page/ do
+  save_and_open_page
+end
+
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   json = JSON.parse(@response.body)
   string = JSON.generate(json)

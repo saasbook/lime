@@ -9,12 +9,11 @@ Feature: edit a resource through view
   
 	    Given the following resources exist:
 	      | title                        | url | contact_email | location | types | audiences | desc| population_focuses | approval_status |
-	      | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women | 1 |
+	      | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Alumni | placeholder | Women | 1 |
 
 	    And the following users exist:
 	      | email                        | api_token | password |
 	      | example@example.com          | example      | password |
-
 
   	Scenario: edit a resource
   		Given I am logged in with user "example@example.com" and password "password"
@@ -22,6 +21,7 @@ Feature: edit a resource through view
   		And I follow "Edit"
   		And I fill in "Contact Email" with "swe@gmail.com"
   		And I select "Events" for "Resource Type"
+			# Then show me the page
   		And I press "submit_button"
   		Then I should see the message "Resource updated."
   		And when I follow "View Resource"

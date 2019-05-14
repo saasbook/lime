@@ -55,7 +55,6 @@ class Resource < ActiveRecord::Base
 
   def self.filter(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h # convert ActiveRecord::Controller params into hash with symbol keys
-    # puts 'inside filter - ' + params.to_s
     # Partition params into has_many fields and normal fields
     # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
     has_many_hash = {}
@@ -72,7 +71,6 @@ class Resource < ActiveRecord::Base
       end
     end
 
-    # puts 'has-many-hash : ' + has_many_hash.to_s
     # return early if there are no has_many fields
     if has_many_hash.empty?
       return Resource.where(params)
@@ -162,7 +160,6 @@ class Resource < ActiveRecord::Base
   def self.create_associations(resource, params)
     fields_hash = self.get_associations_hash(resource)
     fields_hash.each do |field, association|
-      # puts params[field].to_s
       association.delete_all
       if params[field] != nil
         params[field].each do |val|

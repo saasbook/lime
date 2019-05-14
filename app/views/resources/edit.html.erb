@@ -19,7 +19,7 @@
               <div class="input_field col">
                   <%= label_tag(:contact_email, "Contact Email", class: "required") %>
                   <p> Email for the contact person above to be sent requests to update resource information. </p>
-                  <%= text_field_tag(:contact_email, nil, class: "required_input validate-input") %>
+                  <%= text_field_tag(:contact_email, @resource.contact_email, class: "required_input validate-input") %>
                     <p id="email-valid" class="invalid-text"> Invalid Email </p>
               </div>
               <div class="input_field col">
@@ -30,7 +30,7 @@
               <div class="input_field col">
                   <%= label_tag(:contact_phone, "Contact Phone") %>
                   <p> What number can we call if we have a question about the resource? </p>
-                  <%= text_field_tag(:contact_phone, nil, class: "validate-input") %>
+                  <%= text_field_tag(:contact_phone, @resource.contact_phone, class: "validate-input") %>
                     <p id="phone-valid" class="invalid-text"> Invalid Phone </p>
 
               </div>
@@ -84,10 +84,6 @@
                       <% end %>
                   </div>
               <% end %>
-              <div id="other_location">
-                  <p>Other: </p>
-                  <%= text_field_tag(:other) %>
-              </div>
           </div>
 
           <% @has_many_hash.each do |association, values| %>
@@ -183,9 +179,9 @@
       </div>
 
       <div id="form_submit">
-          <%= submit_tag("Update", :id => "submit_button") %>
-          <p id="message"> Description was too long. <p>
-      </div>
+            <%= button_tag("Update", :id => "submit_button") %>
+            <p id="message"><p>
+        </div>
 
   <% end %>
 </div>

@@ -16,13 +16,33 @@ $(document).ready(function() {
         }
     }
 
-    $("#form_section").submit(function () {
+    $("#submit_button").click(function () {
+        var form = $("#form_section");
         if (validate()) {
+            $.ajax({ 
+                url   : form.attr('action'),
+                type  : form.attr('method'),
+                data  : form.serialize()
+           });
             return true;
         } else {
             return false;
         }
     });
+
+    function buttonPost() {
+        var form = $("#form_section");
+        if (validate()) {
+            $.ajax({ 
+                url   : form.attr('action'),
+                type  : form.attr('method'),
+                data  : form.serialize()
+           });
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     function findRequiredFields() {
         $(".required_input").each(function() {
