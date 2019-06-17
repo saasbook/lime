@@ -34,5 +34,9 @@ module Lime
     config.assets.precompile += %w( unapproved.js )
     config.assets.precompile += %w( new.js )
     config.assets.precompile += %w( filter.js )
+
+    config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'ALLOWALL'
+    }
   end
 end
