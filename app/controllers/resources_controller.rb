@@ -80,6 +80,7 @@ class ResourcesController < ApplicationController
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database
+    puts "@@@@@@@@@@@@@@@@@@@@@@@"
     reset_session
     @desc_too_long = false
     @missing = Resource.find_missing_params(params)
