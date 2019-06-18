@@ -34,7 +34,7 @@ csv.each do |row|
     'flagged': '', 
     'flagged_comment': ''
   }
-  r = Resource.create_resource(record)\
+  r = Resource.create_resource(record)
   count = count + 1
   # if data is seeded from Airtable, forcefully gets added to database
   # this is because a majority of the seeded database has empty fields
