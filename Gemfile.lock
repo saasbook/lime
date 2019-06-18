@@ -65,6 +65,7 @@ GEM
     bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     builder (3.2.3)
+    byebug (11.0.1)
     cane (2.6.2)
       parallel
     capybara (3.24.0)
@@ -434,6 +435,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3.1)
   bootstrap-datepicker-rails
+  byebug
   coffee-rails (~> 4.2)
   cucumber-rails
   cucumber-rails-training-wheels
