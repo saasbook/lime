@@ -1,100 +1,141 @@
 class CreateResources < ActiveRecord::Migration[5.2]
   def change
-    create_table :resources do |t|
-      t.string :title             # required
-      t.string :url               # required, validate
-      t.string :contact_email     # required, validate, hidden
-      t.text :desc                # required, validate
-      t.string :resource_email    # validate
-      t.string :resource_phone    # validate
-      t.string :address
-      t.string :contact_name      # hidden
-      t.string :contact_phone     # validate, hidden
-      t.datetime :deadline        # validate
-      t.text :notes               # validate, 1000 chars
-      t.string :funding_amount    # validate
-      t.string :location          # required
-      t.integer :approval_status  # hidden
-      t.string :approved_by       # hidden
-      t.integer :flagged          # hidden?? yes
-      t.text :flagged_comment     # hidden?? yes
-      t.timestamps
+    create_table "audiences", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_audiences_on_resource_id"
     end
-
-    create_table :locations do |t|
-      t.belongs_to :parent, :class_name => "Location"
-      t.string :val
-      t.timestamps
+  
+    create_table "availabilities", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_availabilities_on_resource_id"
     end
-
-    create_table :audiences do |t|
-      t.belongs_to :resource      # required
-      t.string :val              # audience type
-      t.timestamps
-      t.index [:resource_id], name: "index_audiences_on_resource_id"
+  
+    create_table "bug_reports", force: :cascade do |t|
+      t.string "desc"
+      t.boolean "closed"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
     end
-
-    create_table :client_tags do |t| # hidden
-      t.belongs_to :resource     # NOT required
-      t.string :val             # client name
-      t.timestamps
-      t.index [:resource_id], name: "index_client_tags_on_resource_id"
+  
+    create_table "campuses", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_campuses_on_resource_id"
     end
-
-    create_table :population_focuses do |t|
-      t.belongs_to :resource     # NOT required
-      t.string :val             # population focus type
-      t.timestamps
-      t.index [:resource_id], name: "index_population_focuses_on_resource_id"
+  
+    create_table "client_tags", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_client_tags_on_resource_id"
     end
-
-    create_table :campuses do |t|
-      t.belongs_to :resource     # NOT required
-      t.string :val             # campus name
-      t.timestamps
-      t.index [:resource_id], name: "index_campuses_on_resource_id"
+  
+    create_table "colleges", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_colleges_on_resource_id"
     end
-
-    create_table :colleges do |t|
-      t.belongs_to :resource     # NOT required
-      t.string :val             # college name
-      t.timestamps
-      t.index [:resource_id], name: "index_colleges_on_resource_id"
+  
+    create_table "edits", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "user"
+      t.string "parameter"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
     end
-
-    create_table :availabilities do |t|
-      t.belongs_to :resource     # NOT required
-      t.string :val             # availability type
-      t.timestamps
-      t.index [:resource_id], name: "index_availabilities_on_resource_id"
+  
+    create_table "innovation_stages", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_innovation_stages_on_resource_id"
     end
-
-    create_table :innovation_stages do |t|
-      t.belongs_to :resource     # NOT required
-      t.string :val             # innovation stage name
-      t.timestamps
-      t.index [:resource_id], name: "index_innovation_stages_on_resource_id"
+  
+    create_table "locations", force: :cascade do |t|
+      t.integer "parent_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["parent_id"], name: "index_locations_on_parent_id"
     end
-
-    create_table :topics do |t|
-      t.belongs_to :resource    # NOT required
-      t.string :val            # topic name
-      t.timestamps
-      t.index [:resource_id], name: "index_topics_on_resource_id"
+  
+    create_table "population_focuses", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_population_focuses_on_resource_id"
     end
-
-    create_table :technologies do |t|
-      t.belongs_to :resource    # NOT required
-      t.string :val            # technology type
-      t.timestamps
-      t.index [:resource_id], name: "index_technologies_on_resource_id"
+  
+    create_table "resources", force: :cascade do |t|
+      t.string "title"
+      t.string "url"
+      t.string "contact_email"
+      t.text "desc"
+      t.string "resource_email"
+      t.string "resource_phone"
+      t.string "address"
+      t.string "contact_name"
+      t.string "contact_phone"
+      t.datetime "deadline"
+      t.text "notes"
+      t.string "funding_amount"
+      t.string "location"
+      t.integer "approval_status"
+      t.string "approved_by"
+      t.integer "flagged"
+      t.text "flagged_comment"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
     end
-
-    create_table :types do |t|
-      t.belongs_to :resource      # required
-      t.string :val              # type name
-      t.timestamps
-      t.index [:resource_id], name: "index_types_on_resource_id"
+  
+    create_table "technologies", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_technologies_on_resource_id"
+    end
+  
+    create_table "topics", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_topics_on_resource_id"
+    end
+  
+    create_table "types", force: :cascade do |t|
+      t.integer "resource_id"
+      t.string "val"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["resource_id"], name: "index_types_on_resource_id"
+    end
+  
+    create_table "users", force: :cascade do |t|
+      t.string "email", default: "", null: false
+      t.string "encrypted_password", default: "", null: false
+      t.string "api_token", default: "", null: false
+      t.string "reset_password_token"
+      t.datetime "reset_password_sent_at"
+      t.datetime "remember_created_at"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.index ["email"], name: "index_users_on_email", unique: true
+      t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     end
   end
 end
