@@ -80,12 +80,13 @@ class ResourcesController < ApplicationController
   def create
     #this should check any of the params are missing via validation and set an instance variable equal to the missing fields
     #otherwise add a new object to the database
-    puts "@@@@@@@@@@@@@@@@@@@@@@@"
     reset_session
     @desc_too_long = false
     @missing = Resource.find_missing_params(params)
 
     #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
+    # if data is seeded from Airtable, forcefully gets added to database
+    # this is because a majority of the seeded database has empty fields
     if @missing.length > 0
       params.each {|key, val| session[key] = params[key]}
       # redirect_to :controller => 'resources', :action => 'new'
