@@ -36,7 +36,7 @@ module Lime
     config.assets.precompile += %w( filter.js )
 
     config.action_dispatch.default_headers = {
-      'X-Frame-Options' => 'ALLOWALL'
+      'X-Frame-Options' => 'ALLOW-FROM https://witi.berkeley.edu/'
     }
   end
 end
