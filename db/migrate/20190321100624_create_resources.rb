@@ -27,13 +27,6 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :types do |t|
-      t.belongs_to :resource      # required
-      t.string :val              # type name
-      t.timestamps
-      t.index [:resource_id]
-    end
-
     create_table :audiences do |t|
       t.belongs_to :resource      # required
       t.string :val              # audience type
@@ -95,6 +88,13 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.string :val            # technology type
       t.timestamps
       t.index [:resource_id], name: "index_technologies_on_resource_id"
+    end
+
+    create_table :types do |t|
+      t.belongs_to :resource      # required
+      t.string :val              # type name
+      t.timestamps
+      t.index [:resource_id], name: "index_types_on_resource_id"
     end
   end
 end
