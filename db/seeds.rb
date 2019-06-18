@@ -17,7 +17,7 @@ csv.each do |row|
     'types': row['Resource Type'],
     'audiences': row['Audience'],
     'population_focuses': row['Population Focus'], 
-    'location': row['location'],
+    'location': row['Location'],
     'campuses': row['Campuses'], 
     'colleges': row['College eligibility'], 
     'availabilities': row['Availability'], 
@@ -34,9 +34,12 @@ csv.each do |row|
     'flagged': '', 
     'flagged_comment': ''
   }
+  puts record
   r = Resource.create_resource(record)
+  missing = Resource.find_missing_params(record)
+  
   count = count + 1
-  puts "#{r.title}, #{r.url}, #{r.contact_email}, #{r.location}, #{r.types}, #{r.audiences} saved"
+  # puts "#{r.title}, #{r.url}, #{r.contact_email}, #{r.location}, #{r.types}, #{r.audiences} saved"
   r.save
 end
 # csv.each do |row|
