@@ -187,6 +187,7 @@ class Resource < ActiveRecord::Base
   def self.location_helper(params)
     exclusive = (params[:exclusive] == true)
     params.delete :exclusive
+
     
     location = params[:location]
     if location.nil? or exclusive
@@ -200,6 +201,7 @@ class Resource < ActiveRecord::Base
       params[:location] = location
       resources = resources.or(self.filter(params))
     end
+
     return resources
   end
 

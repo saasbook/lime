@@ -85,8 +85,7 @@ class ResourcesController < ApplicationController
     @missing = Resource.find_missing_params(params)
 
     #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
-    # if data is seeded from Airtable, forcefully gets added to database
-    # this is because a majority of the seeded database has empty fields
+    
     if @missing.length > 0
       params.each {|key, val| session[key] = params[key]}
       # redirect_to :controller => 'resources', :action => 'new'

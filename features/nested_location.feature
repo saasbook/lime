@@ -21,8 +21,6 @@ Feature: display list of resources filtered by any combination of available tags
       | Alameda     | California|
       | Berkeley    | Alameda   |
       | Davis       | California|
-      | Stanfurd    | California|
-      | Siberia     | Global    |
 
 
   Scenario: search for all resources within California

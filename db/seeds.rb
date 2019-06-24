@@ -43,4 +43,6 @@ end
 
 puts "There are now #{count} rows in the Resource table"
 
+Location.delete_all
+Location.seed
 
