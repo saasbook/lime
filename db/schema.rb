@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_100624) do
+ActiveRecord::Schema.define(version: 2019_06_25_200034) do
 
   create_table "audiences", force: :cascade do |t|
     t.integer "resource_id"
@@ -73,6 +73,12 @@ ActiveRecord::Schema.define(version: 2019_03_21_100624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_innovation_stages_on_resource_id"
+  end
+
+  create_table "keys", force: :cascade do |t|
+    t.string "registration_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "locations", force: :cascade do |t|

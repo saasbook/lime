@@ -43,5 +43,8 @@ end
 
 puts "There are now #{count} rows in the Resource table"
 
+# WARNING: change the default key before deploying
+default_key = Digest::SHA256.hexdigest "adminbear"
+Key.create!(:registration_key => default_key)
 Location.seed
 

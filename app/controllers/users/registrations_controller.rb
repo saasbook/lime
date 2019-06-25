@@ -13,7 +13,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    if (sign_up_params[:registration_key] == "a303046d48c98a5118785466589cafc7")
+    # reg_key = temp = Digest::SHA256.hexdigest <access key in db> + SecureRandom.hex
+    hashed_key = Digest::SHA256.hexdigest sign_up_params[:registration_key]
+    # compare with registration key stored in the database
+    if (hashed_key == Key.where(:id => 1).first.registration_key)
       new_sign_up_params = {
         "email" => sign_up_params[:email],
         "password" => sign_up_params[:password],
