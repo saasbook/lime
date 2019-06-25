@@ -13,7 +13,41 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    if (sign_up_params[:registration_key] == "a303046d48c98a5118785466589cafc7")
+      new_sign_up_params = {
+        "email" => sign_up_params[:email],
+        "password" => sign_up_params[:password],
+        "password_confirmation" => sign_up_params[:password_confirmation]
+      }
+      sign_up_params = new_sign_up_params
+
+        #begin super
+        build_resource(sign_up_params)
+
+        resource.save
+        yield resource if block_given?
+        if resource.persisted?
+          if resource.active_for_authentication?
+            set_flash_message! :notice, :signed_up
+            sign_up(resource_name, resource)
+            respond_with resource, location: after_sign_up_path_for(resource)
+          else
+            set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+            expire_data_after_sign_in!
+            respond_with resource, location: after_inactive_sign_up_path_for(resource)
+          end
+        else
+          clean_up_passwords resource
+          set_minimum_password_length
+          respond_with resource
+        end
+        #end super
+
+    else
+      respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      
+    end
+
     @user = current_user
     if not @user.nil?
       temp = Digest::SHA256.hexdigest @user.email + SecureRandom.hex
@@ -58,7 +92,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:api_token])
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:registration_key, :api_token])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -72,7 +106,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    flash[:alert] = "Invalid registration key. Your registration key is provided by a website Admin."
+    new_user_registration_path
+  end
 end
