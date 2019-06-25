@@ -162,7 +162,7 @@ class ResourcesController < ApplicationController
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
       format.html do
         flash[:notice] = (@resources.size > 1 ? "Resources have" : "Resource has") + " been successfully approved."
-        redirect_to "/resources.html"
+        redirect_to "/resources/unapproved.html"
       end
     end
   end
