@@ -37,12 +37,8 @@ $(document).ready(function() {
     /* pagination */
 
     let numResources = $(".resource-container").length
-    let itemsPerPage = 15;
+    let itemsPerPage = 10;
     let numPages = Math.ceil(numResources / itemsPerPage);
-    if (numPages > 10) {
-        itemsPerPage = Math.ceil(numResources / 10);
-        numPages = Math.ceil(numResources / itemsPerPage);
-    }
 
     for (let i = 1; i <= numPages; i++) {
         $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
@@ -52,7 +48,7 @@ $(document).ready(function() {
         $(".next").removeClass("disabled")
     }
     $(".resource-container").addClass("hidden-resource");
-
+    
     let openPage = function(pageNum) {
         currentPage = pageNum;
         let start = ((pageNum - 1) * itemsPerPage) + 1;

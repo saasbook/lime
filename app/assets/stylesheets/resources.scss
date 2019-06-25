@@ -587,7 +587,9 @@ select {
 }
 
 .pagination {
-  margin: 16px;
+  margin: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .hidden-resource{
