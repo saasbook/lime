@@ -125,3 +125,9 @@ POST /resources?url={resource url}&title={title}&desc={description}&types="type1
 to 
 https://berkeley-innovation-resources.herokuapp.com.
 you MUST have the required resource fields listed above, but may add any of the optional fields as well.
+
+## Creating an Admin account
+
+To gain administrative access to the website, you will be required to have a "Registration key" that will be given by someone who has control of the database.
+
+If you are managing the SQL database of a deployed version of the website, the registration key can be manually edited as long as the key is properly hashed.
