@@ -9,21 +9,19 @@ class Location < ActiveRecord::Base
   def self.seed
     location_hashes = [{'location' => 'USA', 'parent' => 'Global'},
                       {'location' => 'California', 'parent' => 'USA'},
-                      {'location' => 'Berkeley', 'parent' => 'California'},
-                      {'location' => 'Davis', 'parent' => 'California'},
-                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'},
-                      {'location' => 'UC Davis', 'parent' => 'Davis'},
                       {'location' => 'Bay Area', 'parent' => 'California'},
-                      {'location' => 'Berkeley', 'parent' => 'Bay Area'}
+                      {'location' => 'Berkeley', 'parent' => 'Bay Area'},
+                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'},
+                      {'location' => 'Davis', 'parent' => 'California'},
+                      {'location' => 'UC Davis', 'parent' => 'Davis'}
+                      
                       # {'location' => 'Stanfurd', 'parent' => 'California'},
                       # {'location' => 'Siberia', 'parent' => 'Global'}
                   ]
     global = Location.create :val => "Global"
     global.save :validate => false
     location_hashes.each do |location|
-      parent = Location.where(:val => location['parent'].to_s).first
-      # Location.create! :val => location['location'], :parent_id => parent.id
-      add_location(location, parent)
+      add_location(location['location'].to_s, location['parent'].to_s)
     end
   end
 
@@ -37,9 +35,7 @@ class Location < ActiveRecord::Base
     end
 
     # find the location info using the geocoder
-    Geocoder.configure(api_key: "AIzaSyASGhh8q9iyELO42wWlvJ6xoX1BUKAFZCc")
     result = Geocoder.search(name).first
-    puts result
     nesting_helper(result, result.type, name)
   end
 
