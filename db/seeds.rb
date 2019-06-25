@@ -29,11 +29,15 @@ csv.each do |row|
     'client_tags': row['Client Tags'],
     'notes': row['Notes'], 
     'approval_status': 1, 
-    'approved_by': 'Airtable', # seeded data from Airtable
+    'approved_by': row['Approved by'],
     'updated_at': '', 
     'flagged': '', 
     'flagged_comment': ''
   }
+
+  if record[:approved_by].nil?
+    record[:approved_by] = "Airtable"
+  end
   r = Resource.create_resource(record)
   count = count + 1
   # if data is seeded from Airtable, forcefully gets added to database
@@ -43,7 +47,7 @@ end
 
 puts "There are now #{count} rows in the Resource table"
 
-# WARNING: change the default key before deploying
+# WARNING: change the default key when deploying (this code can be public facing)
 default_key = Digest::SHA256.hexdigest "adminbear"
 Key.create!(:registration_key => default_key)
 Location.seed
