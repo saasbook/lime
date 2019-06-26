@@ -103,7 +103,7 @@ class Location < ActiveRecord::Base
 
   def self.get_values 
 
-    # ['Global', 'USA', 'California', 'Berkeley', 'Davis', 'Stanfurd', 'Siberia']
+    # gets values of all locations in the database, not just the current location
     all_locations = Array.new
     Location.all.each do |loc|
       all_locations.push(loc.val)

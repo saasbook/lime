@@ -150,8 +150,10 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     end
 
     it 'finds all of the child locations' do
+      # assumes seeded data has locations that include:
+      # California, Bay Area, San Francisco, Berkeley, UC Berkeley
       result = Location.child_locations("California")
-      expect(result.count).to eq 4
+      expect(result.count).to eq 5
     end
 
     it 'successfully manually adds a single location' do

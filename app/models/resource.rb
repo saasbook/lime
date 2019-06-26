@@ -187,7 +187,7 @@ class Resource < ActiveRecord::Base
   def self.location_helper(params)
 
     location = params[:location]
-    if location.nil?
+    if location.nil? || !Location.where(:val => location).exists?
       return self.filter(params)
     end
 
