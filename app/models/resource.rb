@@ -53,6 +53,7 @@ class Resource < ActiveRecord::Base
     }
   end
 
+  # finds the resources that match the filters provided
   def self.filter(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h # convert ActiveRecord::Controller params into hash with symbol keys
     # Partition params into has_many fields and normal fields
@@ -71,15 +72,30 @@ class Resource < ActiveRecord::Base
       end
     end
 
+    puts "these are the params"
+    puts params
+    puts "end params"
+    # return Resource.where("Types LIKE :query", query: "Events")
+    # return Resource.where("location LIKE ?", "/.*Berkeley.*/")
+
     # return early if there are no has_many fields
     if has_many_hash.empty?
-      return Resource.where(params)
+      puts "this is empty"
+      resources = Resource.where(params)
+      # puts params
+      # params = {
+      #   ("location LIKE ?", "/.*Berkeley.*/")
+      # }
+      # puts params
+      # puts resources.first.title
+      return resources
     else
       resources = Resource.where(params).includes(*Resource.has_many_associations)
       return self.filter_has_many_helper(resources, has_many_hash)
     end
   end
 
+  # helps find resources based on that have multiple, specific associations
   def self.filter_has_many_helper(resources, has_many_hash)
     filtered = [] # list of returned records
     resources.find_each do |resource|
@@ -185,6 +201,7 @@ class Resource < ActiveRecord::Base
   # find resources of location as well as its children
   # if the location has no resources, find the parent location, and return resources for the parent location
   def self.location_helper(params)
+    puts "location helper"
 
     location = params[:location]
     if location.nil? || !Location.where(:val => location).exists?
@@ -198,6 +215,10 @@ class Resource < ActiveRecord::Base
       params[:location] = location
       resources = resources.or(self.filter(params))
     end
+
+    puts "more params"
+    puts params
+    puts "end"
 
     if resources.length < 1
       # get parent and its resources
