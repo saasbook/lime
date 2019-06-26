@@ -11,9 +11,7 @@ class Location < ActiveRecord::Base
                       {'location' => 'California', 'parent' => 'USA'},
                       {'location' => 'Bay Area', 'parent' => 'California'},
                       {'location' => 'Berkeley', 'parent' => 'Bay Area'},
-                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'},
-                      {'location' => 'Davis', 'parent' => 'California'},
-                      {'location' => 'UC Davis', 'parent' => 'Davis'}
+                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'}
                       
                       # {'location' => 'Stanfurd', 'parent' => 'California'},
                       # {'location' => 'Siberia', 'parent' => 'Global'}

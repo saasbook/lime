@@ -16,6 +16,7 @@ Background: database already has other resources
 
 
 Scenario: adding a resource called "Women Techmakers" with its other fields
+    Given locations are seeded
     Given I am on "/resources/new.html"
     When I fill in "title" with "Women Techmakers"
     And I fill in "url" with "https://www.womentechmakers.com/"

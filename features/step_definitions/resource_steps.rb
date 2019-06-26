@@ -261,3 +261,7 @@ end
 Then /I should be on the welcome page/ do
   expect(page.find('#welcome-title').text).to eq "UC Berkeley Innovation Resource Database"
 end
+
+Given /locations are seeded/ do
+  Location.seed
+end
