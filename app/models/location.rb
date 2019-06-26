@@ -11,7 +11,8 @@ class Location < ActiveRecord::Base
                       {'location' => 'California', 'parent' => 'USA'},
                       {'location' => 'Bay Area', 'parent' => 'California'},
                       {'location' => 'Berkeley', 'parent' => 'Bay Area'},
-                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'}
+                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'},
+                      {'location' => 'San Francisco', 'parent' => 'Bay Area'}
                       
                       # {'location' => 'Stanfurd', 'parent' => 'California'},
                       # {'location' => 'Siberia', 'parent' => 'Global'}
@@ -93,6 +94,11 @@ class Location < ActiveRecord::Base
 
   def parent_presence
     (not parent.blank?) or (val == "Global" and Location.where(:val => "Global").empty?)
+  end
+
+  # gets the parent name String value using a location's parent_id
+  def self.get_parent(location)
+    return Location.where(:id => Location.where(:val => location).first.parent_id).first.val
   end
 
   def self.get_values 

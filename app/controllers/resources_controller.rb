@@ -37,8 +37,7 @@ class ResourcesController < ApplicationController
     end
 
     sort_by = params[:sort_by]
-    exclusive = params[:exclusive]
-    @resources = Resource.location_helper(resource_params.merge({:exclusive => exclusive}))
+    @resources = Resource.location_helper(resource_params)
 
     if @resources != nil
        @resources = @resources.order(sort_by)
