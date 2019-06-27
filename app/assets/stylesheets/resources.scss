@@ -49,7 +49,9 @@ body {
   color: white;
   background-color: rgb(83, 83, 83);
   border-radius: 16px;
-  margin-bottom: 0px;
+  margin-bottom: 16px;
+  text-align: center;
+  display: inline-block;
 }
 
 #filter-button:hover {
@@ -102,8 +104,29 @@ body {
   font-size: 2rem;
   text-align: center;
   width: 100%;
-  margin-top: 24px;
+  margin: 32px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+#search_row {
+  margin: 0px 32px;
+}
+
+.search_bar {
+  font-size: 1rem;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  width: 80%;
+}
+
+.search_bar_text {
+  font-size: 1.5rem;
+  text-align: left;
+  margin-top: 16px;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
