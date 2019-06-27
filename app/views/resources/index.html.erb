@@ -20,7 +20,7 @@
 
       <div class="association" id="search_row">
         <%= label_tag(:search_bar, "Search titles and descriptions:", class: "search_bar_text") %>
-        <%= text_field_tag(:search, nil, class: "search_bar") %>
+        <%= text_field_tag(:search, session[:search], class: "search_bar") %>
       </div>
 
       <div class="association">
@@ -45,7 +45,11 @@
             <% values.each do |val| %>
               <div class="single_checkbox gold_label">
                 <div class="label"><%= val %></div>
-                <%= check_box_tag association+'[]', val %>
+                <% if !session[association].nil? && session[association].include?(val) %>
+                  <%= check_box_tag association+'[]', val, true, class: "checkbox", id: val %>
+                <% else %>
+                  <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -55,55 +59,81 @@
   </div>
 
   <div id="resource-column">
-    <div class="row">
-      <div class="col-12" id = "result-header">
-        <h2>Results</h2>
+    <% if @resources.length == 0 %>
+      <div class="row">
+        <div class="col-12" id = "result-header">
+          <h2>No results found</h2>
+        </div>
       </div>
-    </div>
-    <div class="row" id="pages">
-      <ul class="pagination">
-        <li class="page-arrow prev disabled" id="prev">
-          <p id="prevLink" class="page-link prevLink">Previous</p>
-        </li>
-      </ul>
-    </div>
-    <% @resources.each do |resource| %>
-      <div class="row resource-container">
-        <div class="resource-title text">
-          <%= link_to(resource.title, "/resources/" + resource.id.to_s + ".html") %>
+    <% else %>
+      <div class="row">
+        <div class="col-12" id = "result-header">
+          <h2>Results</h2>
         </div>
-        <div class="resource-url text">
-          URL: <a href="<%= resource.url %>"><%= resource.url %></a>
-        </div>
-        <div class="resource-desc text">
-          Description: <%= resource.desc %>
-        </div>
-        <div class="resource-location text">
-          Location: <%= resource.location %>
-        </div>
-        <div class="resource-types text">
-          Types: <%= resource.types.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
-        </div>
-        <div class="resource-types text">
-          Audiences: <%= resource.audiences.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
-        </div>
+      </div>
+      <div class="row" id="pages">
+        <ul class="pagination">
+          <li class="page-arrow prev disabled" id="prev">
+            <p id="prevLink" class="page-link prevLink">Previous</p>
+          </li>
+        </ul>
+      </div>
 
-       
-        <div class="text links" %>
-          <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
-          <% if user_signed_in? %>
-            <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+      <% @resources.each do |resource| %>
+        <div class="row resource-container">
+          <div class="resource-title text">
+            <%= link_to(resource.title, "/resources/" + resource.id.to_s + ".html") %>
+          </div>
+          <div class="resource-url text">
+            URL: <a href="<%= resource.url %>"><%= resource.url %></a>
+          </div>
+          <div class="resource-desc text">
+            <% if resource.desc == nil %>
+              Description: None
+            <% elsif resource.desc.length > 150 %>
+              Description: <%= resource.desc[0..150] + "..." %>
+            <% else %>
+              Description: <%= resource.desc %>
+            <% end %>
+            
+          </div>
+          <div class="resource-location text">
+            Location: <%= resource.location %>
+          </div>
+          
+          <% @type_value = resource.types.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "")%>
+          <% if @type_value != "" %>
+            <div class="resource-types text">
+              Types: <%=  @type_value %>
+            </div>
           <% end %>
+
+          <% @audience_value = resource.audiences.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "")%>
+          <% if @audience_value != "" %>
+            <div class="resource-types text">
+              Audiences: <%=  @audience_value %>
+            </div>
+          <% end %>
+          
+
+        
+          <div class="text links" %>
+            <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
+            <% if user_signed_in? %>
+              <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+            <% end %>
+          </div>
         </div>
+      <% end %>
+      <div class="row" id="pages">
+        <ul class="pagination">
+          <li class="page-arrow prev disabled" id="prev">
+            <p id="prevLink" class="page-link prevLink">Previous</p>
+          </li>
+        </ul>
       </div>
     <% end %>
-    <div class="row" id="pages">
-      <ul class="pagination">
-        <li class="page-arrow prev disabled" id="prev">
-          <p id="prevLink" class="page-link prevLink">Previous</p>
-        </li>
-      </ul>
-    </div>
+    
     
   </div>
 </div>

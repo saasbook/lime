@@ -32,6 +32,10 @@ class ResourcesController < ApplicationController
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
+    puts "session"
+    reset_session
+    session[:search] = params[:search]
+    puts session[:search]
     if @user.nil?
       params[:approval_status] = 1 # only admins can view unapproved resources
     end
