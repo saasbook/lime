@@ -70,25 +70,18 @@ class Resource < ActiveRecord::Base
         end
         params.delete(key) # remove has_many key from params
       end
+      
     end
-
-    puts "these are the params"
-    puts params
-    puts "end params"
-    # return Resource.where("Types LIKE :query", query: "Events")
-    # return Resource.where("location LIKE ?", "/.*Berkeley.*/")
 
     # return early if there are no has_many fields
     if has_many_hash.empty?
-      puts "this is empty"
-      resources = Resource.where(params)
-      # puts params
-      # params = {
-      #   ("location LIKE ?", "/.*Berkeley.*/")
-      # }
-      # puts params
-      # puts resources.first.title
-      return resources
+      search_regex = ""
+      if params[:search].to_s.length != 0
+        search_regex = 'title REGEXP ' + '".*' + params[:search].to_s + '.*" OR desc REGEXP ' + '".*' + params[:search].to_s + '.*"'
+      end
+      
+      params.delete :search
+      return Resource.where(params).where(search_regex)
     else
       resources = Resource.where(params).includes(*Resource.has_many_associations)
       return self.filter_has_many_helper(resources, has_many_hash)
@@ -201,7 +194,6 @@ class Resource < ActiveRecord::Base
   # find resources of location as well as its children
   # if the location has no resources, find the parent location, and return resources for the parent location
   def self.location_helper(params)
-    puts "location helper"
 
     location = params[:location]
     if location.nil? || !Location.where(:val => location).exists?
@@ -215,10 +207,6 @@ class Resource < ActiveRecord::Base
       params[:location] = location
       resources = resources.or(self.filter(params))
     end
-
-    puts "more params"
-    puts params
-    puts "end"
 
     if resources.length < 1
       # get parent and its resources
