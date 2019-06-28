@@ -76,11 +76,13 @@ class Resource < ActiveRecord::Base
     # return early if there are no has_many fields
     search_regex = ""
       if params[:search].to_s.length != 0
-        search_regex = 'title REGEXP ' + '".*' + params[:search].to_s + '.*" OR desc REGEXP ' + '".*' + params[:search].to_s + '.*"'
+        # search_regex = 'title REGEXP ' + '".*' + params[:search].to_s + '.*" OR desc REGEXP ' + '".*' + params[:search].to_s + '.*"'
+        search_regex = 'title ~* ?'
       end
       params.delete :search
     if has_many_hash.empty?
-      return Resource.where(params).where(search_regex)
+      # return Resource.where(params).where(search_regex)
+      return Resource.where('title ~* :pat', :pat => ".*fem.*")
     else
       resources = Resource.where(params).where(search_regex).includes(*Resource.has_many_associations)
       return self.filter_has_many_helper(resources, has_many_hash)
