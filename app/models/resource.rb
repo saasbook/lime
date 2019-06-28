@@ -77,8 +77,8 @@ class Resource < ActiveRecord::Base
     search_regex = ""
       if params[:search].to_s.length != 0
         # search_regex = 'title ~* ' + '".*' + params[:search].to_s + '.*"' #'" OR desc ~* ' + '".*' + params[:search].to_s + '.*"'
-        # search_regex = "title ~* '.*" + params[:search].to_s + ".*'"# + " OR desc ~* '.*" + params[:search].to_s + ".*'"
-        search_regex = "desc ~* 'Feminist'"#'.*" + params[:search].to_s + ".*'"
+        search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR title ~* '.*" + params[:search].to_s + ".*'"
+        # search_regex = "desc ~* 'Feminist'"#'.*" + params[:search].to_s + ".*'"
       end
       params.delete :search
       puts search_regex
