@@ -138,7 +138,7 @@
         
           <div class="text links" %>
             <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
-            <p class="resource-updated">Last Updated: <%= resource.updated_at %></p>
+            <p class="resource-updated">Last Updated: <%= resource.updated_at.to_date() %></p>
             
             <% if user_signed_in? %>
               <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>

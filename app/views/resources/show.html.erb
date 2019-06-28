@@ -34,9 +34,7 @@
                         <a href="<%= text.to_s %>" target="_blank"><%= text.to_s %></a>
                     <% elsif (key.to_s === "Location") %>
                         <%= text.to_s.gsub(",", ", ") %>
-                    <% elsif (key.to_s === "Deadline") %>
-                        <%= text.to_s.to_date() %>
-                    <% elsif (key.to_s === "Deadline") %>
+                    <% elsif (key.to_s === "Deadline" || key.to_s === "Created on" || key.to_s === "Updated on") %>
                         <%= text.to_s.to_date() %>
                     <% else %>
                         <%= text.to_s %>
