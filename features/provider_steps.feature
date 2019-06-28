@@ -21,7 +21,7 @@ Scenario: adding a resource called "Women Techmakers" with its other fields
     When I fill in "title" with "Women Techmakers"
     And I fill in "url" with "https://www.womentechmakers.com/"
     And I fill in "Contact Email" with "WTMScholars@google.com"
-    And I fill in "Desc" with "Google-backed initiative that..."
+    And I fill in "Description" with "Google-backed initiative that..."
     And I select "Networks" for "Resource Type"
     And I select "Undergraduate Student" for "Audience"
     And I choose "Global" for "Location"

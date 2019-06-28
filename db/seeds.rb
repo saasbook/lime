@@ -13,7 +13,7 @@ csv.each do |row|
     'contact_email': row['Email-Contact'],
     'contact_name': row['Contact'],
     'contact_phone': row['Phone-Contact'],
-    'desc': row['Resource Description'],
+    'description': row['Resource Description'],
     'types': row['Resource Type'],
     'audiences': row['Audience'],
     'population_focuses': row['Population Focus'], 

@@ -40,7 +40,7 @@ the response will be JSON in the following format
  "title":"Resource Title",   
  "url":"www.exampleurl.com",   
  "contact_email":"foo@exampleurl.com",   
- "desc":"description string",   
+ "description":"description string",   
  "resource_email":"foo@exampleurl.com",   
  "resource_phone":"(100) 100-1000",   
  "address":"101 Sproul Hall, Berkeley, CA 94720",   
@@ -92,7 +92,7 @@ This location nesting is done when resources are added, and is done using the ge
 * id - database id of resource
 * url - url for the resource
 * title - the name of the resource
-* desc - description of the resource
+* description - description of the resource
 * types - resource type tags
 * location - where the resource is available
 * audiences - who the resource is for 
@@ -119,7 +119,7 @@ https://berkeley-innovation-resources.herokuapp.com/resources/new.html
 ### Creating new resources
 To create a new resource, make a POST request to the API in the format:
 ```
-POST /resources?url={resource url}&title={title}&desc={description}&types="type1, type2, ..."&location="loc1, loc2"&audiences="audience1, audience2, ..."&contact_email="contact email here"
+POST /resources?url={resource url}&title={title}&description={description}&types="type1, type2, ..."&location="loc1, loc2"&audiences="audience1, audience2, ..."&contact_email="contact email here"
 
 ```
 to 

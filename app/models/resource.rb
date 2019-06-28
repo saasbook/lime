@@ -11,7 +11,7 @@ class Resource < ActiveRecord::Base
   has_many :technologies
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :contact_email, :location, :presence => true
-  validates :desc, :presence => true, :length => {:maximum => 500}
+  validates :description, :presence => true, :length => {:maximum => 500}
 
   # def self.auth_params
   #   [:flagged, :approval_status, :approved_by]
@@ -76,13 +76,10 @@ class Resource < ActiveRecord::Base
     # return early if there are no has_many fields
     search_regex = ""
       if params[:search].to_s.length != 0
-        search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR notes ~* '.*" + params[:search].to_s + ".*'"
-        # search_regex = "desc ~* 'Feminist'"#'.*" + params[:search].to_s + ".*'"
+        search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR description ~* '.*" + params[:search].to_s + ".*'"  + " OR url ~* '.*" + params[:search].to_s + ".*'"
       end
       params.delete :search
-      puts search_regex
     if has_many_hash.empty?
-      puts search_regex
       return Resource.where(params).where(search_regex)
     else
       resources = Resource.where(params).where(search_regex).includes(*Resource.has_many_associations)
@@ -225,7 +222,7 @@ class Resource < ActiveRecord::Base
   end
 
   def self.get_required_resources
-    return ["title", "url", "contact_email", "location", "types", "audiences", "desc"]
+    return ["title", "url", "contact_email", "location", "types", "audiences", "description"]
   end
 
   def self.all_values_hash
@@ -234,7 +231,7 @@ class Resource < ActiveRecord::Base
         "Contact Name" => "contact_name",
         "Contact Phone" => "contact_phone",
         "URL" => "url",
-        "Description" => "desc",
+        "Description" => "description",
         "Location" => "location",
         "Resource Email" => "resource_email",
         "Resource Phone" => "resource_phone",
@@ -263,7 +260,7 @@ class Resource < ActiveRecord::Base
   def self.all_public_values_hash
     {
         "URL" => "url",
-        "Description" => "desc",
+        "Description" => "description",
         "Location" => "location",
         "Resource Email" => "resource_email",
         "Resource Phone" => "resource_phone",

@@ -46,7 +46,7 @@ Feature: update a resource given certain params
     
     Scenario: edit attributes already set for a resource
       When I make a PUT request to "/resources/1" with parameters:
-        |       url     |        desc       | api_key |
+        |       url     |        description       | api_key |
         |    new_url    | not a placeholder | example |
       Then I should receive a JSON object
       When I make a GET request to "/resources" with parameters: 

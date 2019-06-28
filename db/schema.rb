@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_06_25_200034) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "audiences", force: :cascade do |t|
     t.integer "resource_id"
     t.string "val"
@@ -101,7 +104,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_200034) do
     t.string "title"
     t.string "url"
     t.string "contact_email"
-    t.text "desc"
+    t.text "description"
     t.string "resource_email"
     t.string "resource_phone"
     t.string "address"

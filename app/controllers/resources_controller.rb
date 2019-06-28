@@ -3,7 +3,7 @@ class ResourcesController < ApplicationController
     params.permit(
                   :title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :desc, :approval_status, :flagged, :flagged_comment, 
+                  :types, :audiences, :description, :approval_status, :flagged, :flagged_comment, 
                   :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, 
                   :address, :deadline, :notes, :funding_amount, :approved_by, :order_by, :search,
 
@@ -105,7 +105,7 @@ class ResourcesController < ApplicationController
       # redirect_to :controller => 'resources', :action => 'new'
       return
     end
-    if params[:desc] != nil and params[:desc].length > 500 then @desc_too_long = true end
+    if params[:description] != nil and params[:description].length > 500 then @desc_too_long = true end
     if @desc_too_long
       params.each do |key, val|
         session[key] = params[key]

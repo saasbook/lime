@@ -102,16 +102,16 @@
             <a href="<%= resource.url %>" target="_blank"><%= resource.url %></a>
           </div>
           <div class="resource-desc text">
-            <% if resource.desc == nil %>
+            <% if resource.description == nil %>
             <p class="title">Description:</p>
             <p>None</p>
-            <% elsif resource.desc.split.size > 50 %>
+            <% elsif resource.description.split.size > 50 %>
             <p class="title">Description:</p>
-              <% @split = resource.desc.split[0..50] %>
+              <% @split = resource.description.split[0..50] %>
               <p> <%= @split.join(" ") + " ..." %> </p>
             <% else %>
               <p class="title">Description:</p>
-              <p> <%= resource.desc %> </p>
+              <p> <%= resource.description %> </p>
             <% end %>
             
           </div>

@@ -83,7 +83,7 @@ class CreateResources < ActiveRecord::Migration[5.2]
       t.string "title"
       t.string "url"
       t.string "contact_email"
-      t.text "desc"
+      t.text "description"
       t.string "resource_email"
       t.string "resource_phone"
       t.string "address"
