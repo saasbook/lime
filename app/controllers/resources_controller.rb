@@ -47,11 +47,12 @@ class ResourcesController < ApplicationController
     end
     @resources = Resource.location_helper(resource_params)
 
-    if @resources == nil || @resources.length == 0
+    if (@resources == nil || @resources.length == 0)
       # if no results, suggests to search again with exact same params but instead uses parent location
       @parent_location = Location.get_parent(params[:location])
       @parent_params = params
       @parent_params[:location] = @parent_location
+
       @parent_query = "/resources.html?" + @parent_params.except(:controller, :action, :format).to_unsafe_h.to_query
     else
        @resources = @resources.order(sort_by)

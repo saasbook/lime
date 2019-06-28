@@ -98,7 +98,16 @@ class Location < ActiveRecord::Base
 
   # gets the parent name String value using a location's parent_id
   def self.get_parent(location)
-    return Location.where(:id => Location.where(:val => location).first.parent_id).first.val
+    location_data = Location.where(:val => location).first
+    puts location
+    puts location_data == nil
+    if location_data != nil && location != "Global"
+      puts location_data.parent_id
+      return Location.where(:id => location_data.parent_id).first.val
+    else
+      puts location_data
+      return ""
+    end
   end
 
   def self.get_values 

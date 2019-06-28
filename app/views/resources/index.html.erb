@@ -70,7 +70,11 @@
       <div class="row">
         <div class="col-12" id = "result-header">
           <h2>No results found</h2>
-          <p id="none_message"> Would you like to search in the larger location: <%= link_to @parent_location, @parent_query, id: 'new-parent-button' %>? </p>
+          <% if @parent_location != "" %>
+            <p id="none_message"> Would you like to search in the larger location: <%= link_to @parent_location, @parent_query, id: 'new-parent-button' %>? </p>
+          <% else %>
+              <p id="none_message"> Try changing your filtering options.</p>
+          <% end %>
           
         </div>
       </div>
