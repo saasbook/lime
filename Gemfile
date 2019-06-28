@@ -38,7 +38,7 @@ gem 'geocoder'
 # gem 'capistrano-rails', group: :development
 gem 'devise'
 
-gem 'sqlite3_ar_regexp', '~> 2.2'
+# gem 'sqlite3_ar_regexp', '~> 2.2'
 
 
 # Reduces boot times through caching; required in config/boot.rb
