@@ -25,12 +25,29 @@
         <%= text_field_tag(:search, session[:search], class: "search_bar") %>
       </div>
 
+      <div class="association" id="sort">
+        <h2>Sort results</h2>
+        <div class="filters">
+          <% @sort_list = ["title", "location", "updated_at"] %>
+          <% @sort_list.each do |category| %>
+            <div class="single_checkbox gold_label sort_label">
+              <div class="label sort-radio"><%= category.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ") %></div>
+              <% if !session[:sort_by].nil? && session[:sort_by].include?(category) %>
+                <%= radio_button_tag "sort_by", category, true, class: "radio"%>
+              <% else %>
+                <%= radio_button_tag "sort_by", category, false, class: "radio" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
       <div class="association">
         <h2>Location</h2>
         <% @locations.each do |association, values| %>
           <div class="filters">
             <% values.each do |val| %>
-              <div class="single_checkbox gold_label">
+              <div class="single_checkbox gold_label loc_label">
                 <div class="label loc-radio"><%= val %></div>
                 
                 <% if !session[association].nil? && session[association].include?(val) %>

@@ -42,7 +42,7 @@ class ResourcesController < ApplicationController
     end
 
     sort_by = params[:sort_by]
-    if sort_by == nil
+    if sort_by == nil || sort_by != "location" || sort_by != "title"
       sort_by = "updated_at"
     end
     @resources = Resource.location_helper(resource_params)
