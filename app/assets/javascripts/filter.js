@@ -33,7 +33,14 @@ $(document).ready(function() {
         }
     });
 
-
+    /* reset filters */
+    $("#filter-reset-button").click(function() {
+        $(".single_checkbox").each(function () {
+            $(this).find('input').prop({"checked": false});
+            $(this).children(".label").css({"background-color":"#fff0d1"});
+        })
+    });
+    
     /* pagination */
 
     let numResources = $(".resource-container").length
@@ -112,8 +119,10 @@ $(document).ready(function() {
         $(".page-item").removeClass("active"); 
         if ($(this).hasClass("next") && currentPage >= numPages) {
             $(".next").addClass("disabled");
+            $(".prev").removeClass("disabled")
         } else if ($(this).hasClass("prev") && currentPage <= 1) {
             $(".prev").addClass("disabled");
+            $(".next").removeClass("disabled")
         } else {
             $(".page-arrow").removeClass("disabled")
         }

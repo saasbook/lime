@@ -5,7 +5,7 @@
 </div>
 
 <div class="links" %>
-    <%= link_to("Back", "/resources.html/" , class: "btn btn-outline-primary") %>
+    <%= link_to("Back", :back , class: "btn btn-outline-primary") %>
     <% if user_signed_in? %>
         <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
         <% all_values = @all_values_hash %>
@@ -31,7 +31,11 @@
                 <p>
                     <b><%= key.to_s + ": "%></b> 
                     <% if (key.to_s === "URL") %>
-                        <a href="<%= text.to_s %>"><%= text.to_s %></a>
+                        <a href="<%= text.to_s %>" target="_blank"><%= text.to_s %></a>
+                    <% elsif (key.to_s === "Location") %>
+                        <%= text.to_s.gsub(",", ", ") %>
+                    <% elsif (key.to_s === "Deadline") %>
+                        <%= text.to_s.to_date() %>
                     <% elsif (key.to_s === "Deadline") %>
                         <%= text.to_s.to_date() %>
                     <% else %>

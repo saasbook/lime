@@ -41,7 +41,24 @@ body {
 }
 
 .resource-container .text {
-  margin:12px 12px;
+  margin: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  max-width: 95%;
+  p {
+    margin-right: 16px;
+    margin-bottom: 0px;
+  }
+  .title {
+    min-width: 5rem;
+    text-align:right;
+  }
+
+  a {
+    word-wrap: break-word;
+    // max-width: 95%;
+    overflow: hidden;
+  }
 }
 
 #filter-button {
@@ -77,6 +94,9 @@ body {
   padding: 0px;
   width: 50vw;
   float: right;
+  #none_message {
+    font-size: 16px;
+  }
 }
 
 #approval-column {
@@ -163,6 +183,7 @@ body {
   width: 80vw;
 }
 
+
 .resource-title {
   font-size: 1.5rem;
   color: rgb(0, 0, 0);
@@ -176,6 +197,12 @@ body {
 .resource-title a:visited {
   text-decoration: inherit;
   color: inherit;
+}
+
+.resource-updated {
+  padding: 0px;
+  margin: 0px;
+  font-size: 0.75rem;
 }
 
 .approve-button {
@@ -575,6 +602,7 @@ select {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 #show .links {

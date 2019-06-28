@@ -15,11 +15,13 @@
       <div class="row">
         <div id="filter-header">
           <%= submit_tag 'Filter', class: 'btn btn-outline-dark btn-lg', id: 'filter-button'%>
+
+          <%= button_tag 'Reset filters', :type => 'button', class: 'btn btn-outline-dark btn-sm', id: 'filter-reset-button'%>
         </div>
       </div>
 
       <div class="association" id="search_row">
-        <%= label_tag(:search_bar, "Search titles and descriptions:", class: "search_bar_text") %>
+        <%= label_tag(:search_bar, "Search", class: "search_bar_text") %>
         <%= text_field_tag(:search, session[:search], class: "search_bar") %>
       </div>
 
@@ -30,7 +32,12 @@
             <% values.each do |val| %>
               <div class="single_checkbox gold_label">
                 <div class="label loc-radio"><%= val %></div>
-                <%= radio_button_tag association, val, false, class: "radio", id: val %>
+                
+                <% if !session[association].nil? && session[association].include?(val) %>
+                  <%= radio_button_tag association, val, true, class: "radio", id: val %>
+                <% else %>
+                  <%= radio_button_tag association, val, false, class: "radio", id: val %>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -63,6 +70,8 @@
       <div class="row">
         <div class="col-12" id = "result-header">
           <h2>No results found</h2>
+          <p id="none_message"> Would you like to search in the larger location: <%= link_to @parent_location, @parent_query, id: 'new-parent-button' %>? </p>
+          
         </div>
       </div>
     <% else %>
@@ -85,33 +94,43 @@
             <%= link_to(resource.title, "/resources/" + resource.id.to_s + ".html") %>
           </div>
           <div class="resource-url text">
-            URL: <a href="<%= resource.url %>"><%= resource.url %></a>
+            <p class="title">URL:</p>
+            <a href="<%= resource.url %>" target="_blank"><%= resource.url %></a>
           </div>
           <div class="resource-desc text">
             <% if resource.desc == nil %>
-              Description: None
-            <% elsif resource.desc.length > 150 %>
-              Description: <%= resource.desc[0..150] + "..." %>
+            <p class="title">Description:</p>
+            <p>None</p>
+            <% elsif resource.desc.split.size > 50 %>
+            <p class="title">Description:</p>
+              <% @split = resource.desc.split[0..50] %>
+              <p> <%= @split.join(" ") + " ..." %> </p>
             <% else %>
-              Description: <%= resource.desc %>
+              <p class="title">Description:</p>
+              <p> <%= resource.desc %> </p>
             <% end %>
             
           </div>
-          <div class="resource-location text">
-            Location: <%= resource.location %>
-          </div>
+          <% if resource.location != nil %>
+            <div class="resource-location text">
+              <p class="title">Location:</p>
+              <p> <%= resource.location.gsub(",", ", ") %> </p>
+            </div>
+          <% end %>
           
           <% @type_value = resource.types.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "")%>
           <% if @type_value != "" %>
             <div class="resource-types text">
-              Types: <%=  @type_value %>
+              <p class="title">Types:</p>
+              <p> <%= @type_value %> </p>
             </div>
           <% end %>
 
           <% @audience_value = resource.audiences.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "")%>
           <% if @audience_value != "" %>
             <div class="resource-types text">
-              Audiences: <%=  @audience_value %>
+              <p class="title">Audiences:</p>
+              <p> <%= @audience_value %> </p>
             </div>
           <% end %>
           
@@ -119,6 +138,8 @@
         
           <div class="text links" %>
             <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
+            <p class="resource-updated">Last Updated: <%= resource.updated_at %></p>
+            
             <% if user_signed_in? %>
               <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
             <% end %>

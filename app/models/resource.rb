@@ -74,16 +74,15 @@ class Resource < ActiveRecord::Base
     end
 
     # return early if there are no has_many fields
-    if has_many_hash.empty?
-      search_regex = ""
+    search_regex = ""
       if params[:search].to_s.length != 0
         search_regex = 'title REGEXP ' + '".*' + params[:search].to_s + '.*" OR desc REGEXP ' + '".*' + params[:search].to_s + '.*"'
       end
-      
       params.delete :search
+    if has_many_hash.empty?
       return Resource.where(params).where(search_regex)
     else
-      resources = Resource.where(params).includes(*Resource.has_many_associations)
+      resources = Resource.where(params).where(search_regex).includes(*Resource.has_many_associations)
       return self.filter_has_many_helper(resources, has_many_hash)
     end
   end
@@ -208,17 +207,17 @@ class Resource < ActiveRecord::Base
       resources = resources.or(self.filter(params))
     end
 
-    if resources.length < 1
-      # get parent and its resources
-      parent = Location.get_parent(location)
-      locations = Location.child_locations(parent)
-      resources = Resource.none
+    # if resources.length < 1
+    #   # get parent and its resources
+    #   parent = Location.get_parent(location)
+    #   locations = Location.child_locations(parent)
+    #   resources = Resource.none
 
-      locations.each do |location|
-        params[:location] = location
-        resources = resources.or(self.filter(params))
-      end
-    end 
+    #   locations.each do |location|
+    #     params[:location] = location
+    #     resources = resources.or(self.filter(params))
+    #   end
+    # end 
     return resources
   end
 
@@ -253,8 +252,8 @@ class Resource < ActiveRecord::Base
         "Approved By" => "approved_by",
         "Flagged" => "flagged",
         "Flagged Comment" => "flagged_comment",
-        "Created At" => "created_at",
-        "Updated At" => "updated_at"
+        "Created on" => "created_at",
+        "Updated on" => "updated_at"
     }
   end
 
@@ -278,8 +277,8 @@ class Resource < ActiveRecord::Base
         'Topics' => "topics",
         'Technologies' => "technologies",
         'Client tags' => "client_tags",
-        "Created At" => "created_at",
-        "Updated At" => "updated_at"
+        "Created on" => "created_at",
+        "Updated on" => "updated_at"
     }
   end
 end

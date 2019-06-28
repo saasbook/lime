@@ -32,18 +32,28 @@ class ResourcesController < ApplicationController
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
-    puts "session"
     reset_session
-    session[:search] = params[:search]
-    puts session[:search]
+    params.each do |key, value|
+      session[key] = value
+    end
+
     if @user.nil?
       params[:approval_status] = 1 # only admins can view unapproved resources
     end
 
     sort_by = params[:sort_by]
+    if sort_by == nil
+      sort_by = "updated_at"
+    end
     @resources = Resource.location_helper(resource_params)
 
-    if @resources != nil
+    if @resources == nil || @resources.length == 0
+      # if no results, suggests to search again with exact same params but instead uses parent location
+      @parent_location = Location.get_parent(params[:location])
+      @parent_params = params
+      @parent_params[:location] = @parent_location
+      @parent_query = "/resources.html?" + @parent_params.except(:controller, :action, :format).to_unsafe_h.to_query
+    else
        @resources = @resources.order(sort_by)
     end
 
