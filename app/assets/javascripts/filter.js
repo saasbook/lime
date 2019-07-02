@@ -136,4 +136,16 @@ $(document).ready(function() {
         setActive();
     });
 
+    /* implementation to show/hide results based on filters selected */
+
+    /* data structure to store all resources */
+    let resources = [];
+    $('.resource_information').each(function(i, resource) {
+        console.log(resource.props);
+        resources.push(resource.data('resource'));
+    });
+    console.log(resources);
+
+
+
 });

@@ -7,6 +7,7 @@
 </div>
 
 <%= javascript_include_tag "filter" %>
+<%= javascript_pack_tag 'application' %>
 
 <div class="index"  id="resource-container-wrapper">
   <div id="filter-column">
@@ -110,6 +111,9 @@
       </div>
 
       <% @resources.each do |resource| %>
+        <%= content_tag :div, class: "resource_information", data: {resource: resource} do %>
+        <% end %>
+        <%= react_component("Resource", { title: resource.title }) %>
         <div class="row resource-container">
           <div class="resource-title text">
             <%= link_to(resource.title, "/resources/" + resource.id.to_s + ".html") %>
@@ -155,8 +159,6 @@
             </div>
           <% end %>
           
-
-        
           <div class="text links" %>
             <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
             <p class="resource-updated">Last Updated: <%= resource.updated_at.to_date() %></p>

@@ -40,6 +40,11 @@ gem 'devise'
 
 # gem 'sqlite3_ar_regexp', '~> 2.2'
 
+# React.js for filtering on browser
+# refer to https://github.com/reactjs/react-rails
+gem 'webpacker'
+gem 'react-rails'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
