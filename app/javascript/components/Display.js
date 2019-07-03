@@ -57,13 +57,18 @@ class Display extends React.Component {
         <div id="filter-column">
           <form action="/resources.html" method="get">
             <div className="row">
-              <button id="filter-reset-button" className="btn btn-outline-dark btn-lg">Reset Filters</button>
+              <div id="filter-header">
+                <button id="filter-reset-button" className="btn btn-outline-dark btn-sm">Reset Filters</button>
+              </div>
             </div>{/*reset-button*/}
             <div className="association" id="search_row">
               <label className="search_bar_text">Search</label>
               <input type="text" name="search" className="search_bar"></input>
             </div>{/*search-row*/}
             {this.state.all_filters.get("types")}
+            {this.state.all_filters.get("audiences")}
+            {this.state.all_filters.get("topics")}
+            {this.state.all_filters.get("availabilities")}
           </form>
         </div> {/*filter-column*/}
         <div id="resource-column">

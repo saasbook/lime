@@ -11,7 +11,6 @@ class Filter extends React.Component {
         </button>
       )
     });
-    console.log(initial_values);
     this.state = {
       checked: false,
       values: initial_values,
@@ -26,7 +25,7 @@ class Filter extends React.Component {
   render () {
     return (
       <div className="association">
-        <h2>{this.props.association}</h2>
+        <h2>{this.props.association.charAt(0).toUpperCase() + this.props.association.slice(1)}</h2>
         <div className="filters">
           {this.state.values}
         </div>

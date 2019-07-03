@@ -10,7 +10,10 @@
 <%= javascript_include_tag "filter" %>
 
 <div class="index"  id="resource-container-wrapper">
+<% if false %>
   <div id="filter-column">
+
+  
     <%= form_tag("/resources.html", method: :get) do %>
       
       <div class="row">
@@ -82,6 +85,7 @@
       <% end %>
     <% end %>
   </div>
+  <% end %>
 
   <%= react_component("Display", { filters: @has_many_hash, resources: @resources }) %>
 
