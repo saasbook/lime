@@ -6,8 +6,8 @@
     <h1>Resources </h1>
 </div>
 
-<%= javascript_include_tag "filter" %>
 <%= javascript_pack_tag 'application' %>
+<%= javascript_include_tag "filter" %>
 
 <div class="index"  id="resource-container-wrapper">
   <div id="filter-column">
@@ -83,6 +83,9 @@
     <% end %>
   </div>
 
+  <%= react_component("Display", { filters: @has_many_hash, resources: @resources }) %>
+
+  <% if false %>
   <div id="resource-column">
     <% if @resources.length == 0 %>
       <div class="row">
@@ -111,63 +114,13 @@
       </div>
 
       <% @resources.each do |resource| %>
-        <%= content_tag :div, class: "resource_information", data: {resource: resource} do %>
-        <% end %>
-        <%= react_component("Resource", { title: resource.title }) %>
-        <div class="row resource-container">
-          <div class="resource-title text">
-            <%= link_to(resource.title, "/resources/" + resource.id.to_s + ".html") %>
-          </div>
-          <div class="resource-url text">
-            <p class="title">URL:</p>
-            <a href="<%= resource.url %>" target="_blank"><%= resource.url %></a>
-          </div>
-          <div class="resource-desc text">
-            <% if resource.description == nil %>
-            <p class="title">Description:</p>
-            <p>None</p>
-            <% elsif resource.description.split.size > 50 %>
-            <p class="title">Description:</p>
-              <% @split = resource.description.split[0..50] %>
-              <p> <%= @split.join(" ") + " ..." %> </p>
-            <% else %>
-              <p class="title">Description:</p>
-              <p> <%= resource.description %> </p>
-            <% end %>
-            
-          </div>
-          <% if resource.location != nil %>
-            <div class="resource-location text">
-              <p class="title">Location:</p>
-              <p> <%= resource.location.gsub(",", ", ") %> </p>
-            </div>
-          <% end %>
-          
-          <% @type_value = resource.types.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "")%>
-          <% if @type_value != "" %>
-            <div class="resource-types text">
-              <p class="title">Types:</p>
-              <p> <%= @type_value %> </p>
-            </div>
-          <% end %>
 
-          <% @audience_value = resource.audiences.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "")%>
-          <% if @audience_value != "" %>
-            <div class="resource-types text">
-              <p class="title">Audiences:</p>
-              <p> <%= @audience_value %> </p>
-            </div>
-          <% end %>
-          
-          <div class="text links" %>
-            <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
-            <p class="resource-updated">Last Updated: <%= resource.updated_at.to_date() %></p>
-            
-            <% if user_signed_in? %>
-              <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
-            <% end %>
-          </div>
-        </div>
+        
+        <% if false %>
+        <div class="resource-container" data-resource=<%= resource.attributes %> > </div>
+        <% end %>
+        
+        
       <% end %>
       <div class="row" id="pages">
         <ul class="pagination">
@@ -177,7 +130,6 @@
         </ul>
       </div>
     <% end %>
-    
-    
   </div>
+  <% end %>
 </div>

@@ -49,19 +49,10 @@ $(document).ready(function() {
     
     /* pagination */
 
-    let numResources = $(".resource-container").length
     let itemsPerPage = 10;
+    let numResources = $(".resource-container").length
     let numPages = Math.ceil(numResources / itemsPerPage);
 
-    for (let i = 1; i <= numPages; i++) {
-        $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
-    }
-    $(".pagination").append('<li class="page-arrow next disabled" id="next"><p id="nextLink" class="page-link nextLink">Next</p></li>');
-    if (numPages > 1) {
-        $(".next").removeClass("disabled")
-    }
-    $(".resource-container").addClass("hidden-resource");
-    
     let openPage = function(pageNum) {
         currentPage = pageNum;
         let start = ((pageNum - 1) * itemsPerPage) + 1;
@@ -89,6 +80,15 @@ $(document).ready(function() {
             }
         });
     }
+
+    for (let i = 1; i <= numPages; i++) {
+        $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
+    }
+    $(".pagination").append('<li class="page-arrow next disabled" id="next"><p id="nextLink" class="page-link nextLink">Next</p></li>');
+    if (numPages > 1) {
+        $(".next").removeClass("disabled")
+    }
+    $(".resource-container").addClass("hidden-resource");
 
     openPage(1);
     setActive(1);
@@ -136,15 +136,38 @@ $(document).ready(function() {
         setActive();
     });
 
+    
+
+    
+
+    
+
     /* implementation to show/hide results based on filters selected */
 
     /* data structure to store all resources */
-    let resources = [];
-    $('.resource_information').each(function(i, resource) {
-        console.log(resource.props);
-        resources.push(resource.data('resource'));
-    });
-    console.log(resources);
+    // let resources = [];
+    // $('.resource_information').each(function(i, resource) {
+    //     console.log(resource.props);
+    //     resources.push(resource.data('resource'));
+    // });
+    // console.log(resources);
+
+
+    // $(".single_checkbox").click(function() {
+    //     let association = $(this).find(".label")[0].textContent
+    //     console.log(association);
+
+    //     $(".resource-container").each(function() {
+    //         console.log($(this).find());
+    //         // if (count >= start && count <= end) {
+    //         //     $(this).removeClass("hidden-resource");
+    //         // } else {
+    //         //     $(this).addClass("hidden-resource");
+    //         // }
+    //         // count++;
+    //     });
+    // });
+
 
 
 
