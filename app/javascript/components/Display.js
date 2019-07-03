@@ -8,15 +8,15 @@ class Display extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(this.props.resources);
     let all_filters = new Map();
     Object.keys(this.props.filters).forEach(association => {
-      console.log(association)
       all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} filter={this.filter}></Filter>)
     });
-    console.log(all_filters);
 
     let initial_resources = new Array();
     this.props.resources.forEach(resource => {
+
       initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     });
 
@@ -27,11 +27,17 @@ class Display extends React.Component {
     }
   }
   
-  filter(types) {
-    filtered_resources = new Array();
-    this.props.resources.forEach(resource => {
-      initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
+  filter = (association, value) => {
+    console.log(association);
+    console.log(value);
+    let filtered_resources = new Array();
+    this.state.resources.forEach(resource => {
+      
+      let resource_associations = resource.props.data;
+      console.log(resource_associations);
+      // filtered_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     })
+    
     this.setState({filtered_resources: filtered_resources});
   }
   
@@ -55,7 +61,7 @@ class Display extends React.Component {
     return (
       <div className="index"  id="resource-container-wrapper">
         <div id="filter-column">
-          <form action="/resources.html" method="get">
+          <div>
             <div className="row">
               <div id="filter-header">
                 <button id="filter-reset-button" className="btn btn-outline-dark btn-sm">Reset Filters</button>
@@ -69,7 +75,7 @@ class Display extends React.Component {
             {this.state.all_filters.get("audiences")}
             {this.state.all_filters.get("topics")}
             {this.state.all_filters.get("availabilities")}
-          </form>
+          </div>
         </div> {/*filter-column*/}
         <div id="resource-column">
           {result_header}

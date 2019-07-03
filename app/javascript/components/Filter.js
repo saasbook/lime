@@ -6,20 +6,20 @@ class Filter extends React.Component {
     let initial_values = new Array();
     this.props.values.forEach(value => {
       initial_values.push(
-        <button className="single_checkbox gold_label label">
+        <button key={value} className="single_checkbox gold_label label" onClick={() => this.change_filter(this.props.association, value)}>
           {value}
         </button>
       )
     });
     this.state = {
-      checked: false,
       values: initial_values,
       selected: new Array()
     }
   }
 
-  change_filter (value) {
-    
+  change_filter = (association, value) => {
+
+    this.props.filter(association, value)
   }
 
   render () {
