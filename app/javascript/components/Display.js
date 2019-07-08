@@ -7,34 +7,42 @@ class Display extends React.Component {
 
   constructor(props) {
     super(props);
-
-    console.log(this.props.resources);
+    let parsed_resources = JSON.parse(this.props.resources)
     let all_filters = new Map();
     Object.keys(this.props.filters).forEach(association => {
       all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} filter={this.filter}></Filter>)
     });
 
     let initial_resources = new Array();
-    this.props.resources.forEach(resource => {
 
-      initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
+    parsed_resources.forEach(resource => {
+      console.log(resource);
+      for (let association in resource) {
+        // console.log(association);
+        // console.log(typeof(resource[association]));
+        // if (typeof(association) == "object") {
+        //   console.log(association)
+        // }
+      };
+      // initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     });
-
+    console.log(parsed_resources);
     this.state = {
-      resources: initial_resources,
-      filtered_resources: initial_resources,
+      resources: parsed_resources,
+      filtered_resources: parsed_resources,
       all_filters: all_filters
     }
+    
   }
   
   filter = (association, value) => {
-    console.log(association);
-    console.log(value);
+    // console.log(association);
+    // console.log(value);
     let filtered_resources = new Array();
     this.state.resources.forEach(resource => {
       
       let resource_associations = resource.props.data;
-      console.log(resource_associations);
+      // console.log(resource_associations);
       // filtered_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     })
     
@@ -106,6 +114,6 @@ class Display extends React.Component {
 
 Display.propTypes = {
   filters: PropTypes.object,
-  resources: PropTypes.array
+  resources: PropTypes.Array
 };
 export default Display

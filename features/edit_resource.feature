@@ -8,7 +8,7 @@ Feature: edit a resource through view
 	Background: resources have been added to database
   
 	    Given the following resources exist:
-	      | title                        | url | contact_email | location | types | audiences | desc| population_focuses | approval_status |
+	      | title                        | url | contact_email | location | types | audiences | description | population_focuses | approval_status |
 	      | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Alumni | placeholder | Women | 1 |
 
 	    And the following users exist:

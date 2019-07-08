@@ -8,7 +8,7 @@ so that my resource can be added to the approval queue
 Background: database already has other resources
 
     Given the following resources exist:
-      | title                        | url | contact_email | location | types | audiences | desc| population_focuses |
+      | title                        | url | contact_email | location | types | audiences | description | population_focuses |
       | Girls in Engineering of California | http://gie.uc.edu |  gie@uc.edu | California | Mentoring,Scholarship | Other | placeholder | Women |
       | Girls in Engineering         | http://gie.berkeley.edu |  gie@berkeley.edu | Berkeley | Mentoring,Scholarship | Other | placeholder | Women |
 
@@ -30,14 +30,14 @@ Scenario: adding a resource called "Women Techmakers" with its other fields
 
 Scenario: adding a resource called "Society of Women Engineers" with its fields
     When I make a POST request to "/resources" with parameters: 
-      | title                        | url | contact_email | location | types | audiences | desc| population_focuses |
+      | title                        | url | contact_email | location | types | audiences | description | population_focuses |
       | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women |
     Then I should receive a JSON object
     And the JSON should contain "Society of Women Engineers"
 
 Scenario: adding a resource called "Coaching Fellowship Again" with missing other fields
     When I make a POST request to "/resources" with parameters: 
-      | title                         | location | types | audiences | desc| population_focuses |
+      | title                         | location | types | audiences | description | population_focuses |
       | Coaching Fellowship Again     | Berkeley | Mentoring | Other | placeholder | Women |
     Then I should not receive a JSON
     And the JSON should not contain "Coaching Fellowship Again"

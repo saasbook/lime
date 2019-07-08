@@ -7,7 +7,7 @@ Feature: admin edits list of unapproved resources
   Background: resources that have been added to the database
 
     Given the following resources exist:
-      | title                        | url | contact_email | location | types | audiences | desc| population_focuses | approval_status |
+      | title                        | url | contact_email | location | types | audiences | description | population_focuses | approval_status |
       | Girls in Engineering of California | http://gie.uc.edu |  gie@uc.edu | California | Mentoring,Scholarship | Other | placeholder | Women | 1 |
       | Girls in Engineering         | http://gie.berkeley.edu |  gie@berkeley.edu | Berkeley | Mentoring,Scholarship | Other | placeholder | Women | 0 |
       | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | Women | 1 |

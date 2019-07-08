@@ -18,16 +18,17 @@ class Resource < ActiveRecord::Base
   # end
 
   def self.include_has_many_params
-    {:types => {:only => [:val]},
-     :audiences => {:only => [:val]},
-     :client_tags => {:only => [:val]},
-     :population_focuses => {:only => [:val]},
-     :campuses => {:only => [:val]},
-     :colleges => {:ony => [:val]},
-     :availabilities => {:only => [:val]},
-     :innovation_stages => {:only => [:val]},
-     :topics => {:only => [:val]},
-     :technologies => {:only => [:val]}
+    {
+      :types => {:only => [:val]},
+      :audiences => {:only => [:val]},
+      :client_tags => {:only => [:val]},
+      :population_focuses => {:only => [:val]},
+      :campuses => {:only => [:val]},
+      :colleges => {:only => [:val]},
+      :availabilities => {:only => [:val]},
+      :innovation_stages => {:only => [:val]},
+      :topics => {:only => [:val]},
+      :technologies => {:only => [:val]}
     }
   end
 

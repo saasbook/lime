@@ -61,8 +61,13 @@ class ResourcesController < ApplicationController
     @has_many_hash = self.has_many_value_hash
     @locations = Location.get_locations
 
+    @resources_json = @resources.as_json(:include => Resource.include_has_many_params)
+    @resources_json.map! do |resource|
+      resource = json_fix(resource)
+    end
+
     respond_to do |format|
-      format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params)}
+      format.json {render :json => @resources_json.to_json(:include => Resource.include_has_many_params)}
       format.html
     end
   end
@@ -77,7 +82,8 @@ class ResourcesController < ApplicationController
     # if @user.nil? and @resource&.approval_status == 0
     #   @resource = nil
     # end
-
+    
+    @resource = json_fix(@resource)
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html  
@@ -123,7 +129,7 @@ class ResourcesController < ApplicationController
     if params[:location] != nil then Location.nest_location(params[:location]) end
 
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
+      format.json {render :json => @resource.to_json(:includes => Resource.include_has_many_params) }
       format.html {redirect_to :controller => 'resources', :action => 'new'}
     end
   end
@@ -154,6 +160,25 @@ class ResourcesController < ApplicationController
         redirect_to :controller => 'resources', :action => 'edit'
       end
     end
+  end
+
+  # fixes the formatting issue that .to_json does 
+  # where the associations with "many_params" are converted to arrays of hashes for each ":val"
+  # this helper converts the array of hashes to just an array
+  def json_fix(resource)
+    @full_resource = resource.as_json(:include => Resource.include_has_many_params)
+    @full_resource.each do |association, values|
+      if values.kind_of?(Array) && values.length > 0
+        new_association = Array.new
+        values.each do |value|
+          value.each do |k, v|
+            new_association.push(v)
+          end
+        end
+        @full_resource[association] = new_association
+      end
+    end
+    return @full_resource
   end
 
   def approve_many

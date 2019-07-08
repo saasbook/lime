@@ -87,7 +87,8 @@
   </div>
   <% end %>
 
-  <%= react_component("Display", { filters: @has_many_hash, resources: @resources }) %>
+  <% resource_data = @resources.to_json(:include => Resource.include_has_many_params) %> 
+  <%= react_component("Display", { filters: @has_many_hash, resources: resource_data }) %>
 
   <% if false %>
   <div id="resource-column">

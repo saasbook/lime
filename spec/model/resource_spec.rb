@@ -6,9 +6,9 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     it 'creates resources in the database' do
       Resource.destroy_all
       Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
-                               "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+                               "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
       Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
-                               "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+                               "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
       result = Resource.all.order(:title)
       expect(result.count).to eq 2
       expect(result.first.title).to eq "thing1"
@@ -20,16 +20,16 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     before(:each) do
       Resource.destroy_all
       @resource1 = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
-                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
       @resource2 = Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
-                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
       @resource3 = Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
-                                            "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+                                            "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
       @resource4 = Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
-                               "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+                               "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
 
       User.delete_all
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
@@ -44,7 +44,7 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
 
     it 'returns the flagged resources if flagged is specified' do
       Resource.create_resource "title" => "thing5", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
-                               "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "flagged" => 1
+                               "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "flagged" => 1
       result = Resource.filter({"flagged" => 1})
       # print result.pretty_print_inspect
       expect(result.count).to eq 1
@@ -76,19 +76,19 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     before(:each) do
       Resource.destroy_all
       @resource1 = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
-                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
       @resource2 = Resource.create_resource "title" => "thing2", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Berkeley",
-                                            "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+                                            "types" => 'Scholarship,Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
       @resource3 = Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "USA",
-                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "desc" => "descriptions", "approval_status" => 0
+                                            "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
       @resource4 = Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "California",
-                                            "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+                                            "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
 
       @resource5 = Resource.create_resource "title" => "thing5", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Seattle",
-                                            "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "desc" => "descriptions"
+                                            "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
 
       User.delete_all
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')

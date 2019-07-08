@@ -7,7 +7,7 @@ Feature: display list of resources filtered by any combination of available tags
   Background: resources have been added to database
 
     Given the following resources exist:
-      | title                        | url | contact_email | location | types | audiences | desc| approval_status |
+      | title                        | url | contact_email | location | types | audiences | description | approval_status |
       | Girls in Engineering of California | http://gie.uc.edu |  gie@uc.edu | California | Mentoring | Other | placeholder | 1 |
       | Girls in Engineering         | http://gie.berkeley.edu |  gie@berkeley.edu | Berkeley | Mentoring | Other | placeholder | 1 |
       | Society of Women Engineers   | http://swe.berkeley.edu | swe@berkeley.edu  | Berkeley | Mentoring | Other | placeholder | 1 |
