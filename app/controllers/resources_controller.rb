@@ -65,9 +65,10 @@ class ResourcesController < ApplicationController
     @resources_json.map! do |resource|
       resource = json_fix(resource)
     end
+    @resources = @resources_json
 
     respond_to do |format|
-      format.json {render :json => @resources_json.to_json(:include => Resource.include_has_many_params)}
+      format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params)}
       format.html
     end
   end

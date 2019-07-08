@@ -7,48 +7,140 @@ class Display extends React.Component {
 
   constructor(props) {
     super(props);
-    let parsed_resources = JSON.parse(this.props.resources)
+
     let all_filters = new Map();
     Object.keys(this.props.filters).forEach(association => {
       all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} filter={this.filter}></Filter>)
     });
 
     let initial_resources = new Array();
-
-    parsed_resources.forEach(resource => {
-      console.log(resource);
-      for (let association in resource) {
-        // console.log(association);
-        // console.log(typeof(resource[association]));
-        // if (typeof(association) == "object") {
-        //   console.log(association)
-        // }
-      };
-      // initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
+    this.props.resources.forEach(resource => {
+      initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     });
-    console.log(parsed_resources);
+
     this.state = {
-      resources: parsed_resources,
-      filtered_resources: parsed_resources,
+      resources: initial_resources,
+      filtered_resources: initial_resources,
       all_filters: all_filters
     }
     
   }
   
   filter = (association, value) => {
-    // console.log(association);
-    // console.log(value);
     let filtered_resources = new Array();
     this.state.resources.forEach(resource => {
-      
       let resource_associations = resource.props.data;
-      // console.log(resource_associations);
-      // filtered_resources.push(<Resource key={resource.id} data={resource}></Resource>)
+      if (resource_associations[association].includes(value)) {
+        filtered_resources.push(<Resource key={resource.props.data.id} data={resource.props.data}></Resource>)
+      }
     })
     
     this.setState({filtered_resources: filtered_resources});
   }
+
+  componentDidMount() {
+    this.paginate();
+  }
+
+  componentDidUpdate() {
+    this.paginate();
+  }
   
+  paginate = () => {
+    $(".pagination").html("");
+    let itemsPerPage = 10;
+    let numResources = $(".resource-container").length
+    let numPages = Math.ceil(numResources / itemsPerPage);
+
+    let openPage = function(pageNum) {
+        currentPage = pageNum;
+        let start = ((pageNum - 1) * itemsPerPage) + 1;
+        let end = (pageNum * itemsPerPage);
+        let count = 1;
+        $(".resource-container").each(function() {
+            if (count >= start && count <= end) {
+                $(this).removeClass("hidden-resource");
+            } else {
+                $(this).addClass("hidden-resource");
+            }
+            count++;
+        });
+    }
+
+    let setActive = function()  {
+        let count = 1;
+        $(".page-item").each(function() {
+            if (count === Number(currentPage)) {
+                $(this).addClass("active"); 
+            }
+            count++;
+            if (count > numPages) {
+                count = 1;
+            }
+        });
+    }
+
+    
+    $(".pagination").append('<li class="page-arrow prev disabled" id="prev"><p id="prevLink" class="page-link prevLink">Previous</p></li>');
+    for (let i = 1; i <= numPages; i++) {
+        $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
+    }
+    $(".pagination").append('<li class="page-arrow next disabled" id="next"><p id="nextLink" class="page-link nextLink">Next</p></li>');
+    if (numPages > 1) {
+        $(".next").removeClass("disabled")
+    }
+    /* hide all pages */
+    $(".resource-container").addClass("hidden-resource");
+
+    /* open first page */
+    openPage(1);
+    setActive(1);
+    var currentPage = 1;
+
+    /* pagination buttons */
+    $(".page-link").click(function() {
+        if($(this).hasClass("nextLink")) {
+            openPage(Number(currentPage) + 1);
+        } else if ($(this).hasClass("prevLink")){
+            openPage(Number(currentPage) - 1);
+        } else {
+            openPage($(this).text());
+        }
+        
+    });
+
+    $(".page-item").click(function() {
+        $(".page-item").removeClass("active");
+        setActive();
+
+        if (currentPage < numPages) {
+            $(".next").removeClass("disabled");
+        } else {
+            $(".next").addClass("disabled");
+        }
+        if ((currentPage >= 2)) {
+            $(".prev").removeClass("disabled");
+        } else {
+            $(".prev").addClass("disabled");
+        }    
+    });
+
+    $(".page-arrow").click(function() {
+        $(".page-item").removeClass("active"); 
+        if ($(this).hasClass("next") && currentPage >= numPages) {
+            $(".next").addClass("disabled");
+            $(".prev").removeClass("disabled")
+        } else if ($(this).hasClass("prev") && currentPage <= 1) {
+            $(".prev").addClass("disabled");
+            $(".next").removeClass("disabled")
+        } else {
+            $(".page-arrow").removeClass("disabled")
+        }
+
+        setActive();
+    });
+  }
+
 
   render () {
     let result_header = (
@@ -88,20 +180,12 @@ class Display extends React.Component {
         <div id="resource-column">
           {result_header}
             <div className="row" id="pages">
-              <ul className="pagination">
-                <li className="page-arrow prev disabled" id="prev">
-                  <p id="prevLink" className="page-link prevLink">Previous</p>
-                </li>
-              </ul>
+              <ul className="pagination"></ul>
             </div>
             {this.state.filtered_resources}
             
             <div className="row" id="pages">
-              <ul className="pagination">
-                <li className="page-arrow prev disabled" id="prev">
-                  <p id="prevLink" className="page-link prevLink">Previous</p>
-                </li>
-              </ul>
+              <ul className="pagination"></ul>
             </div>
         </div> {/*resource-column*/}
       </div> /*index*/
@@ -114,6 +198,6 @@ class Display extends React.Component {
 
 Display.propTypes = {
   filters: PropTypes.object,
-  resources: PropTypes.Array
+  resources: PropTypes.array
 };
 export default Display

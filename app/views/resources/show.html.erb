@@ -1,7 +1,7 @@
 <div id="show">
 
 <div id="show-title">
-    <h2><%= @resource.title %></h2>
+    <h2><%= @resource["title"] %></h2>
 </div>
 
 <div class="links" %>
@@ -19,7 +19,6 @@
     <% all_values.map do |key, value| %>
         <% text = @resource[value]%>
         <% if (@has_many_hash.key?(value)) %>
-            <% text = @resource.send(value).collect(&:val) %>
             <% text = text.to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
         <% end %>
         <% if (text != nil && text.to_s.length != 0) %>

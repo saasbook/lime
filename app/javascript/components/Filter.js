@@ -18,7 +18,6 @@ class Filter extends React.Component {
   }
 
   change_filter = (association, value) => {
-
     this.props.filter(association, value)
   }
 

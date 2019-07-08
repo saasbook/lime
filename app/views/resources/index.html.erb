@@ -87,7 +87,7 @@
   </div>
   <% end %>
 
-  <% resource_data = @resources.to_json(:include => Resource.include_has_many_params) %> 
+  <% resource_data = @resources_json %> 
   <%= react_component("Display", { filters: @has_many_hash, resources: resource_data }) %>
 
   <% if false %>
@@ -112,9 +112,6 @@
       </div>
       <div class="row" id="pages">
         <ul class="pagination">
-          <li class="page-arrow prev disabled" id="prev">
-            <p id="prevLink" class="page-link prevLink">Previous</p>
-          </li>
         </ul>
       </div>
 
@@ -129,9 +126,6 @@
       <% end %>
       <div class="row" id="pages">
         <ul class="pagination">
-          <li class="page-arrow prev disabled" id="prev">
-            <p id="prevLink" class="page-link prevLink">Previous</p>
-          </li>
         </ul>
       </div>
     <% end %>
