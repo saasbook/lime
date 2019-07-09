@@ -18,26 +18,50 @@ class Filter extends React.Component {
   }
 
   change_filter = (e, association, value) => {
-    this.props.filter(association, value)
     let key = e.target.getAttribute("data-key");
     let curr_selected = this.state.selected;
-    if (this.state.selected.has(key)) {
-      e.target.className = "single_checkbox gold_label label"
-      curr_selected.delete(key);
+    if (this.props.association === "location") {
+      /* special case for Location filtering */
+      curr_selected = new Set([key]);
+      $(".filters-loc").children().each (button => {
+        $(".filters-loc").children()[button].className = "single_checkbox gold_label label";
+      })
+      
+      if (this.state.selected.values().next().value == curr_selected.values().next().value) {
+        this.props.filter(association, "Global");
+        curr_selected.clear();
+      } else {
+        this.props.filter(association, value);
+        e.target.className = "single_checkbox gold_label label active"
+      }
+      this.setState({selected: curr_selected});
+      
     } else {
-      e.target.className = "single_checkbox gold_label label active"
-      curr_selected.add(key);
+      /* change color of buttons */
+      if (this.state.selected.has(key)) {
+        e.target.className = "single_checkbox gold_label label"
+        curr_selected.delete(key);
+      } else {
+        e.target.className = "single_checkbox gold_label label active"
+        curr_selected.add(key);
+      }
+      this.setState({selected: curr_selected});
+
+      /* call filter function in Display */
+      this.props.filter(association, value);
     }
-    this.setState({selected: curr_selected});
   }
 
   render () {
+    let filter_div = (<div className="filters">{this.state.values}</div>)
+    if (this.props.association === "location") {
+      filter_div = (<div className="filters filters-loc">{this.state.values}</div>)
+    }
+
     return (
       <div className="association">
         <h2>{this.props.association.charAt(0).toUpperCase() + this.props.association.slice(1)}</h2>
-        <div className="filters">
-          {this.state.values}
-        </div>
+        {filter_div}
       </div>/*association*/
     );
   }

@@ -8,6 +8,7 @@ class Location < ActiveRecord::Base
 
   def self.seed
     location_hashes = [{'location' => 'USA', 'parent' => 'Global'},
+                      {'location' => 'International', 'parent' => 'Global'},
                       {'location' => 'California', 'parent' => 'USA'},
                       {'location' => 'Bay Area', 'parent' => 'California'},
                       {'location' => 'Berkeley', 'parent' => 'Bay Area'},
@@ -74,6 +75,9 @@ class Location < ActiveRecord::Base
 
   # returns list of locations that match given location, including the location and all of its children
   def self.child_locations(location)
+    if (location == "United States")
+      location = "USA"
+    end
     if location == nil or !Location.exists?(:val => location)
       return []
     end
@@ -98,6 +102,9 @@ class Location < ActiveRecord::Base
 
   # gets the parent name String value using a location's parent_id (given the location's value)
   def self.get_parent(location)
+    if (location == "United States")
+      location = "USA"
+    end
     location_data = Location.where(:val => location).first
     if location_data != nil && location != "Global"
       return Location.where(:id => location_data.parent_id).first.val

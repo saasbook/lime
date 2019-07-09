@@ -8,7 +8,7 @@ class Display extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props.child_locations);
+    
 
     let all_filters = new Map();
     Object.keys(this.props.filters).forEach(association => {
@@ -28,7 +28,6 @@ class Display extends React.Component {
     });
     let initial_filters = new Map();
     initial_filters.set("location", s);
-    console.log(initial_filters)
 
     this.state = {
       resources: initial_resources,
@@ -41,7 +40,7 @@ class Display extends React.Component {
   }
   
   filter = (association, value) => {
-    
+
     let curr_activated_filters = this.state.activated_filters;
     if (association == "location") {
       /* for locations, its Set gets reset to include its value as well as all its children */
@@ -69,13 +68,36 @@ class Display extends React.Component {
     let filtered_resources = new Array();
     this.state.resources.forEach(resource => {
       let includes = true;
+      let resource_associations = resource.props.data;
       for (const [key, value] of this.state.activated_filters.entries()) {
         value.forEach(v => {
-          let resource_associations = resource.props.data;
           if (key == "location") {
-            let children_set = curr_activated_filters.get(association);
-            if (!children_set.has(resource_associations[key])){
+            let resource_location = resource_associations[key]
+            if (resource_location != null) {
+              /* case when there are multiple locations */
+              resource_location = resource_location.split(",").map(function(item) {
+                return item.trim();
+              });
+              if (resource_location.length === 1) {
+                resource_location = resource_location[0];
+              } else {
+                resource_location = resource_location[1];
+              }
+            }
+            
+            if (resource_location === "United States") {
+              resource_location = "USA"
+            } else if (resource_location === "International") {
+              resource_location = "Global"
+            }
+            let children_set = curr_activated_filters.get("location");
+            if (!children_set.has(resource_location)){
               includes = false;
+            }
+            
+            /* exception if no location for a resource exists. is only included in "Global" */
+            if ((resource_location == undefined || resource_location.length < 1) && children_set.has("Global")) {
+              includes = true;
             }
           } else {
             if (resource_associations[key] == undefined || resource_associations[key].length < 1 || !resource_associations[key].includes(v)) {
