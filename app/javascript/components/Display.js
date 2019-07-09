@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Resource from './Resource.js';
 import Filter from './Filter.js';
+import { DEFAULT_ECDH_CURVE } from "tls";
 
 class Display extends React.Component {
 
@@ -21,17 +22,41 @@ class Display extends React.Component {
     this.state = {
       resources: initial_resources,
       filtered_resources: initial_resources,
-      all_filters: all_filters
+      all_filters: all_filters,
+      activated_filters : new Map()
     }
     
   }
   
   filter = (association, value) => {
+    let curr_activated_filters = this.state.activated_filters;
+    if (curr_activated_filters.has(association)) {
+      if (curr_activated_filters.get(association).has(value)) {
+        curr_activated_filters.get(association).delete(value);
+      } else {
+        curr_activated_filters.get(association).add(value);
+      }
+    } else {
+      let s = new Set();
+      s.add(value);
+      curr_activated_filters.set(association, s);
+    }
+
+    this.setState({activated_filters: curr_activated_filters});
     let filtered_resources = new Array();
     this.state.resources.forEach(resource => {
-      let resource_associations = resource.props.data;
-      if (resource_associations[association].includes(value)) {
-        filtered_resources.push(<Resource key={resource.props.data.id} data={resource.props.data}></Resource>)
+      let includes = true;
+      for (const [key, value] of this.state.activated_filters.entries()) {
+        value.forEach(v => {
+          let resource_associations = resource.props.data;
+          if (resource_associations[key] == undefined || resource_associations[key].length < 1 || !resource_associations[key].includes(v)) {
+            includes = false;
+          }
+        });
+        
+      }
+      if (includes) {
+        filtered_resources.push(<Resource key={resource.props.data.id} data={resource.props.data}></Resource>);
       }
     })
     
@@ -149,7 +174,7 @@ class Display extends React.Component {
       </div>
     )
 
-    if (this.state.resources.length == 0) {
+    if (this.state.filtered_resources.length == 0 || this.state.resources.length == 0) {
       result_header = (
         <div className="col-12" id = "result-header">
           <h2>No results found</h2>

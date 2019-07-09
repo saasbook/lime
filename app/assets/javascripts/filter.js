@@ -1,7 +1,4 @@
 $(document).ready(function() {
-
-    /* pagination */
-
     
      /* checkboxes */
     
@@ -14,7 +11,6 @@ $(document).ready(function() {
 
 
     $(".single_checkbox").click(function() {
-        // paginate();
         if ($(this).find('input[type="radio"]').prop("checked") == false) {
             if ($(this).hasClass("loc_label")) {
                 if ($(this).hasClass("gold_label")) {
@@ -28,8 +24,6 @@ $(document).ready(function() {
             }
         }
         
-
-
         if($(this).find('input').prop("checked") == true){
             $(this).find('input').prop({"checked": false});
             if ($(this).hasClass("gold_label")) {
