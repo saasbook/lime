@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 class Filter extends React.Component {
   constructor(props) {
     super(props);
+
     let initial_values = new Array();
     this.props.values.forEach(value => {
       initial_values.push(
@@ -15,6 +16,22 @@ class Filter extends React.Component {
       values: initial_values,
       selected: new Set()
     }
+  }
+
+  reset = () => {
+    let initial_values = new Array();
+    this.props.values.forEach(value => {
+      initial_values.push(
+        <button key={value} data-key={value} className="single_checkbox gold_label label" onClick={(e) => this.change_filter(e, this.props.association, value)}>
+          {value}
+        </button>
+      )
+    });
+    $(".filters").children().each (button => {
+      $(".filters").children()[button].className = "single_checkbox gold_label label";
+    })
+    this.setState({values: initial_values,
+      selected: new Set()});
   }
 
   change_filter = (e, association, value) => {

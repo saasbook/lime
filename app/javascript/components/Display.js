@@ -3,21 +3,27 @@ import PropTypes from "prop-types"
 import Resource from './Resource.js';
 import Filter from './Filter.js';
 import { DEFAULT_ECDH_CURVE } from "tls";
+import { all } from "q";
 
 class Display extends React.Component {
 
   constructor(props) {
     super(props);
-    
-
-    let all_filters = new Map();
-    Object.keys(this.props.filters).forEach(association => {
-      all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} filter={this.filter}></Filter>)
-    });
-
+    this.resetRefs = new Array();
     let initial_resources = new Array();
     this.props.resources.forEach(resource => {
       initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
+    });
+
+    let all_filters = new Map();
+    let filter_indices = new Map();
+    let i = 0;
+    Object.keys(this.props.filters).forEach(association => {
+      let ref = React.createRef();
+      this.resetRefs.push(ref)
+      all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} filter={this.filter} ref={this.resetRefs[i]}></Filter>)
+      filter_indices.set(association, i);
+      i++;
     });
 
     /* initialze filters to include all Global resources and its children */ 
@@ -34,13 +40,42 @@ class Display extends React.Component {
       filtered_resources: initial_resources,
       all_filters: all_filters,
       activated_filters : initial_filters,
+      filter_indices: filter_indices,
       child_locations: children_map
     }
     
   }
+
+  reset_filters = () => {
+    /* reset resources */ 
+    let children_map = new Map(Object.entries(this.props.child_locations));
+    let s = new Set();
+    children_map.get("Global").forEach(location => {
+      s.add(location);
+    });
+    let initial_filters = new Map();
+    initial_filters.set("location", s);
+
+    let done = false;
+    var values = this.state.all_filters.values();
+    let next = values.next();
+    while(!done) {
+      let filter_object = next.value;
+      if (this.state.activated_filters.has(filter_object.props.association)) {
+        let filter_index = this.state.filter_indices.get(filter_object.props.association);
+        this.resetRefs[filter_index].current.reset();
+      }
+      next = values.next();
+      done = next.done;
+    }
+    // callback needed to filter after updating state
+    this.setState({activated_filters: initial_filters}, () => {
+      this.filter("location", "Global")
+    });
+    
+  }
   
   filter = (association, value) => {
-
     let curr_activated_filters = this.state.activated_filters;
     if (association == "location") {
       /* for locations, its Set gets reset to include its value as well as all its children */
@@ -66,6 +101,7 @@ class Display extends React.Component {
 
     /* reset filtered_resources */
     let filtered_resources = new Array();
+
     this.state.resources.forEach(resource => {
       let includes = true;
       let resource_associations = resource.props.data;
@@ -245,7 +281,7 @@ class Display extends React.Component {
           <div>
             <div className="row">
               <div id="filter-header">
-                <button id="filter-reset-button" className="btn btn-outline-dark btn-sm">Reset Filters</button>
+                <button id="filter-reset-button" className="btn btn-outline-dark btn-sm" onClick={this.reset_filters}>Reset Filters</button>
               </div>
             </div>{/*reset-button*/}
             <div className="association" id="search_row">
@@ -265,7 +301,7 @@ class Display extends React.Component {
               <ul className="pagination"></ul>
             </div>
             {this.state.filtered_resources}
-            
+                
             <div className="row" id="pages">
               <ul className="pagination"></ul>
             </div>
