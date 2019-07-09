@@ -41,7 +41,8 @@ class Display extends React.Component {
       all_filters: all_filters,
       activated_filters : initial_filters,
       filter_indices: filter_indices,
-      child_locations: children_map
+      child_locations: children_map,
+      search_text: ""
     }
     
   }
@@ -69,15 +70,18 @@ class Display extends React.Component {
       done = next.done;
     }
     // callback needed to filter after updating state
-    this.setState({activated_filters: initial_filters}, () => {
+    this.setState({activated_filters: initial_filters, search_text: ""}, () => {
       this.filter("location", "Global")
     });
+    $(".search_bar")[0].value = "";
     
   }
   
   filter = (association, value) => {
     let curr_activated_filters = this.state.activated_filters;
-    if (association == "location") {
+    if (association == "text") {
+      this.setState({activated_filters: curr_activated_filters});
+    } else if (association == "location") {
       /* for locations, its Set gets reset to include its value as well as all its children */
       let s = new Set();
       this.state.child_locations.get(value).forEach(location => {
@@ -99,7 +103,7 @@ class Display extends React.Component {
 
     this.setState({activated_filters: curr_activated_filters});
 
-    /* reset filtered_resources */
+    /* reset the array filtered_resources before refiltering */
     let filtered_resources = new Array();
 
     this.state.resources.forEach(resource => {
@@ -147,9 +151,40 @@ class Display extends React.Component {
         filtered_resources.push(<Resource key={resource.props.data.id} data={resource.props.data}></Resource>);
       }
     })
+
+    /* match with the text in search field */
+    filtered_resources = this.search(filtered_resources);
     
     this.setState({filtered_resources: filtered_resources});
   }
+
+  search = (curr_resources) => {
+    let filtered_resources = new Array();
+    curr_resources.forEach(resource => {
+      let title = resource.props.data["title"]
+      let description = resource.props.data["description"]
+      let url = resource.props.data["url"]
+
+      let search_text = this.state.search_text.split(" ");
+      search_text.forEach(word => {
+        let regex_string = ".*" + word + ".*";
+
+        let regex = new RegExp(regex_string, 'i');
+        if (!filtered_resources.includes(resource) && (regex.test(title) || regex.test(url) ||  regex.test(description))) {
+          filtered_resources.push(resource);
+        }
+      })
+    });
+    return filtered_resources;
+  }
+
+  updateSearch = (e) => {
+    e.preventDefault();
+    this.setState({search_text: $(".search_bar")[0].value}, () => {
+      this.filter("text", "search");
+    });
+  }
+
 
   componentDidMount() {
     if (this.state.filtered_resources.length > 0) {
@@ -286,7 +321,11 @@ class Display extends React.Component {
             </div>{/*reset-button*/}
             <div className="association" id="search_row">
               <label className="search_bar_text">Search</label>
-              <input type="text" name="search" className="search_bar"></input>
+              <form onSubmit={this.updateSearch}>
+                <input type="text" name="search" className="search_bar"></input>
+                <button type="submit" id="search-button" className="btn btn-outline-dark btn-sm" onClick={this.updateSearch}>></button>
+              </form>
+              
             </div>{/*search-row*/}
             {this.state.all_filters.get("location")}
             {this.state.all_filters.get("types")}

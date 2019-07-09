@@ -36,14 +36,6 @@ $(document).ready(function() {
             $(this).children(".label").css({"background-color":"#96CAE7"});
         }
     });
-
-    /* reset filters */
-    $("#filter-reset-button").click(function() {
-        $(".single_checkbox").each(function () {
-            $(this).find('input').prop({"checked": false});
-            $(this).children(".label").css({"background-color":"#fff0d1"});
-        })
-    });
     
 
 });
