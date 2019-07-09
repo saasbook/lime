@@ -60,6 +60,13 @@ class ResourcesController < ApplicationController
 
     @has_many_hash = self.has_many_value_hash
     @locations = Location.get_locations
+    @child_locations = Hash.new
+
+    @locations["location"].each {|value|
+      children = Location.child_locations(value)
+      @child_locations[value] = children
+    }
+    
 
     @resources_json = @resources.as_json(:include => Resource.include_has_many_params)
     @resources_json.map! do |resource|

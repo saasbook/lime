@@ -96,7 +96,7 @@ class Location < ActiveRecord::Base
     (not parent.blank?) or (val == "Global" and Location.where(:val => "Global").empty?)
   end
 
-  # gets the parent name String value using a location's parent_id
+  # gets the parent name String value using a location's parent_id (given the location's value)
   def self.get_parent(location)
     location_data = Location.where(:val => location).first
     if location_data != nil && location != "Global"

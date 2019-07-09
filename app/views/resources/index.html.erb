@@ -66,29 +66,12 @@
         
       </div>
 
-      <% @has_many_hash.each do |association, values| %>
-        <div class="association">
-          <h2><%= association.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ") %></h2>
-          <div class="filters">
-            <% values.each do |val| %>
-              <div class="single_checkbox gold_label">
-                <div class="label"><%= val %></div>
-                <% if !session[association].nil? && session[association].include?(val) %>
-                  <%= check_box_tag association+'[]', val, true, class: "checkbox", id: val %>
-                <% else %>
-                  <%= check_box_tag association+'[]', val, false, class: "checkbox", id: val %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
     <% end %>
   </div>
   <% end %>
 
   <% resource_data = @resources_json %> 
-  <%= react_component("Display", { filters: @has_many_hash, resources: resource_data }) %>
+  <%= react_component("Display", { filters: @has_many_hash.merge(@locations), child_locations: @child_locations, resources: resource_data }) %>
 
   <% if false %>
   <div id="resource-column">

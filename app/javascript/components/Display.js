@@ -8,6 +8,7 @@ class Display extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props.child_locations);
 
     let all_filters = new Map();
     Object.keys(this.props.filters).forEach(association => {
@@ -19,19 +20,39 @@ class Display extends React.Component {
       initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     });
 
+    /* initialze filters to include all Global resources and its children */ 
+    let children_map = new Map(Object.entries(this.props.child_locations));
+    let s = new Set();
+    children_map.get("Global").forEach(location => {
+      s.add(location);
+    });
+    let initial_filters = new Map();
+    initial_filters.set("location", s);
+    console.log(initial_filters)
+
     this.state = {
       resources: initial_resources,
       filtered_resources: initial_resources,
       all_filters: all_filters,
-      activated_filters : new Map()
+      activated_filters : initial_filters,
+      child_locations: children_map
     }
     
   }
   
   filter = (association, value) => {
+    
     let curr_activated_filters = this.state.activated_filters;
-    if (curr_activated_filters.has(association)) {
+    if (association == "location") {
+      /* for locations, its Set gets reset to include its value as well as all its children */
+      let s = new Set();
+      this.state.child_locations.get(value).forEach(location => {
+        s.add(location);
+      });
+      curr_activated_filters.set(association, s);
+    } else if (curr_activated_filters.has(association)) {
       if (curr_activated_filters.get(association).has(value)) {
+      
         curr_activated_filters.get(association).delete(value);
       } else {
         curr_activated_filters.get(association).add(value);
@@ -43,14 +64,23 @@ class Display extends React.Component {
     }
 
     this.setState({activated_filters: curr_activated_filters});
+
+    /* reset filtered_resources */
     let filtered_resources = new Array();
     this.state.resources.forEach(resource => {
       let includes = true;
       for (const [key, value] of this.state.activated_filters.entries()) {
         value.forEach(v => {
           let resource_associations = resource.props.data;
-          if (resource_associations[key] == undefined || resource_associations[key].length < 1 || !resource_associations[key].includes(v)) {
-            includes = false;
+          if (key == "location") {
+            let children_set = curr_activated_filters.get(association);
+            if (!children_set.has(resource_associations[key])){
+              includes = false;
+            }
+          } else {
+            if (resource_associations[key] == undefined || resource_associations[key].length < 1 || !resource_associations[key].includes(v)) {
+              includes = false;
+            }
           }
         });
         
@@ -64,11 +94,15 @@ class Display extends React.Component {
   }
 
   componentDidMount() {
-    this.paginate();
+    if (this.state.filtered_resources.length > 0) {
+      this.paginate();
+    } else {$(".pagination").html("");}
   }
 
   componentDidUpdate() {
-    this.paginate();
+    if (this.state.filtered_resources.length > 0) {
+      this.paginate();
+    } else {$(".pagination").html("");}
   }
   
   paginate = () => {
@@ -196,6 +230,7 @@ class Display extends React.Component {
               <label className="search_bar_text">Search</label>
               <input type="text" name="search" className="search_bar"></input>
             </div>{/*search-row*/}
+            {this.state.all_filters.get("location")}
             {this.state.all_filters.get("types")}
             {this.state.all_filters.get("audiences")}
             {this.state.all_filters.get("topics")}
@@ -223,6 +258,7 @@ class Display extends React.Component {
 
 Display.propTypes = {
   filters: PropTypes.object,
+  child_locations: PropTypes.object,
   resources: PropTypes.array
 };
 export default Display
