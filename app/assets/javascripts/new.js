@@ -17,12 +17,8 @@ $(document).ready(function() {
     }
 
     $("#submit_button").click(function () {
-        console.log("test")
         var form = $("#form_section");
         if (validate()) {
-            console.log(form.attr('action'))
-            console.log(form.attr('method'))
-            console.log(form.serialize())
             $.ajax({ 
                 url   : form.attr('action'),
                 type  : form.attr('method'),
@@ -30,7 +26,6 @@ $(document).ready(function() {
            });
             return true;
         } else {
-            console.log("no")
             return false;
         }
     });

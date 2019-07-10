@@ -16,9 +16,10 @@ body {
 }
 
 #resource-container-wrapper {
-  margin-top: 2.5rem;
   display: inline;
-  overflow:hidden;
+  overflow: hidden;
+  height: 0px;
+
 }
 
 .resource-container {
@@ -114,12 +115,11 @@ a.resource-results {
   overflow-x: hidden;
   overflow-y: hidden;
   box-sizing: content-box;
-  height: 70vh;
+  // height: 100vh;
   max-height: 100vh;
   position: fixed;
-  transition: 200ms;
+  margin-top: 2.5rem;
   &:hover {
-    transition: 200ms;
     overflow-y:scroll;
   }
 }
@@ -127,11 +127,12 @@ a.resource-results {
 #resource-column {
   // background-color: #198BCC;
   background-color: white;
-  margin: 0px 10vw 32px 1vw;
+  margin: 0px 10vw 40px 1vw;
   box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
   padding: 0px;
   width: 50vw;
   float: right;
+  margin-top: 2.5rem;
   #none_message {
     font-size: 16px;
   }
@@ -331,7 +332,7 @@ a.resource-results {
   height: 200px;
   background: rgb(0,109,157);
   background: linear-gradient(0deg, rgba(0,109,157,1) 0%, rgba(0,109,157,1) 55%, rgba(0,91,133,1) 100%);
-  margin-bottom: 32px;
+  // margin-bottom: 32px;
 }
 
 #resources-index {

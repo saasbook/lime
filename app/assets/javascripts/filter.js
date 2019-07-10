@@ -37,20 +37,32 @@ $(document).ready(function() {
         }
     });
     
-    const initial_filter_height = $("#filter-column").height()
-    $(window).on('scroll', function () {
+    /* scroll and width and height changes */
+    let navigationHeight = $("body").height();
+    const margin = parseInt($("#filter-column").css("margin-top"));
+    let initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
+    $("#filter-column").css({height: initial_filter_height});
+
+    $(window).on('resize', function() {
+        navigationHeight = $("body").height();
+        initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
+        changeSize();
+    });
+
+    function changeSize() {
+        navigationHeight = $("body").height();
         let newHeight = initial_filter_height;
-        // TODO get size of the header div, use it for calculations
-        if ($(window).scrollTop() > 160) {
-            newHeight = initial_filter_height + 180;
-            $("#filter-column").stop().animate({height: newHeight, top: 40},200);
+        let newTop = navigationHeight - $(window).scrollTop();
+        if ($(window).scrollTop() > navigationHeight) {
+            newHeight = initial_filter_height + navigationHeight;
+            newTop = 0;
+            $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
         } else {
             newHeight = initial_filter_height + $(window).scrollTop();
-            let newTop = 180 - $(window).scrollTop();
             $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
         }
-        
-        
-    });
+    }
+
+    $(window).on('scroll', changeSize);
 
 });
