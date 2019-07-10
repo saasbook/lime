@@ -8,8 +8,8 @@ class Resource extends React.Component {
       let description = this.props.data.description
       if (description == null) {
         description = "None"
-      } else if (description.length > 250) {
-        description = description.substring(0,250) + " ... "
+      } else if (description.length > 150) {
+        description = description.substring(0,150) + " ... "
       }
 
       let location = this.props.data.location
@@ -24,30 +24,29 @@ class Resource extends React.Component {
         </div>
       }
       return (
-        <div className="row resource-container">
+        <a href={id} target="_blank" className="resource-results"><div className="row resource-container">
           <div className="resource-title text">
-            <a href={id}>{this.props.data.title}</a>
-          </div>
-          <div className="resource-url text">
-            <p className="title">URL:</p>
-            <a href={this.props.data.url} target="_blank">{this.props.data.url}</a>
+            <p>{this.props.data.title}</p>
+            {/*<a href={this.props.data.url} className="resource-url" target="_blank">Website</a>*/}
+            
           </div>
           <div className="resource-desc text">
               <p className="title">Description:</p>
               <p> {description}</p>
-            
           </div>
-          {location_html}
-        
-          <div className="text links">
+          <div className="resource-bottom">
+            {location_html}
+            <p className="resource-updated">Last Updated: {updated}</p>
+          </div>
+          {/* <div className="text links">
             <a href={id} className="btn btn-outline-primary">More info</a>
             <p className="resource-updated">Last Updated: {updated}</p>
             
-            {/* <% if user_signed_in? %>
+            <% if user_signed_in? %>
               <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
-            <% end %> */}
-          </div>
-        </div>
+            <% end %> 
+          </div>*/}
+        </div></a>
       );
     } else {
       return null

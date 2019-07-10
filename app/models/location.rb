@@ -15,8 +15,6 @@ class Location < ActiveRecord::Base
                       {'location' => 'UC Berkeley', 'parent' => 'Berkeley'},
                       {'location' => 'San Francisco', 'parent' => 'Bay Area'}
                       
-                      # {'location' => 'Stanfurd', 'parent' => 'California'},
-                      # {'location' => 'Siberia', 'parent' => 'Global'}
                   ]
     global = Location.create :val => "Global"
     global.save :validate => false

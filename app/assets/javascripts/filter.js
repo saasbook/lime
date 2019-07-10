@@ -37,5 +37,20 @@ $(document).ready(function() {
         }
     });
     
+    const initial_filter_height = $("#filter-column").height()
+    $(window).on('scroll', function () {
+        let newHeight = initial_filter_height;
+        // TODO get size of the header div, use it for calculations
+        if ($(window).scrollTop() > 160) {
+            newHeight = initial_filter_height + 180;
+            $("#filter-column").stop().animate({height: newHeight, top: 40},200);
+        } else {
+            newHeight = initial_filter_height + $(window).scrollTop();
+            let newTop = 180 - $(window).scrollTop();
+            $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+        }
+        
+        
+    });
 
 });

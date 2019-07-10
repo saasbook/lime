@@ -294,6 +294,7 @@ class Display extends React.Component {
   }
 
 
+
   render () {
     let result_header = (
       <div className="col-12" id = "result-header">

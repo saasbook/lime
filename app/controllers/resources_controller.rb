@@ -132,7 +132,9 @@ class ResourcesController < ApplicationController
 
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
-    rp[:approval_status] = @user == nil ? 0 : 1
+    # TODO: give option via checkbox for admin to automatically approve
+    # rp[:approval_status] = @user == nil ? 0 : 1
+    rp[:approval_status] = 0
     @resource = Resource.create_resource(rp)
     if params[:location] != nil then Location.nest_location(params[:location]) end
 
