@@ -18,8 +18,35 @@ body {
 #resource-container-wrapper {
   display: inline;
   overflow: hidden;
-  height: 0px;
+  @media only screen and (max-width: 750px) {
+    #filter-column {
+      margin: 16px;
+      width: 95vw;
+      position: static;
+      overflow-y: visible;
+      height: auto;
+    }
+    .association {
+      margin: 16px;
+    }
 
+    #resource-column {
+      margin: 0px;
+      width: 100vw;
+      box-shadow: none;
+      height: auto;
+    }
+
+    .text p {
+      margin-left: 8px;
+      margin-right: 8px;
+      width: auto;
+    }
+
+    p.title, .resource-bottom {
+      display: none;
+    }
+  }
 }
 
 .resource-container {
@@ -104,7 +131,6 @@ a.resource-results {
 }
 
 #filter-column {
-  border-radius: 10px;
   margin: 0px 1vw 32px 10vw;
   background-color: #FDB515;
   box-shadow: 0px 0px 14px 1px rgba(176,176,176,1);
@@ -113,15 +139,11 @@ a.resource-results {
   flex-flow: wrap;
   float: left;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
   box-sizing: content-box;
-  // height: 100vh;
   max-height: 100vh;
   position: fixed;
   margin-top: 2.5rem;
-  &:hover {
-    overflow-y:scroll;
-  }
 }
 
 #resource-column {
@@ -151,9 +173,6 @@ a.resource-results {
   align-items: center;
 }
 
-#approval-title, #faq-title {
-  height: 200px;
-} 
 
 .approval-checkbox {
   display: none;
@@ -325,14 +344,35 @@ a.resource-results {
 #new {
   background: rgb(250, 250, 250);
   width: 100%;
+  @media only screen and (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+      padding: 8px 16px;
+    }
+    h2 {
+      font-size: 1.75rem;
+    }
+    #instructions p {
+      font-size: 1.25rem;
+      padding-left: 10%;
+    }
+  }
+
 }
 
 .top{
   width: 100%;
-  height: 200px;
+  max-height: 150px;
   background: rgb(0,109,157);
   background: linear-gradient(0deg, rgba(0,109,157,1) 0%, rgba(0,109,157,1) 55%, rgba(0,91,133,1) 100%);
   // margin-bottom: 32px;
+  @media only screen and (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+      padding: 8px 16px;
+      max-width: 100%;
+    }
+  }
 }
 
 #resources-index {
@@ -348,10 +388,13 @@ a.resource-results {
   width: 900px;
 }
 
-#instructions p {
-  font-size: 24px;
-  padding-left: 20%;
-  width: 80%;
+#instructions {
+  margin-top: 40px;
+  p {
+    font-size: 24px;
+    padding-left: 20%;
+    width: 80%;
+  }
 }
 
 #suggest_form {
@@ -375,7 +418,21 @@ a.resource-results {
   border-radius: 0px 50px 0px 0px;
   margin-bottom: 48px;
   box-shadow: 0 8px 6px -6px gray;
-  width: 1000px;
+  max-width: 1000px;
+  @media only screen and (max-width: 1050px) {
+    width: 80vw;
+    .contact_row, .resource_row, .resource_checkboxes {
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .resource_checkboxes, .other-info {
+      width: 60vw;
+    }
+    input {
+      width: 60vw;
+    }
+  }
+  
 }
 
 .input_field {
@@ -405,6 +462,9 @@ textarea {
   padding: 4px 8px;
   outline: none;
   transition: 500ms;
+  @media only screen and (max-width: 600px) {
+    width: 60vw;
+  }
 }
 
 input[type=text]:focus {

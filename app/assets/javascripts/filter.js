@@ -41,26 +41,36 @@ $(document).ready(function() {
     let navigationHeight = $("body").height();
     const margin = parseInt($("#filter-column").css("margin-top"));
     let initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
-    $("#filter-column").css({height: initial_filter_height});
+    if ($(window).width() >= 750) {
+        $("#filter-column").css({height: initial_filter_height});
+    }
 
     $(window).on('resize', function() {
-        navigationHeight = $("body").height();
-        initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
-        changeSize();
+        if ($(window).width() >= 750) {
+            navigationHeight = $("body").height();
+            initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
+            changeSize();
+        }
     });
 
     function changeSize() {
-        navigationHeight = $("body").height();
+        if ($(window).width() < 750) {
+            $("#filter-column").stop().animate({height: "auto", top: 0},0);
+        } else {
+            navigationHeight = $("body").height();
         let newHeight = initial_filter_height;
         let newTop = navigationHeight - $(window).scrollTop();
         if ($(window).scrollTop() > navigationHeight) {
             newHeight = initial_filter_height + navigationHeight;
             newTop = 0;
             $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+            
         } else {
             newHeight = initial_filter_height + $(window).scrollTop();
             $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
         }
+        }
+        
     }
 
     $(window).on('scroll', changeSize);
