@@ -166,14 +166,17 @@ class Display extends React.Component {
       let url = resource.props.data["url"]
 
       let search_text = this.state.search_text.split(" ");
+      let regex_string = ""
       search_text.forEach(word => {
-        let regex_string = ".*" + word + ".*";
-
-        let regex = new RegExp(regex_string, 'i');
-        if (!filtered_resources.includes(resource) && (regex.test(title) || regex.test(url) ||  regex.test(description))) {
-          filtered_resources.push(resource);
-        }
+        regex_string = regex_string + "(?=.*" + word + ")";
       })
+      regex_string = regex_string + ".+"
+      
+      let regex = new RegExp(regex_string, 'i');
+      if (!filtered_resources.includes(resource) && (regex.test(title) || regex.test(url) ||  regex.test(description))) {
+        filtered_resources.push(resource);
+      }
+      
     });
     return filtered_resources;
   }
