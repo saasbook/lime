@@ -31,7 +31,7 @@ class BugReportsController < ApplicationController
 
     respond_to do |format|
       if @bug_report.save
-        format.html { redirect_to @bug_report, notice: 'Bug report was successfully created.' }
+        format.html { redirect_to "/", notice: 'Bug report was successfully created.' }
         format.json { render :show, status: :created, location: @bug_report }
       else
         format.html { render :new }
