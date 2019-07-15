@@ -77,7 +77,7 @@ class Filter extends React.Component {
 
     return (
       <div className="association">
-        <h2>{this.props.association.charAt(0).toUpperCase() + this.props.association.slice(1)}</h2>
+        <h2>{this.props.association.charAt(0).toUpperCase() + this.props.association.slice(1).replace(/_/g, ' ')}</h2>
         {filter_div}
       </div>/*association*/
     );

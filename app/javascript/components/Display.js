@@ -336,6 +336,7 @@ class Display extends React.Component {
             {this.state.all_filters.get("audiences")}
             {this.state.all_filters.get("topics")}
             {this.state.all_filters.get("availabilities")}
+            {this.state.all_filters.get("client_tags")}
           </div>
         </div> {/*filter-column*/}
         <div id="resource-column">

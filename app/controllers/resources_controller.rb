@@ -140,7 +140,7 @@ class ResourcesController < ApplicationController
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:includes => Resource.include_has_many_params) }
-      format.html {redirect_to "/resources/new.html"}
+      format.html {redirect_to :controller => 'resources', :action => 'new'}
     end
   end
 

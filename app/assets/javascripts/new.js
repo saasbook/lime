@@ -24,6 +24,10 @@ $(document).ready(function() {
                 type  : form.attr('method'),
                 data  : form.serialize()
            });
+           $("#message").show();
+            $("#message").text("Your resource has been submitted!");
+            $("#message").css("color", "green");
+            $('#submit_button').attr('disabled','disabled');
             return true;
         } else {
             return false;
