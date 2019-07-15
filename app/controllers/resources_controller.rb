@@ -176,6 +176,9 @@ class ResourcesController < ApplicationController
   # where the associations with "many_params" are converted to arrays of hashes for each ":val"
   # this helper converts the array of hashes to just an array
   def json_fix(resource)
+    if (resource == nil) 
+      return nil
+    end
     @full_resource = resource.as_json(:include => Resource.include_has_many_params)
     @full_resource.each do |association, values|
       if values.kind_of?(Array) && values.length > 0
@@ -248,7 +251,9 @@ class ResourcesController < ApplicationController
   end
 
   def destroy
-
+    Resource.destroy(params[:id])
+    flash[:alert] = "Resource deleted"
+    redirect_to "/resources/" + params[:id] + ".html"
   end
 
   def unapproved
