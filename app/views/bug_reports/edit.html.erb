@@ -3,4 +3,5 @@
 <%= render 'form', bug_report: @bug_report %>
 
 <%= link_to 'Show', @bug_report %> |
-<%= link_to 'Back', bug_reports_path %>
+<%= link_to 'Back', bug_reports_path %> |
+<%= link_to 'Delete', @bug_report.destroy %>
