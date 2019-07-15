@@ -22,7 +22,7 @@ Then set up the app as normal, rake db:setup, and rails s. You MUST run rake db:
 ## Api Usage
 ### Getting an API key
 Login to your profile on the website at   
-https://berkeley-innovation-resources.herokuapp.com/users/sign_in  
+https://innovationresourcedatabase.herokuapp.com/users/sign_in  
 then press the "view api key" button, and an alert will flash with your API key
 
 ### Api Call response format
@@ -114,7 +114,7 @@ This location nesting is done when resources are added, and is done using the ge
 * notes 
 
 For more information on the values each attribute can hold, please visit
-https://berkeley-innovation-resources.herokuapp.com/resources/new.html
+https://innovationresourcedatabase.herokuapp.com/resources/new.html
 
 ### Creating new resources
 To create a new resource, make a POST request to the API in the format:
@@ -123,5 +123,5 @@ POST /resources?url={resource url}&title={title}&description={description}&types
 
 ```
 to 
-https://berkeley-innovation-resources.herokuapp.com.
+https://innovationresourcedatabase.herokuapp.com.
 you MUST have the required resource fields listed above, but may add any of the optional fields as well.
