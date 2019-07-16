@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :bug_reports
   get 'faq/index'
   get 'welcome/index'
