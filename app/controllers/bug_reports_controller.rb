@@ -57,9 +57,9 @@ class BugReportsController < ApplicationController
   # DELETE /bug_reports/1
   # DELETE /bug_reports/1.json
   def destroy
-    @bug_report.destroy
+    @bug_report.destroy()
     respond_to do |format|
-      format.html { redirect_to bug_reports_url, notice: 'Bug report was successfully destroyed.' }
+      format.html { redirect_to bug_reports_url, notice: 'Bug report was successfully deleted.' }
       format.json { head :no_content }
     end
   end

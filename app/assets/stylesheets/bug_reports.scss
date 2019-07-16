@@ -2,6 +2,40 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#bug-wrapper {
+  margin: auto;
+  display: block;
+  h1, label, input {
+    display: block;
+    margin: 32px auto;
+    text-align: center;
+  }
+  h2#bug-desc {
+    display: block; 
+    font-size: 1.5em;
+    margin: 32px auto;
+    width: 75%;
+  }
+  label {
+    margin-bottom: 16px;
+  }
+  input {
+    margin-top: 16px;
+  }
+  #bug_report_desc, label {
+    display: block;
+    margin: 16px auto;
+  }
+  input[type="checkbox"] {
+    text-align: center;
+    display: block;
+    width: 16px;
+  }
+
+}
+
+
+
 #bug-title {
   width: 25%;
   margin: 0 auto;
@@ -18,9 +52,8 @@
 
 .bug-report-description {
   justify-content: center;
-  border-top: 1px solid grey;
   border-bottom: 1px solid grey;
-  margin: .5rem 0 .5rem 0;
+  
 }
 
 .resource-container:hover {
@@ -31,3 +64,4 @@
 .bug-btn {
   margin: 0px 32px;
 }
+

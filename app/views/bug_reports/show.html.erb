@@ -1,7 +1,7 @@
-<p id="notice"><%= notice %></p>
+<div id="bug-wrapper">
 
 <p>
-  <strong>Desc:</strong>
+  <strong>Description:</strong>
   <%= @bug_report.desc %>
 </p>
 
@@ -10,5 +10,9 @@
   <%= @bug_report.closed %>
 </p>
 
-<%= link_to 'Edit', edit_bug_report_path(@bug_report) %> |
-<%= link_to 'Back', bug_reports_path %>
+<div class="bug-navigation">
+  <%= link_to 'Edit', edit_bug_report_path(@bug_report) %> |
+  <%= link_to 'Back', bug_reports_path %>
+</div>
+
+</div>
