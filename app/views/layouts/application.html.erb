@@ -15,26 +15,44 @@
 
     <nav class="navbar">
       <div id="left-nav">
-        <a class="btn btn-primary nav-link nav-item" href="/">Home</a>
-        <a class="btn btn-info nav-link nav-item" href="/resources.html/">All Resources</a>
-        <a class="btn btn-info nav-link nav-item" href="/resources/new.html">Suggest a Resource</a>
-        <% if user_signed_in? %>
-          <a class="btn btn-info nav-link nav-item" href="/resources/unapproved.html">Approval Queue</a>
-        <% end %>
-        <a class="btn btn-info nav-link nav-item" href="/faq/index.html">FAQ</a>     
+        <a class="nav-link nav-item" href="/">Home</a>
+        <a class="nav-link nav-item" href="/resources.html/">All Resources</a>
+        <div class="dropdown">
+          <a class="dropbtn nav-link nav-item" href="/resources/new.html">Suggest a Resource</a>
+          <div class="dropdown-content">
+            <% if user_signed_in? %>
+              <a class="nav-link nav-item" href="/resources/unapproved.html">Approval Queue</a>
+            <% end %>
+            <a class="nav-link nav-item" href="/faq/index.html">FAQ</a>     
+          </div>
+        </div>  
       </div>
       <div id="right-nav">
-        <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'btn btn-success admin-button') %>
+        
         <% if user_signed_in? %>
-          <%= link_to('View Bugs', bug_reports_path, method: :get, class: 'btn btn-success admin-button') %>
-          <%= link_to('Edit Account', edit_user_registration_path, method: :get, class: 'btn btn-success admin-button') %>
-          <%= link_to('View API Key', showkey_user_path, method: :get, class: 'btn btn-success admin-button') %>
-          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'btn btn-warning admin-button') %>
+          <div class="dropdown">
+            <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
+            <div class="dropdown-content">
+              <%= link_to('View Bugs', bug_reports_path, method: :get, class: 'admin-button nav-link nav-item') %>
+            </div>
+          </div>
+          <div class="dropdown">
+            <%= link_to('Edit Account', edit_user_registration_path, method: :get, class: 'admin-button nav-link') %>
+            <div class="dropdown-content">
+              <%= link_to('API Key', showkey_user_path, method: :get, class: 'admin-button nav-link') %>
+            </div>
+          </div>
+          
+          <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'admin-button nav-link') %>
         <% else %>
-          <%= link_to('Admin Login', new_user_session_path, class: 'btn btn-success admin-button')  %>
-          <%= link_to('Admin Registration', new_user_registration_path, class: 'btn btn-success admin-button') %>
+          <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
+          <%= link_to('Admin Login', new_user_session_path, class: 'admin-button nav-link')  %>
+          <%= link_to('Admin Registration', new_user_registration_path, class: 'admin-button nav-link') %>
         <% end %>
       </div>
+      <% if false %>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+      <% end %>
     </nav>
 
     <% if notice %>
