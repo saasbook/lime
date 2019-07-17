@@ -320,14 +320,14 @@ class Display extends React.Component {
           <div>
             <div className="row">
               <div id="filter-header">
-                <button id="filter-reset-button" className="btn btn-outline-dark btn-sm" onClick={this.reset_filters}>Reset Filters</button>
+                <button id="filter-reset-button" className="btn btn-med" onClick={this.reset_filters}>Reset Filters</button>
               </div>
             </div>{/*reset-button*/}
             <div className="association" id="search_row">
               <label className="search_bar_text">Search</label>
-              <form onSubmit={this.updateSearch}>
+              <form onSubmit={this.updateSearch} className="search-form">
                 <input type="text" name="search" className="search_bar"></input>
-                <button type="submit" id="search-button" className="btn btn-outline-dark btn-sm" onClick={this.updateSearch}>></button>
+                <button type="submit" id="search-button" className="btn" onClick={this.updateSearch}>Search</button>
               </form>
               
             </div>{/*search-row*/}

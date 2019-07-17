@@ -12,17 +12,46 @@ class Resource extends React.Component {
         description = description.substring(0,150) + " ... "
       }
 
-      let location = this.props.data.location
-      let location_html = ""
-
       let updated = this.props.data.updated_at.slice(0,10)
-      if (location != null) {
-        location = location.replace(",", ", ");
-        location_html = <div className="resource-location text">
-          <p className="title">Location:</p>
-          <p> {location} </p>
-        </div>
+
+      let tags = []
+      
+      if (this.props.data.location != null) {
+        let locations = this.props.data.location.split(",");
+        for (let i = 0; i < locations.length; i++) {
+          let value = locations[i];
+          let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+          tags.push(label)
+        }
       }
+
+      for (let i = 0; i < this.props.data.types.length; i++) {
+        let value = this.props.data.types[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+      for (let i = 0; i < this.props.data.audiences.length; i++) {
+        let value = this.props.data.audiences[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+      for (let i = 0; i < this.props.data.topics.length; i++) {
+        let value = this.props.data.topics[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+      for (let i = 0; i < this.props.data.availabilities.length; i++) {
+        let value = this.props.data.availabilities[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+      for (let i = 0; i < this.props.data.client_tags.length; i++) {
+        let value = this.props.data.client_tags[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+
+
       return (
         <a href={id} target="_blank" className="resource-results"><div className="row resource-container">
           <div className="resource-title text">
@@ -31,21 +60,15 @@ class Resource extends React.Component {
             
           </div>
           <div className="resource-desc text">
-              <p className="title">Description:</p>
               <p> {description}</p>
           </div>
           <div className="resource-bottom">
-            {location_html}
-            <p className="resource-updated">Last Updated: {updated}</p>
-          </div>
-          {/* <div className="text links">
-            <a href={id} className="btn btn-outline-primary">More info</a>
-            <p className="resource-updated">Last Updated: {updated}</p>
+            <div className="resource-tags">
+              {tags}
+            </div>
             
-            <% if user_signed_in? %>
-              <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
-            <% end %> 
-          </div>*/}
+          </div>
+          <p className="resource-updated">Last Updated: {updated}</p>
         </div></a>
       );
     } else {
