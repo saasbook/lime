@@ -34,6 +34,7 @@ module Lime
     config.assets.precompile += %w( unapproved.js )
     config.assets.precompile += %w( new.js )
     config.assets.precompile += %w( filter.js )
+    config.assets.precompile += %w( resource-index.js )
 
     # config.action_dispatch.default_headers = {
     #   'X-Frame-Options' => 'ALLOW-FROM https://witi.berkeley.edu/'

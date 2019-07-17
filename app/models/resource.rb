@@ -171,7 +171,7 @@ class Resource < ActiveRecord::Base
     fields_hash = self.get_associations_hash(resource)
     
     fields_hash.each do |field, association|
-      association.delete_all
+      # association.delete_all
       if params[field] != nil
         params[field].each do |val|
           association.create!(:val => val)

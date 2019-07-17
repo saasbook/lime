@@ -45,6 +45,8 @@ class ResourcesController < ApplicationController
     if sort_by == nil || sort_by != "location" || sort_by != "title"
       sort_by = "updated_at"
     end
+    
+
     @resources = Resource.location_helper(resource_params)
 
     if (@resources == nil || @resources.length == 0)
@@ -66,16 +68,20 @@ class ResourcesController < ApplicationController
       children = Location.child_locations(value)
       @child_locations[value] = children
     }
-    
+    # attempt to eager load all resources
+    @all_resources = Resource.all.includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) 
 
-    @resources_json = @resources.as_json(:include => Resource.include_has_many_params)
+ 
+
+    @resources_json = @all_resources.as_json(:include => Resource.include_has_many_params)
+
     @resources_json.map! do |resource|
       resource = json_fix(resource)
     end
-    @resources = @resources_json
+    
 
     respond_to do |format|
-      format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params)}
+      format.json {render :json => @resources_json}
       format.html
     end
   end
