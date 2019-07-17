@@ -62,7 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def showkey
     @user = current_user
     if (not @user.nil?) and request.format.html?
-      flash[:alert] = "Your API key is '#{@user.api_token}'."
+      flash[:notice] = "Your API key is '#{@user.api_token}'."
     end
     redirect_back(fallback_location: root_path)
   end

@@ -43,6 +43,10 @@ body {
   justify-content: center;
 }
 
+p.alert, p.alert-danger, p.alert-success {
+  margin: 0px;
+}
+
 
 /* navigation bar */
 
