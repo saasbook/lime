@@ -6,6 +6,17 @@
 
 <div id="unapproved"  id="resource-container-wrapper">
     <div class="col" id="approval-column">
+      <%= form_for @upload do |f| %>
+        <%= f.file_field :csv %>
+        <%= f.submit 'Upload CSV file', class: 'btn btn-outline-dark approve-button' %>
+      <% end %>
+
+      <%= form_tag("/resources/approve/many.html", method: :delete) do %>
+        <button class='btn btn-outline-dark' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure?">
+          Delete All
+        </button>
+      <% end %>
+
       <%= form_tag("/resources/approve/many.html", method: :post) do %>
         <div id="result-header">
           <h2><%= @resource_count %> awaiting approval<h2>
@@ -18,6 +29,7 @@
               <div class="resource-title text">
                   <%= resource.title %>
               </div>
+              <%= button_to 'Delete', @resource, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary", id: "btn-delete" %>
               <div class="approval-checkbox">
                 <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
               </div>

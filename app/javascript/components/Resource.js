@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 class Resource extends React.Component {
   render () {
-    if (this.props.data.title.match(new RegExp(".*", "i"))) {
+    if (this.props.data.title.match(new RegExp(".*", "i")) && this.props.data.approval_status == 1) {
       let id = "/resources/" + this.props.data.id + ".html"
 
       let description = this.props.data.description
@@ -50,8 +50,6 @@ class Resource extends React.Component {
         let label = (<div className="text label" key={"label-" + value}> {value} </div>)
         tags.push(label)
       }
-
-
       return (
         <a href={id} target="_blank" className="resource-results"><div className="row resource-container">
           <div className="resource-title text">
@@ -71,6 +69,8 @@ class Resource extends React.Component {
           <p className="resource-updated">Last Updated: {updated}</p>
         </div></a>
       );
+      
+      
     } else {
       return null
     }

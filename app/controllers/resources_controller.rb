@@ -1,4 +1,5 @@
 class ResourcesController < ApplicationController
+  require 'csv'
   def resource_params
     params.permit(
                   :title, :url, :contact_email, :location, :population_focuses, :campuses,
@@ -37,9 +38,7 @@ class ResourcesController < ApplicationController
       session[key] = value
     end
 
-    if @user.nil?
-      params[:approval_status] = 1 # only admins can view unapproved resources
-    end
+    params[:approval_status] = 1 # no one can view unapproved
 
     sort_by = params[:sort_by]
     if sort_by == nil || sort_by != "location" || sort_by != "title"
@@ -50,7 +49,7 @@ class ResourcesController < ApplicationController
     @resources = Resource.location_helper(resource_params)
 
     if (@resources == nil || @resources.length == 0)
-      # if no results, suggests to search again with exact same params but instead uses parent location
+      # if no results, suggests to search again with exact same params but instead uses parent location (not currently used)
       @parent_location = Location.get_parent(params[:location])
       @parent_params = params
       @parent_params[:location] = @parent_location
@@ -200,6 +199,59 @@ class ResourcesController < ApplicationController
     return @full_resource
   end
 
+  def upload
+    puts params[:csv]
+    
+    uploaded_io = params[:csv]
+    csv_text = uploaded_io.read
+    csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+    count = 0
+    csv.each do |row|
+      record = {
+        'title': row['Resource'],
+        'url': row['Resource URL'],
+        'resource_email': row['Email-General'],
+        'resource_phone': row['Phone-General'],
+        'address': row['Address'],
+        'contact_email': row['Email-Contact'],
+        'contact_name': row['Contact'],
+        'contact_phone': row['Phone-Contact'],
+        'description': row['Resource Description'],
+        'types': row['Resource Type'],
+        'audiences': row['Audience'],
+        'population_focuses': row['Population Focus'], 
+        'location': row['Location'],
+        'campuses': row['Campuses'], 
+        'colleges': row['College eligibility'], 
+        'availabilities': row['Availability'], 
+        'deadline': row['Deadline'], 
+        'innovation_stages': row['Innovation Type'], 
+        'funding_amount': row['Funding Amount'],
+        'topics': row['Topic'],
+        'technologies': row['Technology'],
+        'client_tags': row['Client Tags'],
+        'notes': row['Notes'], 
+        'approval_status': 0, 
+        'approved_by': row['Approved by'],
+        'updated_at': '', 
+        'flagged': '', 
+        'flagged_comment': ''
+      }
+
+      # if record[:approved_by].nil?
+      #   record[:approved_by] = "Airtable"
+      # end
+      r = Resource.create_resource(record)
+      count = count + 1
+      # if data is seeded from CSV file, forcefully gets added to database
+      # this is because a majority of the seeded database has empty fields
+      r.save(validate: false)
+    end
+
+    puts "There are now #{count} rows in the Resource table"
+
+  end
+
   def approve_many
     status = approve_many_status
     lst = params[:approve_list]
@@ -220,6 +272,35 @@ class ResourcesController < ApplicationController
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
       format.html do
         flash[:notice] = (@resources.size > 1 ? "Resources have" : "Resource has") + " been successfully approved."
+        redirect_to "/resources/unapproved.html"
+      end
+    end
+  end
+
+  def delete_many
+    status = approve_many_status
+    lst = params[:approve_list]
+    if @user.nil?
+      approve_many_sad_path("This action is unauthorized.", 401)
+      return
+    elsif not [0, 1].include? status
+      approve_many_sad_path("Approval status must be either 0 or 1.", 403)
+      return
+      approve_many_sad_path("Approval list not formatted correctly.", 400)
+      return
+    else
+      @resources = Resource.where(:approval_status => 0).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) 
+      # @resources = Resource.where(:approval_status => 0)
+    end
+
+    @resources.each do |resource|
+      Resource.delete(resource.id)
+    end
+
+    respond_to do |format|
+      format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
+      format.html do
+        flash[:notice] = (@resources.size > 1 ? "All unapproved resources have" : "Resource has") + " been deleted."
         redirect_to "/resources/unapproved.html"
       end
     end
@@ -261,6 +342,7 @@ class ResourcesController < ApplicationController
     flash[:alert] = "Resource deleted"
     redirect_to "/resources/" + params[:id] + ".html"
   end
+  
 
   def unapproved
     if @user.nil?
@@ -270,10 +352,11 @@ class ResourcesController < ApplicationController
         redirect_to "/resources.html"
       end
     else
-      @resources = Resource.where(:approval_status => 0)
+      @resources = Resource.where(:approval_status => 0).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
       @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
       @all_values_hash = Resource.all_values_hash
       @has_many_hash = self.has_many_value_hash
+      @upload = ""
       respond_to do |format|
         format.json {@resource.to_json(:include => Resource.include_has_many_params)}
         format.html
@@ -318,6 +401,8 @@ class ResourcesController < ApplicationController
     end
     return @resources
   end
+
+  
 
 end
 

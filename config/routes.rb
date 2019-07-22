@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   end
   resources :resources, :defaults => {:format => 'json'}
   match 'resources/approve/many' => 'resources#approve_many', via: [:put, :patch, :post], :defaults => {:format => 'json'}
+  match 'resources/approve/many' => 'resources#delete_many', via: [:delete], :defaults => {:format => 'json'}
+
+  
   match 'resources/approve/:id' => 'resources#update', via: [:put, :patch, :post], :defaults => {:format => 'json'}
+  match 'resources/unapproved' => 'resources#upload', via: [:put, :patch, :post], :defaults => {:format => 'json'}
   root "welcome#index"
   #For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

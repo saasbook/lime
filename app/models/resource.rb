@@ -9,13 +9,14 @@ class Resource < ActiveRecord::Base
   has_many :innovation_stages
   has_many :topics
   has_many :technologies
+  after_destroy :destroy_related_records
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :contact_email, :location, :presence => true
   validates :description, :presence => true, :length => {:maximum => 500}
 
-  # def self.auth_params
-  #   [:flagged, :approval_status, :approved_by]
-  # end
+  def self.auth_params
+    [:flagged, :approval_status, :approved_by]
+  end
 
   def self.include_has_many_params
     {
@@ -150,6 +151,42 @@ class Resource < ActiveRecord::Base
     Resource.create_associations(resource, params)
     return resource
   end
+
+  def destroy_related_records
+    types.each do |audience|
+      types.destroy
+    end
+    audiences.each do |audience|
+      audience.destroy
+    end
+    client_tags.each do |audience|
+      client_tags.destroy
+    end
+    population_focuses.each do |audience|
+      population_focuses.destroy
+    end
+    campuses.each do |audience|
+      campuses.destroy
+    end
+    colleges.each do |audience|
+      colleges.destroy
+    end
+    availabilities.each do |audience|
+      availabilities.destroy
+    end
+    innovation_stages.each do |audience|
+      innovation_stages.destroy
+    end
+    topics.each do |audience|
+      topics.destroy
+    end
+    technologies.each do |audience|
+      technologies.destroy
+    end
+    puts "destroyed al"
+  end
+
+  
 
   def self.separate_params(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h

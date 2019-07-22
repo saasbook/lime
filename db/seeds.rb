@@ -28,7 +28,7 @@ csv.each do |row|
     'technologies': row['Technology'],
     'client_tags': row['Client Tags'],
     'notes': row['Notes'], 
-    'approval_status': 1, 
+    'approval_status': 0, 
     'approved_by': row['Approved by'],
     'updated_at': '', 
     'flagged': '', 
