@@ -200,8 +200,6 @@ class ResourcesController < ApplicationController
   end
 
   def upload
-    puts params[:csv]
-    
     uploaded_io = params[:csv]
     csv_text = uploaded_io.read
     csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
@@ -248,7 +246,8 @@ class ResourcesController < ApplicationController
       r.save(validate: false)
     end
 
-    puts "There are now #{count} rows in the Resource table"
+    flash[:notice] = "Added #{count} resources to the approval queue"
+    redirect_to "/resources/unapproved.html"
 
   end
 
@@ -294,13 +293,15 @@ class ResourcesController < ApplicationController
     end
 
     @resources.each do |resource|
-      Resource.delete(resource.id)
+      
+      # Resource.destroy(resource.id)
+      resource.destroy
     end
 
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
       format.html do
-        flash[:notice] = (@resources.size > 1 ? "All unapproved resources have" : "Resource has") + " been deleted."
+        flash[:alert] = (@resources.size > 1 ? "All unapproved resources have" : "Resource has") + " been deleted."
         redirect_to "/resources/unapproved.html"
       end
     end

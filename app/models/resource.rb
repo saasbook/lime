@@ -1,14 +1,14 @@
 class Resource < ActiveRecord::Base
-  has_many :types
-  has_many :audiences
-  has_many :client_tags
-  has_many :population_focuses
-  has_many :campuses
-  has_many :colleges
-  has_many :availabilities
-  has_many :innovation_stages
-  has_many :topics
-  has_many :technologies
+  has_many :types, dependent: :destroy
+  has_many :audiences, dependent: :destroy
+  has_many :client_tags, dependent: :destroy
+  has_many :population_focuses, dependent: :destroy
+  has_many :campuses, dependent: :destroy
+  has_many :colleges, dependent: :destroy
+  has_many :availabilities, dependent: :destroy
+  has_many :innovation_stages, dependent: :destroy
+  has_many :topics, dependent: :destroy
+  has_many :technologies, dependent: :destroy
   after_destroy :destroy_related_records
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :contact_email, :location, :presence => true
@@ -183,7 +183,6 @@ class Resource < ActiveRecord::Base
     technologies.each do |audience|
       technologies.destroy
     end
-    puts "destroyed al"
   end
 
   

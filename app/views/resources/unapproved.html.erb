@@ -11,6 +11,12 @@
         <%= f.submit 'Upload CSV file', class: 'btn btn-outline-dark approve-button' %>
       <% end %>
 
+      <%= form_tag("/resources/approve/many.html", method: :post) do %>
+        <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
+          Approve All
+        </button>
+      <% end %>
+
       <%= form_tag("/resources/approve/many.html", method: :delete) do %>
         <button class='btn btn-outline-dark' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure?">
           Delete All
@@ -58,11 +64,7 @@
           </div>
         <% end %>
       <% end %>
-      <%= form_tag("/resources/approve/many.html", method: :post) do %>
-        <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
-          Approve All
-        </button>
-      <% end %>
+      
   </div>
   
 </div>
