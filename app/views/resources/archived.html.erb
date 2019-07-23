@@ -2,8 +2,6 @@
   <h1>Archived Resources</h1>
 </div>
 
-<%= javascript_include_tag "unapproved" %>
-
 <div id="archived"  id="resource-container-wrapper">
     <div class="col" id="approval-column">
 
@@ -25,6 +23,8 @@
             </div>
             <div class="links" %>
               <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+
+              <%= button_to 'Restore', resources_restore_path(resource), data: { confirm: "Are you sure you want to restore?", id: resource["id"] } , class: "btn btn-outline-primary btn-restore", id: resource["id"] %>
               
               <%= button_to 'Delete', resource, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-outline-primary", id: "btn-delete" %>
             </div>

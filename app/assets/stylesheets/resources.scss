@@ -200,6 +200,16 @@ a.resource-results {
   margin-top: 16px;
 }
 
+#archived .links, #unapproved .links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  .btn {
+    width: auto;
+    margin: 0px;
+  }
+}
 
 #filter-header {
   font-size: 2rem;
@@ -750,14 +760,11 @@ select {
   margin-top: 32px;
 }
 
-.links {
+#show .links {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-}
-
-#show .links {
   margin-bottom: 32px;
   width: 50vw;
 }

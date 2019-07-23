@@ -394,9 +394,9 @@ class ResourcesController < ApplicationController
 
   def restore
     id = params[:id]
-    r = Resource.update(id, :approval_status => 1)
+    r = Resource.update(id, :approval_status => 0)
     r.save(validate: false)
-    flash[:alert] = "Resource restored"
+    flash[:notice] = "Resource restored. It is now located in the approval queue."
     redirect_to "/resources/archived.html"
   end
 
