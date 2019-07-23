@@ -7,8 +7,8 @@
 <div id="unapproved"  id="resource-container-wrapper">
     <div class="col" id="approval-column">
       <%= form_for @upload do |f| %>
-        <%= f.file_field :csv %>
-        <%= f.submit 'Upload CSV file', class: 'btn btn-outline-dark approve-button' %>
+        <%= f.file_field :csv, class: "csv-button" %>
+        <%= f.submit 'Upload CSV file', class: 'btn btn-outline-dark csv-button' %>
       <% end %>
 
       <%= form_tag("/resources/approve/many.html", method: :post) do %>

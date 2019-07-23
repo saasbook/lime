@@ -12,6 +12,12 @@
   </head>
 
   <body>
+    <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
 
     <nav class="navbar">
       <div id="left-nav">
@@ -55,13 +61,6 @@
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
       <% end %>
     </nav>
-
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
     <%= yield %>
   </body>
 

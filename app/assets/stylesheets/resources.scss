@@ -212,6 +212,15 @@ a.resource-results {
   }
 }
 
+.csv-button {
+  margin: 16px;
+}
+
+
+
+
+/* all resources */
+
 #filter-header {
   font-size: 2rem;
   text-align: center;
@@ -413,11 +422,9 @@ a.resource-results {
   max-height: 150px;
   background: rgb(0,109,157);
   background: linear-gradient(0deg, rgba(0,109,157,1) 0%, rgba(0,109,157,1) 55%, rgba(0,91,133,1) 100%);
-  // margin-bottom: 32px;
   @media only screen and (max-width: 600px) {
     h1 {
       font-size: 2rem;
-      padding: 8px 16px;
       max-width: 100%;
     }
   }
@@ -432,8 +439,8 @@ a.resource-results {
   font-weight: 100;
   font-family: "Poppins-Light", Arial, sans-serif;
   font-size: 48px;
-  padding: 8px 96px;
-  width: 900px;
+  padding: 8px 8px 16px;
+  text-align: center;
 }
 
 #instructions {
