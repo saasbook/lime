@@ -13,12 +13,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    puts "test"
     # reg_key = temp = Digest::SHA256.hexdigest <access key in db> + SecureRandom.hex
     hashed_key = Digest::SHA256.hexdigest sign_up_params[:registration_key]
-    # puts sign_up_params[:registration_key]
-    # puts "test"
-    # puts Key.where(:id => 1).first.registration_key
     # compare with registration key stored in the database
     if (hashed_key == Key.where(:id => 1).first.registration_key)
       
@@ -52,7 +48,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
         #end super
 
     else
-      puts "eles"
       respond_with resource, location: after_inactive_sign_up_path_for(resource)
       
     end
@@ -70,8 +65,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if (not @user.nil?) and request.format.html?
       flash[:notice] = "Your API key is '#{@user.api_token}'."
     end
-    # redirect_to "/users/edit"
-    redirect_back(fallback_location: root_path)
+    redirect_to "/users/edit"
+    # redirect_back(fallback_location: root_path)
   end
 
   # GET /resource/edit

@@ -10,20 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_212717) do
+ActiveRecord::Schema.define(version: 2019_06_25_200034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "audiences", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_audiences_on_resource_id"
   end
 
   create_table "availabilities", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_availabilities_on_resource_id"
   end
 
@@ -35,20 +39,26 @@ ActiveRecord::Schema.define(version: 2019_07_16_212717) do
   end
 
   create_table "campuses", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_campuses_on_resource_id"
   end
 
   create_table "client_tags", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_client_tags_on_resource_id"
   end
 
   create_table "colleges", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_colleges_on_resource_id"
   end
 
@@ -61,8 +71,10 @@ ActiveRecord::Schema.define(version: 2019_07_16_212717) do
   end
 
   create_table "innovation_stages", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_innovation_stages_on_resource_id"
   end
 
@@ -81,8 +93,10 @@ ActiveRecord::Schema.define(version: 2019_07_16_212717) do
   end
 
   create_table "population_focuses", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_population_focuses_on_resource_id"
   end
 
@@ -109,20 +123,26 @@ ActiveRecord::Schema.define(version: 2019_07_16_212717) do
   end
 
   create_table "technologies", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_technologies_on_resource_id"
   end
 
   create_table "topics", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_topics_on_resource_id"
   end
 
   create_table "types", force: :cascade do |t|
-    t.bigint "resource_id"
+    t.integer "resource_id"
     t.string "val"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["resource_id"], name: "index_types_on_resource_id"
   end
 
@@ -139,5 +159,4 @@ ActiveRecord::Schema.define(version: 2019_07_16_212717) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "audiences", "resources"
 end
