@@ -21,11 +21,11 @@ body {
   overflow: hidden;
   @media only screen and (max-width: 750px) {
     #filter-column {
-      margin: 16px;
-      width: 95vw;
+      margin: 16px 0px;
+      width: 100vw;
       position: static;
       overflow-y: visible;
-      height: auto;
+      max-height: none !important;
     }
     .association {
       margin: 16px;
@@ -34,7 +34,6 @@ body {
     #resource-column {
       margin: 0px;
       width: 100vw;
-      box-shadow: none;
       height: auto;
     }
 
@@ -807,12 +806,15 @@ select {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  max-width: 99vw;
+  margin: 0px;
 }
 
 .pagination {
-  margin: 16px 32px;
+  margin: 16px 16px;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 90vw;
 }
 
 .hidden-resource{
