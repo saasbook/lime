@@ -243,6 +243,9 @@ class ResourcesController < ApplicationController
         'flagged_comment': ''
       }
 
+      puts "print this"
+      puts record["title"]
+
       params, resource_hash = Resource.separate_params(record)
       r = Resource.create_resource(resource_hash)
       r.save(validate: false)
