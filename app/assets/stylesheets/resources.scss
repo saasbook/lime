@@ -201,13 +201,14 @@ a.resource-results {
 }
 
 #archived .links, #unapproved .links {
+  margin: 16px 8px 0px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   .btn {
     width: auto;
-    margin: 0px;
+    margin: 0px 8px;
   }
 }
 

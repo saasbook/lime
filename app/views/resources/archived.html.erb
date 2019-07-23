@@ -6,7 +6,7 @@
     <div class="col" id="approval-column">
 
       <%= form_tag("/resources/delete/many.html", method: :delete) do %>
-        <button class='btn btn-outline-dark btn-all' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure?">
+        <button class='btn btn-outline-dark btn-all' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to delete all resources? This cannot be undone.">
           Delete All
         </button>
       <% end %>
@@ -18,15 +18,18 @@
       
       <% @resources.each do |resource| %>
         <div class="row resource-container unapproved-resource">
-            <div class="resource-title text">
-                <%= resource.title %>
-            </div>
+            
             <div class="links" %>
+              <%= link_to("View Resource", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
+
               <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
 
               <%= button_to 'Restore', resources_restore_path(resource), data: { confirm: "Are you sure you want to restore?", id: resource["id"] } , class: "btn btn-outline-primary btn-restore", id: resource["id"] %>
               
-              <%= button_to 'Delete', resource, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-outline-primary", id: "btn-delete" %>
+              <%= button_to 'Delete', resource, method: :delete, data: { confirm: "Are you sure you want to delete this resource? This cannot be undone." }, class: "btn btn-outline-primary", id: "btn-delete" %>
+            </div>
+            <div class="resource-title text">
+                <%= resource.title %>
             </div>
             <div class="approval-checkbox">
               <%= check_box_tag 'approve_list[]', resource.id, checked=false %>

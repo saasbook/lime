@@ -12,13 +12,13 @@
       <% end %>
 
       <%= form_tag("/resources/approve/many.html", method: :post) do %>
-        <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
+        <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to approve all resources in the queue?">
           Approve All
         </button>
       <% end %>
 
       <%= form_tag("/resources/archive/many.html", method: :post) do %>
-        <button class='btn btn-outline-dark' id="archive-all-button" name="approve_list" value="all" data-confirm="Are you sure?">
+        <button class='btn btn-outline-dark' id="archive-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to archive all resources in the queue?">
           Archive All
         </button>
       <% end %>
@@ -32,9 +32,19 @@
         
         <% @resources.each do |resource| %>
           <div class="row resource-container unapproved-resource">
+              
+              <div class="links" %>
+                <%= link_to("View Resource", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
+                
+                <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+
+                <%= link_to 'Archive', resources_archive_path(resource), method: :put, data: { confirm: "Are you sure you want to archive?", id: resource["id"] } , class: "btn btn-outline-primary btn-archive", id: resource["id"] %>
+          
+              </div>
               <div class="resource-title text">
                   <%= resource.title %>
               </div>
+
               <div class="approval-checkbox">
                 <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
               </div>

@@ -14,10 +14,15 @@
 
     <div class="links" %>
         <% if user_signed_in? %>
-            <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
             <% all_values = @all_values_hash %>
+            <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
+            
+            <% if @resource["approval_status"] == 0 %>
+                <a class="nav-link nav-item btn btn-outline-primary" href="/resources/unapproved.html">View in approval queue</a>
+            <% end %> 
+
             <% if @resource["approval_status"] != 2 %>
-                <%= button_to 'Archive', resources_archive_path(@resource), data: { confirm: "Are you sure?", id: @resource["id"] } , class: "btn btn-outline-primary btn-archive", id: @resource["id"] %>
+                <%= button_to 'Archive', resources_archive_path(@resource), data: { confirm: "Are you sure you want to move this resource to the archive?", id: @resource["id"] } , class: "btn btn-outline-primary btn-archive", id: @resource["id"] %>
             <% else %>
                 <a class="nav-link nav-item btn btn-outline-primary" href="/resources/archived.html">View in archive</a>
             <% end %> 

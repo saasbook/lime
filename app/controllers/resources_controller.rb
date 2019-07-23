@@ -266,6 +266,13 @@ class ResourcesController < ApplicationController
       approve_many_sad_path("Approval list not formatted correctly.", 400)
       return
     else
+      @resources = Resource.where(:approval_status => 0)
+      if @resources.count < 1
+        flash[:notice] = ("No resources to approve.")
+        redirect_to "/resources/unapproved.html"
+        return
+      end
+
       @resources = get_resources(lst)
     end
 
@@ -280,12 +287,17 @@ class ResourcesController < ApplicationController
 
   def archive_many
     lst = params[:approve_list]
-    puts lst
     if @user.nil?
       approve_many_sad_path("This action is unauthorized.", 401)
       return
     else
       @resources = Resource.where(:approval_status => 0).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) 
+    end
+
+    if @resources.count < 1
+      flash[:notice] = ("No resources to archive.")
+      redirect_to "/resources/unapproved.html"
+      return
     end
 
     @resources.each do |resource|
@@ -311,6 +323,11 @@ class ResourcesController < ApplicationController
     else
       @resources = Resource.where(:approval_status => 2).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) 
     end
+    if @resources.count < 1
+      flash[:notice] = ("No resources to delete.")
+      redirect_to "/resources/archived.html"
+      return
+    end
 
     @resources.each do |resource|
       resource.destroy
@@ -318,7 +335,7 @@ class ResourcesController < ApplicationController
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
       format.html do
-        flash[:alert] = (@resources.size > 1 ? "All archived resources have" : "Resource has") + " been deleted."
+        flash[:alert] = (@resources.size > 1 ? "All archived resources have" : "Resource has") + " been permanently deleted."
         redirect_to "/resources/archived.html"
       end
     end
@@ -358,7 +375,7 @@ class ResourcesController < ApplicationController
 
   def destroy
     Resource.destroy(params[:id])
-    flash[:alert] = "Resource deleted"
+    flash[:alert] = "Resource permanently deleted"
     redirect_to "/resources/archived.html"
     # redirect_to "/resources/" + params[:id] + ".html"
   end
