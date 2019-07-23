@@ -5,11 +5,14 @@
 <div id="archived"  id="resource-container-wrapper">
     <div class="col" id="approval-column">
 
-      <%= form_tag("/resources/delete/many.html", method: :delete) do %>
-        <button class='btn btn-outline-dark btn-all' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to delete all resources? This cannot be undone.">
-          Delete All
-        </button>
-      <% end %>
+      <div class="links">
+        <%= form_tag("/resources/delete/many.html", method: :delete) do %>
+          <button class='btn btn-outline-dark btn-all' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to delete all resources? This cannot be undone.">
+            Delete All
+          </button>
+        <% end %>
+        <a class="nav-item btn btn-outline-dark" href="/resources/unapproved.html">View approval queue</a>
+      </div>
 
       <div id="result-header">
         <h2><%= @resource_count %> archived<h2>

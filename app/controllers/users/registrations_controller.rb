@@ -64,7 +64,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if (not @user.nil?) and request.format.html?
       flash[:notice] = "Your API key is '#{@user.api_token}'."
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to "/users/edit"
   end
 
   # GET /resource/edit

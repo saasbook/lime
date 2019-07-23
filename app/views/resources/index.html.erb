@@ -11,10 +11,7 @@
 <%= javascript_include_tag "filter" %>
 <%= javascript_include_tag "resource-index" %>
 
-<div id="loading"></div>
-
 <div class="index"  id="resource-container-wrapper">
-
   <% resource_data = @resources_json %> 
   <%= react_component("Display", { filters: @has_many_hash.merge(@locations), child_locations: @child_locations, resources: resource_data }) %>
 

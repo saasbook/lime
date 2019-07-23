@@ -203,6 +203,11 @@ class ResourcesController < ApplicationController
 
   def upload
     uploaded_io = params[:csv]
+    if uploaded_io == nil
+      flash[:alert] = "Please choose a file first before uploading."
+      redirect_to "/resources/unapproved.html"
+      return
+    end
     csv_text = uploaded_io.read
     csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
     count = 0

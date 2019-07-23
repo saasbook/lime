@@ -8,20 +8,26 @@
     <div class="col" id="approval-column">
       <%= form_for @upload do |f| %>
         <%= f.file_field :csv, class: "csv-button" %>
-        <%= f.submit 'Upload CSV file', class: 'btn btn-outline-dark csv-button' %>
+        <%= f.submit 'Upload resources from CSV file', class: 'btn btn-outline-dark csv-button' %>
       <% end %>
 
-      <%= form_tag("/resources/approve/many.html", method: :post) do %>
-        <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to approve all resources in the queue?">
-          Approve All
-        </button>
-      <% end %>
+      <div class="links">
+        <%= form_tag("/resources/approve/many.html", method: :post) do %>
+          <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to approve all resources in the queue?">
+            Approve All
+          </button>
+        <% end %>
 
-      <%= form_tag("/resources/archive/many.html", method: :post) do %>
-        <button class='btn btn-outline-dark' id="archive-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to archive all resources in the queue?">
-          Archive All
-        </button>
-      <% end %>
+        <%= form_tag("/resources/archive/many.html", method: :post) do %>
+          <button class='btn btn-outline-dark' id="archive-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to archive all resources in the queue?">
+            Archive All
+          </button>
+        <% end %>
+
+        <a class="nav-item btn btn-outline-dark" href="/resources/archived.html">View archived resources</a>
+      </div>
+
+      
 
       <%= form_tag("/resources/approve/many.html", method: :post) do %>
         <div id="result-header">
