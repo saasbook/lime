@@ -17,7 +17,7 @@
             <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
             <% all_values = @all_values_hash %>
 
-            <%= button_to 'Archive', resources_archive_path(@resource), data: { confirm: "Are you sure?", id: @resource["id"] } , class: "btn btn-outline-primary", id: @resource["id"] %>
+            <%= button_to 'Archive', resources_archive_path(@resource), data: { confirm: "Are you sure?", id: @resource["id"] } , class: "btn btn-outline-primary btn-archive", id: @resource["id"] %>
         <% else %>
             <% all_values = @all_public_values_hash %>
         <% end %> 
