@@ -137,8 +137,6 @@ class ResourcesController < ApplicationController
 
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
-    # TODO: give option via checkbox for admin to automatically approve
-    # rp[:approval_status] = @user == nil ? 0 : 1
     rp[:approval_status] = 0
     @resource = Resource.create_resource(rp)
     if params[:location] != nil then Location.nest_location(params[:location]) end
@@ -242,9 +240,6 @@ class ResourcesController < ApplicationController
         'flagged': '', 
         'flagged_comment': ''
       }
-
-      puts "print this"
-      puts record["title"]
 
       params, resource_hash = Resource.separate_params(record)
       r = Resource.create_resource(resource_hash)
@@ -353,7 +348,7 @@ class ResourcesController < ApplicationController
     resources = []
     if lst == 'all'
       Resource.where(:approval_status => 0).each do |resource|
-        r = Resource.update(resource.id, :approval_status => 1)
+        r = Resource.update(resource.id, :approval_status => 1, :approved_by => @user.email)
         r.save(validate: false) # for now, force update even if not valid
       end
       resources = Resource.all
@@ -387,6 +382,40 @@ class ResourcesController < ApplicationController
     redirect_to "/resources/archived.html"
     # redirect_to "/resources/" + params[:id] + ".html"
   end
+
+  def archive
+    id = params[:id]
+    r = Resource.update(id, :approval_status => 2)
+    r.save(validate: false)
+    flash[:alert] = "Resource archived"
+    redirect_to "/resources/" + id + ".html"
+  end
+
+  def restore
+    id = params[:id]
+    r = Resource.update(id, :approval_status => 0)
+    r.save(validate: false)
+    flash[:notice] = "Resource restored. It is now located in the approval queue."
+    redirect_to "/resources/archived.html"
+  end
+
+  def all
+    if @user.nil?
+      if request.format.json?
+        render status: 400, json: {}.to_json
+      else
+        redirect_to "/resources.html"
+      end
+    else
+      @resources = Resource.where(:approval_status => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
+      @all_values_hash = Resource.all_values_hash
+      @has_many_hash = self.has_many_value_hash
+      respond_to do |format|
+        format.json {@resource.to_json(:include => Resource.include_has_many_params)}
+        format.html
+      end
+    end
+  end
   
 
   def unapproved
@@ -407,22 +436,6 @@ class ResourcesController < ApplicationController
         format.html
       end
     end
-  end
-
-  def archive
-    id = params[:id]
-    r = Resource.update(id, :approval_status => 2)
-    r.save(validate: false)
-    flash[:alert] = "Resource archived"
-    redirect_to "/resources/" + id + ".html"
-  end
-
-  def restore
-    id = params[:id]
-    r = Resource.update(id, :approval_status => 0)
-    r.save(validate: false)
-    flash[:notice] = "Resource restored. It is now located in the approval queue."
-    redirect_to "/resources/archived.html"
   end
 
   def archived

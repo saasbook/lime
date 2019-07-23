@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'resources/unapproved', to: 'resources#unapproved'
   get 'resources/archived', to: 'resources#archived'
+  get 'resources/all', to: 'resources#all'
   
   
   # If a 'display user information' page gets added, may be good idea to move location

@@ -22,7 +22,14 @@
     <nav class="navbar">
       <div id="left-nav">
         <a class="nav-link nav-item" href="/">Home</a>
-        <a class="nav-link nav-item" href="/resources.html/">All Resources</a>
+        <div class="dropdown">
+          <a class="nav-link nav-item" href="/resources.html/">All Resources</a>
+          <% if user_signed_in? %>
+              <div class="dropdown-content">
+                  <a class="nav-link nav-item" href="/resources/all.html">Admin View</a>
+              </div>
+          <% end %>
+        </div>
         <div class="dropdown">
           <a class="dropbtn nav-link nav-item" href="/resources/new.html">Suggest a Resource</a>
           <div class="dropdown-content">
@@ -34,8 +41,8 @@
           </div>
         </div>  
       </div>
+
       <div id="right-nav">
-        
         <% if user_signed_in? %>
           <div class="dropdown">
             <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
