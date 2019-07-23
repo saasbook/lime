@@ -4,56 +4,56 @@
 
 <%= javascript_include_tag "unapproved" %>
 
-<div id="unapproved"  id="resource-container-wrapper">
+<div id="archived"  id="resource-container-wrapper">
     <div class="col" id="approval-column">
 
-      <%= form_tag("/resources/approve/many.html", method: :delete) do %>
-        <button class='btn btn-outline-dark' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure?">
+      <%= form_tag("/resources/delete/many.html", method: :delete) do %>
+        <button class='btn btn-outline-dark btn-all' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure?">
           Delete All
         </button>
       <% end %>
 
-      <%= form_tag("/resources/approve/many.html", method: :post) do %>
-        <div id="result-header">
-          <h2><%= @resource_count %> archived<h2>
-        </div>
-        
-        
-        <% @resources.each do |resource| %>
-          <div class="row resource-container unapproved-resource">
-              <div class="resource-title text">
-                  <%= resource.title %>
-              </div>
-              <%= button_to 'Delete', resource, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary", id: "btn-delete" %>
-              <div class="approval-checkbox">
-                <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
-              </div>
-
-              <div>
-                <% i = 0 %>
-                <% @all_values_hash.map do |key, value| %>
-                    <% text = resource[value]%>
-                    <% if (@has_many_hash.key?(value)) %>
-                        <% text = resource.send(value).collect(&:val) %>
-                        <% text = text.to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
-                    <% end %>
-                    <% if (text != nil && text.to_s.length != 0) %>
-                        <% if (i % 2 == 1) %>
-                            <div class="text colored">
-                        <% else %>
-                            <div class="text">
-                        <% end %>
-                            <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
-                        </div>
-                        <% i += 1 %>
-                    <% end %>
-                    
-                <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+      <div id="result-header">
+        <h2><%= @resource_count %> archived<h2>
+      </div>
       
+      
+      <% @resources.each do |resource| %>
+        <div class="row resource-container unapproved-resource">
+            <div class="resource-title text">
+                <%= resource.title %>
+            </div>
+            <div class="links" %>
+              <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+              
+              <%= button_to 'Delete', resource, method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-outline-primary", id: "btn-delete" %>
+            </div>
+            <div class="approval-checkbox">
+              <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
+            </div>
+            <% all_values = @all_values_hash %>
+            <div>
+              <% i = 0 %>
+              <% @all_values_hash.map do |key, value| %>
+                  <% text = resource[value]%>
+                  <% if (@has_many_hash.key?(value)) %>
+                      <% text = resource.send(value).collect(&:val) %>
+                      <% text = text.to_s.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
+                  <% end %>
+                  <% if (text != nil && text.to_s.length != 0) %>
+                      <% if (i % 2 == 1) %>
+                          <div class="text colored">
+                      <% else %>
+                          <div class="text">
+                      <% end %>
+                          <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
+                      </div>
+                      <% i += 1 %>
+                  <% end %>
+              <% end %>
+          </div>
+        </div>
+      <% end %>
   </div>
   
 </div>

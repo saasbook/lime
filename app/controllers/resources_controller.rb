@@ -278,33 +278,48 @@ class ResourcesController < ApplicationController
     end
   end
 
-  def delete_many
-    status = approve_many_status
+  def archive_many
     lst = params[:approve_list]
+    puts lst
     if @user.nil?
       approve_many_sad_path("This action is unauthorized.", 401)
       return
-    elsif not [0, 1].include? status
-      approve_many_sad_path("Approval status must be either 0 or 1.", 403)
-      return
-      approve_many_sad_path("Approval list not formatted correctly.", 400)
-      return
     else
       @resources = Resource.where(:approval_status => 0).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) 
-      # @resources = Resource.where(:approval_status => 0)
     end
 
     @resources.each do |resource|
-      
-      # Resource.destroy(resource.id)
-      resource.destroy
+      r = Resource.update(resource.id, :approval_status => 2)
+      r.save(validate: false)
     end
 
     respond_to do |format|
       format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
       format.html do
-        flash[:alert] = (@resources.size > 1 ? "All unapproved resources have" : "Resource has") + " been deleted."
+        flash[:alert] = (@resources.size > 1 ? "All unapproved resources have" : "Resource has") + " been archived."
         redirect_to "/resources/unapproved.html"
+      end
+    end
+  end
+  
+
+  def delete_many
+    lst = params[:approve_list]
+    if @user.nil?
+      approve_many_sad_path("This action is unauthorized.", 401)
+      return
+    else
+      @resources = Resource.where(:approval_status => 2).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) 
+    end
+
+    @resources.each do |resource|
+      resource.destroy
+    end
+    respond_to do |format|
+      format.json {render :json => @resources.to_json(:include => Resource.include_has_many_params) }
+      format.html do
+        flash[:alert] = (@resources.size > 1 ? "All archived resources have" : "Resource has") + " been deleted."
+        redirect_to "/resources/archived.html"
       end
     end
   end
@@ -344,7 +359,7 @@ class ResourcesController < ApplicationController
   def destroy
     Resource.destroy(params[:id])
     flash[:alert] = "Resource deleted"
-    redirect_to "/resources/unapproved.html"
+    redirect_to "/resources/archived.html"
     # redirect_to "/resources/" + params[:id] + ".html"
   end
   
@@ -377,6 +392,14 @@ class ResourcesController < ApplicationController
     redirect_to "/resources/" + id + ".html"
   end
 
+  def restore
+    id = params[:id]
+    r = Resource.update(id, :approval_status => 1)
+    r.save(validate: false)
+    flash[:alert] = "Resource restored"
+    redirect_to "/resources/archived.html"
+  end
+
   def archived
     if @user.nil?
       if request.format.json?
@@ -389,7 +412,6 @@ class ResourcesController < ApplicationController
       @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
       @all_values_hash = Resource.all_values_hash
       @has_many_hash = self.has_many_value_hash
-      @upload = ""
       respond_to do |format|
         format.json {@resource.to_json(:include => Resource.include_has_many_params)}
         format.html

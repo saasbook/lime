@@ -176,6 +176,8 @@ a.resource-results {
   }
 }
 
+/* approval queue and archived resources */
+
 #approval-column {
   // background-color: #198BCC;
   background-color: white;
@@ -193,6 +195,11 @@ a.resource-results {
 .approval-checkbox {
   display: none;
 }
+
+.btn-all {
+  margin-top: 16px;
+}
+
 
 #filter-header {
   font-size: 2rem;
@@ -217,10 +224,6 @@ a.resource-results {
     transition: 100ms;
   }
 }
-
-
-
-
 
 #search_row {
   margin: 0px 32px;

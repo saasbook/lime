@@ -28,7 +28,7 @@
         <% all_values.map do |key, value| %>
             <% text = @resource[value]%>
             <% if (@has_many_hash.key?(value)) %>
-                <% text = text.to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
+                <% text = text.to_s.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
             <% end %>
             <% if (text != nil && text.to_s.length != 0) %>
                 <% if (i % 2 === 1) %>
