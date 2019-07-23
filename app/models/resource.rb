@@ -142,11 +142,13 @@ class Resource < ActiveRecord::Base
     if resource.valid?
       Resource.create_associations(resource, params)
     end
+    
     return resource
   end
 
   def self.update_resource(id, params)
     params, resource_hash = Resource.separate_params(params)
+    
     resource = Resource.update(id, resource_hash)
     Resource.create_associations(resource, params)
     return resource
@@ -207,7 +209,7 @@ class Resource < ActiveRecord::Base
     fields_hash = self.get_associations_hash(resource)
     
     fields_hash.each do |field, association|
-      # association.delete_all
+      association.delete_all # if updating, need to delete and remake associations
       if params[field] != nil
         params[field].each do |val|
           association.create!(:val => val)

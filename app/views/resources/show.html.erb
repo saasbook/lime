@@ -1,5 +1,7 @@
 <div id="show">
 
+<%= javascript_include_tag "show" %>
+
 <% if @resource == nil %>
     <div id="show-title">
         <h2>This page does not exist!</h2>
@@ -14,7 +16,8 @@
         <% if user_signed_in? %>
             <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
             <% all_values = @all_values_hash %>
-            <%= button_to 'Delete', @resource, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-primary", id: "btn-delete" %>
+
+            <%= button_to 'Archive', resources_archive_path(@resource), data: { confirm: "Are you sure?", id: @resource["id"] } , class: "btn btn-outline-primary", id: @resource["id"] %>
         <% else %>
             <% all_values = @all_public_values_hash %>
         <% end %> 

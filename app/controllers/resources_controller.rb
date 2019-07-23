@@ -150,6 +150,8 @@ class ResourcesController < ApplicationController
   end
 
   def update
+    puts "updating"
+    puts params
     @resource = Resource.find_by(id: params[:id])
     if @resource == nil
       flash[:notice] = "This resource does not exist"
@@ -206,7 +208,7 @@ class ResourcesController < ApplicationController
     count = 0
     csv.each do |row|
       record = {
-        'title': row['Resource'],
+        'title': row['Title'],
         'url': row['Resource URL'],
         'resource_email': row['Email-General'],
         'resource_phone': row['Phone-General'],
@@ -236,14 +238,14 @@ class ResourcesController < ApplicationController
         'flagged_comment': ''
       }
 
-      # if record[:approved_by].nil?
-      #   record[:approved_by] = "Airtable"
-      # end
-      r = Resource.create_resource(record)
+      params, resource_hash = Resource.separate_params(record)
+      r = Resource.create_resource(resource_hash)
+      r.save(validate: false)
+      Resource.create_associations(r, params)
       count = count + 1
       # if data is seeded from CSV file, forcefully gets added to database
-      # this is because a majority of the seeded database has empty fields
-      r.save(validate: false)
+      # this is because a majority of the seeded database has empty or invalid fields
+      
     end
 
     flash[:notice] = "Added #{count} resources to the approval queue"
@@ -311,7 +313,8 @@ class ResourcesController < ApplicationController
     resources = []
     if lst == 'all'
       Resource.where(:approval_status => 0).each do |resource|
-        Resource.update(resource.id, :approval_status => status)
+        r = Resource.update(resource.id, :approval_status => 1)
+        r.save(validate: false) # for now, force update even if not valid
       end
       resources = Resource.all
     else
@@ -341,7 +344,8 @@ class ResourcesController < ApplicationController
   def destroy
     Resource.destroy(params[:id])
     flash[:alert] = "Resource deleted"
-    redirect_to "/resources/" + params[:id] + ".html"
+    redirect_to "/resources/unapproved.html"
+    # redirect_to "/resources/" + params[:id] + ".html"
   end
   
 
@@ -354,6 +358,34 @@ class ResourcesController < ApplicationController
       end
     else
       @resources = Resource.where(:approval_status => 0).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
+      @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
+      @all_values_hash = Resource.all_values_hash
+      @has_many_hash = self.has_many_value_hash
+      @upload = ""
+      respond_to do |format|
+        format.json {@resource.to_json(:include => Resource.include_has_many_params)}
+        format.html
+      end
+    end
+  end
+
+  def archive
+    id = params[:id]
+    r = Resource.update(id, :approval_status => 2)
+    r.save(validate: false)
+    flash[:alert] = "Resource archived"
+    redirect_to "/resources/" + id + ".html"
+  end
+
+  def archived
+    if @user.nil?
+      if request.format.json?
+        render status: 400, json: {}.to_json
+      else
+        redirect_to "/resources.html"
+      end
+    else
+      @resources = Resource.where(:approval_status => 2).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
       @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
       @all_values_hash = Resource.all_values_hash
       @has_many_hash = self.has_many_value_hash
@@ -394,10 +426,15 @@ class ResourcesController < ApplicationController
   end
 
   def update_approvals_in_list(lst)
+    if (status)
+      status = 1
+    end
     @resources = []
     lst.each do |id|
       if Resource.exists? :id => id
-        @resources << Resource.update(id, :approval_status => status)
+        r = Resource.update(id, :approval_status => status)
+        r.save(validate: false)
+        @resources << r
       end
     end
     return @resources

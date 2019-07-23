@@ -33,6 +33,7 @@ module Lime
 
     config.assets.precompile += %w( unapproved.js )
     config.assets.precompile += %w( new.js )
+    config.assets.precompile += %w( show.js )
     config.assets.precompile += %w( filter.js )
     config.assets.precompile += %w( resource-index.js )
 

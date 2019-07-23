@@ -12,8 +12,7 @@ class Location < ActiveRecord::Base
                       {'location' => 'California', 'parent' => 'USA'},
                       {'location' => 'Bay Area', 'parent' => 'California'},
                       {'location' => 'Berkeley', 'parent' => 'Bay Area'},
-                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'},
-                      {'location' => 'San Francisco', 'parent' => 'Bay Area'}
+                      {'location' => 'UC Berkeley', 'parent' => 'Berkeley'}
                       
                   ]
     global = Location.create :val => "Global"
