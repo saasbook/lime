@@ -14,7 +14,6 @@
 
     <div class="links" %>
         <% if user_signed_in? %>
-            <% all_values = @all_values_hash %>
             <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
             
             <% if @resource["approval_status"] == 0 %>
@@ -26,9 +25,10 @@
             <% else %>
                 <a class="nav-item btn btn-outline-primary" href="/resources/archived.html">View in archive</a>
             <% end %> 
-        <% else %>
-            <% all_values = @all_public_values_hash %>
         <% end %> 
+        <% all_values = @all_public_values_hash %>
+        <%= button_to 'Found something incorrect?', resources_archive_path(@resource), data: { id: @resource["id"] } , class: "btn btn-outline-primary", id: @resource["id"] %>
+        
     </div>
 
     <div id="resource_info">
