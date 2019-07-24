@@ -114,10 +114,16 @@ class Resource < ActiveRecord::Base
         .compact.each { |field| params[field] = params[field].to_s }
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
+      if params[:flagged] < 0 || params[:flagged] > 1
+        params[:flagged] = 1
+      end
     end
 
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
+      if params[:approval_status] < 0 || params[:approval_status] > 2
+        params[:approval_status] = 0
+      end
     end
 
     return params

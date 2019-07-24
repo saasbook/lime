@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'resources/unapproved', to: 'resources#unapproved'
   get 'resources/archived', to: 'resources#archived'
+  get 'resources/flagged', to: 'resources#flagged'
   get 'resources/all', to: 'resources#all'
   
   
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   match 'resources/approve/:id' => 'resources#update', via: [:put, :patch, :post], :defaults => {:format => 'json'}
   match 'resources/archive/:id' => 'resources#archive', as: :resources_archive, via: [:put, :post, :patch]
   match 'resources/restore/:id' => 'resources#restore', as: :resources_restore, via: [:put, :post, :patch]
+  match 'resources/flag/:id' => 'resources#flag', as: :resources_flag, via: [:put, :post, :patch]
 
   match 'resources/unapproved' => 'resources#upload', via: [:put, :patch, :post], :defaults => {:format => 'json'}
   root "welcome#index"

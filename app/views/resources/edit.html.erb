@@ -176,7 +176,41 @@
                   <%= text_area_tag(:notes, @resource.notes) %>
               </div>
           </div>
+
+          
       </div>
+
+      <div class="form_step">
+          <h2>Admin information</h2>
+          <div class="resource_row">
+              <div class="input_field">
+                  <%= label_tag(:approval_status, "Approval Status") %>
+                  <p> 0 = unapproved, 1 = approved, 2 = archived </p>
+                  <%= text_field_tag(:approval_status, @resource.approval_status) %>
+              </div>
+              <div class="input_field">
+                  <%= label_tag(:approval_status, "Flagged") %>
+                  <p> 0 = no flag, 1 = flagged </p>
+                  <%= text_field_tag(:flagged, @resource.flagged) %>
+              </div>
+          </div>
+
+          <div class="resource_row">
+              <div class="input_field">
+                  <%= label_tag(:flagged_comment, "Flagged comment") %>
+                  <p> Any issues or outdated information about this resource. </p>
+                  <%= text_area_tag(:flagged_comment, @resource.flagged_comment) %>
+              </div>
+          </div>
+
+          <div class="resource_row">
+              <div class="input_field">
+                  <%= label_tag(:approved_by, "Approved By") %>
+                  <p>The person who approved the resource from the approval queue. </p>
+                  <%= text_field_tag(:approved_by, @resource.approved_by) %>
+              </div>
+          </div>
+        </div>
 
       <div id="form_submit">
             <%= button_tag("Update", :id => "submit_button") %>

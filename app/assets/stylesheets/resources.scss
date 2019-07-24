@@ -199,7 +199,7 @@ a.resource-results {
   margin-top: 16px;
 }
 
-#archived .links, #unapproved .links, #all .links {
+#archived .links, #unapproved .links, #all .links, #flagged .links {
   margin: 16px 8px 0px;
   display: flex;
   flex-direction: row;
@@ -774,6 +774,26 @@ select {
   align-items: center;
   margin-bottom: 32px;
   width: 50vw;
+}
+
+#show .flag-form {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display:none;
+  input {
+    margin: 32px 0px;
+  }
+}
+
+
+
+#show .flag-section {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #edit-top {

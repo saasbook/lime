@@ -138,6 +138,7 @@ class ResourcesController < ApplicationController
     # https://stackoverflow.com/questions/18369592/modify-ruby-hash-in-place-rails-strong-params
     rp = resource_params
     rp[:approval_status] = 0
+    rp[:flagged] = 0
     @resource = Resource.create_resource(rp)
     if params[:location] != nil then Location.nest_location(params[:location]) end
 
@@ -148,15 +149,13 @@ class ResourcesController < ApplicationController
   end
 
   def update
-    puts "updating"
-    puts params
     @resource = Resource.find_by(id: params[:id])
     if @resource == nil
       flash[:notice] = "This resource does not exist"
       return
     end
     # Don't let guests update anything unless the params are "allowed"
-    if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
+    if @user == nil
       flash[:notice] = "You don't have permissions to update records"
       redirect_to :controller => 'resources', :action => 'edit'
       return
@@ -379,8 +378,23 @@ class ResourcesController < ApplicationController
   def destroy
     Resource.destroy(params[:id])
     flash[:alert] = "Resource permanently deleted"
-    redirect_to "/resources/archived.html"
-    # redirect_to "/resources/" + params[:id] + ".html"
+    redirect_back(fallback_location: root_path)
+  end
+
+  def flag
+    id = params[:id]
+    comment = params[:flagged_comment]
+    r = Resource.update(id, :flagged => 1)
+    r.save(validate: false)
+    if r[:flagged_comment].length > 0
+      r = Resource.update(id, :flagged_comment => r[:flagged_comment] + "; "+ comment)
+    else
+      r = Resource.update(id, :flagged_comment => comment);
+    end
+    
+    r.save(validate: false)
+    flash[:notice] = "Thank you for your feedback. A database admin will create fixes as soon as possible."
+    redirect_back(fallback_location: root_path)
   end
 
   def archive
@@ -388,15 +402,15 @@ class ResourcesController < ApplicationController
     r = Resource.update(id, :approval_status => 2)
     r.save(validate: false)
     flash[:alert] = "Resource archived"
-    redirect_to "/resources/" + id + ".html"
+    redirect_back(fallback_location: root_path)
   end
 
   def restore
     id = params[:id]
-    r = Resource.update(id, :approval_status => 0)
+    r = Resource.update(id, :approval_status => 0, :flagged => 0)
     r.save(validate: false)
     flash[:notice] = "Resource restored. It is now located in the approval queue."
-    redirect_to "/resources/archived.html"
+    redirect_back(fallback_location: root_path)
   end
 
   def all
@@ -431,6 +445,25 @@ class ResourcesController < ApplicationController
       @all_values_hash = Resource.all_values_hash
       @has_many_hash = self.has_many_value_hash
       @upload = ""
+      respond_to do |format|
+        format.json {@resource.to_json(:include => Resource.include_has_many_params)}
+        format.html
+      end
+    end
+  end
+
+  def flagged
+    if @user.nil?
+      if request.format.json?
+        render status: 400, json: {}.to_json
+      else
+        redirect_to "/resources.html"
+      end
+    else
+      @resources = Resource.where(:flagged => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
+      @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
+      @all_values_hash = Resource.all_values_hash
+      @has_many_hash = self.has_many_value_hash
       respond_to do |format|
         format.json {@resource.to_json(:include => Resource.include_has_many_params)}
         format.html

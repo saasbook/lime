@@ -19,7 +19,6 @@ $(document).ready(function() {
     $("#submit_button").click(function () {
         var form = $("#form_section");
         if (validate()) {
-            console.log(form.serialize())
             $.ajax({ 
                 url   : form.attr('action'),
                 type  : form.attr('method'),
