@@ -125,4 +125,8 @@ class Location < ActiveRecord::Base
         'location' => Location.get_values,
     }
   end
+
+  def self.count(label)
+    return Location.where(:val => label).length;
+  end
 end

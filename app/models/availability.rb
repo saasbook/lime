@@ -4,4 +4,8 @@ class Availability < ActiveRecord::Base
   def self.get_values
     ['Rolling', 'Summer', 'One time', 'Fall', 'Spring', 'Winter']
   end
+
+  def self.count(label)
+    return Availability.where(:val => label).length;
+  end
 end

@@ -8,4 +8,8 @@ class Type < ActiveRecord::Base
      'Job & Internship'
     ]
   end
+
+  def self.count(label)
+    return Type.where(:val => label).length;
+  end
 end

@@ -4,4 +4,8 @@ class ClientTag < ActiveRecord::Base
   def self.get_values
     ['BearX.co', 'WITI', 'CITRIS', 'OnRamp']
   end
+
+  def self.count(label)
+    return ClientTag.where(:val => label).length;
+  end
 end

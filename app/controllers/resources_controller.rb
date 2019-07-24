@@ -60,6 +60,19 @@ class ResourcesController < ApplicationController
     end
 
     @has_many_hash = self.has_many_value_hash
+    @filters = {}
+    @has_many_hash.each do |association, values|
+      @valid_associations = []
+      values.each do |value|
+        if association.classify.constantize.count(value) > 0
+          @valid_associations.push(value)
+        end
+      end
+      @filters[association] = @valid_associations
+    end
+
+    @has_many_hash = @filters
+
     @locations = Location.get_locations
     @child_locations = Hash.new
 

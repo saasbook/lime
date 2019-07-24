@@ -4,4 +4,8 @@ class Campus < ActiveRecord::Base
   def self.get_values
     ['Berkeley', 'Davis', 'Merced', 'Santa Cruz']
   end
+
+  def self.count(label)
+    return Campus.where(:val => label).length;
+  end
 end

@@ -8,4 +8,8 @@ class Topic < ActiveRecord::Base
      'Technology', 'Cities', 'International Development', 'Startups+Business',
     ]
   end
+
+  def self.count(label)
+    return Topic.where(:val => label).length;
+  end
 end
