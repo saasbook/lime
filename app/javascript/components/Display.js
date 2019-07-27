@@ -181,6 +181,29 @@ class Display extends React.Component {
     return filtered_resources;
   }
 
+  
+  toggle_filters = () => {
+    
+    if ($(".filter-rows")[0].style.display ==="block") {
+      $(".btn-show-filters")[0].innerHTML = "Show Filters"
+      $("#filter-column").css({height: "auto"});
+    } else {
+      let navigationHeight = $("body").height();
+      const margin = parseInt($("#filter-column").css("margin-top"));
+      let initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
+      let newHeight = initial_filter_height;
+      if ($(window).scrollTop() > navigationHeight) {
+        newHeight = initial_filter_height + navigationHeight;
+        
+      } else {
+        newHeight = initial_filter_height + $(window).scrollTop();
+      }
+      $(".btn-show-filters")[0].innerHTML = "Hide Filters"
+      $("#filter-column").css({height: newHeight});
+    }
+    $(".filter-rows").toggle(0);
+  }
+
   updateSearch = (e) => {
     e.preventDefault();
     this.setState({search_text: $(".search_bar")[0].value}, () => {
@@ -201,6 +224,7 @@ class Display extends React.Component {
     } else {$(".pagination").html("");}
   }
   
+  // Organize all resources into pages (either hide or show)  
   paginate = () => {
     $(".pagination").html("");
     let itemsPerPage = 10;
@@ -317,27 +341,32 @@ class Display extends React.Component {
     return (
       <div className="index"  id="resource-container-wrapper">
         <div id="filter-column">
-          <div>
-            <div className="row">
-              <div id="filter-header">
-                <button id="filter-reset-button" className="btn btn-med" onClick={this.reset_filters}>Reset Filters</button>
-              </div>
-            </div>{/*reset-button*/}
-            <div className="association" id="search_row">
+
+            <div className="association" className="filter_row" id="search-row">
               <label className="search_bar_text">Search</label>
               <form onSubmit={this.updateSearch} className="search-form">
                 <input type="text" name="search" className="search_bar"></input>
                 <button type="submit" id="search-button" className="btn" onClick={this.updateSearch}>Search</button>
               </form>
-              
             </div>{/*search-row*/}
-            {this.state.all_filters.get("location")}
-            {this.state.all_filters.get("types")}
-            {this.state.all_filters.get("audiences")}
-            {this.state.all_filters.get("topics")}
-            {this.state.all_filters.get("availabilities")}
-            {this.state.all_filters.get("client_tags")}
-          </div>
+            <div id="filter-header">
+              <button className="btn-show-filters btn btn-med" onClick={this.toggle_filters}>Show Filters</button>
+              <button id="filter-reset-button" className="btn btn-med" onClick={this.reset_filters}>
+              Reset Filters and Search</button>
+              
+            </div>
+            
+            <div className="filter-rows">
+              {this.state.all_filters.get("location")}
+              {this.state.all_filters.get("types")}
+              {this.state.all_filters.get("audiences")}
+              {this.state.all_filters.get("topics")}
+              {this.state.all_filters.get("availabilities")}
+              {this.state.all_filters.get("client_tags")}
+              {this.state.all_filters.get("population_focuses")}
+              {this.state.all_filters.get("innovation_stages")}
+            </div>{/*filter-rows*/}
+            
         </div> {/*filter-column*/}
         <div id="resource-column">
           {result_header}

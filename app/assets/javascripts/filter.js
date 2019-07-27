@@ -58,17 +58,24 @@ $(document).ready(function() {
             $("#filter-column").stop().animate({height: "auto", top: 0},0);
         } else {
             navigationHeight = $("body").height();
-        let newHeight = initial_filter_height;
-        let newTop = navigationHeight - $(window).scrollTop();
-        if ($(window).scrollTop() > navigationHeight) {
-            newHeight = initial_filter_height + navigationHeight;
-            newTop = 0;
-            $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+            let newHeight = initial_filter_height;
+            let newTop = navigationHeight - $(window).scrollTop();
+            if ($(window).scrollTop() > navigationHeight) {
+                newHeight = initial_filter_height + navigationHeight;
+                newTop = 0;
+                
+            } else {
+                newHeight = initial_filter_height + $(window).scrollTop();
+                
+            }
             
-        } else {
-            newHeight = initial_filter_height + $(window).scrollTop();
-            $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
-        }
+            if ($(".filter-rows")[0].style.display === "block") {
+                $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+                
+            } else {
+                newHeight = parseInt($("#search-row").css("height")) + parseInt($("#filter-header").css("height")) + 64;
+                $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+            }
         }
         
     }

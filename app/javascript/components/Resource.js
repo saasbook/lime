@@ -50,6 +50,26 @@ class Resource extends React.Component {
         let label = (<div className="text label" key={"label-" + value}> {value} </div>)
         tags.push(label)
       }
+      for (let i = 0; i < this.props.data.innovation_stages.length; i++) {
+        let value = this.props.data.innovation_stages[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+      for (let i = 0; i < this.props.data.population_focuses.length; i++) {
+        let value = this.props.data.population_focuses[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+      for (let i = 0; i < this.props.data.technologies.length; i++) {
+        let value = this.props.data.technologies[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
+      for (let i = 0; i < this.props.data.campuses.length; i++) {
+        let value = this.props.data.campuses[i];
+        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
+        tags.push(label)
+      }
       return (
         <a href={id} target="_blank" className="resource-results"><div className="row resource-container">
           <div className="resource-title text">
