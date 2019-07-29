@@ -352,7 +352,7 @@ class Display extends React.Component {
             <div id="filter-header">
               <button className="btn-show-filters btn btn-med" onClick={this.toggle_filters}>Show Filters</button>
               <button id="filter-reset-button" className="btn btn-med" onClick={this.reset_filters}>
-              Reset Filters and Search</button>
+              Reset Filters &amp; Clear Search</button>
               
             </div>
             

@@ -5,7 +5,7 @@ class Audience < ActiveRecord::Base
     ['Undergraduate Student', 'Graduate Student',
      'Faculty', 'Staff', 'Alumni',
      'Recent Alumni', 'Everyone', 'Women',
-     'Investors', 'Non\-profit', 'For\-profit'
+     'Investors', 'Non-profit', 'For-profit'
     ]
   end
 

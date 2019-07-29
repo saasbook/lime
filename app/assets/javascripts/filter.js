@@ -38,48 +38,53 @@ $(document).ready(function() {
     });
     
     /* scroll and width and height changes */
-    let navigationHeight = $("body").height();
-    const margin = parseInt($("#filter-column").css("margin-top"));
-    let initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
-    if ($(window).width() >= 750) {
-        $("#filter-column").css({height: initial_filter_height});
-    }
-
-    $(window).on('resize', function() {
+    if ($("#filter-column").length > 0) {
+        let navigationHeight = $("body").height();
+        const margin = parseInt($("#filter-column").css("margin-top"));
+        let initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
         if ($(window).width() >= 750) {
-            navigationHeight = $("body").height();
-            initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
-            changeSize();
+            $("#filter-column").css({height: initial_filter_height});
         }
-    });
 
-    function changeSize() {
-        if ($(window).width() < 750) {
-            $("#filter-column").stop().animate({height: "auto", top: 0},0);
-        } else {
-            navigationHeight = $("body").height();
-            let newHeight = initial_filter_height;
-            let newTop = navigationHeight - $(window).scrollTop();
-            if ($(window).scrollTop() > navigationHeight) {
-                newHeight = initial_filter_height + navigationHeight;
-                newTop = 0;
-                
+        $(window).on('resize', function() {
+            if ($(window).width() >= 750) {
+                navigationHeight = $("body").height();
+                initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
+                changeSize();
+            }
+        });
+
+        function changeSize() {
+            if ($(window).width() < 750) {
+                $("#filter-column").stop().animate({height: "auto", top: 0},0);
             } else {
-                newHeight = initial_filter_height + $(window).scrollTop();
+                navigationHeight = $("body").height();
+                let newHeight = initial_filter_height;
+                let newTop = navigationHeight - $(window).scrollTop();
+                if ($(window).scrollTop() > navigationHeight) {
+                    newHeight = initial_filter_height + navigationHeight;
+                    newTop = 0;
+                    
+                } else {
+                    newHeight = initial_filter_height + $(window).scrollTop();
+                    
+                }
                 
+                if ($(".filter-rows")[0].style.display === "block") {
+                    $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+                    
+                } else {
+                    newHeight = parseInt($("#search-row").css("height")) + parseInt($("#filter-header").css("height")) + 64;
+                    $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+                }
             }
             
-            if ($(".filter-rows")[0].style.display === "block") {
-                $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
-                
-            } else {
-                newHeight = parseInt($("#search-row").css("height")) + parseInt($("#filter-header").css("height")) + 64;
-                $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
-            }
         }
-        
-    }
 
-    $(window).on('scroll', changeSize);
+        
+        $(window).on('scroll', changeSize);
+        changeSize();
+    }
+    
 
 });

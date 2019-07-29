@@ -1,19 +1,41 @@
 @import "bootstrap";
 
-// @font-face {
-//   font-family: 'Poppins';
-//   src: url('https://fonts.googleapis.com/css?family=Poppins');
-//   // src: url('../fonts/Poppins/Poppins-Light.ttf') format('truetype');
-//   // src: url('../fonts/Poppins/Poppins-Medium.ttf') format('truetype');
-// }
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/Poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-ExtraLight';
+  src: url('../assets/Poppins/Poppins-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Rubik-Regular';
+  src: url('../assets/Rubik/Rubik-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('../assets/Rubik/Rubik-Regular.ttf') format('truetype');
+}
 
 #invoice-wrapper {
   font-family: 'SourceSansPro';
 }
 
 body {
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: 'Poppins', Arial, sans-serif;
   padding: 0px;
+  color: #383e44;
+  h2, h3 {
+    font-family: 'Poppins-Light', Arial, sans-serif;
+    color: #383e44;
+  }
+  p, .label {
+    font-family: 'Rubik-Regular', Arial, sans-serif;
+    color: #383e44;
+  }
 }
 
 #resource-container-wrapper {
@@ -294,7 +316,6 @@ a.resource-results {
   font-size: 1.5rem;
   text-align: left;
   margin: 8px;
-  color: black;
 }
 
 #result-header {
@@ -408,6 +429,10 @@ a.resource-results {
 #new {
   background: rgb(250, 250, 250);
   width: 100%;
+  h2 {
+    font-family: "Rubik-Regular";
+    text-align: center;
+  }
   @media only screen and (max-width: 600px) {
     h1 {
       font-size: 2rem;
@@ -444,7 +469,7 @@ a.resource-results {
 .top h1 {
   color: white;
   font-weight: 100;
-  font-family: "Poppins-Light", Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
   font-size: 48px;
   padding: 8px 8px 16px;
   text-align: center;
