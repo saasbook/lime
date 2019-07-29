@@ -40,8 +40,7 @@ $(document).ready(function() {
     /* scroll and width and height changes */
     if ($("#filter-column").length > 0) {
         let navigationHeight = $("body").height();
-        const margin = parseInt($("#filter-column").css("margin-top"));
-        let initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
+        let initial_filter_height = ($(window).height() - navigationHeight - 64);
         if ($(window).width() >= 750) {
             $("#filter-column").css({height: initial_filter_height});
         }
@@ -49,10 +48,11 @@ $(document).ready(function() {
         $(window).on('resize', function() {
             if ($(window).width() >= 750) {
                 navigationHeight = $("body").height();
-                initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
+                initial_filter_height = ($(window).height() - navigationHeight - 64);
                 changeSize();
             }
         });
+        
 
         function changeSize() {
             if ($(window).width() < 750) {
@@ -60,22 +60,22 @@ $(document).ready(function() {
             } else {
                 navigationHeight = $("body").height();
                 let newHeight = initial_filter_height;
-                let newTop = navigationHeight - $(window).scrollTop();
+                let newTop = navigationHeight - $(window).scrollTop() + 32;
                 if ($(window).scrollTop() > navigationHeight) {
                     newHeight = initial_filter_height + navigationHeight;
-                    newTop = 0;
+                    newTop = 32;
                     
                 } else {
                     newHeight = initial_filter_height + $(window).scrollTop();
-                    
                 }
                 
-                if ($(".filter-rows")[0].style.display === "block") {
+                let minHeight = parseInt($("#search-row").css("height")) + parseInt($("#initial-filters").css("height")) + parseInt($("#filter-header").css("height")) + parseInt($("#filter-more").css("height")) + 32 + 32 + 8;
+
+                if ($(".filter-rows")[0].style.display === "block" || (minHeight > initial_filter_height) && (newHeight < minHeight)) {
                     $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
                     
                 } else {
-                    newHeight = parseInt($("#search-row").css("height")) + parseInt($("#filter-header").css("height")) + 64;
-                    $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+                    $("#filter-column").stop().animate({height: minHeight, top: newTop},0);
                 }
             }
             

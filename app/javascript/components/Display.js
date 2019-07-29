@@ -183,14 +183,14 @@ class Display extends React.Component {
 
   
   toggle_filters = () => {
+    let navigationHeight = $("body").height();
+    let initial_filter_height = ($(window).height() - navigationHeight - 64);
     
     if ($(".filter-rows")[0].style.display ==="block") {
+      let newHeight = parseInt($("#search-row").css("height")) + parseInt($("#initial-filters").css("height")) + parseInt($("#filter-header").css("height")) + parseInt($("#filter-more").css("height")) + 32 + 32 + 8;
       $(".btn-show-filters")[0].innerHTML = "Show Filters"
-      $("#filter-column").css({height: "auto"});
+      $("#filter-column").css({height: newHeight});
     } else {
-      let navigationHeight = $("body").height();
-      const margin = parseInt($("#filter-column").css("margin-top"));
-      let initial_filter_height = ($(window).height() - navigationHeight - margin - margin);
       let newHeight = initial_filter_height;
       if ($(window).scrollTop() > navigationHeight) {
         newHeight = initial_filter_height + navigationHeight;
@@ -350,21 +350,26 @@ class Display extends React.Component {
               </form>
             </div>{/*search-row*/}
             <div id="filter-header">
-              <button className="btn-show-filters btn btn-med" onClick={this.toggle_filters}>Show Filters</button>
               <button id="filter-reset-button" className="btn btn-med" onClick={this.reset_filters}>
-              Reset Filters &amp; Clear Search</button>
+              Clear All</button>
+            </div>
+            <div id="initial-filters">
               
+              {this.state.all_filters.get("types")}
+            </div>{/*filter-rows*/}
+
+            <div id="filter-more">
+              <button className="btn-show-filters btn btn-med" onClick={this.toggle_filters}>More Filters</button>
             </div>
             
             <div className="filter-rows">
-              {this.state.all_filters.get("location")}
-              {this.state.all_filters.get("types")}
+            {this.state.all_filters.get("location")}
               {this.state.all_filters.get("audiences")}
               {this.state.all_filters.get("topics")}
               {this.state.all_filters.get("availabilities")}
-              {this.state.all_filters.get("client_tags")}
               {this.state.all_filters.get("population_focuses")}
               {this.state.all_filters.get("innovation_stages")}
+              {this.state.all_filters.get("client_tags")}
             </div>{/*filter-rows*/}
             
         </div> {/*filter-column*/}

@@ -178,11 +178,14 @@ a.resource-results {
   box-sizing: content-box;
   max-height: 100vh;
   position: fixed;
-  margin-top: 2.5rem;
 }
 
 .filter-rows {
   display: none;
+}
+
+#initial-filters {
+  display: block;
 }
 
 #resource-column {
@@ -193,7 +196,6 @@ a.resource-results {
   padding: 0px;
   width: 50vw;
   float: right;
-  margin-top: 2.5rem;
   #none_message {
     font-size: 16px;
   }
@@ -248,11 +250,11 @@ a.resource-results {
   margin: 0px;
 }
 
-#filter-header {
+#filter-header, #filter-more {
   font-size: 2rem;
   text-align: center;
   width: 100%;
-  margin: 32px 0px 32px 0px;
+  margin: 16px 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -303,7 +305,7 @@ a.resource-results {
 .association, #location {
   display: flex;
   flex-direction: column;
-  margin: 48px 32px 16px 32px;
+  margin: 16px 32px 16px 32px;
 }
 
 .index h2 {
@@ -451,29 +453,27 @@ a.resource-results {
 
 .top{
   width: 100%;
-  max-height: 150px;
-  background: rgb(0,109,157);
-  background: linear-gradient(0deg, rgba(0,109,157,1) 0%, rgba(0,109,157,1) 55%, rgba(0,91,133,1) 100%);
+  // background: rgb(0,109,157);
+  // background: linear-gradient(0deg, rgba(0,109,157,1) 0%, rgba(0,109,157,1) 55%, rgba(0,91,133,1) 100%);
   @media only screen and (max-width: 600px) {
     h1 {
       font-size: 2rem;
       max-width: 100%;
     }
   }
+  margin: 32px 0px;
+  h1 {
+    color: #383e44;
+    font-weight: 100;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 48px;
+    margin: 0px;
+    text-align: center;
+  }
+  
 }
 
-#resources-index {
-  height: 80px;
-} 
 
-.top h1 {
-  color: white;
-  font-weight: 100;
-  font-family: "Poppins", Arial, sans-serif;
-  font-size: 48px;
-  padding: 8px 8px 16px;
-  text-align: center;
-}
 
 #instructions {
   margin-top: 40px;
