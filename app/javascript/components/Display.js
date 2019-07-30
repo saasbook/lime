@@ -225,6 +225,33 @@ class Display extends React.Component {
   }
   
   // Organize all resources into pages (either hide or show)  
+  loadMore = () => {
+    $(".pagination").html("");
+    let itemsPerPage = 10;
+    let numResources = $(".resource-container").length;
+    let numResourcesOpened = 10;
+
+    $(".resource-container").each(function() {
+      $(this).addClass("hidden-resource");
+    });
+
+    let loadNext = function()  {
+      let count = 1;
+      $(".page-item").each(function() {
+          if (count === Number(currentPage)) {
+              $(this).addClass("active"); 
+          }
+          count++;
+          if (count > numPages) {
+              count = 1;
+          }
+      });
+  }
+
+  }
+
+    l
+
   paginate = () => {
     $(".pagination").html("");
     let itemsPerPage = 10;
@@ -258,7 +285,6 @@ class Display extends React.Component {
             }
         });
     }
-
     
     $(".pagination").append('<li class="page-arrow prev disabled" id="prev"><p id="prevLink" class="page-link prevLink">Previous</p></li>');
     for (let i = 1; i <= numPages; i++) {
@@ -375,9 +401,6 @@ class Display extends React.Component {
         </div> {/*filter-column*/}
         <div id="resource-column">
           {result_header}
-            <div className="row" id="pages">
-              <ul className="pagination"></ul>
-            </div>
             {this.state.filtered_resources}
                 
             <div className="row" id="pages">
