@@ -11,7 +11,7 @@ class Resource < ActiveRecord::Base
   has_many :technologies, dependent: :destroy
   after_destroy :destroy_related_records
   # validations: https://guides.rubyonrails.org/active_record_validations.html
-  validates :title, :url, :contact_email, :location, :presence => true
+  validates :title, :url, :location, :presence => true
   validates :description, :presence => true, :length => {:maximum => 500}
 
   def self.auth_params
@@ -110,7 +110,7 @@ class Resource < ActiveRecord::Base
 
   def self.cast_param_vals(params)
     params.values_at(
-        :flagged_comment,:title,:url,:contact_email,:location)
+        :flagged_comment,:title,:url,:location)
         .compact.each { |field| params[field] = params[field].to_s }
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
@@ -132,7 +132,7 @@ class Resource < ActiveRecord::Base
   def self.log_edits(params)
     # if the field exists, then create and Edit
     params.values_at(
-        :flagged,:approval_status,:title,:url,:contact_email,:location)
+        :flagged,:approval_status,:title,:url,:location)
         .compact.each { |field| self.edit_helper(params[:id], field) }
   end
 
@@ -267,7 +267,7 @@ class Resource < ActiveRecord::Base
   end
 
   def self.get_required_resources
-    return ["title", "url", "contact_email", "location", "types", "audiences", "description"]
+    return ["title", "url", "location", "types", "audiences", "description"]
   end
 
   def self.all_values_hash
