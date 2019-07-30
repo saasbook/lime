@@ -8,38 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <div id="instructions">
-    <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable.<p>
+    <p>Fill out the form below to help contribute. We will contact you if we find the resource acceptable or have any questions.<p>
     <p class="required">Required fields are marked with an <p>
 </div>
 
 <div id="suggest_form">
 
     <%= form_tag("/resources.html", method: "post", id: "form_section") do %>
-        <div class="form_step" id="contact_info">
-            <h2>Contact info for person maintaining resource (not public facing)</h2>
-            <div class="contact_row">
-                <div class="input_field col">
-                    <%= label_tag(:contact_email, "Contact Email", class: "required") %>
-                    <p class="label-desc"> Email for the contact person above to be sent requests to update resource information. </p>
-                    <%= text_field_tag(:contact_email, nil, class: "required_input validate-input") %>
-                    <p id="email-valid" class="invalid-text"> Invalid Email </p>
-                </div>
-                <div class="input_field col">
-                    <%= label_tag(:contact_name, "Contact Name") %>
-                    <p class="label-desc"> A specific person who can speak for the organization and keep the resource information updated? </p>
-                    <%= text_field_tag(:contact_name) %>
-                </div>
-                <div class="input_field col">
-                    <%= label_tag(:contact_phone, "Contact Phone") %>
-                    <p class="label-desc"> What number can we call if we have a question about the resource? </p>
-                    <%= text_field_tag(:contact_phone, nil, class: "validate-input") %>
-                    <p id="phone-valid" class="invalid-text"> Invalid Phone </p>
-                </div>
-            </div>
-
-            
-        </div>
-
         <div class="form_step">
             <h2>Basic information about the resource</h2>
             <div class="resource_row">
@@ -98,6 +73,28 @@
                 <% end %>
             <% end %>
         </div>
+        <div class="form_step" id="contact_info">
+            <h2>Contact info for person maintaining resource</h2>
+            <div class="contact_row">
+                <div class="input_field col">
+                    <%= label_tag(:contact_email, "Contact Email") %>
+                    <p class="label-desc"> Email of the person or organization we can contact if needed. </p>
+                    <%= text_field_tag(:contact_email, nil, class: "validate-input") %>
+                    <p id="email-valid" class="invalid-text"> Invalid Email </p>
+                </div>
+                <div class="input_field col">
+                    <%= label_tag(:contact_name, "Contact Name") %>
+                    <p class="label-desc"> The person who is most up-to-date with this resource's information. </p>
+                    <%= text_field_tag(:contact_name) %>
+                </div>
+                <div class="input_field col">
+                    <%= label_tag(:contact_phone, "Contact Phone") %>
+                    <p class="label-desc"> Who can we call if we have a question about the resource? </p>
+                    <%= text_field_tag(:contact_phone, nil, class: "validate-input") %>
+                    <p id="phone-valid" class="invalid-text"> Invalid Phone </p>
+                </div>
+            </div> 
+        </div>
 
         <div class="form_step">
             <h2>Other information about the resource</h2>
@@ -115,7 +112,7 @@
                 </div>
                 <div class="input_field col">
                     <%= label_tag(:address, "Address") %>
-                    <p class="label-desc-other">Useful if you host events at your physical location. </p>
+                    <p class="label-desc-other">An organization's headquarters or an event's physical location. </p>
                     <%= text_field_tag(:address, nil) %>
                 </div>
             </div>
@@ -123,7 +120,7 @@
             <div class="resource_row">
                 <div class="input_field other-info">
                     <%= label_tag(:deadline, "Deadline") %>
-                    <p> What is the specific date applications are due or an event is held, or resource is available until? The first or upcoming deadline. </p>
+                    <p>The specific date applications are due, when an event is held, or when a resource becomes unavailable. The first or upcoming deadline.</p>
                     <%= date_field_tag(:deadline, nil) %>
 
                 </div>

@@ -5,7 +5,7 @@ $(document).ready(function() {
             $("#message").text("Description was too long.");
             $("#message").css("color", "red");
             return false;
-        } else if($("#contact_email").val() === "" || $("#title").val() === "" || $("#url").val() === "" || $("#description").val() === ""){
+        } else if($("#title").val() === "" || $("#url").val() === "" || $("#description").val() === ""){
             findRequiredFields();
             $("#message").show();
             $("#message").text("Please fill in the required fields.");

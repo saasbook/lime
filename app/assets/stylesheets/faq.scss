@@ -24,7 +24,7 @@ body {padding: 100px 20px;}
 .accordion input[type="radio"]:checked ~ .accordionContent {display: block;}
 
 .accordion .accordionBlock {
-  margin-bottom: 5px;
+  margin-bottom: 32px;
   display: block;
   width: 100%;
   float: left;
@@ -37,30 +37,30 @@ body {padding: 100px 20px;}
   float: left;
   padding: 10px;
   font-weight: 400;
+  background-color: #ffffff
 }
 
 .accordion .accordionBlock label {
-  background: #f5f5f5;
+  background: #eee;
   width: 100%;
   border:1px solid #eee;
-  padding: 10px;
+  padding: 16px;
   margin-bottom: 0;
   float: left;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-size: 1.25rem;
   cursor:pointer;}
 .accordion input[type="radio"]:checked ~ label {
   border-bottom: 0 none;
-  background: #ccc;
+  background: rgb(189, 189, 189);
 }
 
 .accordion .accordionBlock .accordionContent {
-  animation: 1s fadeInAccordion;
+  animation: 500ms fadeInAccordion;
   animation-fill-mode: forwards;
   visibility: hidden;
-  font-size:13px;
-  line-height:18px}
+  font-size:1.1rem;
+}
 
 
 @keyframes fadeInAccordion {

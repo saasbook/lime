@@ -8,13 +8,70 @@
         <p>It might have previously existed, but is no longer available.</p>
     </div>
 <% else %>
-    <div id="show-title">
-        <h2><%= @resource["title"] %></h2>
+    <div id="resource_info">
+        <div id="show-title">
+            <h2><%= @resource["title"] %></h2>
+        </div>
+        <% if @resource["url"].to_s.length > 0 %>
+            <div class="resource-detail detail-border-bot">
+                <h3>Website</h3>
+                <a href="<%= @resource["url"] %>"><%= @resource["url"][0...100] %></a>
+            </div>
+        <% end %>
+        <% if @resource["resource-detail"].to_s.length > 0 %>
+            <div class="resource-detail">
+                <h3>Description</h3>
+                <p><%= @resource["description"] %></p>
+            </div>
+        <% end %>
+        <% if @resource["address"].to_s.length > 0 || @resource["location"].to_s.length > 0 %>
+            <div class="resource-detail">
+                <h3>Location</h3>
+                <p><%= @resource["address"] %></p>
+                <p><%= @resource["location"] %></p>
+            </div>
+        <% end %>
+        <% if @resource["resource_email"].to_s.length > 0 %>
+            <div class="resource-detail">
+                <h3>Contact Information</h3>
+                <p><%= @resource["resource_email"] %></p>
+            </div>
+        <% end %>
+        <div class="resource-detail detail-border-top">
+            <h3>Categories & Tags</h3>
+            <% @has_many_hash.map do |key, value| %>
+                <% if @resource[key].length > 0 %>
+                    <div class="resource-tag">
+                        <p><b><%= key.to_s.gsub(/[\_]/, " ").gsub(/[^0-9A-Za-z,\s,\-,\&]/, "").capitalize%></b><p>
+                        <div class="show-tag">
+                            <% @tags = @resource[key].to_s.split(',')%>
+                            <% @tags.each do |tag| %>
+                                <div class="label">
+                                    <%=  tag.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
+                                </div>
+                            <% end%>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+        <p class="resource-updated">Last Updated:  <%= @updated_at %> </p>
+    </div>
+
+    <div class="flag-section">
+        <%= form_tag("/resources/flag/" + @resource["id"].to_s, method: "post", id: "form_section", class: "flag-form") do %>
+            <div class="input_field">
+                    <p> Please let us know what info is incorrect or outdated. </p>
+                    <%= text_area_tag(:flagged_comment) %>
+            </div>
+                <%= button_to 'Submit', resources_flag_path(@resource), data: { id: @resource["id"] } , class: "btn btn-outline-primary", id: @resource["id"] %>
+        <% end %>
+        <button class="btn btn-outline-primary" id="flag-btn">Found something incorrect?</button>
     </div>
 
     <div class="links" %>
         <% if user_signed_in? %>
-            <% all_values = @all_values_hash %>
+            <% all_values = @has_many_hash %>
             <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
             
             <% if @resource["approval_status"] == 0 %>
@@ -27,52 +84,9 @@
                 <a class="nav-item btn btn-outline-primary" href="/resources/archived.html">View in archive</a>
             <% end %>
         <% else %>
-            <% all_values = @all_public_values_hash %>
+            <% all_values = @has_many_hash %>
         <% end %> 
         
-    </div>
-
-    <div id="resource_info">
-        <% i = 0 %>
-        <% all_values.map do |key, value| %>
-            <% text = @resource[value]%>
-            <% if (@has_many_hash.key?(value)) %>
-                <% text = text.to_s.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
-            <% end %>
-            <% if (text != nil && text.to_s.length != 0) %>
-                <% if (i % 2 === 1) %>
-                    <div class="text colored">
-                <% else %>
-                    <div class="text">
-                <% end %>
-                    <p>
-                        <b><%= key.to_s + ": "%></b> 
-                        <% if (key.to_s === "URL") %>
-                            <a href="<%= text.to_s %>" target="_blank"><%= text.to_s %></a>
-                        <% elsif (key.to_s === "Location") %>
-                            <%= text.to_s.gsub(",", ", ") %>
-                        <% elsif (key.to_s === "Deadline" || key.to_s === "Created on" || key.to_s === "Updated on") %>
-                            <%= text.to_s.to_date() %>
-                        <% else %>
-                            <%= text.to_s %>
-                        <% end %>
-                    </p>
-                </div>
-                <% i += 1 %>
-            <% end %>
-            
-        <% end %>
-    </div>
-
-    <div class="flag-section">
-        <%= form_tag("/resources/flag/" + @resource["id"].to_s, method: "post", id: "form_section", class: "flag-form") do %>
-            <div class="input_field">
-                    <p> Please let us know what info is incorrect or outdated. </p>
-                    <%= text_area_tag(:flagged_comment) %>
-            </div>
-                <%= button_to 'Submit', resources_flag_path(@resource), data: { id: @resource["id"] } , class: "btn btn-outline-primary", id: @resource["id"] %>
-        <% end %>
-        <button class="btn btn-outline-primary" id="flag-btn">Found something incorrect?</button>
     </div>
 <% end %>
 

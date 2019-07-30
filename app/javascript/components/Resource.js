@@ -12,7 +12,7 @@ class Resource extends React.Component {
         description = description.substring(0,150) + " ... "
       }
 
-      let updated = this.props.data.updated_at.slice(0,10)
+      // let updated = this.props.data.updated_at.slice(0,10)
 
       let tags = []
       
@@ -86,7 +86,7 @@ class Resource extends React.Component {
             </div>
             
           </div>
-          <p className="resource-updated">Last Updated: {updated}</p>
+          {/* <p className="resource-updated">Last Updated: {updated}</p> */}
         </div></a>
       );
       

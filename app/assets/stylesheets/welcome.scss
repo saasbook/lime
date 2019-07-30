@@ -2,18 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @font-face {
-  font-family: 'Poppins';
-  src: url('../assets/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-family: 'Nunito';
+  src: url('../assets/Nunito/Nunito-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'Poppins-Light';
-  src: url('../assets/Poppins/Poppins-Light.ttf') format('truetype');
+  font-family: 'Nunito-SemiBold';
+  src: url('../assets/Nunito/Nunito-SemiBold.ttf') format('truetype');
 }
 
 body {
   // background-color: lightyellow !important;
-  background-color: #fff;
-  font-family: "Poppins", Arial, sans-serif;
+  background-color: rgb(250, 250, 250);
+  font-family: "Nunito", Arial, sans-serif;
   color: #383e44;
   input {
     width: auto;
@@ -34,7 +34,7 @@ body {
   height: 95vh;
 }
 #welcome-title {
-  font-family: 'Poppins-ExtraLight';
+  font-family: 'Nunito-SemiBold';
   text-align: center;
   width: 50vw;
   margin: 0 2vw 0 4vw;
@@ -59,6 +59,7 @@ body {
   align-content: center;
   justify-content: center;
   padding: 0;
+  background-color: rgb(206, 206, 206);
   
 }
 .logo {
@@ -109,12 +110,18 @@ p.alert, p.alert-danger, p.alert-success {
   padding: 0px !important;
   .nav-link {
     color: #fff;
-    font-family: "Poppins-Light", Helvetica, Arial, sans-serif;
-    transition: 250ms;
+    font-family: "Nunito-SemiBold", Helvetica, Arial, sans-serif;
+    transition: 100ms;
     border-bottom: 4px solid #005b85;
     margin: 4px 0px 0px 0px;
     padding: 16px 32px;
   }
+}
+
+.navbar a:hover, .navbar .dropbtn:hover {
+  border-bottom: 4px solid #fff;
+  color: white;
+  transition: 100ms;
 }
 
 // @media screen and (max-width: 1100px) {
@@ -152,12 +159,9 @@ p.alert, p.alert-danger, p.alert-success {
 
 .dropdown:hover .dropdown-content {
   display: block;
+  transition: 100ms;
 }
 
-.navbar a:hover, .navbar .dropbtn:hover {
-  border-bottom: 4px solid #fff;
-  color: white;
-}
 
 
 

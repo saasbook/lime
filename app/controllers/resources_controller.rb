@@ -104,12 +104,16 @@ class ResourcesController < ApplicationController
     @all_values_hash = Resource.all_values_hash
     @all_public_values_hash = Resource.all_public_values_hash
     @has_many_hash = self.has_many_value_hash
-    # only admins can see unapproved resources
-    # if @user.nil? and @resource&.approval_status == 0
-    #   @resource = nil
-    # end
+    
+    # only admins can see unapproved and archived resources
+    if @user.nil? and @resource&.approval_status == 0
+      @resource = nil
+    end
     
     @resource = json_fix(@resource)
+    @updated_at = @resource["updated_at"]
+    puts @resource["title"]
+    puts @updated_at
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html  
