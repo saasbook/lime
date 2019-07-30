@@ -64,26 +64,17 @@ body {
 }
 .logo {
   width: 300px;
-  margin: auto;
+  margin: 32px;
 }
 #logo-row {
-  align-items: center;
-  // width: 100vw;
+  
   border-top:8px #006D9D solid;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   padding-top: 32px;
-}
-#berkeley-row {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 32px 25vw;
-  margin: auto;
 }
 
 p.alert, p.alert-danger, p.alert-success {
@@ -160,6 +151,18 @@ p.alert, p.alert-danger, p.alert-success {
 .dropdown:hover .dropdown-content {
   display: block;
   transition: 100ms;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(206, 206, 206);
+  padding: 32px 0px;
+  p {
+    text-align: center;
+    margin: auto;
+  }
 }
 
 
