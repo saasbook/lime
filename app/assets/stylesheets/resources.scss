@@ -771,7 +771,7 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   #show-title{
     margin-top: 32px;
   }
@@ -787,6 +787,43 @@ select {
   }
   .resource-tag {
     margin-bottom: 8px;
+  }
+}
+
+
+#show .links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 32px auto;
+  width: 80vw;
+  .btn {
+    margin-right: 32px;
+  }
+}
+
+#show .flag-section {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80vw;
+  margin: 32px auto;
+}
+
+#show .flag-form {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  display:none;
+  
+  input {
+    margin: 32px 0px;
+  }
+  p {
+    margin-bottom: 16px;
   }
 }
 
@@ -828,32 +865,6 @@ select {
 
 }
 
-#show .links {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  width: 50vw;
-}
-
-#show .flag-form {
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  display:none;
-  input {
-    margin: 32px 0px;
-  }
-}
-
-#show .flag-section {
-  margin-bottom: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 /* edit */
 
