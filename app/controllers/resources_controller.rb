@@ -33,6 +33,7 @@ class ResourcesController < ApplicationController
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
+    puts params
     reset_session
     params.each do |key, value|
       session[key] = value

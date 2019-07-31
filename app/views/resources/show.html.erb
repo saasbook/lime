@@ -58,6 +58,17 @@
         <p class="resource-updated">Last Updated:  <%= @updated_at %> </p>
     </div>
 
+    <div class="flag-section">
+        <%= form_tag("/resources/flag/" + @resource["id"].to_s, method: "post", id: "form_section", class: "flag-form") do %>
+            <div class="input_field">
+                    <p> Please let us know what info is incorrect or outdated. </p>
+                    <%= text_area_tag(:flagged_comment) %>
+            </div>
+                <%= button_to 'Submit', resources_flag_path(@resource), data: { id: @resource["id"] } , class: "btn btn-outline-primary", id: @resource["id"] %>
+        <% end %>
+        <button class="btn btn-outline-primary" id="flag-btn">Found something incorrect?</button>
+    </div>
+
     <div class="links" %>
         <% if user_signed_in? %>
             <% all_values = @has_many_hash %>
