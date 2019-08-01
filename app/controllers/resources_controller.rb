@@ -6,7 +6,7 @@ class ResourcesController < ApplicationController
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
                   :types, :audiences, :description, :approval_status, :flagged, :flagged_comment, 
                   :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, 
-                  :address, :deadline, :notes, :funding_amount, :approved_by, :order_by, :search,
+                  :address, :deadline, :notes, :funding_amount, :approved_by, :search,
 
                   types: [], colleges: [], audiences: [], campuses: [], client_tags: [], innovation_stages: [],
                   population_focuses: [], availabilities: [], topics: [], technologies: []
@@ -49,16 +49,19 @@ class ResourcesController < ApplicationController
         # TODO (if API GET requests available for non-admins)
         # if an Admin making API call, show all resources
         # else show only resources that have approval_status = 1 
-        sort_by = params[:sort_by]
-        if sort_by == nil || sort_by != "location" || sort_by != "title"
-          sort_by = "updated_at"
+        @sort_by = params[:sort_by].to_s
+        puts @sort_by
+        if @sort_by == nil || (@sort_by != "location" && @sort_by != "title")
+          @sort_by = "updated_at"
         end
         @resources = Resource.location_helper(resource_params)
+        @resources = @resources.order(@sort_by)
         
         # this functionality was meant for the web app 
         # but has been deprecated
+        #
         # if (@resources == nil || @resources.length == 0)
-        #   # if no results, suggests to search again with exact same params but instead uses parent location (not currently used)
+        #   # if no results, suggests to search again with exact same params but instead uses parent location
         #   @parent_location = Location.get_parent(params[:location])
         #   @parent_params = params
         #   @parent_params[:location] = @parent_location
@@ -71,7 +74,9 @@ class ResourcesController < ApplicationController
         render :json => @resources
       }
       format.html {
-        params[:approval_status] = 1 # no one can view unapproved
+        # no one using the web app is allowed to view unapproved
+        params[:approval_status] = 1 
+
         @has_many_hash = self.has_many_value_hash
         @filters = {}
         @has_many_hash.each do |association, values|
