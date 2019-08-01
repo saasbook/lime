@@ -225,46 +225,20 @@ class Display extends React.Component {
   }
   
   // Organize all resources into pages (either hide or show)  
-  loadMore = () => {
-    $(".pagination").html("");
-    let itemsPerPage = 10;
-    let numResources = $(".resource-container").length;
-    let numResourcesOpened = 10;
-
-    $(".resource-container").each(function() {
-      $(this).addClass("hidden-resource");
-    });
-
-    let loadNext = function()  {
-      let count = 1;
-      $(".page-item").each(function() {
-          if (count === Number(currentPage)) {
-              $(this).addClass("active"); 
-          }
-          count++;
-          if (count > numPages) {
-              count = 1;
-          }
-      });
-  }
-
-  }
-
-    l
 
   paginate = () => {
     $(".pagination").html("");
     let itemsPerPage = 10;
     let numResources = $(".resource-container").length
     let numPages = Math.ceil(numResources / itemsPerPage);
+    let openedPages = 1;
 
     let openPage = function(pageNum) {
         currentPage = pageNum;
-        let start = ((pageNum - 1) * itemsPerPage) + 1;
         let end = (pageNum * itemsPerPage);
         let count = 1;
         $(".resource-container").each(function() {
-            if (count >= start && count <= end) {
+            if (count >= 1 && count <= end) {
                 $(this).removeClass("hidden-resource");
             } else {
                 $(this).addClass("hidden-resource");
@@ -286,11 +260,12 @@ class Display extends React.Component {
         });
     }
     
-    $(".pagination").append('<li class="page-arrow prev disabled" id="prev"><p id="prevLink" class="page-link prevLink">Previous</p></li>');
-    for (let i = 1; i <= numPages; i++) {
-        $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
-    }
-    $(".pagination").append('<li class="page-arrow next disabled" id="next"><p id="nextLink" class="page-link nextLink">Next</p></li>');
+    // $(".pagination").append('<li class="page-arrow prev disabled" id="prev"><p id="prevLink" class="page-link prevLink">Previous</p></li>');
+    // for (let i = 1; i <= numPages; i++) {
+    //     $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
+    // }
+    $(".pagination").append('<li class="page-more" id="next"><p id="nextLink" class="page-link nextLink">Show More</p></li>');
+    /* add show all */
     if (numPages > 1) {
         $(".next").removeClass("disabled")
     }
@@ -303,47 +278,52 @@ class Display extends React.Component {
     var currentPage = 1;
 
     /* pagination buttons */
-    $(".page-link").click(function() {
-        if($(this).hasClass("nextLink")) {
-            openPage(Number(currentPage) + 1);
-        } else if ($(this).hasClass("prevLink")){
-            openPage(Number(currentPage) - 1);
-        } else {
-            openPage($(this).text());
-        }
+    $(".page-more").click(function() {
+      openPage(openedPages + 1);
+      openedPages++
+    });
+    // $(".page-link").click(function() {
+    //     if($(this).hasClass("nextLink")) {
+    //         openPage(Number(currentPage) + 1);
+    //     } else if ($(this).hasClass("prevLink")){
+    //         openPage(Number(currentPage) - 1);
+    //     } else {
+    //         openPage($(this).text());
+    //     }
         
-    });
+    // });
 
-    $(".page-item").click(function() {
-        $(".page-item").removeClass("active");
-        setActive();
+    // $(".page-item").click(function() {
+    //     $(".page-item").removeClass("active");
+    //     setActive();
 
-        if (currentPage < numPages) {
-            $(".next").removeClass("disabled");
-        } else {
-            $(".next").addClass("disabled");
-        }
-        if ((currentPage >= 2)) {
-            $(".prev").removeClass("disabled");
-        } else {
-            $(".prev").addClass("disabled");
-        }    
-    });
+    //     if (currentPage < numPages) {
+    //         $(".next").removeClass("disabled");
+    //     } else {
+    //         $(".next").addClass("disabled");
+    //     }
+    //     if ((currentPage >= 2)) {
+    //         $(".prev").removeClass("disabled");
+    //     } else {
+    //         $(".prev").addClass("disabled");
+    //     }    
+    // });
 
-    $(".page-arrow").click(function() {
-        $(".page-item").removeClass("active"); 
-        if ($(this).hasClass("next") && currentPage >= numPages) {
-            $(".next").addClass("disabled");
-            $(".prev").removeClass("disabled")
-        } else if ($(this).hasClass("prev") && currentPage <= 1) {
-            $(".prev").addClass("disabled");
-            $(".next").removeClass("disabled")
-        } else {
-            $(".page-arrow").removeClass("disabled")
-        }
+    // $(".page-arrow").click(function() {
+    //     $(".page-item").removeClass("active"); 
+    //     if ($(this).hasClass("next") && currentPage >= numPages) {
+    //         $(".next").addClass("disabled");
+    //         $(".prev").removeClass("disabled")
+    //     } else if ($(this).hasClass("prev") && currentPage <= 1) {
+    //         $(".prev").addClass("disabled");
+    //         $(".next").removeClass("disabled")
+    //     } else {
+    //         $(".page-arrow").removeClass("disabled")
+    //     }
 
-        setActive();
-    });
+    //     setActive();
+    // });
+    
   }
 
 
