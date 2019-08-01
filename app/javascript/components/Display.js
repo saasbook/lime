@@ -11,6 +11,7 @@ class Display extends React.Component {
     super(props);
     this.resetRefs = new Array();
     let initial_resources = new Array();
+    /* TODO: this.props.resources can't have unapproved or archived resources (same with admin view) */
     this.props.resources.forEach(resource => {
       initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     });
@@ -42,11 +43,13 @@ class Display extends React.Component {
       activated_filters : initial_filters,
       filter_indices: filter_indices,
       child_locations: children_map,
-      search_text: ""
+      search_text: "",
+      results_visible: 10
     }
     
   }
 
+  /* remove all selected filters and clear search */
   reset_filters = () => {
     /* reset resources */ 
     let children_map = new Map(Object.entries(this.props.child_locations));
@@ -77,12 +80,13 @@ class Display extends React.Component {
     
   }
   
+  // clicking on a filter button
   filter = (association, value) => {
     let curr_activated_filters = this.state.activated_filters;
     if (association == "text") {
       this.setState({activated_filters: curr_activated_filters});
     } else if (association == "location") {
-      /* for locations, its Set gets reset to include its value as well as all its children */
+      /* for locations, its "Set" gets reset to include its value as well as all its children */
       let s = new Set();
       this.state.child_locations.get(value).forEach(location => {
         s.add(location);
@@ -106,6 +110,7 @@ class Display extends React.Component {
     /* reset the array filtered_resources before refiltering */
     let filtered_resources = new Array();
 
+    /* loop and push into filtered_resources */
     this.state.resources.forEach(resource => {
       let includes = true;
       let resource_associations = resource.props.data;
@@ -155,9 +160,18 @@ class Display extends React.Component {
     /* match with the text in search field */
     filtered_resources = this.search(filtered_resources);
     
-    this.setState({filtered_resources: filtered_resources});
+    /* 
+    * update the state from these results 
+    * after state updated, use callback to openInitial 10 
+    */
+    if (filtered_resources.length < 10) {
+      this.setState({filtered_resources: filtered_resources, activated_filters: curr_activated_filters, results_visible: filtered_resources.length}, this.openInitial);
+    } else {
+      this.setState({filtered_resources: filtered_resources, activated_filters: curr_activated_filters, results_visible: 10}, this.openInitial);
+    }
   }
 
+  // submit the search form
   search = (curr_resources) => {
     let filtered_resources = new Array();
     curr_resources.forEach(resource => {
@@ -182,6 +196,7 @@ class Display extends React.Component {
   }
 
   
+  // show or hide "More Filters" when pressing the button
   toggle_filters = () => {
     let navigationHeight = $("body").height();
     let initial_filter_height = ($(window).height() - navigationHeight - 64);
@@ -214,134 +229,72 @@ class Display extends React.Component {
 
   componentDidMount() {
     if (this.state.filtered_resources.length > 0) {
-      this.paginate();
+      this.openInitial();
     } else {$(".pagination").html("");}
   }
 
   componentDidUpdate() {
-    if (this.state.filtered_resources.length > 0) {
-      this.paginate();
-    } else {$(".pagination").html("");}
+  }
+
+  // Show first 10 resources, hide rest
+  openInitial = () => {
+    let end = 10;
+    if (end > this.state.results_visible) {
+      end = this.state.results_visible;
+    }
+    let count = 1;
+    $(".resource-container").each(function() {
+      if (count >= 1 && count <= end) {
+          $(this).removeClass("hidden-resource");
+      } else {
+          $(this).addClass("hidden-resource");
+      }
+      count++;
+    });
   }
   
-  // Organize all resources into pages (either hide or show)  
-
-  paginate = () => {
-    $(".pagination").html("");
-    let itemsPerPage = 10;
-    let numResources = $(".resource-container").length
-    let numPages = Math.ceil(numResources / itemsPerPage);
-    let openedPages = 1;
-
-    let openPage = function(pageNum) {
-        currentPage = pageNum;
-        let end = (pageNum * itemsPerPage);
-        let count = 1;
-        $(".resource-container").each(function() {
-            if (count >= 1 && count <= end) {
-                $(this).removeClass("hidden-resource");
-            } else {
-                $(this).addClass("hidden-resource");
-            }
-            count++;
-        });
+  // Organize all resources into sections of 10 (either hide or show)  
+  openMore = () => {
+    let end = this.state.results_visible + 10;
+    if (end > this.state.filtered_resources.length) {
+      end = this.state.filtered_resources.length;
     }
-
-    let setActive = function()  {
-        let count = 1;
-        $(".page-item").each(function() {
-            if (count === Number(currentPage)) {
-                $(this).addClass("active"); 
-            }
-            count++;
-            if (count > numPages) {
-                count = 1;
-            }
-        });
-    }
-    
-    // $(".pagination").append('<li class="page-arrow prev disabled" id="prev"><p id="prevLink" class="page-link prevLink">Previous</p></li>');
-    // for (let i = 1; i <= numPages; i++) {
-    //     $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
-    // }
-    $(".pagination").append('<button class="page-more btn btn-outline-primary">Show More</button>');
-    /* add show all as well as a count of the number of results at top right */
-    if (numPages > 1) {
-        $(".next").removeClass("disabled")
-    }
-    /* hide all pages */
-    $(".resource-container").addClass("hidden-resource");
-
-    /* open first page */
-    openPage(1);
-    setActive(1);
-    var currentPage = 1;
-
-    /* pagination buttons */
-    $(".page-more").click(function() {
-      openPage(openedPages + 1);
-      openedPages++
+    let count = 1;
+    $(".resource-container").each(function() {
+        if (count >= 1 && count <= end) {
+            $(this).removeClass("hidden-resource");
+        } else {
+            $(this).addClass("hidden-resource");
+        }
+        count++;
     });
-    // $(".page-link").click(function() {
-    //     if($(this).hasClass("nextLink")) {
-    //         openPage(Number(currentPage) + 1);
-    //     } else if ($(this).hasClass("prevLink")){
-    //         openPage(Number(currentPage) - 1);
-    //     } else {
-    //         openPage($(this).text());
-    //     }
-        
-    // });
-
-    // $(".page-item").click(function() {
-    //     $(".page-item").removeClass("active");
-    //     setActive();
-
-    //     if (currentPage < numPages) {
-    //         $(".next").removeClass("disabled");
-    //     } else {
-    //         $(".next").addClass("disabled");
-    //     }
-    //     if ((currentPage >= 2)) {
-    //         $(".prev").removeClass("disabled");
-    //     } else {
-    //         $(".prev").addClass("disabled");
-    //     }    
-    // });
-
-    // $(".page-arrow").click(function() {
-    //     $(".page-item").removeClass("active"); 
-    //     if ($(this).hasClass("next") && currentPage >= numPages) {
-    //         $(".next").addClass("disabled");
-    //         $(".prev").removeClass("disabled")
-    //     } else if ($(this).hasClass("prev") && currentPage <= 1) {
-    //         $(".prev").addClass("disabled");
-    //         $(".next").removeClass("disabled")
-    //     } else {
-    //         $(".page-arrow").removeClass("disabled")
-    //     }
-
-    //     setActive();
-    // });
-    
+    this.setState({results_visible: end})
   }
-
-
 
   render () {
     let result_header = (
       <div className="col-12" id = "result-header">
         <h2>Results</h2>
+        <p id="search-message">{this.state.filtered_resources.length} results found</p>
       </div>
+    )
+
+    let result_bottom = (
+      <div id="results-bottom">
+        <p className="results-visible">Showing results {this.state.results_visible} out of {this.state.filtered_resources.length}</p>
+        <button className="page-more btn btn-outline-primary" onClick={this.openMore}>Show More</button>
+      </div>
+      
     )
 
     if (this.state.filtered_resources.length == 0 || this.state.resources.length == 0) {
       result_header = (
         <div className="col-12" id = "result-header">
           <h2>No results found</h2>
-          <p id="none_message"> Try changing your filtering options.</p>
+          <p id="search-message"> Try changing your filtering options.</p>
         </div>
       )
+      result_bottom = <div className="row"></div>;
     }
 
     return (
@@ -381,16 +334,10 @@ class Display extends React.Component {
         </div> {/*filter-column*/}
         <div id="resource-column">
           {result_header}
-            {this.state.filtered_resources}
-                
-            <div className="row" id="pages">
-              <ul className="pagination"></ul>
-            </div>
+          {this.state.filtered_resources}
+          {result_bottom}
         </div> {/*resource-column*/}
       </div> /*index*/
-
-
-      
     );
   }
 }

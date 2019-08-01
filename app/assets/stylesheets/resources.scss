@@ -26,6 +26,16 @@
   src: url('../assets/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
 }
 
+.btn-outline-primary {
+  border-color: #428BCC;
+  color: #428BCC;
+  &:hover {
+    color: white;
+    background-color: #428BCC;
+    border-color: #428BCC;
+  }
+}
+
 #invoice-wrapper {
   font-family: 'SourceSansPro';
 }
@@ -207,7 +217,7 @@ a.resource-results {
   padding: 0px;
   width: 50vw;
   float: right;
-  #none_message {
+  #search-message {
     font-size: 16px;
   }
 }
@@ -893,39 +903,22 @@ select {
   width: auto;
 }
 
-/* pagination */
-
-#pages {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  max-width: 99vw;
-  margin: 0px;
-}
-
-.pagination {
-  margin: 16px 16px;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 90vw;
-}
+/* show more or hide resources */
 
 .hidden-resource{
   display: none;
 }
 
-.page-item, .page-arrow {
-  cursor: pointer;
+#results-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: 16px 0px 8px;
+  }
+  button {
+    margin: 8px 0px 16px;
+  }
 }
 
-.page-item.disabled, .page-arrow.disabled {
-  cursor: default;
-  pointer-events: none;
-}
-
-.page-item.disabled p , .page-arrow.disabled p {
-  cursor: default;
-  pointer-events: none;
-  color: gray;
-}

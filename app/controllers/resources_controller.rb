@@ -33,7 +33,6 @@ class ResourcesController < ApplicationController
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
   def index
-    puts params
     reset_session
     params.each do |key, value|
       session[key] = value
@@ -82,9 +81,7 @@ class ResourcesController < ApplicationController
       @child_locations[value] = children
     }
     # attempt to eager load all resources
-    @all_resources = Resource.all.includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) 
-
- 
+    @all_resources = Resource.where(:approval_status => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies)
 
     @resources_json = @all_resources.as_json(:include => Resource.include_has_many_params)
 
