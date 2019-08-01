@@ -265,7 +265,7 @@ class Display extends React.Component {
     //     $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
     // }
     $(".pagination").append('<li class="page-more" id="next"><p id="nextLink" class="page-link nextLink">Show More</p></li>');
-    /* add show all */
+    /* add show all as well as a count of the number of results at top right */
     if (numPages > 1) {
         $(".next").removeClass("disabled")
     }
