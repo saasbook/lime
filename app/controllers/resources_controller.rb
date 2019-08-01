@@ -29,70 +29,79 @@ class ResourcesController < ApplicationController
     }
   end
 
-  # assumes API GET request in this format :
+  # GET requests that access the entire database
+  # includes the filtering
+  #
+  # if an API call: assumes API GET request in this format :
   # GET /resources?types=Events,Mentoring&audiences=Undergraduate,Graduate&sort_by=title
   # GET /resources?title=Feminist Research Institute
+  #
+  # if webpage/html: grabs all resources
   def index
     reset_session
     params.each do |key, value|
       session[key] = value
     end
 
-    params[:approval_status] = 1 # no one can view unapproved
-
-    sort_by = params[:sort_by]
-    if sort_by == nil || sort_by != "location" || sort_by != "title"
-      sort_by = "updated_at"
-    end
-    
-
-    @resources = Resource.location_helper(resource_params)
-
-    if (@resources == nil || @resources.length == 0)
-      # if no results, suggests to search again with exact same params but instead uses parent location (not currently used)
-      @parent_location = Location.get_parent(params[:location])
-      @parent_params = params
-      @parent_params[:location] = @parent_location
-
-      @parent_query = "/resources.html?" + @parent_params.except(:controller, :action, :format).to_unsafe_h.to_query
-    else
-       @resources = @resources.order(sort_by)
-    end
-
-    @has_many_hash = self.has_many_value_hash
-    @filters = {}
-    @has_many_hash.each do |association, values|
-      @valid_associations = []
-      values.each do |value|
-        if association.classify.constantize.count(value) > 0
-          @valid_associations.push(value)
-        end
-      end
-      @filters[association] = @valid_associations
-    end
-
-    @has_many_hash = @filters
-
-    @locations = Location.get_locations
-    @child_locations = Hash.new
-
-    @locations["location"].each {|value|
-      children = Location.child_locations(value)
-      @child_locations[value] = children
-    }
-    # attempt to eager load all resources
-    @all_resources = Resource.where(:approval_status => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies)
-
-    @resources_json = @all_resources.as_json(:include => Resource.include_has_many_params)
-
-    @resources_json.map! do |resource|
-      resource = json_fix(resource)
-    end
-    
-
+    # process the data differently depending if an API call or a webpage
     respond_to do |format|
-      format.json {render :json => @resources_json}
-      format.html
+      format.json {
+        # TODO (if API GET requests available for non-admins)
+        # if an Admin making API call, show all resources
+        # else show only resources that have approval_status = 1 
+        sort_by = params[:sort_by]
+        if sort_by == nil || sort_by != "location" || sort_by != "title"
+          sort_by = "updated_at"
+        end
+        @resources = Resource.location_helper(resource_params)
+        
+        # this functionality was meant for the web app 
+        # but has been deprecated
+        # if (@resources == nil || @resources.length == 0)
+        #   # if no results, suggests to search again with exact same params but instead uses parent location (not currently used)
+        #   @parent_location = Location.get_parent(params[:location])
+        #   @parent_params = params
+        #   @parent_params[:location] = @parent_location
+
+        #   @parent_query = "/resources.html?" + @parent_params.except(:controller, :action, :format).to_unsafe_h.to_query
+        # else
+        #   @resources = @resources.order(sort_by)
+        # end
+
+        render :json => @resources
+      }
+      format.html {
+        params[:approval_status] = 1 # no one can view unapproved
+        @has_many_hash = self.has_many_value_hash
+        @filters = {}
+        @has_many_hash.each do |association, values|
+          @valid_associations = []
+          values.each do |value|
+            if association.classify.constantize.count(value) > 0
+              @valid_associations.push(value)
+            end
+          end
+          @filters[association] = @valid_associations
+        end
+
+        @has_many_hash = @filters
+
+        @locations = Location.get_locations
+        @child_locations = Hash.new
+
+        @locations["location"].each {|value|
+          children = Location.child_locations(value)
+          @child_locations[value] = children
+        }
+        # attempt to eager load all resources
+        @all_resources = Resource.where(:approval_status => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies)
+
+        @resources_json = @all_resources.as_json(:include => Resource.include_has_many_params)
+
+        @resources_json.map! do |resource|
+          resource = json_fix(resource)
+        end
+      }
     end
   end
 
@@ -110,8 +119,6 @@ class ResourcesController < ApplicationController
     
     @resource = json_fix(@resource)
     @updated_at = @resource["updated_at"]
-    puts @resource["title"]
-    puts @updated_at
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
       format.html  
