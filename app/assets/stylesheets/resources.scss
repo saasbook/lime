@@ -914,11 +914,17 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .result-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
   p {
-    margin: 16px 0px 8px;
+    margin: 16px 0px 16px;
   }
   button {
-    margin: 8px 0px 16px;
+    margin: 0px 8px 16px;
   }
 }
 

@@ -271,6 +271,15 @@ class Display extends React.Component {
     this.setState({results_visible: end})
   }
 
+  openAll = () => {
+    let end = this.state.filtered_resources.length;
+    let count = 1;
+    $(".resource-container").each(function() {
+      $(this).removeClass("hidden-resource");
+    });
+    this.setState({results_visible: end})
+  }
+
   render () {
     let result_header = (
       <div className="col-12" id = "result-header">
@@ -282,10 +291,20 @@ class Display extends React.Component {
     let result_bottom = (
       <div id="results-bottom">
         <p className="results-visible">Showing results {this.state.results_visible} out of {this.state.filtered_resources.length}</p>
-        <button className="page-more btn btn-outline-primary" onClick={this.openMore}>Show More</button>
+        <div className="result-buttons">
+          <button className="btn btn-outline-primary" onClick={this.openMore}>Show More</button>
+          <button className="btn btn-outline-primary" onClick={this.openAll}>Show All</button>
+        </div>
       </div>
-      
     )
+
+    if (this.state.results_visible >= this.state.filtered_resources.length) {
+      result_bottom = (
+        <div id="results-bottom">
+          <p className="results-visible">Showing results {this.state.results_visible} out of {this.state.filtered_resources.length}</p>
+        </div>
+      )
+    }
 
     if (this.state.filtered_resources.length == 0 || this.state.resources.length == 0) {
       result_header = (
