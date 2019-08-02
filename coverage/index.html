@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-08-02T12:47:59-07:00">2019-08-02T12:47:59-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-08-02T12:53:37-07:00">2019-08-02T12:53:37-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -15068,7 +15068,7 @@
         <li class="covered" data-hits="1" data-linenumber="107">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.types.collect(&amp;:val)).to eq [&#39;Scholarship&#39;, &#39;Funding&#39;]</code>
+          <code class="ruby">      expect(resource.types.collect(&amp;:val)).to match_array [&#39;Scholarship&#39;, &#39;Funding&#39;]</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="108">
@@ -15128,7 +15128,7 @@
         <li class="covered" data-hits="1" data-linenumber="117">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to eq [&#39;WITI&#39;,&#39;CITRIS&#39;]</code>
+          <code class="ruby">      expect(resource.client_tags.collect(&amp;:val)).to match_array [&#39;WITI&#39;,&#39;CITRIS&#39;]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="118">
@@ -15428,13 +15428,13 @@
         <li class="covered" data-hits="1" data-linenumber="167">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.types.collect(&amp;:val)).to eq [&#39;Scholarship&#39;,&#39;Funding&#39;]</code>
+          <code class="ruby">      expect(resource.types.collect(&amp;:val)).to match_array  [&#39;Scholarship&#39;,&#39;Funding&#39;]</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="168">
           <span class="hits">1</span>
           
-          <code class="ruby">      expect(resource.audiences.collect(&amp;:val)).to eq [&quot;Grad&quot;,&quot;Undergrad&quot;]</code>
+          <code class="ruby">      expect(resource.audiences.collect(&amp;:val)).to match_array  [&quot;Grad&quot;,&quot;Undergrad&quot;]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="169">

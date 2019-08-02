@@ -104,7 +104,7 @@ RSpec.describe 'Resource management', :type => :request do
       resource = Resource.find_by(title: "something")
       expect(resource.url).to eq "something.com"
       expect(resource.location).to eq 'someplace'
-      expect(resource.types.collect(&:val)).to eq ['Scholarship', 'Funding']
+      expect(resource.types.collect(&:val)).to match_array ['Scholarship', 'Funding']
       expect(resource.client_tags.collect(&:val)).to eq ['BearX']
 
       # patch as admin changes values
@@ -114,7 +114,7 @@ RSpec.describe 'Resource management', :type => :request do
       expect(resource.flagged).to eq 1
       expect(resource.location).to eq "anotherplace"
       expect(resource.description).to eq "another description"
-      expect(resource.client_tags.collect(&:val)).to eq ['WITI','CITRIS']
+      expect(resource.client_tags.collect(&:val)).to match_array ['WITI','CITRIS']
 
       # make sure change is reflected in future HTTP request
       get '/resources/' + resource.id.to_s + '/?api_key=example'
@@ -164,8 +164,8 @@ RSpec.describe 'Resource management', :type => :request do
       expect(resource.description).to eq "description"
       expect(resource.contact_email).to eq "something@gmail.com"
       expect(resource.location).to eq "someplace"
-      expect(resource.types.collect(&:val)).to eq ['Scholarship','Funding']
-      expect(resource.audiences.collect(&:val)).to eq ["Grad","Undergrad"]
+      expect(resource.types.collect(&:val)).to match_array  ['Scholarship','Funding']
+      expect(resource.audiences.collect(&:val)).to match_array  ["Grad","Undergrad"]
 
       # make sure no changes are reflected in http request
       get '/resources/' + resource.id.to_s + '/?api_key=example'
