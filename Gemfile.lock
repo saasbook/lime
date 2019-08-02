@@ -91,6 +91,8 @@ GEM
       rest-client (>= 1.6.0)
       ruby_parser (~> 3.0)
       sexp_processor (~> 4.1)
+    city-state (0.0.13)
+      rubyzip (~> 1.1)
     code_analyzer (0.4.8)
       sexp_processor
     code_metrics (0.1.3)
@@ -449,6 +451,7 @@ DEPENDENCIES
   bootstrap (~> 4.3.1)
   bootstrap-datepicker-rails
   byebug
+  city-state
   coffee-rails (~> 4.2)
   cucumber-rails
   cucumber-rails-training-wheels

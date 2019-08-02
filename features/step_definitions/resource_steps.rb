@@ -259,7 +259,16 @@ Then /I should see all the unapproved resources/ do
 end
 
 Then /I should be on the welcome page/ do
-  expect(page.find('#welcome-title').text).to eq "UC Berkeley Innovation Resource Database"
+  expect(page.find('h1').text).to eq "Innovation Resource Database"
+end
+
+Then /I should be asked to sign in/ do
+  expect(page.find('.alert').text).to eq "You need to sign in or sign up before continuing."
+end
+
+Then /I should be on the edit account page/ do
+  # print page.html
+  expect(page.find('h2').text).to eq "Edit User"
 end
 
 Given /locations are seeded/ do

@@ -154,7 +154,7 @@ class Resource < ActiveRecord::Base
 
   def self.update_resource(id, params)
     params, resource_hash = Resource.separate_params(params)
-    
+
     resource = Resource.update(id, resource_hash)
     Resource.create_associations(resource, params)
     return resource
@@ -246,7 +246,6 @@ class Resource < ActiveRecord::Base
 
     locations = Location.child_locations(location)
     resources = Resource.none
-
     locations.each do |location|
       params[:location] = location
       resources = resources.or(self.filter(params))

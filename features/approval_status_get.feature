@@ -20,8 +20,8 @@ Feature: admin gets list of unapproved resources
 
   Scenario: guest users cannot view unapproved resources
     When I make a GET request to "/resources" with parameters:
-      | approval_status |
-      |        0        |
+      ||
+      ||
     Then I should receive a JSON object
     And the JSON should contain "Girls in Engineering of California"
     And the JSON should contain "Girls in Engineering"

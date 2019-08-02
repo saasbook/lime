@@ -52,7 +52,7 @@ class ResourcesController < ApplicationController
     # else show only resources that have approval_status = 1 
   
     # this functionality was meant for the web app 
-    # but has been deprecated
+    # but has been removed
     #
     # if (@resources == nil || @resources.length == 0)
     #   # if no results, suggests to search again with exact same params but instead uses parent location
@@ -184,7 +184,8 @@ class ResourcesController < ApplicationController
     end
     
     new_params = Resource.cast_param_vals(params)
-    Resource.log_edits(new_params)
+    # TODO: finish/fix edit log functionality
+    # Resource.log_edits(new_params)
 
     # Don't let guests update anything unless the params are "allowed"
     if Resource.guest_update_params_allowed?(resource_params) && @user == nil
@@ -195,9 +196,9 @@ class ResourcesController < ApplicationController
       return
     else
       Resource.update_resource(new_params[:id], resource_params)
-      @resource = Resource.find(new_params[:id])
+      
     end
-    
+    @resource = Resource.find(new_params[:id])
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }

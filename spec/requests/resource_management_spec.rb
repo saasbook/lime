@@ -1,6 +1,7 @@
 require 'rspec'
 require 'rails_helper'
 
+# Tests ability for editing the database using only the API, not the web app
 RSpec.describe 'Resource management', :type => :request do
 
   describe 'index' do
@@ -53,11 +54,32 @@ RSpec.describe 'Resource management', :type => :request do
       expect(Resource.where(title: "something2")).not_to exist
     end
 
-    it "adds an approved resource to the database if requester is an admin" do
+    # functionality to make API automatically approved if an admin removed
+    it "adds an unapproved resource to the database" do
       post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&description=description&api_key=example'
       expect(Resource.where(title: "something")).to exist
       resource = Resource.find_by(title: "something")
+      puts resource["audiences"]
       expect(resource.title).to eq "something"
+      expect(resource.url).to eq "something.com"
+      expect(resource.contact_email).to eq "something@gmail.com"
+      expect(resource.location).to eq "someplace"
+      expect(resource.audiences).to exist
+      expect(resource.types).to exist
+      expect(resource.description).to eq "description"
+      expect(resource.approval_status).to eq 0
+    end
+
+    # in order to approve, need to be an admin
+    it "approves an unapproved resource to the database if requester is an admin" do
+      expect(User.where(api_token: "example")).to exist
+      post '/resources?title=something2&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&description=description&api_key=example'
+      expect(Resource.where(title: "something2")).to exist
+      resource = Resource.find_by(title: "something2")
+      expect(resource.approval_status).to eq 0
+      patch '/resources/' + resource.id.to_s + '/?approval_status=1&title=something2&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&description=description&api_key=example'
+      resource = Resource.find_by(title: "something2")
+      expect(resource.title).to eq "something2"
       expect(resource.url).to eq "something.com"
       expect(resource.contact_email).to eq "something@gmail.com"
       expect(resource.location).to eq "someplace"
@@ -118,12 +140,14 @@ RSpec.describe 'Resource management', :type => :request do
       assert response.body.to_s.include?('BearX')
     end
 
-    it 'properly adds to edit table' do
-      post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&description=description'
-      resource = Resource.find_by(title: "something")
-      patch '/resources/' + resource.id.to_s + '/?location=anotherplace&description=another description&flagged=1&approval_status=1&title=blasd&url=weqweqwe.com&contact_email=ssds&api_key=example'
-      expect(Edit.all.count).to eq 6
-    end
+    # edit table functionality currently removed
+    #
+    # it 'properly adds to edit table' do
+    #   post '/resources?title=something&url=something.com&contact_email=something@gmail.com&location=someplace&types=Scholarship,Funding&audiences=Grad,Undergrad&description=description'
+    #   resource = Resource.find_by(title: "something")
+    #   patch '/resources/' + resource.id.to_s + '/?location=anotherplace&description=another description&flagged=1&approval_status=1&title=blasd&url=weqweqwe.com&contact_email=ssds&api_key=example'
+    #   expect(Edit.all.count).to eq 6
+    # end
 
     it "doesn't let guests update values they are not allowed to" do
       # seed with a resource

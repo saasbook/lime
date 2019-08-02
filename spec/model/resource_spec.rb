@@ -132,11 +132,12 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       expect(result.where(title: "thing5")).to exist
     end
 
-    it 'finds children for a location not explicitly added to the database' do
-      result = Resource.location_helper({:location => "Washington"})
-      expect(result.count).to eq 1
-      expect(result.where(title: "thing5")).to exist
-    end
+    # removed this functionality
+    # it 'finds children for a location not explicitly added to the database' do
+    #   result = Resource.location_helper({:location => "Washington"})
+    #   expect(result.count).to eq 1
+    #   expect(result.where(title: "thing5")).to exist
+    # end
 
     it 'allows for the adding of new locations' do
       Location.nest_location("Hawaii")
@@ -151,9 +152,9 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
 
     it 'finds all of the child locations' do
       # assumes seeded data has locations that include:
-      # California, Bay Area, San Francisco, Berkeley, UC Berkeley
+      # California, Bay Area, Berkeley, UC Berkeley
       result = Location.child_locations("California")
-      expect(result.count).to eq 5
+      expect(result.count).to eq 4
     end
 
     it 'successfully manually adds a single location' do
