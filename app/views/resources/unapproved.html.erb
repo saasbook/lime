@@ -31,7 +31,7 @@
 
       <%= form_tag("/resources/approve/many.html", method: :post) do %>
         <div id="result-header">
-          <h2><%= @resource_count %> awaiting approval<h2>
+          <h2><%= @resource_count %> awaiting approval</h2>
           <%= submit_tag 'Approve selected resources', class: 'btn btn-outline-dark approve-button' %>
         </div>
         
