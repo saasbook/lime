@@ -42,34 +42,35 @@ class ResourcesController < ApplicationController
     params.each do |key, value|
       session[key] = value
     end
+    @sort_by = params[:sort_by].to_s
+    if @sort_by == nil || (@sort_by != "location" && @sort_by != "title")
+      @sort_by = "updated_at"
+    end
+
+    # TODO (if API GET requests available for non-admins)
+    # if an Admin making API call, show all resources
+    # else show only resources that have approval_status = 1 
+  
+    # this functionality was meant for the web app 
+    # but has been deprecated
+    #
+    # if (@resources == nil || @resources.length == 0)
+    #   # if no results, suggests to search again with exact same params but instead uses parent location
+    #   @parent_location = Location.get_parent(params[:location])
+    #   @parent_params = params
+    #   @parent_params[:location] = @parent_location
+
+    #   @parent_query = "/resources.html?" + @parent_params.except(:controller, :action, :format).to_unsafe_h.to_query
+    # else
+    #   @resources = @resources.order(sort_by)
+    # end
+    @resources = Resource.location_helper(resource_params)
+    
 
     # process the data differently depending if an API call or a webpage
     respond_to do |format|
       format.json {
-        # TODO (if API GET requests available for non-admins)
-        # if an Admin making API call, show all resources
-        # else show only resources that have approval_status = 1 
-        @sort_by = params[:sort_by].to_s
-        puts @sort_by
-        if @sort_by == nil || (@sort_by != "location" && @sort_by != "title")
-          @sort_by = "updated_at"
-        end
-        @resources = Resource.location_helper(resource_params)
         @resources = @resources.order(@sort_by)
-        
-        # this functionality was meant for the web app 
-        # but has been deprecated
-        #
-        # if (@resources == nil || @resources.length == 0)
-        #   # if no results, suggests to search again with exact same params but instead uses parent location
-        #   @parent_location = Location.get_parent(params[:location])
-        #   @parent_params = params
-        #   @parent_params[:location] = @parent_location
-
-        #   @parent_query = "/resources.html?" + @parent_params.except(:controller, :action, :format).to_unsafe_h.to_query
-        # else
-        #   @resources = @resources.order(sort_by)
-        # end
 
         render :json => @resources
       }
@@ -181,18 +182,22 @@ class ResourcesController < ApplicationController
       flash[:notice] = "This resource does not exist"
       return
     end
-    # Don't let guests update anything unless the params are "allowed"
-    if @user == nil
-      flash[:notice] = "You don't have permissions to update records"
-      redirect_to :controller => 'resources', :action => 'edit'
-      return
-    end
-
+    
     new_params = Resource.cast_param_vals(params)
     Resource.log_edits(new_params)
 
-    Resource.update_resource(new_params[:id], resource_params)
-    @resource = Resource.find(new_params[:id])
+    # Don't let guests update anything unless the params are "allowed"
+    if Resource.guest_update_params_allowed?(resource_params) && @user == nil
+      Resource.update_resource(new_params[:id], resource_params)
+    elsif @user == nil
+      flash[:notice] = "You don't have permissions to update records"
+      redirect_to :controller => 'resources', :action => 'edit'
+      return
+    else
+      Resource.update_resource(new_params[:id], resource_params)
+      @resource = Resource.find(new_params[:id])
+    end
+    
 
     respond_to do |format|
       format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }

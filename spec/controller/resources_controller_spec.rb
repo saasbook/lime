@@ -15,10 +15,12 @@ RSpec.describe ResourcesController, :type => :controller do
 
   describe 'model filter method is called upon GET request' do
     it 'calls the model method that performs the database filtering' do
-      params = ActionController::Parameters.new(  {types: "Events,Mentoring", approval_status: 1} )
+      params = ActionController::Parameters.new(  {types: "Events,Mentoring"} )
       params.permit!
+      
       expect(Resource).to receive(:filter).with(params)
-      get :index, params: {:types => 'Events,Mentoring', :sort_by => 'title'}
+      get :index, params: {:types => 'Events,Mentoring'}
+
     end
   end
 
@@ -34,10 +36,10 @@ RSpec.describe ResourcesController, :type => :controller do
 
   describe "POST create" do
     it 'calls the correct model method' do
-      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", approval_status: 0})
+      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", approval_status: 0, flagged: 0})
       params.permit!
       expect(Resource).to receive(:create_resource).with(params)
-      post :create, params: {title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"}
+      post :create, params: {title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"}
     end
   end
 
@@ -61,12 +63,12 @@ RSpec.describe ResourcesController, :type => :controller do
                                "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
       User.delete_all
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
-      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"})
+      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"})
       params.permit!
 
       # test allowed to update
       expect(Resource).to receive(:update_resource).with(resource.id.to_s, params)
-      patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", api_key: "example"}, :format => :json
+      patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", api_key: "example"}, :format => :json
 
       # test not allowed to update without valid api key
       expect(Resource).not_to receive(:update_resource)
@@ -78,12 +80,12 @@ RSpec.describe ResourcesController, :type => :controller do
                                "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
       User.delete_all
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
-      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", contact_name: "contact"})
+      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", contact_name: "contact"})
       params.permit!
 
       # test allowed to update
       expect(Resource).to receive(:update_resource).with(resource.id.to_s, params)
-      patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", contact_name: "contact", api_key: "example"}, :format => :json
+      patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions", contact_name: "contact", api_key: "example"}, :format => :json
     end
 
 
@@ -91,12 +93,12 @@ RSpec.describe ResourcesController, :type => :controller do
     it "doesn't call update for guests who try to update values they are not permitted to" do
       resource = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
                                           "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
-      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"})
+      params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"})
       params.permit!
 
       # test not allowed to update values
       expect(Resource).not_to receive(:update_resource)
-      patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "someplace", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"}, :format => :json
+      patch :update, params: {id: resource.id, title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"}, :format => :json
 
       # test not allowed to unflag
       expect(Resource).not_to receive(:update_resource)

@@ -24,7 +24,6 @@ class Location < ActiveRecord::Base
 
   def self.nest_location(name)
     #ignore if already in the locations database
-
     if Location.exists? :val => name
       return
     elsif Location.first.nil?
@@ -32,8 +31,8 @@ class Location < ActiveRecord::Base
     end
 
     # find the location info using the geocoder
-    result = Geocoder.search(name).first
-    nesting_helper(result, result.type, name)
+    # result = Geocoder.search(name).first
+    # nesting_helper(result, result.type, name)
   end
 
   def self.nesting_helper(result, type, name)
