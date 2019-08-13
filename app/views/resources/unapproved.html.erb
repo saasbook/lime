@@ -6,51 +6,80 @@
 
 <div id="unapproved"  id="resource-container-wrapper">
     <div class="col" id="approval-column">
+      <%= form_for @upload do |f| %>
+        <%= f.file_field :csv, class: "csv-button" %>
+        <%= f.submit 'Upload resources from CSV file', class: 'btn btn-outline-dark csv-button' %>
+      <% end %>
+
+      <div class="links">
+        <%= form_tag("/resources/approve/many.html", method: :post) do %>
+          <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to approve all resources in the queue?">
+            Approve All
+          </button>
+        <% end %>
+
+        <%= form_tag("/resources/archive/many.html", method: :post) do %>
+          <button class='btn btn-outline-dark' id="archive-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to archive all resources in the queue?">
+            Archive All
+          </button>
+        <% end %>
+
+        <a class="nav-item btn btn-outline-dark" href="/resources/archived.html">View archived resources</a>
+      </div>
+
+      
+
       <%= form_tag("/resources/approve/many.html", method: :post) do %>
         <div id="result-header">
-          <%= @resource_count %> awaiting approval
+          <h2><%= @resource_count %> awaiting approval</h2>
           <%= submit_tag 'Approve selected resources', class: 'btn btn-outline-dark approve-button' %>
-          <form action=<%=resources_approve_many_path %>, method="post">
-            <button class='btn btn-outline-dark' id="approve-all-button" name="approve_list" value="all">
-              Approve All
-            </button>
-          </form>
         </div>
         
         
-      <% @resources.each do |resource| %>
-        <div class="row resource-container unapproved-resource">
-            <div class="resource-title text">
-                <%= resource.title %>
-            </div>
-            <div class="approval-checkbox">
-              <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
-            </div>
+        <% @resources.each do |resource| %>
+          <div class="row resource-container unapproved-resource">
+              
+              <div class="links" %>
+                <%= link_to("View Resource", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
+                
+                <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
 
-            <div>
-              <% i = 0 %>
-              <% @all_values_hash.map do |key, value| %>
-                  <% text = resource[value]%>
-                  <% if (@has_many_hash.key?(value)) %>
-                      <% text = resource.send(value).collect(&:val) %>
-                      <% text = text.to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
-                  <% end %>
-                  <% if (text != nil && text.to_s.length != 0) %>
-                      <% if (i % 2 == 1) %>
-                          <div class="text colored">
-                      <% else %>
-                          <div class="text">
-                      <% end %>
-                          <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
-                      </div>
-                      <% i += 1 %>
-                  <% end %>
-                  
-              <% end %>
+                <%= link_to 'Archive', resources_archive_path(resource), method: :put, data: { confirm: "Are you sure you want to archive?", id: resource["id"] } , class: "btn btn-outline-primary btn-archive", id: resource["id"] %>
+          
+              </div>
+              <div class="resource-title text">
+                  <%= resource.title %>
+              </div>
+
+              <div class="approval-checkbox">
+                <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
+              </div>
+
+              <div>
+                <% i = 0 %>
+                <% @all_values_hash.map do |key, value| %>
+                    <% text = resource[value]%>
+                    <% if (@has_many_hash.key?(value)) %>
+                        <% text = resource.send(value).collect(&:val) %>
+                        <% text = text.to_s.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
+                    <% end %>
+                    <% if (text != nil && text.to_s.length != 0) %>
+                        <% if (i % 2 == 1) %>
+                            <div class="text colored">
+                        <% else %>
+                            <div class="text">
+                        <% end %>
+                            <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
+                        </div>
+                        <% i += 1 %>
+                    <% end %>
+                    
+                <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-      <% end %>
+      
   </div>
   
 </div>

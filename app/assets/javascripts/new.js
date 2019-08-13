@@ -1,11 +1,11 @@
 $(document).ready(function() {
     function validate() {
-        if ($("#desc").val() != "" && $("#desc").val().match(/(\w+)/g).length > 500) {
+        if ($("#description").val() != "" && $("#description").val().match(/(\w+)/g).length > 500) {
             $("#message").show();
             $("#message").text("Description was too long.");
             $("#message").css("color", "red");
             return false;
-        } else if($("#contact_email").val() === "" || $("#title").val() === "" || $("#url").val() === "" || $("#desc").val() === ""){
+        } else if($("#title").val() === "" || $("#url").val() === "" || $("#description").val() === ""){
             findRequiredFields();
             $("#message").show();
             $("#message").text("Please fill in the required fields.");
@@ -24,6 +24,10 @@ $(document).ready(function() {
                 type  : form.attr('method'),
                 data  : form.serialize()
            });
+           $("#message").show();
+            $("#message").text("Your resource has been submitted!");
+            $("#message").css("color", "green");
+            $('#submit_button').attr('disabled','disabled');
             return true;
         } else {
             return false;

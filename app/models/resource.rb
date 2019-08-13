@@ -1,41 +1,43 @@
 class Resource < ActiveRecord::Base
-  has_many :types
-  has_many :audiences
-  has_many :client_tags
-  has_many :population_focuses
-  has_many :campuses
-  has_many :colleges
-  has_many :availabilities
-  has_many :innovation_stages
-  has_many :topics
-  has_many :technologies
+  has_many :types, dependent: :destroy
+  has_many :audiences, dependent: :destroy
+  has_many :client_tags, dependent: :destroy
+  has_many :population_focuses, dependent: :destroy
+  has_many :campuses, dependent: :destroy
+  has_many :colleges, dependent: :destroy
+  has_many :availabilities, dependent: :destroy
+  has_many :innovation_stages, dependent: :destroy
+  has_many :topics, dependent: :destroy
+  has_many :technologies, dependent: :destroy
+  after_destroy :destroy_related_records
   # validations: https://guides.rubyonrails.org/active_record_validations.html
-  validates :title, :url, :contact_email, :location, :presence => true
-  validates :desc, :presence => true, :length => {:maximum => 500}
+  validates :title, :url, :location, :presence => true
+  validates :description, :presence => true, :length => {:maximum => 500}
 
-  # def self.auth_params
-  #   [:flagged, :approval_status, :approved_by]
-  # end
+  def self.auth_params
+    [:flagged, :approval_status, :approved_by]
+  end
 
   def self.include_has_many_params
-    {:types => {:only => [:val]},
-     :audiences => {:only => [:val]},
-     :client_tags => {:only => [:val]},
-     :population_focuses => {:only => [:val]},
-     :campuses => {:only => [:val]},
-     :colleges => {:ony => [:val]},
-     :availabilities => {:only => [:val]},
-     :innovation_stages => {:only => [:val]},
-     :topics => {:only => [:val]},
-     :technologies => {:only => [:val]}
+    {
+      :types => {:only => [:val]},
+      :audiences => {:only => [:val]},
+      :client_tags => {:only => [:val]},
+      :population_focuses => {:only => [:val]},
+      :campuses => {:only => [:val]},
+      :colleges => {:only => [:val]},
+      :availabilities => {:only => [:val]},
+      :innovation_stages => {:only => [:val]},
+      :topics => {:only => [:val]},
+      :technologies => {:only => [:val]}
     }
   end
 
   def self.guest_update_params_allowed?(resource_params)
      update_allowed = (((resource_params.keys.size <= 1) and
-         (resource_params.keys[0] == "flagged" ) and (resource_params["flagged"] == '1')) or
+         (resource_params.keys[0] == "flagged" ) and (resource_params["flagged"] == 1)) or
          ((resource_params.keys[0] == "flagged" or resource_params.keys[0] == "flagged_comment") and
-         (resource_params.keys[1] == "flagged" or resource_params.keys[1] == "flagged_comment") and resource_params["flagged"] == '1'))
+         (resource_params.keys[1] == "flagged" or resource_params.keys[1] == "flagged_comment") and resource_params["flagged"] == 1))
     return update_allowed
   end
 
@@ -53,6 +55,7 @@ class Resource < ActiveRecord::Base
     }
   end
 
+  # finds the resources that match the filters provided
   def self.filter(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h # convert ActiveRecord::Controller params into hash with symbol keys
     # Partition params into has_many fields and normal fields
@@ -69,17 +72,24 @@ class Resource < ActiveRecord::Base
         end
         params.delete(key) # remove has_many key from params
       end
+      
     end
 
     # return early if there are no has_many fields
+    search_regex = ""
+      if params[:search].to_s.length != 0
+        search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR description ~* '.*" + params[:search].to_s + ".*'"  + " OR url ~* '.*" + params[:search].to_s + ".*'"
+      end
+      params.delete :search
     if has_many_hash.empty?
-      return Resource.where(params)
+      return Resource.where(params).where(search_regex)
     else
-      resources = Resource.where(params).includes(*Resource.has_many_associations)
+      resources = Resource.where(params).where(search_regex).includes(*Resource.has_many_associations)
       return self.filter_has_many_helper(resources, has_many_hash)
     end
   end
 
+  # helps find resources based on that have multiple, specific associations
   def self.filter_has_many_helper(resources, has_many_hash)
     filtered = [] # list of returned records
     resources.find_each do |resource|
@@ -100,14 +110,20 @@ class Resource < ActiveRecord::Base
 
   def self.cast_param_vals(params)
     params.values_at(
-        :flagged_comment,:title,:url,:contact_email,:location)
+        :flagged_comment,:title,:url,:location)
         .compact.each { |field| params[field] = params[field].to_s }
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
+      if params[:flagged] < 0 || params[:flagged] > 1
+        params[:flagged] = 1
+      end
     end
 
     if params[:approval_status]
       params[:approval_status] = params[:approval_status].to_i
+      if params[:approval_status] < 0 || params[:approval_status] > 2
+        params[:approval_status] = 0
+      end
     end
 
     return params
@@ -116,7 +132,7 @@ class Resource < ActiveRecord::Base
   def self.log_edits(params)
     # if the field exists, then create and Edit
     params.values_at(
-        :flagged,:approval_status,:title,:url,:contact_email,:location)
+        :flagged,:approval_status,:title,:url,:location)
         .compact.each { |field| self.edit_helper(params[:id], field) }
   end
 
@@ -127,19 +143,57 @@ class Resource < ActiveRecord::Base
 
   def self.create_resource(params)
     params, resource_hash = Resource.separate_params(params)
+
     resource = Resource.create(resource_hash)
     if resource.valid?
       Resource.create_associations(resource, params)
     end
+    
     return resource
   end
 
   def self.update_resource(id, params)
     params, resource_hash = Resource.separate_params(params)
+
     resource = Resource.update(id, resource_hash)
     Resource.create_associations(resource, params)
     return resource
   end
+
+  def destroy_related_records
+    types.each do |audience|
+      types.destroy
+    end
+    audiences.each do |audience|
+      audience.destroy
+    end
+    client_tags.each do |audience|
+      client_tags.destroy
+    end
+    population_focuses.each do |audience|
+      population_focuses.destroy
+    end
+    campuses.each do |audience|
+      campuses.destroy
+    end
+    colleges.each do |audience|
+      colleges.destroy
+    end
+    availabilities.each do |audience|
+      availabilities.destroy
+    end
+    innovation_stages.each do |audience|
+      innovation_stages.destroy
+    end
+    topics.each do |audience|
+      topics.destroy
+    end
+    technologies.each do |audience|
+      technologies.destroy
+    end
+  end
+
+  
 
   def self.separate_params(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h
@@ -159,11 +213,12 @@ class Resource < ActiveRecord::Base
 
   def self.create_associations(resource, params)
     fields_hash = self.get_associations_hash(resource)
+    
     fields_hash.each do |field, association|
-      association.delete_all
+      association.delete_all # if updating, need to delete and remake associations
       if params[field] != nil
         params[field].each do |val|
-          association.create(:val => val)
+          association.create!(:val => val)
         end
       end
     end
@@ -179,30 +234,39 @@ class Resource < ActiveRecord::Base
     return missing
   end
 
-  # this method is here
   # if filtering by location, filtering should behave as the following
+  # find resources of location as well as its children
   # if the location has no resources, find the parent location, and return resources for the parent location
   def self.location_helper(params)
-    exclusive = (params[:exclusive] == true)
-    params.delete :exclusive
-    
+
     location = params[:location]
-    if location.nil? or exclusive
+    if location.nil? || !Location.where(:val => location).exists?
       return self.filter(params)
     end
 
     locations = Location.child_locations(location)
     resources = Resource.none
-
     locations.each do |location|
       params[:location] = location
       resources = resources.or(self.filter(params))
     end
+
+    # if resources.length < 1
+    #   # get parent and its resources
+    #   parent = Location.get_parent(location)
+    #   locations = Location.child_locations(parent)
+    #   resources = Resource.none
+
+    #   locations.each do |location|
+    #     params[:location] = location
+    #     resources = resources.or(self.filter(params))
+    #   end
+    # end 
     return resources
   end
 
   def self.get_required_resources
-    return ["title", "url", "contact_email", "location", "types", "audiences", "desc"]
+    return ["title", "url", "location", "types", "audiences", "description"]
   end
 
   def self.all_values_hash
@@ -211,7 +275,7 @@ class Resource < ActiveRecord::Base
         "Contact Name" => "contact_name",
         "Contact Phone" => "contact_phone",
         "URL" => "url",
-        "Description" => "desc",
+        "Description" => "description",
         "Location" => "location",
         "Resource Email" => "resource_email",
         "Resource Phone" => "resource_phone",
@@ -232,15 +296,15 @@ class Resource < ActiveRecord::Base
         "Approved By" => "approved_by",
         "Flagged" => "flagged",
         "Flagged Comment" => "flagged_comment",
-        "Created At" => "created_at",
-        "Updated At" => "updated_at"
+        "Created on" => "created_at",
+        "Updated on" => "updated_at"
     }
   end
 
   def self.all_public_values_hash
     {
         "URL" => "url",
-        "Description" => "desc",
+        "Description" => "description",
         "Location" => "location",
         "Resource Email" => "resource_email",
         "Resource Phone" => "resource_phone",
@@ -257,8 +321,8 @@ class Resource < ActiveRecord::Base
         'Topics' => "topics",
         'Technologies' => "technologies",
         'Client tags' => "client_tags",
-        "Created At" => "created_at",
-        "Updated At" => "updated_at"
+        "Created on" => "created_at",
+        "Updated on" => "updated_at"
     }
   end
 end

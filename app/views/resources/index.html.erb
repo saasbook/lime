@@ -1,100 +1,17 @@
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+
 <div class="top" id="resources-index">
     <h1>Resources </h1>
 </div>
 
+
+<%= javascript_pack_tag 'application' %>
 <%= javascript_include_tag "filter" %>
+<%= javascript_include_tag "resource-index" %>
 
 <div class="index"  id="resource-container-wrapper">
-  <div id="filter-column">
-    <%= form_tag("/resources.html", method: :get) do %>
-      
-      <div class="row">
-        <div id="filter-header">
-          <%= submit_tag 'Filter', class: 'btn btn-outline-dark btn-lg', id: 'filter-button'%>
-        </div>
-      </div>
-
-      <div class="association">
-        <h2>Location</h2>
-        <% @locations.each do |association, values| %>
-          <div class="filters">
-            <% values.each do |val| %>
-              <div class="single_checkbox gold_label">
-                <div class="label loc-radio"><%= val %></div>
-                <%= radio_button_tag association, val, false, class: "radio", id: val %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-        
-      </div>
-
-      <% @has_many_hash.each do |association, values| %>
-        <div class="association">
-          <h2><%= association.capitalize.gsub(/[^0-9A-Za-z,\s]/, " ") %></h2>
-          <div class="filters">
-            <% values.each do |val| %>
-              <div class="single_checkbox gold_label">
-                <div class="label"><%= val %></div>
-                <%= check_box_tag association+'[]', val %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div id="resource-column">
-    <div class="row">
-      <div class="col-12" id = "result-header">
-        <h2>Results</h2>
-      </div>
-    </div>
-    <div class="row" id="pages">
-      <ul class="pagination">
-        <li class="page-arrow prev disabled" id="prev">
-          <p id="prevLink" class="page-link prevLink">Previous</p>
-        </li>
-      </ul>
-    </div>
-    <% @resources.each do |resource| %>
-      <div class="row resource-container">
-        <div class="resource-title text">
-          <%= link_to(resource.title, "/resources/" + resource.id.to_s + ".html") %>
-        </div>
-        <div class="resource-url text">
-          URL: <a href="<%= resource.url %>"><%= resource.url %></a>
-        </div>
-        <div class="resource-desc text">
-          Description: <%= resource.desc %>
-        </div>
-        <div class="resource-location text">
-          Location: <%= resource.location %>
-        </div>
-        <div class="resource-types text">
-          Types: <%= resource.types.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
-        </div>
-        <div class="resource-types text">
-          Audiences: <%= resource.audiences.collect(&:val).to_s.gsub(/[^0-9A-Za-z,\s]/, "") %>
-        </div>
-
-       
-        <div class="text links" %>
-          <%= link_to("More info", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
-          <% if user_signed_in? %>
-            <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-    <div class="row" id="pages">
-      <ul class="pagination">
-        <li class="page-arrow prev disabled" id="prev">
-          <p id="prevLink" class="page-link prevLink">Previous</p>
-        </li>
-      </ul>
-    </div>
-    
-  </div>
+  <% resource_data = @resources_json %> 
+  <%= react_component("Display", { filters: @has_many_hash.merge(@locations), child_locations: @child_locations, resources: resource_data }) %>
 </div>

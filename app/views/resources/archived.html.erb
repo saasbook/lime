@@ -1,0 +1,65 @@
+<div class="top" id="approval-title">
+  <h1>Archived Resources</h1>
+</div>
+
+<div id="archived"  id="resource-container-wrapper">
+    <div class="col" id="approval-column">
+
+      <div class="links">
+        <%= form_tag("/resources/delete/many.html", method: :delete) do %>
+          <button class='btn btn-outline-dark btn-all' id="delete-all-button" name="approve_list" value="all" data-confirm="Are you sure you want to delete all resources? This cannot be undone.">
+            Delete All
+          </button>
+        <% end %>
+        <a class="nav-item btn btn-outline-dark" href="/resources/unapproved.html">View approval queue</a>
+      </div>
+
+      <div id="result-header">
+        <h2><%= @resource_count %> archived</h2>
+      </div>
+      
+      
+      <% @resources.each do |resource| %>
+        <div class="row resource-container unapproved-resource">
+            
+            <div class="links" %>
+              <%= link_to("View Resource", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
+
+              <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+
+              <%= button_to 'Restore', resources_restore_path(resource), data: { confirm: "Are you sure you want to restore?", id: resource["id"] } , class: "btn btn-outline-primary btn-restore", id: resource["id"] %>
+              
+              <%= button_to 'Delete', resource, method: :delete, data: { confirm: "Are you sure you want to delete this resource? This cannot be undone." }, class: "btn btn-outline-primary", id: "btn-delete" %>
+            </div>
+            <div class="resource-title text">
+                <%= resource.title %>
+            </div>
+            <div class="approval-checkbox">
+              <%= check_box_tag 'approve_list[]', resource.id, checked=false %>
+            </div>
+            <% all_values = @all_values_hash %>
+            <div>
+              <% i = 0 %>
+              <% @all_values_hash.map do |key, value| %>
+                  <% text = resource[value]%>
+                  <% if (@has_many_hash.key?(value)) %>
+                      <% text = resource.send(value).collect(&:val) %>
+                      <% text = text.to_s.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
+                  <% end %>
+                  <% if (text != nil && text.to_s.length != 0) %>
+                      <% if (i % 2 == 1) %>
+                          <div class="text colored">
+                      <% else %>
+                          <div class="text">
+                      <% end %>
+                          <p><b><%= key.to_s + ": "%></b> <%= text.to_s %></p>
+                      </div>
+                      <% i += 1 %>
+                  <% end %>
+              <% end %>
+          </div>
+        </div>
+      <% end %>
+  </div>
+  
+</div>

@@ -15,4 +15,22 @@ input {
   justify-content: center;
   align-items: center;
   margin: 32px;
+  .login-remember {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 16px auto;
+    input {
+      width: auto;
+      margin: 0px 8px;
+    }
+    label {
+      margin: 0px;
+    }
+  }
+
+  .login-remember {
+    display: none;
+  }
 }

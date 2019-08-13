@@ -1,6 +1,39 @@
+<div id="bug-wrapper">
 <h1>Editing Bug Report</h1>
 
-<%= render 'form', bug_report: @bug_report %>
+<%= form_with(model: @bug_report, local: true) do |form| %>
+    <% if @bug_report.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@bug_report.errors.count, "error") %> prohibited this bug_report from being saved:</h2>
+  
+        <ul>
+        <% @bug_report.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div class="field">
+      <%= form.label :desc, "Description" %>
+      <%= form.text_area :desc %>
+    </div>
 
-<%= link_to 'Show', @bug_report %> |
-<%= link_to 'Back', bug_reports_path %>
+    <div class="bug-checkbox">
+        <%= form.label :closed %>
+        <%= form.check_box :closed %>
+    </div>
+  
+  
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+
+
+
+<div class="bug-navigation">
+    <%= link_to 'View', @bug_report %> |
+    <%= link_to 'Delete', { action: :destroy, id: @bug_report.id }, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+</div>

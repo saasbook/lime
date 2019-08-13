@@ -28,10 +28,11 @@ class BugReportsController < ApplicationController
   # POST /bug_reports.json
   def create
     @bug_report = BugReport.new(bug_report_params)
+    @bug_report.closed = false;
 
     respond_to do |format|
       if @bug_report.save
-        format.html { redirect_to @bug_report, notice: 'Bug report was successfully created.' }
+        format.html { redirect_to "/", notice: 'Bug report was successfully created.' }
         format.json { render :show, status: :created, location: @bug_report }
       else
         format.html { render :new }
@@ -57,9 +58,9 @@ class BugReportsController < ApplicationController
   # DELETE /bug_reports/1
   # DELETE /bug_reports/1.json
   def destroy
-    @bug_report.destroy
+    @bug_report.destroy()
     respond_to do |format|
-      format.html { redirect_to bug_reports_url, notice: 'Bug report was successfully destroyed.' }
+      format.html { redirect_to bug_reports_url, notice: 'Bug report was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -67,7 +68,11 @@ class BugReportsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bug_report
-      @bug_report = BugReport.find(params[:id])
+      if BugReport.exists?(params[:id])
+        @bug_report = BugReport.find(params[:id])
+      else
+        redirect_to bug_reports_url
+      end
     end
 
     def access_control

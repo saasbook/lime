@@ -5,4 +5,7 @@ class Technology < ActiveRecord::Base
     ['Networks', 'Internet of Things', 'Cyber Security', 'Computing', 'Big Data & Quantum Computing', 'Computer Technology']
   end
 
+  def self.count(label)
+    return Technology.where(:val => label).length;
+  end
 end

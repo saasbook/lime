@@ -4,8 +4,12 @@ class Type < ActiveRecord::Base
   def self.get_values
     ['Events', 'Mentoring', 'Education & Awareness', 'Funding & Grants', 'Networks',
      'Student Groups', 'Fellowships & Scholarships', 'Competitions', 'Investors for Equity, VCs',
-     'Accelerators & Incubators', 'Competitions', 'Courses', 'Training & Support', 'Crowdfunding',
+     'Accelerators & Incubators', 'Courses', 'Training & Support', 'Crowdfunding',
      'Job & Internship'
     ]
+  end
+
+  def self.count(label)
+    return Type.where(:val => label).length;
   end
 end

@@ -9,4 +9,8 @@ class Audience < ActiveRecord::Base
     ]
   end
 
+  def self.count(label)
+    return Audience.where(:val => label).length;
+  end
+
 end

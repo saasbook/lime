@@ -2,6 +2,10 @@ class Campus < ActiveRecord::Base
   belongs_to :resource
 
   def self.get_values
-    ['Davis', 'Berkeley', 'Merced', 'Santa Cruz']
+    ['Berkeley', 'Davis', 'Merced', 'Santa Cruz']
+  end
+
+  def self.count(label)
+    return Campus.where(:val => label).length;
   end
 end

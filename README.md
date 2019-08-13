@@ -12,7 +12,7 @@
     * Api call response format
     * Basic Resource Search
     * Filtering searches
-        * location filtering
+    * location filtering
     * Resource Attributes    
     * Creating new resources
 ## Running up the app locally
@@ -22,7 +22,7 @@ Then set up the app as normal, rake db:setup, and rails s. You MUST run rake db:
 ## Api Usage
 ### Getting an API key
 Login to your profile on the website at   
-https://berkeley-innovation-resources.herokuapp.com/users/sign_in  
+https://innovationresourcedatabase.herokuapp.com/users/sign_in  
 then press the "view api key" button, and an alert will flash with your API key
 
 ### Api Call response format
@@ -40,7 +40,7 @@ the response will be JSON in the following format
  "title":"Resource Title",   
  "url":"www.exampleurl.com",   
  "contact_email":"foo@exampleurl.com",   
- "desc":"description string",   
+ "description":"description string",   
  "resource_email":"foo@exampleurl.com",   
  "resource_phone":"(100) 100-1000",   
  "address":"101 Sproul Hall, Berkeley, CA 94720",   
@@ -92,7 +92,7 @@ This location nesting is done when resources are added, and is done using the ge
 * id - database id of resource
 * url - url for the resource
 * title - the name of the resource
-* desc - description of the resource
+* description - description of the resource
 * types - resource type tags
 * location - where the resource is available
 * audiences - who the resource is for 
@@ -114,16 +114,18 @@ This location nesting is done when resources are added, and is done using the ge
 * notes 
 
 For more information on the values each attribute can hold, please visit
-https://berkeley-innovation-resources.herokuapp.com/resources/new.html
+https://innovationresourcedatabase.herokuapp.com/resources/new.html
 
 ### Creating new resources
 To create a new resource, make a POST request to the API in the format:
 ```
-POST /resources?url={resource url}&title={title}&desc={description}&types="type1, type2, ..."&location="loc1, loc2"&audiences="audience1, audience2, ..."&contact_email="contact email here"
+POST /resources?url={resource url}&title={title}&description={description}&types="type1, type2, ..."&location="loc1, loc2"&audiences="audience1, audience2, ..."&contact_email="contact email here"
 
 ```
 to 
-https://berkeley-innovation-resources.herokuapp.com.
+
+https://innovationresourcedatabase.herokuapp.com.
+
 you MUST have the required resource fields listed above, but may add any of the optional fields as well.
 
 ## Creating an Admin account

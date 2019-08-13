@@ -13,7 +13,45 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    # reg_key = temp = Digest::SHA256.hexdigest <access key in db> + SecureRandom.hex
+    hashed_key = Digest::SHA256.hexdigest sign_up_params[:registration_key]
+    # compare with registration key stored in the database
+    if (hashed_key == Key.where(:id => 1).first.registration_key)
+      
+      new_sign_up_params = {
+        "email" => sign_up_params[:email],
+        "password" => sign_up_params[:password],
+        "password_confirmation" => sign_up_params[:password_confirmation]
+      }
+      sign_up_params = new_sign_up_params
+
+        #begin super
+        build_resource(sign_up_params)
+
+        resource.save
+        yield resource if block_given?
+        if resource.persisted?
+          if resource.active_for_authentication?
+            set_flash_message! :notice, :signed_up
+            sign_up(resource_name, resource)
+            respond_with resource, location: after_sign_up_path_for(resource)
+          else
+            set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+            expire_data_after_sign_in!
+            respond_with resource, location: after_inactive_sign_up_path_for(resource)
+          end
+        else
+          clean_up_passwords resource
+          set_minimum_password_length
+          respond_with resource
+        end
+        #end super
+
+    else
+      respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      
+    end
+
     @user = current_user
     if not @user.nil?
       temp = Digest::SHA256.hexdigest @user.email + SecureRandom.hex
@@ -25,9 +63,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def showkey
     @user = current_user
     if (not @user.nil?) and request.format.html?
-      flash[:alert] = "Your API key is '#{@user.api_token}'."
+      flash[:notice] = "Your API key is '#{@user.api_token}'."
     end
-    redirect_back(fallback_location: root_path)
+    redirect_to "/users/edit"
+    # redirect_back(fallback_location: root_path)
   end
 
   # GET /resource/edit
@@ -58,7 +97,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:api_token])
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:api_token, :registration_key])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -68,11 +107,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
-  #   super(resource)
+  #   destroy_user_session_path
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    flash[:alert] = "Invalid registration key. Your registration key is provided by a website Admin."
+    new_user_registration_path
+  end
 end

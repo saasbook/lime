@@ -1,24 +1,124 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-body {
-  // background-color: lightyellow !important;
-  background: rgb(250, 250, 250) !important;
-  font-family: "Poppins", Arial, sans-serif;
+@font-face {
+  font-family: 'Nunito';
+  src: url('../assets/Nunito/Nunito-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Nunito-SemiBold';
+  src: url('../assets/Nunito/Nunito-SemiBold.ttf') format('truetype');
 }
 
-nav {
+body {
+  // background-color: lightyellow !important;
+  background-color: rgb(250, 250, 250);
+  font-family: "Nunito", Arial, sans-serif;
+  color: #383e44;
+  input {
+    width: auto;
+  }
+}
+
+.title-container {
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 30vw;
+    margin: 0 4vw;
+  }
+  height: 95vh;
+}
+#welcome-title {
+  font-family: 'Nunito-SemiBold', "Nunito", Arial, sans-serif;
+  text-align: center;
+  width: 50vw;
+  margin: 0 2vw 0 4vw;
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+.desc-container {
+  width: 75vw;
+  margin: 0 auto 128px auto;
+  p {
+    font-size: 1.75rem;
+  }
+}
+
+.logo-container {
+  margin-top: 0;
+  align-content: center;
+  justify-content: center;
+  padding: 0;
+  background-color: rgb(206, 206, 206);
+  
+}
+.logo {
+  width: 300px;
+  margin: 32px;
+}
+#logo-row {
+  
+  border-top:8px #006D9D solid;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 32px;
+}
+
+p.alert, p.alert-danger, p.alert-success {
+  margin: 0px;
+}
+
+
+/* navigation bar */
+
+@media only screen and (max-width: 600px) {
+  nav, #left-nav, #right-nav {
+    max-width: 100vw;
+    flex-wrap: wrap;
+  }
+  
+}
+
+
+.navbar {
   background-color: #005b85;
   position: fixed;
   width: 100%;
-  font-size: 0.75rem;
+  font-size: 1.15rem;
+  padding: 0px !important;
+  .nav-link {
+    color: #fff;
+    font-family: "Nunito-SemiBold", Helvetica, Arial, sans-serif;
+    transition: 100ms;
+    border-bottom: 4px solid #005b85;
+    margin: 4px 0px 0px 0px;
+    padding: 16px 32px;
+  }
 }
 
-
-.nav-link {
+.navbar a:hover, .navbar .dropbtn:hover {
+  border-bottom: 4px solid #fff;
   color: white;
-  margin: 0.25rem;
+  transition: 100ms;
 }
+
+// @media screen and (max-width: 1100px) {
+// }
+
+
 
 #left-nav, #right-nav {
   display: flex;
@@ -27,6 +127,7 @@ nav {
 
 #left-nav{
   float: left;
+  
 }
 
 #right-nav {
@@ -35,43 +136,37 @@ nav {
 
 .admin-button {
   justify-content: right;
-  padding: 10px;
-  margin: 0.25rem;
 }
 
-.title-container {
-  padding-top: 10rem;
-  padding-bottom: 7.5rem;
-  border-radius: 10px;
-  background-color: #fdf8ef;
+.dropdown-content {
+  display: none;
+  position: absolute;
   text-align: center;
-}
-#welcome-title {
-  font-family: Georgia;
-  font-size: 5rem;
-  text-align: center;
-  width: 80vw;
-  margin: 0 10vw;
+  background-color: #005b85;
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 100%;
 }
 
-.logo-container {
-  margin-top: 0;
-  align-content: center;
-  padding: 0;
-  
+.dropdown:hover .dropdown-content {
+  display: block;
+  transition: 100ms;
 }
-.logo {
-  width: 20vw;
-  padding: 2rem;
-  margin: auto;
-  border-radius: 20%;
-}
-#logo-row {
+
+
+
+footer {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  width: 100vw;
-  border-top:8px #006D9D solid;
+  background-color: rgb(206, 206, 206);
+  padding: 32px 0px;
+  p {
+    text-align: center;
+    margin: auto;
+  }
 }
-#berkeley-row {
-  justify: center;
-}
+
+
+
 

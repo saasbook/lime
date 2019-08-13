@@ -1,8 +1,8 @@
 $(document).ready(function() {
-
-    /* checkboxes */
     
-    $(".single_checkbox").each(function () {
+     /* checkboxes */
+    
+     $(".single_checkbox").each(function () {
         if($(this).find('input[type="checkbox"]').prop("checked") == true || $(this).find('input[type="radio"]').prop("checked") == true){
             $(this).children(".label").css({"background-color":"#96CAE7"});
         }
@@ -11,15 +11,19 @@ $(document).ready(function() {
 
 
     $(".single_checkbox").click(function() {
-        if ($(this).find('input[type="radio"]').prop("checked") == false){
-            if ($(this).hasClass("gold_label")) {
-                $(".loc-radio").css({"background-color":"rgb(255, 240, 209)"});
-            } else {
-                $(".loc-radio").css({"background-color":"#D8DFEB"});
+        if ($(this).find('input[type="radio"]').prop("checked") == false) {
+            if ($(this).hasClass("loc_label")) {
+                if ($(this).hasClass("gold_label")) {
+                    $(".loc-radio").css({"background-color":"rgb(255, 240, 209)"});
+                    
+                } else {
+                    $(".loc-radio").css({"background-color":"#D8DFEB"});
+                }
+            } else if ($(this).hasClass("sort_label")) {
+                $(".sort-radio").css({"background-color":"rgb(255, 240, 209)"});
             }
         }
-
-
+        
         if($(this).find('input').prop("checked") == true){
             $(this).find('input').prop({"checked": false});
             if ($(this).hasClass("gold_label")) {
@@ -32,97 +36,55 @@ $(document).ready(function() {
             $(this).children(".label").css({"background-color":"#96CAE7"});
         }
     });
-
-
-    /* pagination */
-
-    let numResources = $(".resource-container").length
-    let itemsPerPage = 15;
-    let numPages = Math.ceil(numResources / itemsPerPage);
-    if (numPages > 10) {
-        itemsPerPage = Math.ceil(numResources / 10);
-        numPages = Math.ceil(numResources / itemsPerPage);
-    }
-
-    for (let i = 1; i <= numPages; i++) {
-        $(".pagination").append('<li class="page-item"><p class="page-link">' + i + '</p></li>');
-    }
-    $(".pagination").append('<li class="page-arrow next disabled" id="next"><p id="nextLink" class="page-link nextLink">Next</p></li>');
-    if (numPages > 1) {
-        $(".next").removeClass("disabled")
-    }
-    $(".resource-container").addClass("hidden-resource");
-
-    let openPage = function(pageNum) {
-        currentPage = pageNum;
-        let start = ((pageNum - 1) * itemsPerPage) + 1;
-        let end = (pageNum * itemsPerPage);
-        let count = 1;
-        $(".resource-container").each(function() {
-            if (count >= start && count <= end) {
-                $(this).removeClass("hidden-resource");
-            } else {
-                $(this).addClass("hidden-resource");
-            }
-            count++;
-        });
-    }
-
-    let setActive = function() {
-        let count = 1;
-        $(".page-item").each(function() {
-            if (count === Number(currentPage)) {
-                $(this).addClass("active"); 
-            }
-            count++;
-            if (count > numPages) {
-                count = 1;
-            }
-        });
-    }
-
-    openPage(1);
-    setActive(1);
-    var currentPage = 1;
-
-    $(".page-link").click(function() {
-        if($(this).hasClass("nextLink")) {
-            openPage(Number(currentPage) + 1);
-        } else if ($(this).hasClass("prevLink")){
-            openPage(Number(currentPage) - 1);
-        } else {
-            openPage($(this).text());
+    
+    /* scroll and width and height changes */
+    if ($("#filter-column").length > 0) {
+        let navigationHeight = $("body").height();
+        let initial_filter_height = ($(window).height() - navigationHeight - 64);
+        if ($(window).width() >= 750) {
+            $("#filter-column").css({height: initial_filter_height});
         }
+
+        $(window).on('resize', function() {
+            if ($(window).width() >= 750) {
+                navigationHeight = $("body").height();
+                initial_filter_height = ($(window).height() - navigationHeight - 64);
+                changeSize();
+            }
+        });
         
-    });
 
-    $(".page-item").click(function() {
-        $(".page-item").removeClass("active");
-        setActive();
+        function changeSize() {
+            if ($(window).width() < 750) {
+                $("#filter-column").stop().animate({height: "auto", top: 0},0);
+            } else {
+                navigationHeight = $("body").height();
+                let newHeight = initial_filter_height;
+                let newTop = navigationHeight - $(window).scrollTop() + 32;
+                if ($(window).scrollTop() > navigationHeight) {
+                    newHeight = initial_filter_height + navigationHeight;
+                    newTop = 32;
+                    
+                } else {
+                    newHeight = initial_filter_height + $(window).scrollTop();
+                }
+                
+                let minHeight = parseInt($("#search-row").css("height")) + parseInt($("#initial-filters").css("height")) + parseInt($("#filter-header").css("height")) + parseInt($("#filter-more").css("height")) + 32 + 32 + 8;
 
-        if (currentPage < numPages) {
-            $(".next").removeClass("disabled");
-        } else {
-            $(".next").addClass("disabled");
+                if ($(".filter-rows")[0].style.display === "block" || (minHeight > initial_filter_height) && (newHeight < minHeight)) {
+                    $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
+                    
+                } else {
+                    $("#filter-column").stop().animate({height: minHeight, top: newTop},0);
+                }
+            }
+            
         }
-        if ((currentPage >= 2)) {
-            $(".prev").removeClass("disabled");
-        } else {
-            $(".prev").addClass("disabled");
-        }    
-    });
 
-    $(".page-arrow").click(function() {
-        $(".page-item").removeClass("active"); 
-        if ($(this).hasClass("next") && currentPage >= numPages) {
-            $(".next").addClass("disabled");
-        } else if ($(this).hasClass("prev") && currentPage <= 1) {
-            $(".prev").addClass("disabled");
-        } else {
-            $(".page-arrow").removeClass("disabled")
-        }
-
-        setActive();
-    });
+        
+        $(window).on('scroll', changeSize);
+        changeSize();
+    }
+    
 
 });
