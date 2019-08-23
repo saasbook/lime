@@ -12,7 +12,7 @@
     * Api call response format
     * Basic Resource Search
     * Filtering searches
-        * location filtering
+    * location filtering
     * Resource Attributes    
     * Creating new resources
 ## Running up the app locally
@@ -123,7 +123,9 @@ POST /resources?url={resource url}&title={title}&description={description}&types
 
 ```
 to 
+
 https://innovationresourcedatabase.herokuapp.com.
+
 you MUST have the required resource fields listed above, but may add any of the optional fields as well.
 
 ## Creating an Admin account
