@@ -609,6 +609,8 @@ select {
 
 #new input {
   margin: 0px;
+  width: 30vw;
+  min-width: 300px;
 }
 
 
@@ -643,6 +645,16 @@ select {
 
 .contact_row .input_field {
   margin: 24px;
+  max-width: 350px;
+  input {
+    max-width: 350px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #new input {
+    min-width: 60vw;
+  }
 }
 
 .resource_row .input_field {
@@ -656,7 +668,10 @@ select {
 }
 
 .other-info {
-  width: 500px;
+  max-width: 350px;
+  input {
+    max-width: 350px;
+  }
 }
 
 .label-desc {
