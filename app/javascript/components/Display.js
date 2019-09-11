@@ -343,10 +343,10 @@ class Display extends React.Component {
             <div className="filter-rows">
             {this.state.all_filters.get("location")}
               {this.state.all_filters.get("audiences")}
-              {this.state.all_filters.get("topics")}
+              {/* {this.state.all_filters.get("topics")} */}
               {this.state.all_filters.get("availabilities")}
               {this.state.all_filters.get("population_focuses")}
-              {this.state.all_filters.get("innovation_stages")}
+              {/* {this.state.all_filters.get("innovation_stages")} */}
               {this.state.all_filters.get("client_tags")}
             </div>{/*filter-rows*/}
             
