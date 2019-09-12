@@ -13,6 +13,7 @@ class Resource < ActiveRecord::Base
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :location, :presence => true
   validates :description, :presence => true#, :length => {:maximum => 500}
+  # TODO: figure out if a character limit is needed since certain descriptions in the original spread sheet have above 500 characters (ex: CITRIS Foundry)
 
   def self.auth_params
     [:flagged, :approval_status, :approved_by]

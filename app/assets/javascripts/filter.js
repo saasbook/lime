@@ -69,7 +69,7 @@ $(document).ready(function() {
                     newHeight = initial_filter_height + $(window).scrollTop();
                 }
                 
-                let minHeight = parseInt($("#search-row").css("height")) + parseInt($("#initial-filters").css("height")) + parseInt($("#filter-header").css("height")) + parseInt($("#filter-more").css("height")) + 32 + 32 + 8;
+                let minHeight = parseInt($("#search-row").css("height")) + parseInt($("#initial-filters").css("height")) + parseInt($("#filter-header").css("height")) + parseInt($("#filter-more").css("height")) + 32 + 32 + 8 + 32;
 
                 if ($(".filter-rows")[0].style.display === "block" || (minHeight > initial_filter_height) && (newHeight < minHeight)) {
                     $("#filter-column").stop().animate({height: newHeight, top: newTop},0);
