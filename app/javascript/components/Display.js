@@ -327,14 +327,17 @@ class Display extends React.Component {
                 <button type="submit" id="search-button" className="btn" onClick={this.updateSearch}>Search</button>
               </form>
             </div>{/*search-row*/}
+            <div id="filter-directions">
+              <p>Use filters to narrow down results.<br/> Click “Clear All” to start a new search.</p>
+            </div>
+
             <div id="filter-header">
               <button id="filter-reset-button" className="btn btn-med" onClick={this.reset_filters}>
               Clear All</button>
             </div>
             <div id="initial-filters">
-              
               {this.state.all_filters.get("types")}
-            </div>{/*filter-rows*/}
+            </div>
 
             <div id="filter-more">
               <button className="btn-show-filters btn btn-med" onClick={this.toggle_filters}>More Filters</button>

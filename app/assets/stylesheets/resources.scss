@@ -271,16 +271,29 @@ a.resource-results {
   margin: 0px;
 }
 
-#filter-header, #filter-more {
+#filter-header, #filter-more, #filter-directions {
   font-size: 2rem;
   text-align: center;
   width: 100%;
-  margin: 16px 0px;
+  margin: 8px 0px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
 }
+
+#filter-directions {
+  text-align: center;
+  width: 100%;
+  align-items: center;
+  margin: 8px 0px;
+  p {
+    font-size: 12px;
+    margin: 0px 16px;
+  }
+}
+
 
 #filter-column .btn {
   background-color: #FDB515;
