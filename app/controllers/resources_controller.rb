@@ -189,6 +189,7 @@ class ResourcesController < ApplicationController
 
     # Don't let guests update anything unless the params are "allowed"
     if Resource.guest_update_params_allowed?(resource_params) && @user == nil
+      # temp: update anyway
       Resource.update_resource(new_params[:id], resource_params)
     elsif @user == nil
       flash[:notice] = "You don't have permissions to update records"
@@ -196,7 +197,6 @@ class ResourcesController < ApplicationController
       return
     else
       Resource.update_resource(new_params[:id], resource_params)
-      
     end
     @resource = Resource.find(new_params[:id])
 
