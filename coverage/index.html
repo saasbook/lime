@@ -14,7 +14,7 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-08-02T12:53:37-07:00">2019-08-02T12:53:37-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-09-16T20:03:00-07:00">2019-09-16T20:03:00-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -213,7 +213,7 @@
       <tr>
         <td class="strong"><a href="#129fa0eea92621bd110e8596dfad6b03aaa1ce5f" class="src_link" title="app/models/resource.rb">app/models/resource.rb</a></td>
         <td class="yellow strong">86.21 %</td>
-        <td>330</td>
+        <td>332</td>
         <td>145</td>
         <td>125</td>
         <td>20</td>
@@ -1711,52 +1711,52 @@
           <code class="ruby">    if Resource.guest_update_params_allowed?(resource_params) &amp;&amp; @user == nil</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="192">
+        <li class="never" data-hits="" data-linenumber="192">
+          
+          
+          <code class="ruby">      # temp: update anyway</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="193">
           <span class="hits">2</span>
           
           <code class="ruby">      Resource.update_resource(new_params[:id], resource_params)</code>
         </li>
       
-        <li class="covered" data-hits="11" data-linenumber="193">
+        <li class="covered" data-hits="11" data-linenumber="194">
           <span class="hits">11</span>
           
           <code class="ruby">    elsif @user == nil</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="194">
+        <li class="covered" data-hits="6" data-linenumber="195">
           <span class="hits">6</span>
           
           <code class="ruby">      flash[:notice] = &quot;You don&#39;t have permissions to update records&quot;</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="195">
+        <li class="covered" data-hits="6" data-linenumber="196">
           <span class="hits">6</span>
           
           <code class="ruby">      redirect_to :controller =&gt; &#39;resources&#39;, :action =&gt; &#39;edit&#39;</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="196">
+        <li class="covered" data-hits="6" data-linenumber="197">
           <span class="hits">6</span>
           
           <code class="ruby">      return</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="197">
+        <li class="never" data-hits="" data-linenumber="198">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="198">
+        <li class="covered" data-hits="5" data-linenumber="199">
           <span class="hits">5</span>
           
           <code class="ruby">      Resource.update_resource(new_params[:id], resource_params)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="199">
-          
-          
-          <code class="ruby">      </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="200">
@@ -4672,7 +4672,7 @@
         <li class="covered" data-hits="7" data-linenumber="5">
           <span class="hits">7</span>
           
-          <code class="ruby">    [&#39;Research\-Academia&#39;, &#39;Research&#39;, &#39;Project&#39;, &#39;Startups&#39;, &#39;Clubs&#39;]</code>
+          <code class="ruby">    [&#39;Research-Academia&#39;, &#39;Research&#39;, &#39;Project&#39;, &#39;Startups&#39;, &#39;Clubs&#39;]</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="6">
@@ -5809,1093 +5809,1093 @@
         <li class="covered" data-hits="1" data-linenumber="15">
           <span class="hits">1</span>
           
-          <code class="ruby">  validates :description, :presence =&gt; true, :length =&gt; {:maximum =&gt; 500}</code>
+          <code class="ruby">  validates :description, :presence =&gt; true#, :length =&gt; {:maximum =&gt; 500}</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="16">
           
           
+          <code class="ruby">  # TODO: figure out if a character limit is needed since certain descriptions in the original spread sheet have above 500 characters (ex: CITRIS Foundry)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="17">
+        <li class="covered" data-hits="1" data-linenumber="18">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.auth_params</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="18">
+        <li class="missed" data-hits="0" data-linenumber="19">
           
           
           <code class="ruby">    [:flagged, :approval_status, :approved_by]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="19">
+        <li class="never" data-hits="" data-linenumber="20">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="20">
+        <li class="never" data-hits="" data-linenumber="21">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
+        <li class="covered" data-hits="1" data-linenumber="22">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.include_has_many_params</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="22">
+        <li class="never" data-hits="" data-linenumber="23">
           
           
           <code class="ruby">    {</code>
         </li>
       
-        <li class="covered" data-hits="28" data-linenumber="23">
+        <li class="covered" data-hits="28" data-linenumber="24">
           <span class="hits">28</span>
           
           <code class="ruby">      :types =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="25">
           
           
           <code class="ruby">      :audiences =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="25">
+        <li class="never" data-hits="" data-linenumber="26">
           
           
           <code class="ruby">      :client_tags =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="26">
+        <li class="never" data-hits="" data-linenumber="27">
           
           
           <code class="ruby">      :population_focuses =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
+        <li class="never" data-hits="" data-linenumber="28">
           
           
           <code class="ruby">      :campuses =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="28">
+        <li class="never" data-hits="" data-linenumber="29">
           
           
           <code class="ruby">      :colleges =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="never" data-hits="" data-linenumber="30">
           
           
           <code class="ruby">      :availabilities =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="30">
+        <li class="never" data-hits="" data-linenumber="31">
           
           
           <code class="ruby">      :innovation_stages =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="31">
+        <li class="never" data-hits="" data-linenumber="32">
           
           
           <code class="ruby">      :topics =&gt; {:only =&gt; [:val]},</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="32">
+        <li class="never" data-hits="" data-linenumber="33">
           
           
           <code class="ruby">      :technologies =&gt; {:only =&gt; [:val]}</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="33">
-          
-          
-          <code class="ruby">    }</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="34">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    }</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="35">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="36">
+        <li class="covered" data-hits="1" data-linenumber="37">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.guest_update_params_allowed?(resource_params)</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="37">
+        <li class="covered" data-hits="14" data-linenumber="38">
           <span class="hits">14</span>
           
           <code class="ruby">     update_allowed = (((resource_params.keys.size &lt;= 1) and</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="38">
+        <li class="covered" data-hits="8" data-linenumber="39">
           <span class="hits">8</span>
           
           <code class="ruby">         (resource_params.keys[0] == &quot;flagged&quot; ) and (resource_params[&quot;flagged&quot;] == 1)) or</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="39">
+        <li class="covered" data-hits="12" data-linenumber="40">
           <span class="hits">12</span>
           
           <code class="ruby">         ((resource_params.keys[0] == &quot;flagged&quot; or resource_params.keys[0] == &quot;flagged_comment&quot;) and</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="40">
+        <li class="covered" data-hits="4" data-linenumber="41">
           <span class="hits">4</span>
           
           <code class="ruby">         (resource_params.keys[1] == &quot;flagged&quot; or resource_params.keys[1] == &quot;flagged_comment&quot;) and resource_params[&quot;flagged&quot;] == 1))</code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="41">
+        <li class="covered" data-hits="14" data-linenumber="42">
           <span class="hits">14</span>
           
           <code class="ruby">    return update_allowed</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="43">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="44">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
           <code class="ruby">  # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="45">
+        <li class="covered" data-hits="1" data-linenumber="46">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.has_many_associations</code>
         </li>
       
-        <li class="covered" data-hits="7953" data-linenumber="46">
+        <li class="covered" data-hits="7953" data-linenumber="47">
           <span class="hits">7953</span>
           
           <code class="ruby">    Resource.reflect_on_all_associations(:has_many).map! { |association| association.name.to_sym }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="47">
+        <li class="never" data-hits="" data-linenumber="48">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="48">
+        <li class="never" data-hits="" data-linenumber="49">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="49">
+        <li class="covered" data-hits="1" data-linenumber="50">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="covered" data-hits="99" data-linenumber="50">
+        <li class="covered" data-hits="99" data-linenumber="51">
           <span class="hits">99</span>
           
           <code class="ruby">    return {:audiences =&gt; resource.audiences, :availabilities =&gt; resource.availabilities,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="51">
+        <li class="never" data-hits="" data-linenumber="52">
           
           
           <code class="ruby">            :campuses =&gt; resource.campuses, :client_tags =&gt; resource.client_tags,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="52">
+        <li class="never" data-hits="" data-linenumber="53">
           
           
           <code class="ruby">            :colleges =&gt; resource.colleges, :innovation_stages =&gt; resource.innovation_stages,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="53">
+        <li class="never" data-hits="" data-linenumber="54">
           
           
           <code class="ruby">            :population_focuses =&gt; resource.population_focuses, :technologies =&gt; resource.technologies,</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="54">
+        <li class="never" data-hits="" data-linenumber="55">
           
           
           <code class="ruby">            :topics =&gt; resource.topics, :types =&gt; resource.types</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="55">
+        <li class="never" data-hits="" data-linenumber="56">
           
           
           <code class="ruby">    }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="56">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="57">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="58">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="59">
+          
+          
           <code class="ruby">  # finds the resources that match the filters provided</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="59">
+        <li class="covered" data-hits="1" data-linenumber="60">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.filter(params)</code>
         </li>
       
-        <li class="covered" data-hits="60" data-linenumber="60">
+        <li class="covered" data-hits="60" data-linenumber="61">
           <span class="hits">60</span>
           
           <code class="ruby">    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h # convert ActiveRecord::Controller params into hash with symbol keys</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="61">
+        <li class="never" data-hits="" data-linenumber="62">
           
           
           <code class="ruby">    # Partition params into has_many fields and normal fields</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="62">
+        <li class="never" data-hits="" data-linenumber="63">
           
           
           <code class="ruby">    # has_many_hash = {k =&gt; [v1,v2,v3]} ; ex. {audiences =&gt; [undergrad, grad, alumni]}</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="63">
+        <li class="covered" data-hits="31" data-linenumber="64">
           <span class="hits">31</span>
           
           <code class="ruby">    has_many_hash = {}</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="64">
+        <li class="covered" data-hits="31" data-linenumber="65">
           <span class="hits">31</span>
           
           <code class="ruby">    params.each_key do |key|</code>
         </li>
       
-        <li class="covered" data-hits="29" data-linenumber="65">
+        <li class="covered" data-hits="29" data-linenumber="66">
           <span class="hits">29</span>
           
           <code class="ruby">      if self.has_many_associations.include?(key)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="66">
+        <li class="never" data-hits="" data-linenumber="67">
           
           
           <code class="ruby">        # String variation (JSON request)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="67">
+        <li class="covered" data-hits="2" data-linenumber="68">
           <span class="hits">2</span>
           
           <code class="ruby">        if params[key].is_a?(String)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="68">
+        <li class="covered" data-hits="5" data-linenumber="69">
           <span class="hits">5</span>
           
           <code class="ruby">          has_many_hash[key] = params[key].split(&#39;,&#39;).map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="69">
+        <li class="never" data-hits="" data-linenumber="70">
           
           
           <code class="ruby">        # List variation (HTML request)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="70">
+        <li class="missed" data-hits="0" data-linenumber="71">
           
           
           <code class="ruby">        elsif params[key].is_a?(Array)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="71">
+        <li class="missed" data-hits="0" data-linenumber="72">
           
           
           <code class="ruby">          has_many_hash[key] = params[key]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="72">
+        <li class="never" data-hits="" data-linenumber="73">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="73">
+        <li class="covered" data-hits="2" data-linenumber="74">
           <span class="hits">2</span>
           
           <code class="ruby">        params.delete(key) # remove has_many key from params</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="74">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="75">
           
           
-          <code class="ruby">      </code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="76">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="77">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="78">
           
           
-          <code class="ruby">    # return early if there are no has_many fields</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="79">
-          <span class="hits">31</span>
+        <li class="never" data-hits="" data-linenumber="79">
           
-          <code class="ruby">    search_regex = &quot;&quot;</code>
+          
+          <code class="ruby">    # return early if there are no has_many fields</code>
         </li>
       
         <li class="covered" data-hits="31" data-linenumber="80">
           <span class="hits">31</span>
           
+          <code class="ruby">    search_regex = &quot;&quot;</code>
+        </li>
+      
+        <li class="covered" data-hits="31" data-linenumber="81">
+          <span class="hits">31</span>
+          
           <code class="ruby">      if params[:search].to_s.length != 0</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="81">
+        <li class="missed" data-hits="0" data-linenumber="82">
           
           
           <code class="ruby">        search_regex = &quot;title ~* &#39;.*&quot; + params[:search].to_s + &quot;.*&#39;&quot; + &quot; OR description ~* &#39;.*&quot; + params[:search].to_s + &quot;.*&#39;&quot;  + &quot; OR url ~* &#39;.*&quot; + params[:search].to_s + &quot;.*&#39;&quot;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="never" data-hits="" data-linenumber="83">
           
           
           <code class="ruby">      end</code>
-        </li>
-      
-        <li class="covered" data-hits="31" data-linenumber="83">
-          <span class="hits">31</span>
-          
-          <code class="ruby">      params.delete :search</code>
         </li>
       
         <li class="covered" data-hits="31" data-linenumber="84">
           <span class="hits">31</span>
           
+          <code class="ruby">      params.delete :search</code>
+        </li>
+      
+        <li class="covered" data-hits="31" data-linenumber="85">
+          <span class="hits">31</span>
+          
           <code class="ruby">    if has_many_hash.empty?</code>
         </li>
       
-        <li class="covered" data-hits="29" data-linenumber="85">
+        <li class="covered" data-hits="29" data-linenumber="86">
           <span class="hits">29</span>
           
           <code class="ruby">      return Resource.where(params).where(search_regex)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
+        <li class="never" data-hits="" data-linenumber="87">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="87">
+        <li class="covered" data-hits="2" data-linenumber="88">
           <span class="hits">2</span>
           
           <code class="ruby">      resources = Resource.where(params).where(search_regex).includes(*Resource.has_many_associations)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="88">
+        <li class="covered" data-hits="2" data-linenumber="89">
           <span class="hits">2</span>
           
           <code class="ruby">      return self.filter_has_many_helper(resources, has_many_hash)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="89">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="90">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="91">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="92">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="93">
+          
+          
           <code class="ruby">  # helps find resources based on that have multiple, specific associations</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="93">
+        <li class="covered" data-hits="1" data-linenumber="94">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.filter_has_many_helper(resources, has_many_hash)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="94">
+        <li class="covered" data-hits="2" data-linenumber="95">
           <span class="hits">2</span>
           
           <code class="ruby">    filtered = [] # list of returned records</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="95">
+        <li class="covered" data-hits="2" data-linenumber="96">
           <span class="hits">2</span>
           
           <code class="ruby">    resources.find_each do |resource|</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="96">
+        <li class="covered" data-hits="8" data-linenumber="97">
           <span class="hits">8</span>
           
           <code class="ruby">      associations_hash = self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="97">
+        <li class="covered" data-hits="8" data-linenumber="98">
           <span class="hits">8</span>
           
           <code class="ruby">      bool_arr = []</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="98">
+        <li class="never" data-hits="" data-linenumber="99">
           
           
           <code class="ruby">      # for each has_many query, check if the current record&#39;s has_many field contains all values in the query</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="99">
+        <li class="covered" data-hits="8" data-linenumber="100">
           <span class="hits">8</span>
           
           <code class="ruby">      has_many_hash.each do |field, values|</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="100">
+        <li class="covered" data-hits="8" data-linenumber="101">
           <span class="hits">8</span>
           
           <code class="ruby">        bool_arr.append (associations_hash[field].records.collect(&amp;:val) &amp; values).sort == values.sort</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="102">
+        <li class="never" data-hits="" data-linenumber="103">
           
           
           <code class="ruby">      # if all queries return true, append the record to the returned value</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="103">
+        <li class="covered" data-hits="8" data-linenumber="104">
           <span class="hits">8</span>
           
           <code class="ruby">      if bool_arr.all?</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="104">
+        <li class="covered" data-hits="4" data-linenumber="105">
           <span class="hits">4</span>
           
           <code class="ruby">        filtered.append resource</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="105">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="106">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="107">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="108">
+          
+          
           <code class="ruby">    # return ActiveRecord::Relation instead of array so that ActiveRecord calls can be chained outside this function</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="108">
+        <li class="covered" data-hits="2" data-linenumber="109">
           <span class="hits">2</span>
           
           <code class="ruby">    return Resource.where(id: filtered.map(&amp;:id))</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="109">
+        <li class="never" data-hits="" data-linenumber="110">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="110">
+        <li class="never" data-hits="" data-linenumber="111">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="111">
+        <li class="never" data-hits="" data-linenumber="112">
+          
+          
+          <code class="ruby">  # </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="113">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.cast_param_vals(params)</code>
         </li>
       
-        <li class="covered" data-hits="13" data-linenumber="112">
+        <li class="covered" data-hits="13" data-linenumber="114">
           <span class="hits">13</span>
           
           <code class="ruby">    params.values_at(</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="113">
+        <li class="never" data-hits="" data-linenumber="115">
           
           
           <code class="ruby">        :flagged_comment,:title,:url,:location)</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="114">
+        <li class="covered" data-hits="16" data-linenumber="116">
           <span class="hits">16</span>
           
           <code class="ruby">        .compact.each { |field| params[field] = params[field].to_s }</code>
         </li>
       
-        <li class="covered" data-hits="13" data-linenumber="115">
+        <li class="covered" data-hits="13" data-linenumber="117">
           <span class="hits">13</span>
           
           <code class="ruby">    if params[:flagged]</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="116">
+        <li class="covered" data-hits="7" data-linenumber="118">
           <span class="hits">7</span>
           
           <code class="ruby">      params[:flagged] = params[:flagged].to_i</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="117">
+        <li class="covered" data-hits="7" data-linenumber="119">
           <span class="hits">7</span>
           
           <code class="ruby">      if params[:flagged] &lt; 0 || params[:flagged] &gt; 1</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="118">
+        <li class="missed" data-hits="0" data-linenumber="120">
           
           
           <code class="ruby">        params[:flagged] = 1</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="119">
+        <li class="never" data-hits="" data-linenumber="121">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="120">
+        <li class="never" data-hits="" data-linenumber="122">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="121">
+        <li class="never" data-hits="" data-linenumber="123">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="13" data-linenumber="122">
+        <li class="covered" data-hits="13" data-linenumber="124">
           <span class="hits">13</span>
           
           <code class="ruby">    if params[:approval_status]</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="123">
+        <li class="covered" data-hits="1" data-linenumber="125">
           <span class="hits">1</span>
           
           <code class="ruby">      params[:approval_status] = params[:approval_status].to_i</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="124">
+        <li class="covered" data-hits="1" data-linenumber="126">
           <span class="hits">1</span>
           
           <code class="ruby">      if params[:approval_status] &lt; 0 || params[:approval_status] &gt; 2</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="125">
+        <li class="missed" data-hits="0" data-linenumber="127">
           
           
           <code class="ruby">        params[:approval_status] = 0</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="126">
+        <li class="never" data-hits="" data-linenumber="128">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="127">
+        <li class="never" data-hits="" data-linenumber="129">
           
           
           <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="128">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="13" data-linenumber="129">
-          <span class="hits">13</span>
-          
-          <code class="ruby">    return params</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="130">
           
           
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="131">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="132">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="13" data-linenumber="131">
+          <span class="hits">13</span>
           
-          <code class="ruby">  def self.log_edits(params)</code>
+          <code class="ruby">    return params</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="132">
+          
+          
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="133">
           
           
-          <code class="ruby">    # if the field exists, then create and Edit</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="134">
+        <li class="covered" data-hits="1" data-linenumber="134">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    params.values_at(</code>
+          <code class="ruby">  def self.log_edits(params)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="135">
           
           
-          <code class="ruby">        :flagged,:approval_status,:title,:url,:location)</code>
+          <code class="ruby">    # if the field exists, then create and Edit</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="136">
           
           
-          <code class="ruby">        .compact.each { |field| self.edit_helper(params[:id], field) }</code>
+          <code class="ruby">    params.values_at(</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="137">
           
           
+          <code class="ruby">        :flagged,:approval_status,:title,:url,:location)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="138">
+          
+          
+          <code class="ruby">        .compact.each { |field| self.edit_helper(params[:id], field) }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="139">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="138">
+        <li class="never" data-hits="" data-linenumber="140">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="139">
+        <li class="covered" data-hits="1" data-linenumber="141">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.edit_helper(id, param)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="140">
+        <li class="missed" data-hits="0" data-linenumber="142">
           
           
           <code class="ruby">    @edit = Edit.new(:resource_id =&gt; id, :user =&gt; @user, :parameter =&gt; param)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="141">
+        <li class="missed" data-hits="0" data-linenumber="143">
           
           
           <code class="ruby">    @edit.save!</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="142">
+        <li class="never" data-hits="" data-linenumber="144">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="143">
+        <li class="never" data-hits="" data-linenumber="145">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="144">
+        <li class="covered" data-hits="1" data-linenumber="146">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.create_resource(params)</code>
         </li>
       
-        <li class="covered" data-hits="87" data-linenumber="145">
+        <li class="covered" data-hits="87" data-linenumber="147">
           <span class="hits">87</span>
           
           <code class="ruby">    params, resource_hash = Resource.separate_params(params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="146">
+        <li class="never" data-hits="" data-linenumber="148">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="87" data-linenumber="147">
-          <span class="hits">87</span>
-          
-          <code class="ruby">    resource = Resource.create(resource_hash)</code>
-        </li>
-      
-        <li class="covered" data-hits="87" data-linenumber="148">
-          <span class="hits">87</span>
-          
-          <code class="ruby">    if resource.valid?</code>
         </li>
       
         <li class="covered" data-hits="87" data-linenumber="149">
           <span class="hits">87</span>
           
+          <code class="ruby">    resource = Resource.create(resource_hash)</code>
+        </li>
+      
+        <li class="covered" data-hits="87" data-linenumber="150">
+          <span class="hits">87</span>
+          
+          <code class="ruby">    if resource.valid?</code>
+        </li>
+      
+        <li class="covered" data-hits="87" data-linenumber="151">
+          <span class="hits">87</span>
+          
           <code class="ruby">      Resource.create_associations(resource, params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="150">
+        <li class="never" data-hits="" data-linenumber="152">
           
           
           <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="151">
-          
-          
-          <code class="ruby">    </code>
-        </li>
-      
-        <li class="covered" data-hits="87" data-linenumber="152">
-          <span class="hits">87</span>
-          
-          <code class="ruby">    return resource</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="153">
           
           
+          <code class="ruby">    </code>
+        </li>
+      
+        <li class="covered" data-hits="87" data-linenumber="154">
+          <span class="hits">87</span>
+          
+          <code class="ruby">    return resource</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="155">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="154">
+        <li class="never" data-hits="" data-linenumber="156">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="155">
+        <li class="covered" data-hits="1" data-linenumber="157">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.update_resource(id, params)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="156">
+        <li class="covered" data-hits="4" data-linenumber="158">
           <span class="hits">4</span>
           
           <code class="ruby">    params, resource_hash = Resource.separate_params(params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="157">
+        <li class="never" data-hits="" data-linenumber="159">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="158">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    resource = Resource.update(id, resource_hash)</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="159">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    Resource.create_associations(resource, params)</code>
         </li>
       
         <li class="covered" data-hits="4" data-linenumber="160">
           <span class="hits">4</span>
           
+          <code class="ruby">    resource = Resource.update(id, resource_hash)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="161">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    Resource.create_associations(resource, params)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="162">
+          <span class="hits">4</span>
+          
           <code class="ruby">    return resource</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="161">
+        <li class="never" data-hits="" data-linenumber="163">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="162">
+        <li class="never" data-hits="" data-linenumber="164">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="163">
+        <li class="covered" data-hits="1" data-linenumber="165">
           <span class="hits">1</span>
           
           <code class="ruby">  def destroy_related_records</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="164">
+        <li class="covered" data-hits="19" data-linenumber="166">
           <span class="hits">19</span>
           
           <code class="ruby">    types.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="165">
+        <li class="missed" data-hits="0" data-linenumber="167">
           
           
           <code class="ruby">      types.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="166">
+        <li class="never" data-hits="" data-linenumber="168">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="167">
+        <li class="covered" data-hits="19" data-linenumber="169">
           <span class="hits">19</span>
           
           <code class="ruby">    audiences.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="168">
+        <li class="missed" data-hits="0" data-linenumber="170">
           
           
           <code class="ruby">      audience.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="169">
+        <li class="never" data-hits="" data-linenumber="171">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="170">
+        <li class="covered" data-hits="19" data-linenumber="172">
           <span class="hits">19</span>
           
           <code class="ruby">    client_tags.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="171">
+        <li class="missed" data-hits="0" data-linenumber="173">
           
           
           <code class="ruby">      client_tags.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="172">
+        <li class="never" data-hits="" data-linenumber="174">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="173">
+        <li class="covered" data-hits="19" data-linenumber="175">
           <span class="hits">19</span>
           
           <code class="ruby">    population_focuses.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="174">
+        <li class="missed" data-hits="0" data-linenumber="176">
           
           
           <code class="ruby">      population_focuses.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="175">
+        <li class="never" data-hits="" data-linenumber="177">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="176">
+        <li class="covered" data-hits="19" data-linenumber="178">
           <span class="hits">19</span>
           
           <code class="ruby">    campuses.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="177">
+        <li class="missed" data-hits="0" data-linenumber="179">
           
           
           <code class="ruby">      campuses.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="178">
+        <li class="never" data-hits="" data-linenumber="180">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="179">
+        <li class="covered" data-hits="19" data-linenumber="181">
           <span class="hits">19</span>
           
           <code class="ruby">    colleges.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="180">
+        <li class="missed" data-hits="0" data-linenumber="182">
           
           
           <code class="ruby">      colleges.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="181">
+        <li class="never" data-hits="" data-linenumber="183">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="182">
+        <li class="covered" data-hits="19" data-linenumber="184">
           <span class="hits">19</span>
           
           <code class="ruby">    availabilities.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="183">
+        <li class="missed" data-hits="0" data-linenumber="185">
           
           
           <code class="ruby">      availabilities.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="184">
+        <li class="never" data-hits="" data-linenumber="186">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="185">
+        <li class="covered" data-hits="19" data-linenumber="187">
           <span class="hits">19</span>
           
           <code class="ruby">    innovation_stages.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="186">
+        <li class="missed" data-hits="0" data-linenumber="188">
           
           
           <code class="ruby">      innovation_stages.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="187">
+        <li class="never" data-hits="" data-linenumber="189">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="188">
+        <li class="covered" data-hits="19" data-linenumber="190">
           <span class="hits">19</span>
           
           <code class="ruby">    topics.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="189">
+        <li class="missed" data-hits="0" data-linenumber="191">
           
           
           <code class="ruby">      topics.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="190">
+        <li class="never" data-hits="" data-linenumber="192">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="19" data-linenumber="191">
+        <li class="covered" data-hits="19" data-linenumber="193">
           <span class="hits">19</span>
           
           <code class="ruby">    technologies.each do |audience|</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="192">
+        <li class="missed" data-hits="0" data-linenumber="194">
           
           
           <code class="ruby">      technologies.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="193">
+        <li class="never" data-hits="" data-linenumber="195">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="194">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="195">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="196">
           
           
-          <code class="ruby">  </code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="197">
@@ -6904,799 +6904,811 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="198">
+        <li class="never" data-hits="" data-linenumber="198">
+          
+          
+          <code class="ruby">  </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="199">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="200">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.separate_params(params)</code>
         </li>
       
-        <li class="covered" data-hits="783" data-linenumber="199">
+        <li class="covered" data-hits="783" data-linenumber="201">
           <span class="hits">783</span>
           
           <code class="ruby">    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="200">
+        <li class="covered" data-hits="91" data-linenumber="202">
           <span class="hits">91</span>
           
           <code class="ruby">    resource_hash = {}</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="201">
+        <li class="covered" data-hits="91" data-linenumber="203">
           <span class="hits">91</span>
           
           <code class="ruby">    params.each do |field, val|</code>
         </li>
       
-        <li class="covered" data-hits="692" data-linenumber="202">
+        <li class="covered" data-hits="692" data-linenumber="204">
           <span class="hits">692</span>
           
           <code class="ruby">      if self.has_many_associations.include? field</code>
         </li>
       
-        <li class="covered" data-hits="179" data-linenumber="203">
+        <li class="covered" data-hits="179" data-linenumber="205">
           <span class="hits">179</span>
           
           <code class="ruby">        if val.is_a?(String)</code>
         </li>
       
-        <li class="covered" data-hits="179" data-linenumber="204">
+        <li class="covered" data-hits="179" data-linenumber="206">
           <span class="hits">179</span>
           
           <code class="ruby">          params[field] = val.split(&#39;,&#39;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="205">
+        <li class="never" data-hits="" data-linenumber="207">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="206">
+        <li class="never" data-hits="" data-linenumber="208">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="513" data-linenumber="207">
+        <li class="covered" data-hits="513" data-linenumber="209">
           <span class="hits">513</span>
           
           <code class="ruby">        params.delete field</code>
         </li>
       
-        <li class="covered" data-hits="513" data-linenumber="208">
+        <li class="covered" data-hits="513" data-linenumber="210">
           <span class="hits">513</span>
           
           <code class="ruby">        resource_hash[field] = val</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="209">
+        <li class="never" data-hits="" data-linenumber="211">
           
           
           <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="210">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="covered" data-hits="91" data-linenumber="211">
-          <span class="hits">91</span>
-          
-          <code class="ruby">    return params, resource_hash</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="212">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="91" data-linenumber="213">
+          <span class="hits">91</span>
+          
+          <code class="ruby">    return params, resource_hash</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="214">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="213">
+        <li class="never" data-hits="" data-linenumber="215">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="214">
+        <li class="covered" data-hits="1" data-linenumber="216">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.create_associations(resource, params)</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="215">
+        <li class="covered" data-hits="91" data-linenumber="217">
           <span class="hits">91</span>
           
           <code class="ruby">    fields_hash = self.get_associations_hash(resource)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="216">
+        <li class="never" data-hits="" data-linenumber="218">
           
           
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="217">
+        <li class="covered" data-hits="91" data-linenumber="219">
           <span class="hits">91</span>
           
           <code class="ruby">    fields_hash.each do |field, association|</code>
         </li>
       
-        <li class="covered" data-hits="910" data-linenumber="218">
+        <li class="covered" data-hits="910" data-linenumber="220">
           <span class="hits">910</span>
           
           <code class="ruby">      association.delete_all # if updating, need to delete and remake associations</code>
         </li>
       
-        <li class="covered" data-hits="910" data-linenumber="219">
+        <li class="covered" data-hits="910" data-linenumber="221">
           <span class="hits">910</span>
           
           <code class="ruby">      if params[field] != nil</code>
         </li>
       
-        <li class="covered" data-hits="179" data-linenumber="220">
+        <li class="covered" data-hits="179" data-linenumber="222">
           <span class="hits">179</span>
           
           <code class="ruby">        params[field].each do |val|</code>
         </li>
       
-        <li class="covered" data-hits="464" data-linenumber="221">
+        <li class="covered" data-hits="464" data-linenumber="223">
           <span class="hits">464</span>
           
           <code class="ruby">          association.create!(:val =&gt; val)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="222">
+        <li class="never" data-hits="" data-linenumber="224">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="223">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="224">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="225">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="226">
           
           
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="227">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="228">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="227">
+        <li class="covered" data-hits="1" data-linenumber="229">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.find_missing_params(params)</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="228">
+        <li class="covered" data-hits="10" data-linenumber="230">
           <span class="hits">10</span>
           
           <code class="ruby">    missing = []</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="229">
+        <li class="covered" data-hits="10" data-linenumber="231">
           <span class="hits">10</span>
           
           <code class="ruby">    Resource.get_required_resources.each do |r|</code>
         </li>
       
-        <li class="covered" data-hits="60" data-linenumber="230">
+        <li class="covered" data-hits="60" data-linenumber="232">
           <span class="hits">60</span>
           
           <code class="ruby">      if !params.include?(r) or params[r] == &quot;&quot;</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="231">
+        <li class="covered" data-hits="6" data-linenumber="233">
           <span class="hits">6</span>
           
           <code class="ruby">        missing.append r</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="232">
+        <li class="never" data-hits="" data-linenumber="234">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="233">
+        <li class="never" data-hits="" data-linenumber="235">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="234">
+        <li class="covered" data-hits="10" data-linenumber="236">
           <span class="hits">10</span>
           
           <code class="ruby">    return missing</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="235">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="236">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="237">
           
           
-          <code class="ruby">  # if filtering by location, filtering should behave as the following</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="238">
           
           
-          <code class="ruby">  # find resources of location as well as its children</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="239">
           
           
-          <code class="ruby">  # if the location has no resources, find the parent location, and return resources for the parent location</code>
+          <code class="ruby">  # if filtering by location, filtering should behave as the following</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="240">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="240">
           
-          <code class="ruby">  def self.location_helper(params)</code>
+          
+          <code class="ruby">  # find resources of location as well as its children</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="241">
           
           
+          <code class="ruby">  # if the location has no resources, find the parent location, and return resources for the parent location</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="242">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.location_helper(params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="243">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="242">
+        <li class="covered" data-hits="9" data-linenumber="244">
           <span class="hits">9</span>
           
           <code class="ruby">    location = params[:location]</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="243">
+        <li class="covered" data-hits="9" data-linenumber="245">
           <span class="hits">9</span>
           
           <code class="ruby">    if location.nil? || !Location.where(:val =&gt; location).exists?</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="244">
+        <li class="covered" data-hits="5" data-linenumber="246">
           <span class="hits">5</span>
           
           <code class="ruby">      return self.filter(params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="245">
+        <li class="never" data-hits="" data-linenumber="247">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="246">
+        <li class="never" data-hits="" data-linenumber="248">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="247">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    locations = Location.child_locations(location)</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="248">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    resources = Resource.none</code>
         </li>
       
         <li class="covered" data-hits="4" data-linenumber="249">
           <span class="hits">4</span>
           
+          <code class="ruby">    locations = Location.child_locations(location)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="250">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    resources = Resource.none</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="251">
+          <span class="hits">4</span>
+          
           <code class="ruby">    locations.each do |location|</code>
         </li>
       
-        <li class="covered" data-hits="23" data-linenumber="250">
+        <li class="covered" data-hits="23" data-linenumber="252">
           <span class="hits">23</span>
           
           <code class="ruby">      params[:location] = location</code>
         </li>
       
-        <li class="covered" data-hits="23" data-linenumber="251">
+        <li class="covered" data-hits="23" data-linenumber="253">
           <span class="hits">23</span>
           
           <code class="ruby">      resources = resources.or(self.filter(params))</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="252">
+        <li class="never" data-hits="" data-linenumber="254">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="253">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="254">
-          
-          
-          <code class="ruby">    # if resources.length &lt; 1</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="255">
           
           
-          <code class="ruby">    #   # get parent and its resources</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="256">
           
           
-          <code class="ruby">    #   parent = Location.get_parent(location)</code>
+          <code class="ruby">    # if resources.length &lt; 1</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="257">
           
           
-          <code class="ruby">    #   locations = Location.child_locations(parent)</code>
+          <code class="ruby">    #   # get parent and its resources</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="258">
           
           
-          <code class="ruby">    #   resources = Resource.none</code>
+          <code class="ruby">    #   parent = Location.get_parent(location)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="259">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    #   locations = Location.child_locations(parent)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="260">
           
           
-          <code class="ruby">    #   locations.each do |location|</code>
+          <code class="ruby">    #   resources = Resource.none</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="261">
           
           
-          <code class="ruby">    #     params[:location] = location</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="262">
           
           
-          <code class="ruby">    #     resources = resources.or(self.filter(params))</code>
+          <code class="ruby">    #   locations.each do |location|</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="263">
           
           
-          <code class="ruby">    #   end</code>
+          <code class="ruby">    #     params[:location] = location</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="264">
           
           
-          <code class="ruby">    # end </code>
+          <code class="ruby">    #     resources = resources.or(self.filter(params))</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="265">
-          <span class="hits">4</span>
+        <li class="never" data-hits="" data-linenumber="265">
           
-          <code class="ruby">    return resources</code>
+          
+          <code class="ruby">    #   end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="266">
           
           
+          <code class="ruby">    # end </code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="267">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    return resources</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="268">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="267">
+        <li class="never" data-hits="" data-linenumber="269">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="268">
+        <li class="covered" data-hits="1" data-linenumber="270">
           <span class="hits">1</span>
           
           <code class="ruby">  def self.get_required_resources</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="269">
+        <li class="covered" data-hits="10" data-linenumber="271">
           <span class="hits">10</span>
           
           <code class="ruby">    return [&quot;title&quot;, &quot;url&quot;, &quot;location&quot;, &quot;types&quot;, &quot;audiences&quot;, &quot;description&quot;]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="270">
+        <li class="never" data-hits="" data-linenumber="272">
           
           
           <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="271">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="272">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def self.all_values_hash</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="273">
           
           
-          <code class="ruby">    {</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="274">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="1" data-linenumber="274">
+          <span class="hits">1</span>
           
-          <code class="ruby">        &quot;Contact Email&quot; =&gt; &quot;contact_email&quot;,</code>
+          <code class="ruby">  def self.all_values_hash</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="275">
           
           
-          <code class="ruby">        &quot;Contact Name&quot; =&gt; &quot;contact_name&quot;,</code>
+          <code class="ruby">    {</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="276">
+        <li class="covered" data-hits="4" data-linenumber="276">
+          <span class="hits">4</span>
           
-          
-          <code class="ruby">        &quot;Contact Phone&quot; =&gt; &quot;contact_phone&quot;,</code>
+          <code class="ruby">        &quot;Contact Email&quot; =&gt; &quot;contact_email&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="277">
           
           
-          <code class="ruby">        &quot;URL&quot; =&gt; &quot;url&quot;,</code>
+          <code class="ruby">        &quot;Contact Name&quot; =&gt; &quot;contact_name&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="278">
           
           
-          <code class="ruby">        &quot;Description&quot; =&gt; &quot;description&quot;,</code>
+          <code class="ruby">        &quot;Contact Phone&quot; =&gt; &quot;contact_phone&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="279">
           
           
-          <code class="ruby">        &quot;Location&quot; =&gt; &quot;location&quot;,</code>
+          <code class="ruby">        &quot;URL&quot; =&gt; &quot;url&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="280">
           
           
-          <code class="ruby">        &quot;Resource Email&quot; =&gt; &quot;resource_email&quot;,</code>
+          <code class="ruby">        &quot;Description&quot; =&gt; &quot;description&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="281">
           
           
-          <code class="ruby">        &quot;Resource Phone&quot; =&gt; &quot;resource_phone&quot;,</code>
+          <code class="ruby">        &quot;Location&quot; =&gt; &quot;location&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="282">
           
           
-          <code class="ruby">        &quot;Address&quot; =&gt; &quot;address&quot;,</code>
+          <code class="ruby">        &quot;Resource Email&quot; =&gt; &quot;resource_email&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="283">
           
           
-          <code class="ruby">        &quot;Funding Amount&quot; =&gt; &quot;funding_amount&quot;,</code>
+          <code class="ruby">        &quot;Resource Phone&quot; =&gt; &quot;resource_phone&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="284">
           
           
-          <code class="ruby">        &quot;Deadline&quot; =&gt; &quot;deadline&quot;,</code>
+          <code class="ruby">        &quot;Address&quot; =&gt; &quot;address&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="285">
           
           
-          <code class="ruby">        &quot;Notes&quot; =&gt; &quot;notes&quot;,</code>
+          <code class="ruby">        &quot;Funding Amount&quot; =&gt; &quot;funding_amount&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="286">
           
           
-          <code class="ruby">        &#39;Types&#39; =&gt; &quot;types&quot;,</code>
+          <code class="ruby">        &quot;Deadline&quot; =&gt; &quot;deadline&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="287">
           
           
-          <code class="ruby">        &#39;Audiences&#39; =&gt; &quot;audiences&quot;,</code>
+          <code class="ruby">        &quot;Notes&quot; =&gt; &quot;notes&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="288">
           
           
-          <code class="ruby">        &#39;Campuses&#39; =&gt; &quot;campuses&quot;,</code>
+          <code class="ruby">        &#39;Types&#39; =&gt; &quot;types&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="289">
           
           
-          <code class="ruby">        &#39;Innovation Stages&#39; =&gt; &quot;innovation_stages&quot;,</code>
+          <code class="ruby">        &#39;Audiences&#39; =&gt; &quot;audiences&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="290">
           
           
-          <code class="ruby">        &#39;Population Focuses&#39; =&gt; &quot;population_focuses&quot;,</code>
+          <code class="ruby">        &#39;Campuses&#39; =&gt; &quot;campuses&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="291">
           
           
-          <code class="ruby">        &#39;Availabilities&#39; =&gt; &quot;availabilities&quot;,</code>
+          <code class="ruby">        &#39;Innovation Stages&#39; =&gt; &quot;innovation_stages&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="292">
           
           
-          <code class="ruby">        &#39;Topics&#39; =&gt; &quot;topics&quot;,</code>
+          <code class="ruby">        &#39;Population Focuses&#39; =&gt; &quot;population_focuses&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="293">
           
           
-          <code class="ruby">        &#39;Technologies&#39; =&gt; &quot;technologies&quot;,</code>
+          <code class="ruby">        &#39;Availabilities&#39; =&gt; &quot;availabilities&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="294">
           
           
-          <code class="ruby">        &#39;Client tags&#39; =&gt; &quot;client_tags&quot;,</code>
+          <code class="ruby">        &#39;Topics&#39; =&gt; &quot;topics&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="295">
           
           
-          <code class="ruby">        &quot;Approval Status&quot; =&gt; &quot;approval_status&quot;,</code>
+          <code class="ruby">        &#39;Technologies&#39; =&gt; &quot;technologies&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="296">
           
           
-          <code class="ruby">        &quot;Approved By&quot; =&gt; &quot;approved_by&quot;,</code>
+          <code class="ruby">        &#39;Client tags&#39; =&gt; &quot;client_tags&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="297">
           
           
-          <code class="ruby">        &quot;Flagged&quot; =&gt; &quot;flagged&quot;,</code>
+          <code class="ruby">        &quot;Approval Status&quot; =&gt; &quot;approval_status&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="298">
           
           
-          <code class="ruby">        &quot;Flagged Comment&quot; =&gt; &quot;flagged_comment&quot;,</code>
+          <code class="ruby">        &quot;Approved By&quot; =&gt; &quot;approved_by&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="299">
           
           
-          <code class="ruby">        &quot;Created on&quot; =&gt; &quot;created_at&quot;,</code>
+          <code class="ruby">        &quot;Flagged&quot; =&gt; &quot;flagged&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="300">
           
           
-          <code class="ruby">        &quot;Updated on&quot; =&gt; &quot;updated_at&quot;</code>
+          <code class="ruby">        &quot;Flagged Comment&quot; =&gt; &quot;flagged_comment&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="301">
           
           
-          <code class="ruby">    }</code>
+          <code class="ruby">        &quot;Created on&quot; =&gt; &quot;created_at&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="302">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">        &quot;Updated on&quot; =&gt; &quot;updated_at&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="303">
           
           
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="304">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def self.all_public_values_hash</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="305">
-          
-          
-          <code class="ruby">    {</code>
-        </li>
-      
-        <li class="covered" data-hits="4" data-linenumber="306">
-          <span class="hits">4</span>
-          
-          <code class="ruby">        &quot;URL&quot; =&gt; &quot;url&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="307">
-          
-          
-          <code class="ruby">        &quot;Description&quot; =&gt; &quot;description&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="308">
-          
-          
-          <code class="ruby">        &quot;Location&quot; =&gt; &quot;location&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="309">
-          
-          
-          <code class="ruby">        &quot;Resource Email&quot; =&gt; &quot;resource_email&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="310">
-          
-          
-          <code class="ruby">        &quot;Resource Phone&quot; =&gt; &quot;resource_phone&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="311">
-          
-          
-          <code class="ruby">        &quot;Address&quot; =&gt; &quot;address&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="312">
-          
-          
-          <code class="ruby">        &quot;Funding Amount&quot; =&gt; &quot;funding_amount&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="313">
-          
-          
-          <code class="ruby">        &quot;Deadline&quot; =&gt; &quot;deadline&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="314">
-          
-          
-          <code class="ruby">        &quot;Notes&quot; =&gt; &quot;notes&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="315">
-          
-          
-          <code class="ruby">        &#39;Types&#39; =&gt; &quot;types&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="316">
-          
-          
-          <code class="ruby">        &#39;Audiences&#39; =&gt; &quot;audiences&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="317">
-          
-          
-          <code class="ruby">        &#39;Campuses&#39; =&gt; &quot;campuses&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="318">
-          
-          
-          <code class="ruby">        &#39;Innovation Stages&#39; =&gt; &quot;innovation_stages&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="319">
-          
-          
-          <code class="ruby">        &#39;Population Focuses&#39; =&gt; &quot;population_focuses&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="320">
-          
-          
-          <code class="ruby">        &#39;Availabilities&#39; =&gt; &quot;availabilities&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="321">
-          
-          
-          <code class="ruby">        &#39;Topics&#39; =&gt; &quot;topics&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="322">
-          
-          
-          <code class="ruby">        &#39;Technologies&#39; =&gt; &quot;technologies&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="323">
-          
-          
-          <code class="ruby">        &#39;Client tags&#39; =&gt; &quot;client_tags&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="324">
-          
-          
-          <code class="ruby">        &quot;Created on&quot; =&gt; &quot;created_at&quot;,</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="325">
-          
-          
-          <code class="ruby">        &quot;Updated on&quot; =&gt; &quot;updated_at&quot;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="326">
-          
-          
           <code class="ruby">    }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="327">
+        <li class="never" data-hits="" data-linenumber="304">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="328">
-          
-          
-          <code class="ruby">end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="329">
+        <li class="never" data-hits="" data-linenumber="305">
           
           
           <code class="ruby"></code>
         </li>
       
+        <li class="covered" data-hits="1" data-linenumber="306">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.all_public_values_hash</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="307">
+          
+          
+          <code class="ruby">    {</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="308">
+          <span class="hits">4</span>
+          
+          <code class="ruby">        &quot;URL&quot; =&gt; &quot;url&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="309">
+          
+          
+          <code class="ruby">        &quot;Description&quot; =&gt; &quot;description&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="310">
+          
+          
+          <code class="ruby">        &quot;Location&quot; =&gt; &quot;location&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="311">
+          
+          
+          <code class="ruby">        &quot;Resource Email&quot; =&gt; &quot;resource_email&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="312">
+          
+          
+          <code class="ruby">        &quot;Resource Phone&quot; =&gt; &quot;resource_phone&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="313">
+          
+          
+          <code class="ruby">        &quot;Address&quot; =&gt; &quot;address&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="314">
+          
+          
+          <code class="ruby">        &quot;Funding Amount&quot; =&gt; &quot;funding_amount&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="315">
+          
+          
+          <code class="ruby">        &quot;Deadline&quot; =&gt; &quot;deadline&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="316">
+          
+          
+          <code class="ruby">        &quot;Notes&quot; =&gt; &quot;notes&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="317">
+          
+          
+          <code class="ruby">        &#39;Types&#39; =&gt; &quot;types&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="318">
+          
+          
+          <code class="ruby">        &#39;Audiences&#39; =&gt; &quot;audiences&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="319">
+          
+          
+          <code class="ruby">        &#39;Campuses&#39; =&gt; &quot;campuses&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="320">
+          
+          
+          <code class="ruby">        &#39;Innovation Stages&#39; =&gt; &quot;innovation_stages&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="321">
+          
+          
+          <code class="ruby">        &#39;Population Focuses&#39; =&gt; &quot;population_focuses&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="322">
+          
+          
+          <code class="ruby">        &#39;Availabilities&#39; =&gt; &quot;availabilities&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="323">
+          
+          
+          <code class="ruby">        &#39;Topics&#39; =&gt; &quot;topics&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="324">
+          
+          
+          <code class="ruby">        &#39;Technologies&#39; =&gt; &quot;technologies&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="325">
+          
+          
+          <code class="ruby">        &#39;Client tags&#39; =&gt; &quot;client_tags&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="326">
+          
+          
+          <code class="ruby">        &quot;Created on&quot; =&gt; &quot;created_at&quot;,</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="327">
+          
+          
+          <code class="ruby">        &quot;Updated on&quot; =&gt; &quot;updated_at&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="328">
+          
+          
+          <code class="ruby">    }</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="329">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
         <li class="never" data-hits="" data-linenumber="330">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="331">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="332">
           
           
           <code class="ruby"></code>
@@ -7833,7 +7845,7 @@
         <li class="covered" data-hits="7" data-linenumber="5">
           <span class="hits">7</span>
           
-          <code class="ruby">    [&#39;Equality, Human Rights, &amp; Justice&#39;, &#39;Education &amp; Learning&#39;,</code>
+          <code class="ruby">    [&#39;Equality &amp; Human Rights &amp; Justice&#39;, &#39;Education &amp; Learning&#39;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="6">
@@ -11135,7 +11147,7 @@
         <li class="never" data-hits="" data-linenumber="11">
           
           
-          <code class="ruby">  # api_key: &quot;AIzaSyASGhh8q9iyELO42wWlvJ6xoX1BUKAFZCc&quot;,               # API key for geocoding service, change if it goes to production</code>
+          <code class="ruby">  # api_key: &quot;&quot;,               # API key for geocoding service</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="12">
