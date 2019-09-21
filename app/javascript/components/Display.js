@@ -237,12 +237,7 @@ class Display extends React.Component {
   componentDidUpdate() {
   }
 
-  // Show first 10 resources, hide rest
-  openInitial = () => {
-    let end = 10;
-    if (end > this.state.results_visible) {
-      end = this.state.results_visible;
-    }
+  unhide = (end) => {
     let count = 1;
     $(".resource-container").each(function() {
       if (count >= 1 && count <= end) {
@@ -252,6 +247,17 @@ class Display extends React.Component {
       }
       count++;
     });
+    
+  }
+
+  // Show first 10 resources, hide rest
+  openInitial = () => {
+    let end = 10;
+    if (end > this.state.results_visible) {
+      end = this.state.results_visible;
+    }
+    this.unhide(end);
+    
   }
   
   // Organize all resources into sections of 10 (either hide or show)  
@@ -260,15 +266,8 @@ class Display extends React.Component {
     if (end > this.state.filtered_resources.length) {
       end = this.state.filtered_resources.length;
     }
-    let count = 1;
-    $(".resource-container").each(function() {
-        if (count >= 1 && count <= end) {
-            $(this).removeClass("hidden-resource");
-        } else {
-            $(this).addClass("hidden-resource");
-        }
-        count++;
-    });
+    this.unhide(end);
+
     this.setState({results_visible: end})
   }
 
