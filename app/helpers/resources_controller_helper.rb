@@ -171,14 +171,18 @@ module ResourcesControllerHelper
           end
         end
       end
-    
-      def flagged
-        if @user.nil?
-          if request.format.json?
+
+      def nilUser 
+        if request.format.json?
             render status: 400, json: {}.to_json
           else
             redirect_to "/resources.html"
           end
+      end
+    
+      def flagged
+        if @user.nil?
+          nilUser()
         else
           @resources = Resource.where(:flagged => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
           @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
@@ -193,11 +197,7 @@ module ResourcesControllerHelper
     
       def archived
         if @user.nil?
-          if request.format.json?
-            render status: 400, json: {}.to_json
-          else
-            redirect_to "/resources.html"
-          end
+          nilUser()
         else
           @resources = Resource.where(:approval_status => 2).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
           @resource_count = "#{@resources.size} resource" + (@resources.size != 1 ? "s" : "")
