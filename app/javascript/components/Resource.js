@@ -11,9 +11,6 @@ class Resource extends React.Component {
       } else if (description.length > 150) {
         description = description.substring(0,150) + " ... "
       }
-
-      // let updated = this.props.data.updated_at.slice(0,10)
-
       let tags = []
       
       if (this.props.data.location != null) {
@@ -25,57 +22,20 @@ class Resource extends React.Component {
         }
       }
 
-      for (let i = 0; i < this.props.data.types.length; i++) {
-        let value = this.props.data.types[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
+      let tag_associations = [this.props.data.types, this.props.data.audiences, this.props.data.topics, this.props.data.availabilities, this.props.data.client_tags, this.props.data.innovation_stages, this.props.data.population_focuses, this.props.data.technologies, this.props.data.campuses];
+
+      for (let i = 0; i < tag_associations.length; i++) {
+        for (let j = 0; j < tag_associations[i].length; j++) {
+          let value = tag_associations[i][j];
+          let label = (<div className="text label" key={"label-" + value}> {value} </div>);
+          tags.push(label);
+        }
       }
-      for (let i = 0; i < this.props.data.audiences.length; i++) {
-        let value = this.props.data.audiences[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
-      for (let i = 0; i < this.props.data.topics.length; i++) {
-        let value = this.props.data.topics[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
-      for (let i = 0; i < this.props.data.availabilities.length; i++) {
-        let value = this.props.data.availabilities[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
-      for (let i = 0; i < this.props.data.client_tags.length; i++) {
-        let value = this.props.data.client_tags[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
-      for (let i = 0; i < this.props.data.innovation_stages.length; i++) {
-        let value = this.props.data.innovation_stages[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
-      for (let i = 0; i < this.props.data.population_focuses.length; i++) {
-        let value = this.props.data.population_focuses[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
-      for (let i = 0; i < this.props.data.technologies.length; i++) {
-        let value = this.props.data.technologies[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
-      for (let i = 0; i < this.props.data.campuses.length; i++) {
-        let value = this.props.data.campuses[i];
-        let label = (<div className="text label" key={"label-" + value}> {value} </div>)
-        tags.push(label)
-      }
+
       return (
         <a href={id} target="_blank" className="resource-results"><div className="row resource-container">
           <div className="resource-title text">
             <p>{this.props.data.title}</p>
-            {/*<a href={this.props.data.url} className="resource-url" target="_blank">Website</a>*/}
-            
           </div>
           <div className="resource-desc text">
               <p> {description}</p>
@@ -86,10 +46,9 @@ class Resource extends React.Component {
             </div>
             
           </div>
-          {/* <p className="resource-updated">Last Updated: {updated}</p> */}
         </div></a>
       );
-      
+      return html;
       
     } else {
       return null

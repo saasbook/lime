@@ -23,6 +23,8 @@
                     <p> Title of the resource </p>
                     <%= text_field_tag(:title, nil, class: "required_input") %>
                 </div>
+            </div>
+            <div class="resource_row">
                 <div class="input_field">
                     <%= label_tag(:url, "Resource URL", class: "required") %>
                     <p> Webpage for resource </p>
@@ -82,11 +84,15 @@
                     <%= text_field_tag(:contact_email, nil, class: "validate-input") %>
                     <p id="email-valid" class="invalid-text"> Invalid Email </p>
                 </div>
+            </div>
+            <div class="contact_row">
                 <div class="input_field col">
                     <%= label_tag(:contact_name, "Contact Name") %>
                     <p class="label-desc"> The person who is most up-to-date with this resource's information. </p>
                     <%= text_field_tag(:contact_name) %>
                 </div>
+            </div>
+            <div class="contact_row">
                 <div class="input_field col">
                     <%= label_tag(:contact_phone, "Contact Phone") %>
                     <p class="label-desc"> Who can we call if we have a question about the resource? </p>
@@ -105,11 +111,15 @@
                     <p class="label-desc-other">Email associated with this resource. </p>
                     <%= text_field_tag(:resource_email, nil) %>
                 </div>
+            </div>
+            <div class="contact_row">
                 <div class="input_field col">
                     <%= label_tag(:resource_phone, "Phone - General") %>
                     <p class="label-desc-other">Phone associated with this resource. </p>
                     <%= text_field_tag(:resource_phone, nil) %>
                 </div>
+            </div>
+            <div class="contact_row">
                 <div class="input_field col">
                     <%= label_tag(:address, "Address") %>
                     <p class="label-desc-other">An organization's headquarters or an event's physical location. </p>

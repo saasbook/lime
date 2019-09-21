@@ -271,16 +271,29 @@ a.resource-results {
   margin: 0px;
 }
 
-#filter-header, #filter-more {
+#filter-header, #filter-more, #filter-directions {
   font-size: 2rem;
   text-align: center;
   width: 100%;
-  margin: 16px 0px;
+  margin: 8px 0px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
 }
+
+#filter-directions {
+  text-align: center;
+  width: 100%;
+  align-items: center;
+  margin: 8px 0px;
+  p {
+    font-size: 12px;
+    margin: 0px 16px;
+  }
+}
+
 
 #filter-column .btn {
   background-color: #FDB515;
@@ -609,6 +622,8 @@ select {
 
 #new input {
   margin: 0px;
+  width: 30vw;
+  min-width: 300px;
 }
 
 
@@ -643,6 +658,16 @@ select {
 
 .contact_row .input_field {
   margin: 24px;
+  max-width: 350px;
+  input {
+    max-width: 350px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #new input {
+    min-width: 60vw;
+  }
 }
 
 .resource_row .input_field {
@@ -656,7 +681,10 @@ select {
 }
 
 .other-info {
-  width: 500px;
+  max-width: 350px;
+  input {
+    max-width: 350px;
+  }
 }
 
 .label-desc {

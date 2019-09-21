@@ -12,7 +12,8 @@ class Resource < ActiveRecord::Base
   after_destroy :destroy_related_records
   # validations: https://guides.rubyonrails.org/active_record_validations.html
   validates :title, :url, :location, :presence => true
-  validates :description, :presence => true, :length => {:maximum => 500}
+  validates :description, :presence => true#, :length => {:maximum => 500}
+  # TODO: figure out if a character limit is needed since certain descriptions in the original spread sheet have above 500 characters (ex: CITRIS Foundry)
 
   def self.auth_params
     [:flagged, :approval_status, :approved_by]
@@ -108,6 +109,7 @@ class Resource < ActiveRecord::Base
     return Resource.where(id: filtered.map(&:id))
   end
 
+  # 
   def self.cast_param_vals(params)
     params.values_at(
         :flagged_comment,:title,:url,:location)
