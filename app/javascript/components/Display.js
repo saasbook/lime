@@ -4,7 +4,7 @@ import Resource from './Resource.js';
 import Filter from './Filter.js';
 import { DEFAULT_ECDH_CURVE } from "tls";
 import { all } from "q";
-import { render } from './helpers/Display_helper.js';
+import { render, searchRow } from './helpers/Display_helper.js';
 
 class Display extends React.Component {
 
@@ -203,7 +203,7 @@ class Display extends React.Component {
     let initial_filter_height = ($(window).height() - navigationHeight - 64);
     
     if ($(".filter-rows")[0].style.display ==="block") {
-      let newHeight = parseInt($("#search-row").css("height")) + parseInt($("#initial-filters").css("height")) + parseInt($("#filter-header").css("height")) + parseInt($("#filter-more").css("height")) + 32 + 32 + 8 + 32;
+      let newHeight =  parseInt($("#filter-header").css("height")) + parseInt($("#initial-filters").css("height")) + parseInt($("#filter-more").css("height")) + parseInt($("#search-row").css("height")) + 32 + 32 + 8 + 32;
       $(".btn-show-filters")[0].innerHTML = "Show Filters"
       $("#filter-column").css({height: newHeight});
     } else {
@@ -278,11 +278,6 @@ class Display extends React.Component {
       $(this).removeClass("hidden-resource");
     });
     this.setState({results_visible: end})
-  }
-
-  // render function located in helper file to reduce lines of code
-  render () {
-    render();
   }
 }
 
