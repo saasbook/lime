@@ -4,6 +4,7 @@ import Resource from './Resource.js';
 import Filter from './Filter.js';
 import { DEFAULT_ECDH_CURVE } from "tls";
 import { all } from "q";
+import { render } from './helpers/Display_helper.js';
 
 class Display extends React.Component {
 
@@ -11,7 +12,7 @@ class Display extends React.Component {
     super(props);
     this.resetRefs = new Array();
     let initial_resources = new Array();
-    /* TODO: this.props.resources can't have unapproved or archived resources (same with admin view) */
+    /* TODO: this.props.resources shouldn't have unapproved or archived resources (same with admin view) because these are visible in html */
     this.props.resources.forEach(resource => {
       initial_resources.push(<Resource key={resource.id} data={resource}></Resource>)
     });
@@ -47,6 +48,7 @@ class Display extends React.Component {
       results_visible: 10
     }
     
+    this.render = render.bind(this) // bind "this" to helper file's "render" function
   }
 
   /* remove all selected filters and clear search */
@@ -149,13 +151,12 @@ class Display extends React.Component {
               includes = false;
             }
           }
-        });
-        
-      }
+        }); // forEach
+      } // for
       if (includes) {
         filtered_resources.push(<Resource key={resource.props.data.id} data={resource.props.data}></Resource>);
       }
-    })
+    }) // forEach
 
     /* match with the text in search field */
     filtered_resources = this.search(filtered_resources);
@@ -169,9 +170,9 @@ class Display extends React.Component {
     } else {
       this.setState({filtered_resources: filtered_resources, activated_filters: curr_activated_filters, results_visible: 10}, this.openInitial);
     }
-  }
+  } // filter
 
-  // submit the search form
+  // submit the search text field, use a regexp based on title, desc, url
   search = (curr_resources) => {
     let filtered_resources = new Array();
     curr_resources.forEach(resource => {
@@ -280,87 +281,9 @@ class Display extends React.Component {
     this.setState({results_visible: end})
   }
 
+  // render function located in helper file to reduce lines of code
   render () {
-    let result_header = (
-      <div className="col-12" id = "result-header">
-        <h2>Results</h2>
-        <p id="search-message">{this.state.filtered_resources.length} results found</p>
-      </div>
-    )
-
-    let result_bottom = (
-      <div id="results-bottom">
-        <p className="results-visible">Showing results {this.state.results_visible} out of {this.state.filtered_resources.length}</p>
-        <div className="result-buttons">
-          <button className="btn btn-outline-primary" onClick={this.openMore}>Show More</button>
-          <button className="btn btn-outline-primary" onClick={this.openAll}>Show All</button>
-        </div>
-      </div>
-    )
-
-    if (this.state.results_visible >= this.state.filtered_resources.length) {
-      result_bottom = (
-        <div id="results-bottom">
-          <p className="results-visible">Showing results {this.state.results_visible} out of {this.state.filtered_resources.length}</p>
-        </div>
-      )
-    }
-
-    if (this.state.filtered_resources.length == 0 || this.state.resources.length == 0) {
-      result_header = (
-        <div className="col-12" id = "result-header">
-          <h2>No results found</h2>
-          <p id="search-message"> Try changing your filtering options.</p>
-        </div>
-      )
-      result_bottom = <div className="row"></div>;
-    }
-
-    return (
-      <div className="index"  id="resource-container-wrapper">
-        <div id="filter-column">
-
-            <div className="association" className="filter_row" id="search-row">
-              <label className="search_bar_text">Search</label>
-              <form onSubmit={this.updateSearch} className="search-form">
-                <input type="text" name="search" className="search_bar"></input>
-                <button type="submit" id="search-button" className="btn" onClick={this.updateSearch}>Search</button>
-              </form>
-            </div>{/*search-row*/}
-            <div id="filter-directions">
-              <p>Use filters to narrow down results.<br/> Click “Clear All” to start a new search.</p>
-            </div>
-
-            <div id="filter-header">
-              <button id="filter-reset-button" className="btn btn-med" onClick={this.reset_filters}>
-              Clear All</button>
-            </div>
-            <div id="initial-filters">
-              {this.state.all_filters.get("types")}
-            </div>
-
-            <div id="filter-more">
-              <button className="btn-show-filters btn btn-med" onClick={this.toggle_filters}>More Filters</button>
-            </div>
-            
-            <div className="filter-rows">
-            {this.state.all_filters.get("location")}
-              {this.state.all_filters.get("audiences")}
-              {/* {this.state.all_filters.get("topics")} */}
-              {this.state.all_filters.get("availabilities")}
-              {this.state.all_filters.get("population_focuses")}
-              {/* {this.state.all_filters.get("innovation_stages")} */}
-              {this.state.all_filters.get("client_tags")}
-            </div>{/*filter-rows*/}
-            
-        </div> {/*filter-column*/}
-        <div id="resource-column">
-          {result_header}
-          {this.state.filtered_resources}
-          {result_bottom}
-        </div> {/*resource-column*/}
-      </div> /*index*/
-    );
+    render();
   }
 }
 
