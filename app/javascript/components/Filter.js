@@ -4,21 +4,14 @@ class Filter extends React.Component {
   constructor(props) {
     super(props);
 
-    let initial_values = new Array();
-    this.props.values.forEach(value => {
-      initial_values.push(
-        <button key={value} data-key={value} className="single_checkbox gold_label label" onClick={(e) => this.change_filter(e, this.props.association, value)}>
-          {value}
-        </button>
-      )
-    });
+    let initial_values = this.resetInitialValues();
     this.state = {
       values: initial_values,
       selected: new Set()
     }
   }
 
-  reset = () => {
+  resetInitialValues = () => {
     let initial_values = new Array();
     this.props.values.forEach(value => {
       initial_values.push(
@@ -27,6 +20,11 @@ class Filter extends React.Component {
         </button>
       )
     });
+    return initial_values;
+  }
+
+  reset = () => {
+    let initial_values = this.resetInitialValues();
     $(".filters").children().each (button => {
       $(".filters").children()[button].className = "single_checkbox gold_label label";
     })

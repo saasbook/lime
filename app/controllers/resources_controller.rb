@@ -1,6 +1,7 @@
 class ResourcesController < ApplicationController
   require 'csv'
   include ResourcesControllerHelper
+  include ResourcesControllerUpload
   def resource_params
     params.permit(
                   :title, :url, :contact_email, :location, :population_focuses, :campuses,
