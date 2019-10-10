@@ -2,7 +2,7 @@ class ClientTag < ActiveRecord::Base
   belongs_to :resource
 
   def self.get_values
-    ['BearX.co', 'WITI', 'CITRIS', 'OnRamp']
+    ['BearX.co', 'WITI', 'CITRIS', 'OnRamp', 'BEGIN']
   end
 
   def self.count(label)
