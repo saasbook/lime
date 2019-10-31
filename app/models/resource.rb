@@ -268,7 +268,12 @@ class Resource < ActiveRecord::Base
     # end 
     return resources
   end
+
+  def self.isURLValid()
+
+  end
  
 end
+
 
 

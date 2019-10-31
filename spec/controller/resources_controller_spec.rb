@@ -190,4 +190,21 @@ RSpec.describe ResourcesController, :type => :controller do
     end
   end
 
+
+  describe "Testing Broken URL" do
+    before (:each) do
+      @resource = Resource.create_resource "title" => "thing1", "url" => "www.google.com", "contact_email" => "something@gmail.com", "location" => "Global",
+                                          "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
+      # params = ActionController::Parameters.new({title: "something", url: "something.com" ,contact_email: "something@gmail.com", location: "Berkeley", types: 'scholarship,funding', audiences: 'grad,undergrad', description: "descriptions"})
+      # params.permit!
+    end
+
+    #Testing URLs now
+    it "should print out URL status" do
+      expect do
+        controller.isURLBroken(@resource)
+      end.to output("GOOD URL").to_stdout
+
+    end
+  end
 end

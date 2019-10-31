@@ -1,5 +1,7 @@
 class ResourcesController < ApplicationController
   require 'csv'
+  require 'net/http'
+  require "open-uri"
   include ResourcesControllerHelper
   include ResourcesControllerUpload
   def resource_params
@@ -121,7 +123,7 @@ class ResourcesController < ApplicationController
     @has_many_hash = self.has_many_value_hash
     
     # only admins can see unapproved and archived resources
-    if @user.nil? and @resource&.approval_status == 0
+    if @user.nil? and @resource.approval_status == 0
       @resource = nil
     end
     
@@ -259,6 +261,32 @@ class ResourcesController < ApplicationController
     flash[:alert] = "Resource permanently deleted"
     redirect_back(fallback_location: root_path)
   end
+
+  def isURLBroken(resource)
+    # id = params[:id]
+    # @resource = Resource.find_by_id(id)
+    # @all_values_hash = Resource.all_values_hash
+    # @all_public_values_hash = Resource.all_public_values_hash
+    # @full_resource = @resource.as_json(:include => Resource.include_has_many_params)
+
+    #open("http://www.google.com") do |f|
+    #
+    #
+    #$stderr.puts resource
+    #$stderr.puts "printing the entire thing"
+    #$stderr.puts "http://"+resource.url
+    open("http://" + resource.url) do |f|
+
+      #puts f.status[0]
+        if f.status[1]=="OK" then
+          print "GOOD URL"
+        else
+          print "BAD URL"
+        end
+
+    end
+  end
+
 end
 
 
