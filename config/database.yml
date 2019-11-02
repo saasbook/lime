@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: lime
   pool: 5
-  username: kpriya
+  username: emilyh
   #password: test
   timeout: 5000
  
@@ -49,8 +49,8 @@ test:
   encoding: unicode
   database: lime_test
   pool: 5
-  username: kpriya
-  #password: test
+  username: emilyh
+#  password: test
   timeout: 5000
 
 
