@@ -935,6 +935,31 @@ select {
   width: auto;
 }
 
+
+.submit-resource-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  text-align: center;
+}
+
+.submit-resource-button {
+  padding: 6px 12px;
+  background-color: #FDB515;
+  border: 2px solid #fff;
+  transition: 100ms;
+  border-radius: 4px;
+  font-size: 14px;
+  color: black;
+  &:hover {
+    background-color: #fff;
+    border: 2px solid #FDB515;
+    transition: 100ms;
+  }
+}
+
+
 /* show more or hide resources */
 
 .hidden-resource{

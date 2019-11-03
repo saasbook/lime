@@ -23,7 +23,7 @@
       <div id="left-nav">
         <a class="nav-link nav-item" href="/">Home</a>
         <div class="dropdown">
-          <a class="nav-link nav-item" href="/resources.html/">All Resources</a>
+          <a class="nav-link nav-item" href="/resources.html/">Resources</a>
           <% if user_signed_in? %>
               <div class="dropdown-content">
                   <a class="nav-link nav-item" href="/resources/all.html">Admin View</a>
@@ -31,14 +31,16 @@
           <% end %>
         </div>
         <div class="dropdown">
-          <a class="dropbtn nav-link nav-item" href="/resources/new.html">Suggest a Resource</a>
+<!--          <a class="dropbtn nav-link nav-item" href="/resources/new.html">Suggest a Resource</a>-->
+          <a class="dropbtn nav-link nav-item" href="/faq/index.html">FAQ</a>
           <div class="dropdown-content">
             <% if user_signed_in? %>
               <a class="nav-link nav-item" href="/resources/unapproved.html">Approval Queue</a>
               <a class="nav-link nav-item" href="/resources/flagged.html">Flagged Resources</a>
               <a class="nav-link nav-item" href="/resources/archived.html">Archived Resources</a>
             <% end %>
-            <a class="nav-link nav-item" href="/faq/index.html">FAQ</a>     
+<!--            <a class="nav-link nav-item" href="/faq/index.html">FAQ</a>-->
+            <%= link_to('Feedback', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
           </div>
         </div>  
       </div>
@@ -60,9 +62,12 @@
           
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'admin-button nav-link') %>
         <% else %>
-          <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
-          <%= link_to('Admin Login', new_user_session_path, class: 'admin-button nav-link')  %>
-          <%= link_to('Admin Registration', new_user_registration_path, class: 'admin-button nav-link') %>
+          <%#= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
+<!--          TODO: create user path for resource owners instead of admins!-->
+          <%= link_to('Log in', new_user_session_path, class: 'admin-button nav-link') %>
+          <%= link_to('Admin', new_user_session_path, class: 'admin-button nav-link')  %>
+
+          <%#= link_to('Admin Registration', new_user_registration_path, class: 'admin-button nav-link') %>
         <% end %>
       </div>
       <% if false %>
