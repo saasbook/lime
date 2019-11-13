@@ -14,6 +14,6 @@ class UserMailer < ApplicationMailer
 
   def annual_reminder_email
     @resource = params[:resource]
-    mail(to: @resource.resource_email, subject: "Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+    mail(to: @resource.contact_email, subject: "Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
   end
 end

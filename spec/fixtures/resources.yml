@@ -1,19 +1,19 @@
 resource_0:
   title: 'resource0'
-  resource_email: "email0@email.com"
+  contact_email: "email0@email.com"
   updated_at: 2018-11-01
 
 resource_1:
   title: 'resource1'
-  resource_email: "email1@email.com"
+  contact_email: "email1@email.com"
   updated_at: 2019-11-01
 
 resource_2:
   title: 'resource2'
-  resource_email: "email2@email.com"
+  contact_email: "email2@email.com"
   updated_at: 2018-11-11
 
 resource_3:
   title: 'resource3'
-  resource_email: "="
+  contact_email: "="
   updated_at: 2018-11-01

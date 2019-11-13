@@ -25,7 +25,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     describe 'annual reminder email' do
-      let(:resource) { instance_double 'Resource', resource_email: 'testemail@email.com', title: 'TestResource'}
+      let(:resource) { instance_double 'Resource', contact_email: 'testemail@email.com', title: 'TestResource'}
       let(:mail) { UserMailer.with(resource: resource).annual_reminder_email.deliver_now }
 
       it 'renders the subject' do
@@ -33,7 +33,7 @@ RSpec.describe UserMailer, type: :mailer do
       end
 
       it 'renders the receiver email' do
-        expect(mail.to).to eq([resource.resource_email])
+        expect(mail.to).to eq([resource.contact_email])
       end
 
       it 'renders the sender email' do

@@ -5,8 +5,8 @@ namespace :resource_owner_tasks do
 
     valid_emails = Set.new
     Resource.all.each do |resource|
-      if !resource.resource_email.blank? && valid_email_regex.match(resource.resource_email)
-        valid_emails.add(resource.resource_email)
+      if !resource.contact_email.blank? && valid_email_regex.match(resource.contact_email)
+        valid_emails.add(resource.contact_email)
       end
     end
 
