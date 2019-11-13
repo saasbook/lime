@@ -46,6 +46,9 @@ gem 'devise'
 gem 'webpacker'
 gem 'react-rails'
 
+# whenever gem for scheduling emails
+gem 'whenever', require: false
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -66,6 +69,7 @@ group :test do
   gem 'factory_girl_rails' # if using FactoryGirl
   gem 'metric_fu'        # collect code metrics
   gem 'selenium-webdriver', '~> 2.53.4'
+  gem 'timecop'
 end
  
 group :development do
