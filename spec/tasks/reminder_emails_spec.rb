@@ -7,6 +7,12 @@ RSpec.describe 'reminder_emails namespace rake task' do
   before :all do
     Rake.application.rake_require 'tasks/reminder_emails'
     Rake::Task.define_task(:environment)
+    time = Time.local(2019, 11, 10, 0, 0, 0)
+    Timecop.freeze(time)
+  end
+
+  after :all do
+    Timecop.return
   end
 
   let :run_rake_task do

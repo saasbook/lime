@@ -5,7 +5,7 @@ namespace :reminder_emails do
     valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/
     Resource.all.each do |resource|
       if !resource.resource_email.blank? && valid_email_regex.match(resource.resource_email) \
-         && (Time.now - resource.updated_at).to_i / 1.day > 365
+         && TimeDifference.between(resource.updated_at, Time.now).in_years >= 1
         out_of_date_resources.add(resource)
       end
     end
