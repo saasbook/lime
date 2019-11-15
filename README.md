@@ -4,6 +4,8 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b9caa915bcbf59ff9007/test_coverage)](https://codeclimate.com/github/katrinapriya/lime/test_coverage)
 
+[![Build Status](https://travis-ci.org/katrinapriya/lime.svg?branch=master)](https://travis-ci.org/katrinapriya/lime)
+
 ## Table of contents
 
 * Running up the app locally
