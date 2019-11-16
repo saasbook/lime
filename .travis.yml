@@ -5,7 +5,7 @@ rvm:
     - 2.6.0
 env:
   global:
-    - CC_TEST_REPORTER_ID=7859b2a9afa12a79aa17a382731ee5d82078e1b9314393be49d51d55caa08747
+    - CC_TEST_REPORTER_ID=6273e941f44274024347e6c2c3153ad5bd3ce4659e8540265466b2069e8fc48b
 
 bundler_args:
     --without production
