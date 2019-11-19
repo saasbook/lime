@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-11-12T18:28:36-08:00">2019-11-12T18:28:36-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-11-19T00:43:00-08:00">2019-11-19T00:43:00-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">84.6%</span></span>
+    (<span class="covered_percent"><span class="yellow">85.69%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         16.78
+         16.08
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>54</b> files in total.
-    <b>1156</b> relevant lines. 
-    <span class="green"><b>978</b> lines covered</span> and
-    <span class="red"><b>178</b> lines missed </span>
+    <b>55</b> files in total.
+    <b>1279</b> relevant lines. 
+    <span class="green"><b>1096</b> lines covered</span> and
+    <span class="red"><b>183</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -157,7 +157,7 @@
         <td>9</td>
         <td>9</td>
         <td>0</td>
-        <td>5.1</td>
+        <td>15.8</td>
       </tr>
       
       <tr>
@@ -231,6 +231,16 @@
       </tr>
       
       <tr>
+        <td class="strong"><a href="#a0fd67254bdd0574e68c00f230ac4fe2fb482a4a" class="src_link" title="app/models/email.rb">app/models/email.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>10</td>
+        <td>4</td>
+        <td>4</td>
+        <td>0</td>
+        <td>25.8</td>
+      </tr>
+      
+      <tr>
         <td class="strong"><a href="#7e55f4c5e29e6a0d4bffb7f377688d159b6d01e5" class="src_link" title="app/models/innovation_stage.rb">app/models/innovation_stage.rb</a></td>
         <td class="green strong">100.0 %</td>
         <td>11</td>
@@ -262,12 +272,12 @@
       
       <tr>
         <td class="strong"><a href="#d049c1fad5d1e3295fd5df029aba691071247608" class="src_link" title="app/models/resource.rb">app/models/resource.rb</a></td>
-        <td class="yellow strong">85.0 %</td>
-        <td>274</td>
-        <td>140</td>
-        <td>119</td>
+        <td class="yellow strong">87.2 %</td>
+        <td>314</td>
+        <td>164</td>
+        <td>143</td>
         <td>21</td>
-        <td>112.6</td>
+        <td>99.8</td>
       </tr>
       
       <tr>
@@ -482,12 +492,12 @@
       
       <tr>
         <td class="strong"><a href="#a5ddd6873e63016a3fcc9fe993dfd1e5ea38e702" class="src_link" title="lib/tasks/reminder_emails.rake">lib/tasks/reminder_emails.rake</a></td>
-        <td class="green strong">100.0 %</td>
-        <td>17</td>
-        <td>10</td>
-        <td>10</td>
-        <td>0</td>
-        <td>1.5</td>
+        <td class="yellow strong">84.38 %</td>
+        <td>52</td>
+        <td>32</td>
+        <td>27</td>
+        <td>5</td>
+        <td>6.5</td>
       </tr>
       
       <tr>
@@ -573,11 +583,11 @@
       <tr>
         <td class="strong"><a href="#e18646127cd9c7ef5974fc1d0dd9303a06f018b7" class="src_link" title="spec/tasks/reminder_emails_spec.rb">spec/tasks/reminder_emails_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>26</td>
-        <td>17</td>
-        <td>17</td>
+        <td>126</td>
+        <td>90</td>
+        <td>90</td>
         <td>0</td>
-        <td>1.2</td>
+        <td>2.1</td>
       </tr>
       
       <tr>
@@ -2007,8 +2017,8 @@
           <code class="ruby">    @full_resource.each do |association, values|</code>
         </li>
       
-        <li class="covered" data-hits="90" data-linenumber="223">
-          <span class="hits">90</span>
+        <li class="covered" data-hits="96" data-linenumber="223">
+          <span class="hits">96</span>
           
           <code class="ruby">      if values.kind_of?(Array) &amp;&amp; values.length &gt; 0</code>
         </li>
@@ -4434,14 +4444,14 @@
           <code class="ruby">  def annual_reminder_email</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="16">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="54" data-linenumber="16">
+          <span class="hits">54</span>
           
           <code class="ruby">    @resource = params[:resource]</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="17">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="54" data-linenumber="17">
+          <span class="hits">54</span>
           
           <code class="ruby">    mail(to: @resource.contact_email, subject: &quot;Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.&quot;)</code>
         </li>
@@ -5336,6 +5346,85 @@
         </li>
       
         <li class="never" data-hits="" data-linenumber="66">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="a0fd67254bdd0574e68c00f230ac4fe2fb482a4a">
+  <div class="header">
+    <h3>app/models/email.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>4</b> relevant lines. 
+      <span class="green"><b>4</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">class Email</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  @@valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="3">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="4">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.valid_email?(email)</code>
+        </li>
+      
+        <li class="covered" data-hits="100" data-linenumber="5">
+          <span class="hits">100</span>
+          
+          <code class="ruby">    @@valid_email_regex.match(email)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="6">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="7">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="8">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="9">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
           
           
           <code class="ruby">end</code>
@@ -6426,10 +6515,10 @@
         <div class="source_table" id="d049c1fad5d1e3295fd5df029aba691071247608">
   <div class="header">
     <h3>app/models/resource.rb</h3>
-    <h4><span class="yellow">85.0 %</span> covered</h4>
+    <h4><span class="yellow">87.2 %</span> covered</h4>
     <div>
-      <b>140</b> relevant lines. 
-      <span class="green"><b>119</b> lines covered</span> and
+      <b>164</b> relevant lines. 
+      <span class="green"><b>143</b> lines covered</span> and
       <span class="red"><b>21</b> lines missed.</span>
     </div>
   </div>
@@ -7436,367 +7525,367 @@
         <li class="covered" data-hits="1" data-linenumber="167">
           <span class="hits">1</span>
           
-          <code class="ruby">  def destroy_related_records</code>
+          <code class="ruby">  def not_updated_in_a_year?</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="168">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="75" data-linenumber="168">
+          <span class="hits">75</span>
           
-          <code class="ruby">    types.each do |audience|</code>
+          <code class="ruby">    TimeDifference.between(updated_at, Time.now).in_years &gt;= 1</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="169">
+        <li class="never" data-hits="" data-linenumber="169">
           
           
-          <code class="ruby">      types.destroy</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="170">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="171">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="1" data-linenumber="171">
+          <span class="hits">1</span>
           
-          <code class="ruby">    audiences.each do |audience|</code>
+          <code class="ruby">  def one_week_passed?</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="172">
+        <li class="covered" data-hits="16" data-linenumber="172">
+          <span class="hits">16</span>
           
-          
-          <code class="ruby">      audience.destroy</code>
+          <code class="ruby">    TimeDifference.between(last_email_sent, Time.now).in_weeks &gt;= 1</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="173">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="174">
-          <span class="hits">76</span>
+        <li class="never" data-hits="" data-linenumber="174">
           
-          <code class="ruby">    client_tags.each do |audience|</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="175">
+        <li class="covered" data-hits="1" data-linenumber="175">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      client_tags.destroy</code>
+          <code class="ruby">  def two_weeks_passed?</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="176">
+        <li class="covered" data-hits="10" data-linenumber="176">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">    TimeDifference.between(last_email_sent, Time.now).in_weeks &gt;= 2</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="177">
-          <span class="hits">76</span>
+        <li class="never" data-hits="" data-linenumber="177">
           
-          <code class="ruby">    population_focuses.each do |audience|</code>
+          
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="178">
+        <li class="never" data-hits="" data-linenumber="178">
           
           
-          <code class="ruby">      population_focuses.destroy</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="179">
+        <li class="covered" data-hits="1" data-linenumber="179">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">  def one_month_passed?</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="180">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="2" data-linenumber="180">
+          <span class="hits">2</span>
           
-          <code class="ruby">    campuses.each do |audience|</code>
+          <code class="ruby">    TimeDifference.between(last_email_sent, Time.now).in_months &gt;= 1</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="181">
+        <li class="never" data-hits="" data-linenumber="181">
           
           
-          <code class="ruby">      campuses.destroy</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="182">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="183">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="1" data-linenumber="183">
+          <span class="hits">1</span>
           
-          <code class="ruby">    colleges.each do |audience|</code>
+          <code class="ruby">  def update_num_emails_and_last_email_sent(num_emails)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="184">
+        <li class="covered" data-hits="22" data-linenumber="184">
+          <span class="hits">22</span>
           
-          
-          <code class="ruby">      colleges.destroy</code>
+          <code class="ruby">    Resource.record_timestamps = false</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="185">
+        <li class="covered" data-hits="22" data-linenumber="185">
+          <span class="hits">22</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">    update!(num_emails: num_emails)</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="186">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="22" data-linenumber="186">
+          <span class="hits">22</span>
           
-          <code class="ruby">    availabilities.each do |audience|</code>
+          <code class="ruby">    update!(last_email_sent: Time.now)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="187">
+        <li class="covered" data-hits="22" data-linenumber="187">
+          <span class="hits">22</span>
           
-          
-          <code class="ruby">      availabilities.destroy</code>
+          <code class="ruby">    Resource.record_timestamps = true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="188">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="189">
-          <span class="hits">76</span>
+        <li class="never" data-hits="" data-linenumber="189">
           
-          <code class="ruby">    innovation_stages.each do |audience|</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="190">
+        <li class="covered" data-hits="1" data-linenumber="190">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      innovation_stages.destroy</code>
+          <code class="ruby">  def update_num_emails(num_emails)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="191">
+        <li class="covered" data-hits="28" data-linenumber="191">
+          <span class="hits">28</span>
           
-          
-          <code class="ruby">    end</code>
+          <code class="ruby">    Resource.record_timestamps = false</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="192">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="28" data-linenumber="192">
+          <span class="hits">28</span>
           
-          <code class="ruby">    topics.each do |audience|</code>
+          <code class="ruby">    update!(num_emails: num_emails)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="193">
+        <li class="covered" data-hits="28" data-linenumber="193">
+          <span class="hits">28</span>
           
-          
-          <code class="ruby">      topics.destroy</code>
+          <code class="ruby">    Resource.record_timestamps = true</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="194">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="195">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="196">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.out_of_date_resources</code>
+        </li>
+      
+        <li class="covered" data-hits="25" data-linenumber="197">
+          <span class="hits">25</span>
+          
+          <code class="ruby">    out_of_date_resources = Set.new</code>
+        </li>
+      
+        <li class="covered" data-hits="25" data-linenumber="198">
+          <span class="hits">25</span>
+          
+          <code class="ruby">    Resource.all.each do |resource|</code>
+        </li>
+      
+        <li class="covered" data-hits="100" data-linenumber="199">
+          <span class="hits">100</span>
+          
+          <code class="ruby">      email = resource.contact_email</code>
+        </li>
+      
+        <li class="covered" data-hits="100" data-linenumber="200">
+          <span class="hits">100</span>
+          
+          <code class="ruby">      if !email.blank? &amp;&amp; Email.valid_email?(email) &amp;&amp; resource.not_updated_in_a_year?</code>
+        </li>
+      
+        <li class="covered" data-hits="50" data-linenumber="201">
+          <span class="hits">50</span>
+          
+          <code class="ruby">        out_of_date_resources.add(resource)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="202">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="203">
+          
+          
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="195">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="25" data-linenumber="204">
+          <span class="hits">25</span>
           
-          <code class="ruby">    technologies.each do |audience|</code>
+          <code class="ruby">    out_of_date_resources</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="196">
-          
-          
-          <code class="ruby">      technologies.destroy</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="197">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="198">
+        <li class="never" data-hits="" data-linenumber="205">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="199">
+        <li class="never" data-hits="" data-linenumber="206">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="200">
-          
-          
-          <code class="ruby">  </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="201">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="202">
+        <li class="covered" data-hits="1" data-linenumber="207">
           <span class="hits">1</span>
           
-          <code class="ruby">  def self.separate_params(params)</code>
+          <code class="ruby">  def destroy_related_records</code>
         </li>
       
-        <li class="covered" data-hits="783" data-linenumber="203">
-          <span class="hits">783</span>
+        <li class="covered" data-hits="76" data-linenumber="208">
+          <span class="hits">76</span>
           
-          <code class="ruby">    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h</code>
+          <code class="ruby">    types.each do |audience|</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="204">
-          <span class="hits">91</span>
-          
-          <code class="ruby">    resource_hash = {}</code>
-        </li>
-      
-        <li class="covered" data-hits="91" data-linenumber="205">
-          <span class="hits">91</span>
-          
-          <code class="ruby">    params.each do |field, val|</code>
-        </li>
-      
-        <li class="covered" data-hits="692" data-linenumber="206">
-          <span class="hits">692</span>
-          
-          <code class="ruby">      if self.has_many_associations.include? field</code>
-        </li>
-      
-        <li class="covered" data-hits="179" data-linenumber="207">
-          <span class="hits">179</span>
-          
-          <code class="ruby">        if val.is_a?(String)</code>
-        </li>
-      
-        <li class="covered" data-hits="179" data-linenumber="208">
-          <span class="hits">179</span>
-          
-          <code class="ruby">          params[field] = val.split(&#39;,&#39;)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="209">
+        <li class="missed" data-hits="0" data-linenumber="209">
           
           
-          <code class="ruby">        end</code>
+          <code class="ruby">      types.destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="210">
           
           
-          <code class="ruby">      else</code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="513" data-linenumber="211">
-          <span class="hits">513</span>
+        <li class="covered" data-hits="76" data-linenumber="211">
+          <span class="hits">76</span>
           
-          <code class="ruby">        params.delete field</code>
+          <code class="ruby">    audiences.each do |audience|</code>
         </li>
       
-        <li class="covered" data-hits="513" data-linenumber="212">
-          <span class="hits">513</span>
+        <li class="missed" data-hits="0" data-linenumber="212">
           
-          <code class="ruby">        resource_hash[field] = val</code>
+          
+          <code class="ruby">      audience.destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="213">
           
           
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="214">
-          
-          
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="215">
-          <span class="hits">91</span>
+        <li class="covered" data-hits="76" data-linenumber="214">
+          <span class="hits">76</span>
           
-          <code class="ruby">    return params, resource_hash</code>
+          <code class="ruby">    client_tags.each do |audience|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="215">
+          
+          
+          <code class="ruby">      client_tags.destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="216">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="217">
+        <li class="covered" data-hits="76" data-linenumber="217">
+          <span class="hits">76</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">    population_focuses.each do |audience|</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="218">
-          <span class="hits">1</span>
+        <li class="missed" data-hits="0" data-linenumber="218">
           
-          <code class="ruby">  def self.create_associations(resource, params)</code>
+          
+          <code class="ruby">      population_focuses.destroy</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="219">
-          <span class="hits">91</span>
+        <li class="never" data-hits="" data-linenumber="219">
           
-          <code class="ruby">    fields_hash = self.get_associations_hash(resource)</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="220">
+        <li class="covered" data-hits="76" data-linenumber="220">
+          <span class="hits">76</span>
           
-          
-          <code class="ruby">    </code>
+          <code class="ruby">    campuses.each do |audience|</code>
         </li>
       
-        <li class="covered" data-hits="91" data-linenumber="221">
-          <span class="hits">91</span>
+        <li class="missed" data-hits="0" data-linenumber="221">
           
-          <code class="ruby">    fields_hash.each do |field, association|</code>
+          
+          <code class="ruby">      campuses.destroy</code>
         </li>
       
-        <li class="covered" data-hits="910" data-linenumber="222">
-          <span class="hits">910</span>
+        <li class="never" data-hits="" data-linenumber="222">
           
-          <code class="ruby">      association.delete_all # if updating, need to delete and remake associations</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="910" data-linenumber="223">
-          <span class="hits">910</span>
+        <li class="covered" data-hits="76" data-linenumber="223">
+          <span class="hits">76</span>
           
-          <code class="ruby">      if params[field] != nil</code>
+          <code class="ruby">    colleges.each do |audience|</code>
         </li>
       
-        <li class="covered" data-hits="179" data-linenumber="224">
-          <span class="hits">179</span>
+        <li class="missed" data-hits="0" data-linenumber="224">
           
-          <code class="ruby">        params[field].each do |val|</code>
+          
+          <code class="ruby">      colleges.destroy</code>
         </li>
       
-        <li class="covered" data-hits="464" data-linenumber="225">
-          <span class="hits">464</span>
+        <li class="never" data-hits="" data-linenumber="225">
           
-          <code class="ruby">          association.create!(:val =&gt; val)</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="226">
+        <li class="covered" data-hits="76" data-linenumber="226">
+          <span class="hits">76</span>
           
-          
-          <code class="ruby">        end</code>
+          <code class="ruby">    availabilities.each do |audience|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="227">
+        <li class="missed" data-hits="0" data-linenumber="227">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">      availabilities.destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="228">
@@ -7805,52 +7894,52 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="229">
+        <li class="covered" data-hits="76" data-linenumber="229">
+          <span class="hits">76</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    innovation_stages.each do |audience|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="230">
+        <li class="missed" data-hits="0" data-linenumber="230">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      innovation_stages.destroy</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="231">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="231">
           
-          <code class="ruby">  def self.find_missing_params(params)</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="232">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="76" data-linenumber="232">
+          <span class="hits">76</span>
           
-          <code class="ruby">    missing = []</code>
+          <code class="ruby">    topics.each do |audience|</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="233">
-          <span class="hits">9</span>
+        <li class="missed" data-hits="0" data-linenumber="233">
           
-          <code class="ruby">    Resource.get_required_resources.each do |r|</code>
+          
+          <code class="ruby">      topics.destroy</code>
         </li>
       
-        <li class="covered" data-hits="54" data-linenumber="234">
-          <span class="hits">54</span>
+        <li class="never" data-hits="" data-linenumber="234">
           
-          <code class="ruby">      if !params.include?(r) or params[r] == &quot;&quot;</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="235">
+        <li class="covered" data-hits="76" data-linenumber="235">
+          <span class="hits">76</span>
           
-          
-          <code class="ruby">        missing.append r</code>
+          <code class="ruby">    technologies.each do |audience|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="236">
+        <li class="missed" data-hits="0" data-linenumber="236">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">      technologies.destroy</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="237">
@@ -7859,118 +7948,118 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="238">
-          <span class="hits">9</span>
-          
-          <code class="ruby">    return missing</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="239">
+        <li class="never" data-hits="" data-linenumber="238">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="240">
+        <li class="never" data-hits="" data-linenumber="239">
           
           
           <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="240">
+          
+          
+          <code class="ruby">  </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="241">
           
           
-          <code class="ruby">  # if filtering by location, filtering should behave as the following</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="242">
-          
-          
-          <code class="ruby">  # find resources of location as well as its children</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="243">
-          
-          
-          <code class="ruby">  # if the location has no resources, find the parent location, and return resources for the parent location</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="244">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def self.location_helper(params)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="245">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="246">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="1" data-linenumber="242">
+          <span class="hits">1</span>
           
-          <code class="ruby">    location = params[:location]</code>
+          <code class="ruby">  def self.separate_params(params)</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="247">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="783" data-linenumber="243">
+          <span class="hits">783</span>
           
-          <code class="ruby">    if location.nil? || !Location.where(:val =&gt; location).exists?</code>
+          <code class="ruby">    params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="248">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="91" data-linenumber="244">
+          <span class="hits">91</span>
           
-          <code class="ruby">      return self.filter(params)</code>
+          <code class="ruby">    resource_hash = {}</code>
+        </li>
+      
+        <li class="covered" data-hits="91" data-linenumber="245">
+          <span class="hits">91</span>
+          
+          <code class="ruby">    params.each do |field, val|</code>
+        </li>
+      
+        <li class="covered" data-hits="692" data-linenumber="246">
+          <span class="hits">692</span>
+          
+          <code class="ruby">      if self.has_many_associations.include? field</code>
+        </li>
+      
+        <li class="covered" data-hits="179" data-linenumber="247">
+          <span class="hits">179</span>
+          
+          <code class="ruby">        if val.is_a?(String)</code>
+        </li>
+      
+        <li class="covered" data-hits="179" data-linenumber="248">
+          <span class="hits">179</span>
+          
+          <code class="ruby">          params[field] = val.split(&#39;,&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="249">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="250">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="251">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="513" data-linenumber="251">
+          <span class="hits">513</span>
           
-          <code class="ruby">    locations = Location.child_locations(location)</code>
+          <code class="ruby">        params.delete field</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="252">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="513" data-linenumber="252">
+          <span class="hits">513</span>
           
-          <code class="ruby">    resources = Resource.none</code>
+          <code class="ruby">        resource_hash[field] = val</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="253">
-          <span class="hits">4</span>
+        <li class="never" data-hits="" data-linenumber="253">
           
-          <code class="ruby">    locations.each do |location|</code>
+          
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="23" data-linenumber="254">
-          <span class="hits">23</span>
+        <li class="never" data-hits="" data-linenumber="254">
           
-          <code class="ruby">      params[:location] = location</code>
+          
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="23" data-linenumber="255">
-          <span class="hits">23</span>
+        <li class="covered" data-hits="91" data-linenumber="255">
+          <span class="hits">91</span>
           
-          <code class="ruby">      resources = resources.or(self.filter(params))</code>
+          <code class="ruby">    return params, resource_hash</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="256">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="257">
@@ -7979,103 +8068,343 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="258">
+        <li class="covered" data-hits="1" data-linenumber="258">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">    # if resources.length &lt; 1</code>
+          <code class="ruby">  def self.create_associations(resource, params)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="259">
+        <li class="covered" data-hits="91" data-linenumber="259">
+          <span class="hits">91</span>
           
-          
-          <code class="ruby">    #   # get parent and its resources</code>
+          <code class="ruby">    fields_hash = self.get_associations_hash(resource)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="260">
           
           
-          <code class="ruby">    #   parent = Location.get_parent(location)</code>
+          <code class="ruby">    </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="261">
+        <li class="covered" data-hits="91" data-linenumber="261">
+          <span class="hits">91</span>
           
-          
-          <code class="ruby">    #   locations = Location.child_locations(parent)</code>
+          <code class="ruby">    fields_hash.each do |field, association|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="262">
+        <li class="covered" data-hits="910" data-linenumber="262">
+          <span class="hits">910</span>
           
-          
-          <code class="ruby">    #   resources = Resource.none</code>
+          <code class="ruby">      association.delete_all # if updating, need to delete and remake associations</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="263">
+        <li class="covered" data-hits="910" data-linenumber="263">
+          <span class="hits">910</span>
           
-          
-          <code class="ruby"></code>
+          <code class="ruby">      if params[field] != nil</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="264">
+        <li class="covered" data-hits="179" data-linenumber="264">
+          <span class="hits">179</span>
           
-          
-          <code class="ruby">    #   locations.each do |location|</code>
+          <code class="ruby">        params[field].each do |val|</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="265">
+        <li class="covered" data-hits="464" data-linenumber="265">
+          <span class="hits">464</span>
           
-          
-          <code class="ruby">    #     params[:location] = location</code>
+          <code class="ruby">          association.create!(:val =&gt; val)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="266">
           
           
-          <code class="ruby">    #     resources = resources.or(self.filter(params))</code>
+          <code class="ruby">        end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="267">
           
           
-          <code class="ruby">    #   end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="268">
           
           
-          <code class="ruby">    # end </code>
+          <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="269">
-          <span class="hits">4</span>
-          
-          <code class="ruby">    return resources</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="270">
+        <li class="never" data-hits="" data-linenumber="269">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="271">
-          
-          
-          <code class="ruby"> </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="272">
-          
-          
-          <code class="ruby">end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="273">
+        <li class="never" data-hits="" data-linenumber="270">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="274">
+        <li class="covered" data-hits="1" data-linenumber="271">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.find_missing_params(params)</code>
+        </li>
+      
+        <li class="covered" data-hits="9" data-linenumber="272">
+          <span class="hits">9</span>
+          
+          <code class="ruby">    missing = []</code>
+        </li>
+      
+        <li class="covered" data-hits="9" data-linenumber="273">
+          <span class="hits">9</span>
+          
+          <code class="ruby">    Resource.get_required_resources.each do |r|</code>
+        </li>
+      
+        <li class="covered" data-hits="54" data-linenumber="274">
+          <span class="hits">54</span>
+          
+          <code class="ruby">      if !params.include?(r) or params[r] == &quot;&quot;</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="275">
+          
+          
+          <code class="ruby">        missing.append r</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="276">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="277">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="9" data-linenumber="278">
+          <span class="hits">9</span>
+          
+          <code class="ruby">    return missing</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="279">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="280">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="281">
+          
+          
+          <code class="ruby">  # if filtering by location, filtering should behave as the following</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="282">
+          
+          
+          <code class="ruby">  # find resources of location as well as its children</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="283">
+          
+          
+          <code class="ruby">  # if the location has no resources, find the parent location, and return resources for the parent location</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="284">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def self.location_helper(params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="285">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="9" data-linenumber="286">
+          <span class="hits">9</span>
+          
+          <code class="ruby">    location = params[:location]</code>
+        </li>
+      
+        <li class="covered" data-hits="9" data-linenumber="287">
+          <span class="hits">9</span>
+          
+          <code class="ruby">    if location.nil? || !Location.where(:val =&gt; location).exists?</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="288">
+          <span class="hits">5</span>
+          
+          <code class="ruby">      return self.filter(params)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="289">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="290">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="291">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    locations = Location.child_locations(location)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="292">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    resources = Resource.none</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="293">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    locations.each do |location|</code>
+        </li>
+      
+        <li class="covered" data-hits="23" data-linenumber="294">
+          <span class="hits">23</span>
+          
+          <code class="ruby">      params[:location] = location</code>
+        </li>
+      
+        <li class="covered" data-hits="23" data-linenumber="295">
+          <span class="hits">23</span>
+          
+          <code class="ruby">      resources = resources.or(self.filter(params))</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="296">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="297">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="298">
+          
+          
+          <code class="ruby">    # if resources.length &lt; 1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="299">
+          
+          
+          <code class="ruby">    #   # get parent and its resources</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="300">
+          
+          
+          <code class="ruby">    #   parent = Location.get_parent(location)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="301">
+          
+          
+          <code class="ruby">    #   locations = Location.child_locations(parent)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="302">
+          
+          
+          <code class="ruby">    #   resources = Resource.none</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="303">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="304">
+          
+          
+          <code class="ruby">    #   locations.each do |location|</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="305">
+          
+          
+          <code class="ruby">    #     params[:location] = location</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="306">
+          
+          
+          <code class="ruby">    #     resources = resources.or(self.filter(params))</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="307">
+          
+          
+          <code class="ruby">    #   end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="308">
+          
+          
+          <code class="ruby">    # end </code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="309">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    return resources</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="310">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="311">
+          
+          
+          <code class="ruby"> </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="312">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="313">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="314">
           
           
           <code class="ruby"></code>
@@ -12166,11 +12495,11 @@
         <div class="source_table" id="a5ddd6873e63016a3fcc9fe993dfd1e5ea38e702">
   <div class="header">
     <h3>lib/tasks/reminder_emails.rake</h3>
-    <h4><span class="green">100.0 %</span> covered</h4>
+    <h4><span class="yellow">84.38 %</span> covered</h4>
     <div>
-      <b>10</b> relevant lines. 
-      <span class="green"><b>10</b> lines covered</span> and
-      <span class="red"><b>0</b> lines missed.</span>
+      <b>32</b> relevant lines. 
+      <span class="green"><b>27</b> lines covered</span> and
+      <span class="red"><b>5</b> lines missed.</span>
     </div>
   </div>
   
@@ -12195,52 +12524,52 @@
           <code class="ruby">  task send_annual_reminder_email: :environment do</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="4">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="11" data-linenumber="4">
+          <span class="hits">11</span>
           
-          <code class="ruby">    out_of_date_resources = Set.new</code>
+          <code class="ruby">    out_of_date_resources = Resource.out_of_date_resources</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="5">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="11" data-linenumber="5">
+          <span class="hits">11</span>
           
-          <code class="ruby">    valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/</code>
+          <code class="ruby">    out_of_date_resources.each do |resource|</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="6">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="22" data-linenumber="6">
+          <span class="hits">22</span>
           
-          <code class="ruby">    Resource.all.each do |resource|</code>
+          <code class="ruby">      next unless resource.num_emails.zero?</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="7">
-          <span class="hits">4</span>
+        <li class="never" data-hits="" data-linenumber="7">
           
-          <code class="ruby">      if !resource.contact_email.blank? &amp;&amp; valid_email_regex.match(resource.contact_email) \</code>
+          
+          <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="8">
+        <li class="covered" data-hits="22" data-linenumber="8">
+          <span class="hits">22</span>
           
-          
-          <code class="ruby">         &amp;&amp; TimeDifference.between(resource.updated_at, Time.now).in_years &gt;= 1</code>
+          <code class="ruby">      UserMailer.with(resource: resource).annual_reminder_email.deliver_now</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="9">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="22" data-linenumber="9">
+          <span class="hits">22</span>
           
-          <code class="ruby">        out_of_date_resources.add(resource)</code>
+          <code class="ruby">      resource.update_num_emails_and_last_email_sent(1)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="10">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="11">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="12">
@@ -12252,28 +12581,238 @@
         <li class="covered" data-hits="1" data-linenumber="13">
           <span class="hits">1</span>
           
+          <code class="ruby">  task send_first_warning_email: :environment do</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="14">
+          <span class="hits">8</span>
+          
+          <code class="ruby">    out_of_date_resources = Resource.out_of_date_resources</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="15">
+          <span class="hits">8</span>
+          
           <code class="ruby">    out_of_date_resources.each do |resource|</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="14">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="16" data-linenumber="16">
+          <span class="hits">16</span>
           
-          <code class="ruby">      UserMailer.with(resource: resource).annual_reminder_email.deliver_now</code>
+          <code class="ruby">      next unless resource.num_emails == 1 &amp;&amp; resource.one_week_passed?</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="15">
+        <li class="never" data-hits="" data-linenumber="17">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="16" data-linenumber="18">
+          <span class="hits">16</span>
+          
+          <code class="ruby">      UserMailer.with(resource: resource).annual_reminder_email.deliver_now;</code>
+        </li>
+      
+        <li class="covered" data-hits="16" data-linenumber="19">
+          <span class="hits">16</span>
+          
+          <code class="ruby">      resource.update_num_emails(2)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="16">
+        <li class="never" data-hits="" data-linenumber="21">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="17">
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="23">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  task send_second_warning_email: :environment do</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="24">
+          <span class="hits">5</span>
+          
+          <code class="ruby">    out_of_date_resources = Resource.out_of_date_resources</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="25">
+          <span class="hits">5</span>
+          
+          <code class="ruby">    out_of_date_resources.each do |resource|</code>
+        </li>
+      
+        <li class="covered" data-hits="10" data-linenumber="26">
+          <span class="hits">10</span>
+          
+          <code class="ruby">      next unless resource.num_emails == 2 &amp;&amp; resource.two_weeks_passed?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="10" data-linenumber="28">
+          <span class="hits">10</span>
+          
+          <code class="ruby">      UserMailer.with(resource: resource).annual_reminder_email.deliver_now</code>
+        </li>
+      
+        <li class="covered" data-hits="10" data-linenumber="29">
+          <span class="hits">10</span>
+          
+          <code class="ruby">      resource.update_num_emails(3)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  task send_third_warning_email: :environment do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    out_of_date_resources = Resource.out_of_date_resources</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    out_of_date_resources.each do |resource|</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="36">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      next unless resource.num_emails == 3 &amp;&amp; resource.one_month_passed?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="38">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      UserMailer.with(resource: resource).annual_reminder_email.deliver_now</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="39">
+          <span class="hits">2</span>
+          
+          <code class="ruby">      resource.update_num_emails(4)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="40">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="43">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  task send_resource_removed_email: :environment do</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="44">
+          
+          
+          <code class="ruby">    out_of_date_resources = Resource.out_of_date_resources</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="45">
+          
+          
+          <code class="ruby">    out_of_date_resources.each do |resource|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="46">
+          
+          
+          <code class="ruby">      next unless resource.num_emails == 3 &amp;&amp; resource.one_month_passed?</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="47">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="48">
+          
+          
+          <code class="ruby">      UserMailer.with(resource: resource).annual_reminder_email.deliver_now</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="49">
+          
+          
+          <code class="ruby">      resource.update_num_emails(4)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="51">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="52">
           
           
           <code class="ruby">end</code>
@@ -16725,8 +17264,8 @@
     <h3>spec/tasks/reminder_emails_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>17</b> relevant lines. 
-      <span class="green"><b>17</b> lines covered</span> and
+      <b>90</b> relevant lines. 
+      <span class="green"><b>90</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -16773,118 +17312,718 @@
         <li class="covered" data-hits="1" data-linenumber="7">
           <span class="hits">1</span>
           
-          <code class="ruby">  before :all do</code>
+          <code class="ruby">  first_time = Time.local(2019, 11, 10, 0, 0, 0)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="8">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="8">
           
-          <code class="ruby">    Rake.application.rake_require &#39;tasks/reminder_emails&#39;</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="9">
           <span class="hits">1</span>
           
+          <code class="ruby">  before :each do</code>
+        </li>
+      
+        <li class="covered" data-hits="11" data-linenumber="10">
+          <span class="hits">11</span>
+          
+          <code class="ruby">    Rake.application.rake_require &#39;tasks/reminder_emails&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="11" data-linenumber="11">
+          <span class="hits">11</span>
+          
           <code class="ruby">    Rake::Task.define_task(:environment)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="10">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="11" data-linenumber="12">
+          <span class="hits">11</span>
           
-          <code class="ruby">    time = Time.local(2019, 11, 10, 0, 0, 0)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="11">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    Timecop.freeze(time)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="12">
-          
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    Timecop.freeze(first_time)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="13">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="14">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="14">
           
-          <code class="ruby">  after :all do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="15">
           <span class="hits">1</span>
           
-          <code class="ruby">    Timecop.return</code>
+          <code class="ruby">  after :each do</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="16">
+        <li class="covered" data-hits="11" data-linenumber="16">
+          <span class="hits">11</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    Timecop.return</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="17">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">  end</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="18">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="18">
           
-          <code class="ruby">  let :run_rake_task do</code>
+          
+          <code class="ruby"></code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="19">
           <span class="hits">1</span>
           
+          <code class="ruby">  let :run_annual_reminder_emails do</code>
+        </li>
+      
+        <li class="covered" data-hits="11" data-linenumber="20">
+          <span class="hits">11</span>
+          
           <code class="ruby">    Rake::Task[&#39;reminder_emails:send_annual_reminder_email&#39;].reenable</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="20">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="11" data-linenumber="21">
+          <span class="hits">11</span>
           
           <code class="ruby">    Rake.application.invoke_task &#39;reminder_emails:send_annual_reminder_email&#39;</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="21">
-          
-          
-          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="22">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="23">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="23">
+        <li class="covered" data-hits="1" data-linenumber="24">
           <span class="hits">1</span>
           
-          <code class="ruby">  it &#39;should send a reminder email to to resources (with a valid resource owner email) that have not been updated for a year&#39; do</code>
+          <code class="ruby">  let :run_first_warning_emails do</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="24">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="8" data-linenumber="25">
+          <span class="hits">8</span>
           
-          <code class="ruby">    expect { run_rake_task }.to change { ActionMailer::Base.deliveries.count }.by(2)</code>
+          <code class="ruby">    Rake::Task[&#39;reminder_emails:send_first_warning_email&#39;].reenable</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="25">
+        <li class="covered" data-hits="8" data-linenumber="26">
+          <span class="hits">8</span>
+          
+          <code class="ruby">    Rake.application.invoke_task &#39;reminder_emails:send_first_warning_email&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="27">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="26">
+        <li class="never" data-hits="" data-linenumber="28">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  let :run_second_warning_emails do</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="30">
+          <span class="hits">5</span>
+          
+          <code class="ruby">    Rake::Task[&#39;reminder_emails:send_second_warning_email&#39;].reenable</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="31">
+          <span class="hits">5</span>
+          
+          <code class="ruby">    Rake.application.invoke_task &#39;reminder_emails:send_second_warning_email&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="33">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  let :run_third_warning_emails do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Rake::Task[&#39;reminder_emails:send_third_warning_email&#39;].reenable</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="36">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Rake.application.invoke_task &#39;reminder_emails:send_third_warning_email&#39;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &#39;should send a reminder email to to resources (with a valid resource owner email) that have not been updated for a year&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="40">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    expect { run_annual_reminder_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="41">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="43">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &#39;should change the num_emails for the resource to 1 if we are sending the first annual email&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="44">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).num_emails).to eq(0)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="45">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).num_emails).to eq(0)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="46">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="47">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).num_emails).to eq(1)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="48">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).num_emails).to eq(1)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="49">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="50">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="51">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &#39;should update last_email_sent attribute of resource if we are sending the first annual email&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="52">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).last_email_sent).to be_nil</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="53">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).last_email_sent).to be_nil</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="54">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="55">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).last_email_sent).to eq first_time</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="56">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).last_email_sent).to eq first_time</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="57">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="58">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="59">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &quot;should send first warning email to resources that have been sent an annual reminder email but have not responded in a week&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="60">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="61">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="62">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    expect { run_first_warning_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="63">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &#39;should not update last_email_sent attribute of resource if we are sending the first warning email&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="66">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="67">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="68">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_first_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="69">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).last_email_sent).to eq first_time</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="70">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).last_email_sent).to eq first_time</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="71">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="72">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="73">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &#39;should change the num_emails for the resource to 2 if we are sending the first warning email&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="74">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="75">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="76">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_first_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="77">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).num_emails).to eq(2)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="78">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).num_emails).to eq(2)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="79">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="80">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="81">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &quot;should send second warning email to resources that have been sent an annual reminder email but have not responded in two weeks&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="82">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="83">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="84">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_first_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="85">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 2.weeks)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="86">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    expect { run_second_warning_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="87">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="88">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="89">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &quot;should send second warning email to resources that have been sent an annual reminder email but have not responded in two weeks&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="90">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="91">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="92">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_first_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="93">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 2.weeks)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="94">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    expect { run_second_warning_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="95">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="96">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="97">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &#39;should not update last_email_sent attribute of resource if we are sending the second warning email&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="98">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="99">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="100">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_first_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="101">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 2.weeks)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="102">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_second_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="103">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).last_email_sent).to eq first_time</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="104">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).last_email_sent).to eq first_time</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="105">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="106">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="107">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &#39;should change the num_emails for the resource to 3 if we are sending the second warning email&#39; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="108">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="109">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="110">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_first_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="111">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 2.weeks)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="112">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_second_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="113">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource0&#39;).num_emails).to eq(3)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="114">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    expect(Resource.find_by_title(&#39;resource2&#39;).num_emails).to eq(3)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="115">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="117">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  it &quot;should send second warning email to resources that have been sent an annual reminder email but have not responded in a month&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="118">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_annual_reminder_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="119">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.week)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="120">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_first_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="121">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 2.weeks)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="122">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    run_second_warning_emails</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="123">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    Timecop.freeze(first_time + 1.month + 1.day)</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="124">
+          <span class="hits">4</span>
+          
+          <code class="ruby">    expect { run_third_warning_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="125">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="126">
           
           
           <code class="ruby">end</code>
