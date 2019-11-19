@@ -16,4 +16,19 @@ class UserMailer < ApplicationMailer
     @resource = params[:resource]
     mail(to: @resource.contact_email, subject: "Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
   end
+
+  def first_warning_email
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: "First warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+  end
+
+  def second_warning_email
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: "Second warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+  end
+
+  def third_warning_email
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: "Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+  end
 end
