@@ -114,7 +114,7 @@ RSpec.describe 'reminder_emails namespace rake task' do
     expect(Resource.find_by_title('resource2').num_emails).to eq(3)
   end
 
-  it "should send second warning email to resources that have been sent an annual reminder email but have not responded in a month" do
+  it "should send third warning email to resources that have been sent an annual reminder email but have not responded in a month" do
     run_annual_reminder_emails
     Timecop.freeze(first_time + 1.week)
     run_first_warning_emails
@@ -122,5 +122,29 @@ RSpec.describe 'reminder_emails namespace rake task' do
     run_second_warning_emails
     Timecop.freeze(first_time + 1.month + 1.day)
     expect { run_third_warning_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)
+  end
+
+  it 'should not update last_email_sent attribute of resource if we are sending the third warning email' do
+    run_annual_reminder_emails
+    Timecop.freeze(first_time + 1.week)
+    run_first_warning_emails
+    Timecop.freeze(first_time + 2.weeks)
+    run_second_warning_emails
+    Timecop.freeze(first_time + 1.month + 1.day)
+    run_third_warning_emails
+    expect(Resource.find_by_title('resource0').last_email_sent).to eq first_time
+    expect(Resource.find_by_title('resource2').last_email_sent).to eq first_time
+  end
+
+  it 'should change the num_emails for the resource to 4 if we are sending the third warning email' do
+    run_annual_reminder_emails
+    Timecop.freeze(first_time + 1.week)
+    run_first_warning_emails
+    Timecop.freeze(first_time + 2.weeks)
+    run_second_warning_emails
+    Timecop.freeze(first_time + 1.month + 1.day)
+    run_third_warning_emails
+    expect(Resource.find_by_title('resource0').num_emails).to eq(4)
+    expect(Resource.find_by_title('resource2').num_emails).to eq(4)
   end
 end
