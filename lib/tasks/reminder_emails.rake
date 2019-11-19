@@ -15,7 +15,7 @@ namespace :reminder_emails do
     out_of_date_resources.each do |resource|
       next unless resource.num_emails == 1 && resource.one_week_passed?
 
-      UserMailer.with(resource: resource).first_warning_email.deliver_now;
+      UserMailer.with(resource: resource).first_warning_email.deliver_now
       resource.update_num_emails(2)
     end
   end
@@ -37,6 +37,16 @@ namespace :reminder_emails do
 
       UserMailer.with(resource: resource).third_warning_email.deliver_now
       resource.update_num_emails(4)
+    end
+  end
+
+  task send_expired_event_email: :environment do
+    expired_resources = Resource.expired_resources
+    expired_resources.each do |resource|
+      unless resource.expired_email_sent
+        UserMailer.with(resource: resource).expired_event_email.deliver_now
+        resource.update_expired_email_sent(true)
+      end
     end
   end
 

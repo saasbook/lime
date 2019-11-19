@@ -36,6 +36,11 @@ RSpec.describe 'reminder_emails namespace rake task' do
     Rake.application.invoke_task 'reminder_emails:send_third_warning_email'
   end
 
+  let :run_expired_event_emails do
+    Rake::Task['reminder_emails:send_expired_event_email'].reenable
+    Rake.application.invoke_task 'reminder_emails:send_expired_event_email'
+  end
+
   it 'should send a reminder email to to resources (with a valid resource owner email) that have not been updated for a year' do
     expect { run_annual_reminder_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)
   end
@@ -146,5 +151,21 @@ RSpec.describe 'reminder_emails namespace rake task' do
     run_third_warning_emails
     expect(Resource.find_by_title('resource0').num_emails).to eq(4)
     expect(Resource.find_by_title('resource2').num_emails).to eq(4)
+  end
+
+  it 'should send an expired event email if a resource is expired' do
+    expect{ run_expired_event_emails }.to change { ActionMailer::Base.deliveries.count }.by(2)
+  end
+
+  it 'should change expired_email_sent if a resource is expired and updated_at should stay the same' do
+    resource0_updated_at = Resource.find_by_title('resource0').updated_at
+    resource2_updated_at = Resource.find_by_title('resource2').updated_at
+    expect(Resource.find_by_title('resource0').expired_email_sent).to be_falsey
+    expect(Resource.find_by_title('resource2').expired_email_sent).to be_falsey
+    run_expired_event_emails
+    expect(Resource.find_by_title('resource0').expired_email_sent).to be_truthy
+    expect(Resource.find_by_title('resource2').expired_email_sent).to be_truthy
+    expect(Resource.find_by_title('resource0').updated_at).to eq resource0_updated_at
+    expect(Resource.find_by_title('resource2').updated_at).to eq resource2_updated_at
   end
 end

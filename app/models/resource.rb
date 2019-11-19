@@ -180,6 +180,10 @@ class Resource < ActiveRecord::Base
     TimeDifference.between(last_email_sent, Time.now).in_months >= 1
   end
 
+  def expired?
+    !deadline.blank? && deadline < Time.now
+  end
+
   def update_num_emails_and_last_email_sent(num_emails)
     Resource.record_timestamps = false
     update!(num_emails: num_emails)
@@ -193,6 +197,12 @@ class Resource < ActiveRecord::Base
     Resource.record_timestamps = true
   end
 
+  def update_expired_email_sent(truth)
+    Resource.record_timestamps = false
+    update!(expired_email_sent: truth)
+    Resource.record_timestamps = true
+  end
+
   def self.out_of_date_resources
     out_of_date_resources = Set.new
     Resource.all.each do |resource|
@@ -202,6 +212,17 @@ class Resource < ActiveRecord::Base
       end
     end
     out_of_date_resources
+  end
+
+  def self.expired_resources
+    expired_resources = Set.new
+    Resource.all.each do |resource|
+      email = resource.contact_email
+      if !email.blank? && Email.valid_email?(email) && resource.expired?
+        expired_resources.add(resource)
+      end
+    end
+    expired_resources
   end
 
   def destroy_related_records

@@ -31,4 +31,9 @@ class UserMailer < ApplicationMailer
     @resource = params[:resource]
     mail(to: @resource.contact_email, subject: "Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
   end
+
+  def expired_event_email
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: "Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+  end
 end

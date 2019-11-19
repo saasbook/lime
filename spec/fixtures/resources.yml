@@ -6,6 +6,7 @@ resource_0:
   location: "Berkeley"
   description: "description0"
   num_emails: 0
+  deadline: 2019-11-09 00:00:00
 
 resource_1:
   title: 'resource1'
@@ -15,6 +16,7 @@ resource_1:
   location: "Berkeley"
   description: "description1"
   num_emails: 0
+  deadline: 2019-12-09 00:00:00
 
 resource_2:
   title: 'resource2'
@@ -24,6 +26,7 @@ resource_2:
   location: "Berkeley"
   description: "description2"
   num_emails: 0
+  deadline: 2019-11-05 00:00:00
 
 resource_3:
   title: 'resource3'
@@ -33,3 +36,4 @@ resource_3:
   location: "Berkeley"
   description: "description3"
   num_emails: 0
+  deadline: 2019-11-09 00:00:00
