@@ -24,6 +24,7 @@ before_script:
   - $CCTR before-build
   - bundle exec rake db:reset
   - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/databse.yml
 
 scripts:
   - bundle exec rake db:setup
