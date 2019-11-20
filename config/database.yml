@@ -47,7 +47,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: travis_ci_test
+  database: lime_test
   pool: 5
   username: emilyh
 #  password: test
