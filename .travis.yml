@@ -3,6 +3,9 @@
 language: ruby
 rvm:
     - 2.6.0
+    
+services:
+    - postgresql
 env:
   global:
     - CC_TEST_REPORTER_ID=6273e941f44274024347e6c2c3153ad5bd3ce4659e8540265466b2069e8fc48b
