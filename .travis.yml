@@ -3,29 +3,40 @@
 language: ruby
 rvm:
     - 2.6.0
+    
+services:
+    - postgresql
 env:
   global:
-    - CC_TEST_REPORTER_ID=7859b2a9afa12a79aa17a382731ee5d82078e1b9314393be49d51d55caa08747
+    - CC_TEST_REPORTER_ID=6273e941f44274024347e6c2c3153ad5bd3ce4659e8540265466b2069e8fc48b
+    - CCTR=./cc-test-reporter
+    - TZ=America/Los_Angeles
 
-bundler_args:
-    --without production
+bundler_args: --without production
 
 before_install:
   - gem install bundler -v 1.17.2
   - bundle update rails
 
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
+  - chmod +x $CCTR
+  - $CCTR before-build
+  - cp config/database.yml.travis config/databse.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
   - bundle exec rake db:reset
 
 scripts:
+  - bundle exec rake db:setup
   - bundle exec rspec
-  - ./cc-test-reporter format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
+  - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
+  - bundle exec cucumber --strict
+  - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
 
 after_script:
-  - ./cc-test-reporter sum-coverage -i coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT -r $CC_TEST_REPORTER_ID
+  - $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
+  - $CCTR after-build --exit-code $TRAVIS_TEST_RESULT
+  - rm -f config/application.yml
+
 notifications:
     - false
