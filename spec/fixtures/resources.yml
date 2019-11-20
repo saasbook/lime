@@ -1,0 +1,39 @@
+resource_0:
+  title: 'resource0'
+  contact_email: "email0@email.com"
+  updated_at: 2018-11-01
+  url: "www.facebook.com"
+  location: "Berkeley"
+  description: "description0"
+  num_emails: 0
+  deadline: 2019-11-09 00:00:00
+
+resource_1:
+  title: 'resource1'
+  contact_email: "email1@email.com"
+  updated_at: 2019-11-01
+  url: "www.facebook.com"
+  location: "Berkeley"
+  description: "description1"
+  num_emails: 0
+  deadline: 2019-12-09 00:00:00
+
+resource_2:
+  title: 'resource2'
+  contact_email: "email2@email.com"
+  updated_at: 2018-11-11
+  url: "www.facebook.com"
+  location: "Berkeley"
+  description: "description2"
+  num_emails: 0
+  deadline: 2019-11-05 00:00:00
+
+resource_3:
+  title: 'resource3'
+  contact_email: "="
+  updated_at: 2018-11-01
+  url: "www.facebook.com"
+  location: "Berkeley"
+  description: "description3"
+  num_emails: 0
+  deadline: 2019-11-09 00:00:00
