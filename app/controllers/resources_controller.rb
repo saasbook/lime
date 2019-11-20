@@ -4,6 +4,8 @@ class ResourcesController < ApplicationController
   require "open-uri"
   include ResourcesControllerHelper
   include ResourcesControllerUpload
+
+
   def resource_params
     params.permit(
                   :title, :url, :contact_email, :location, :population_focuses, :campuses,
@@ -69,7 +71,10 @@ class ResourcesController < ApplicationController
     #   @resources = @resources.order(sort_by)
     # end
     @resources = Resource.location_helper(resource_params)
-    
+
+    #@resources.map do |resource|
+      #isURLBroken_ifSoTagIt(resource)
+    #end
 
     # process the data differently depending if an API call or a webpage
     respond_to do |format|
@@ -108,8 +113,11 @@ class ResourcesController < ApplicationController
 
         @resources_json = @all_resources.as_json(:include => Resource.include_has_many_params)
 
+
+
         @resources_json.map! do |resource|
           resource = json_fix(resource)
+
         end
       }
     end
@@ -262,31 +270,23 @@ class ResourcesController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def isURLBroken(resource)
-    # id = params[:id]
-    # @resource = Resource.find_by_id(id)
-    # @all_values_hash = Resource.all_values_hash
-    # @all_public_values_hash = Resource.all_public_values_hash
-    # @full_resource = @resource.as_json(:include => Resource.include_has_many_params)
 
-    #open("http://www.google.com") do |f|
-    #
-    #
-    #$stderr.puts resource
-    #$stderr.puts "printing the entire thing"
-    #$stderr.puts "http://"+resource.url
-    open("http://" + resource.url) do |f|
+  def isURLBroken_ifSoTagIt(resource)
+    open(resource.url) do |f|
+        #puts resource.url
+        #puts f.status[1]
 
-      #puts f.status[0]
         if f.status[1]=="OK" then
-          print "GOOD URL"
-        else
-          print "BAD URL"
+            print "GOOD URL"
         end
+    end
+    rescue StandardError => e
+         print "BAD URL"
 
+         Resource.tagBrokenURL(resource.id)
     end
   end
 
-end
+
 
 

@@ -1,6 +1,7 @@
 class Resource < ActiveRecord::Base
   include ::Resourceconcern
 
+
   has_many :types, dependent: :destroy
   has_many :audiences, dependent: :destroy
   has_many :client_tags, dependent: :destroy
@@ -269,10 +270,22 @@ class Resource < ActiveRecord::Base
     return resources
   end
 
-  def self.isURLValid()
 
+  def self.tagBrokenURL(id)
+
+     resource = Resource.find_by(id: id)
+
+     isBrokenURLAlreadyTagged=false
+     resource.types.as_json.each do |type|
+        if type["val"]=="BrokenUrl"
+            isBrokenURLAlreadyTagged=true
+        end
+     end
+
+     if !isBrokenURLAlreadyTagged
+        resource.types.create!(:val => 'BrokenURL')
+     end
   end
- 
 end
 
 
