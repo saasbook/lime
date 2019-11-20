@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :resource_owners
+  resources :posts
   devise_for :users, controllers: {registrations: 'users/registrations'}
   resources :bug_reports
   get 'faq/index'

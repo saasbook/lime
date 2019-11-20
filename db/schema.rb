@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_10_30_231324) do
+=======
+ActiveRecord::Schema.define(version: 2019_10_23_235824) do
+>>>>>>> 0c5f2b98cfbf8f9027e85e311126f9a3c6fe6a7a
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +111,7 @@ ActiveRecord::Schema.define(version: 2019_10_30_231324) do
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "resource_owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -119,6 +124,8 @@ ActiveRecord::Schema.define(version: 2019_10_30_231324) do
     t.index ["reset_password_token"], name: "index_resource_owners_on_reset_password_token", unique: true
   end
 
+=======
+>>>>>>> 0c5f2b98cfbf8f9027e85e311126f9a3c6fe6a7a
   create_table "resources", force: :cascade do |t|
     t.string "title"
     t.string "url"
