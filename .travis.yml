@@ -22,9 +22,9 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $CCTR
   - chmod +x $CCTR
   - $CCTR before-build
-  - bundle exec rake db:reset
-  - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/databse.yml
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - bundle exec rake db:reset
 
 scripts:
   - bundle exec rake db:setup
