@@ -29,9 +29,9 @@ before_script:
 scripts:
   - bundle exec rake db:setup
   - bundle exec rspec
-  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
+  - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
   - bundle exec cucumber --strict
-  - $CCTR format-coverage -t simplecov --output coverage/codeclimate.$SUITE.json
+  - $CCTR format-coverage--output coverage/codeclimate.$SUITE.json
 
 after_script:
   - $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
