@@ -6,7 +6,6 @@
 require 'simplecov'
 require 'cucumber/rails'
 SimpleCov.start
-SimpleCov.coverage_dir 'coverage/cucumber'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
