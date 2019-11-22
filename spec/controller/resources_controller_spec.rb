@@ -214,13 +214,13 @@ RSpec.describe ResourcesController, :type => :controller do
 
     it "should print out good URL status" do
       expect do
-        controller.isURLBroken_ifSoTagIt(@resource_goodURL1)
+        @resource_goodURL1.isURLBroken_ifSoTagIt()
       end.to output("GOOD URL").to_stdout
     end
 
 
      it "should tag a resource with a broken URL" do
-        controller.isURLBroken_ifSoTagIt(@resource_badURL1)
+        @resource_badURL1.isURLBroken_ifSoTagIt()
         isURLTaggedAsBroken=false
 
         @resource_badURL1.reload.types.as_json.each do |type|
@@ -235,7 +235,7 @@ RSpec.describe ResourcesController, :type => :controller do
 
     it "should tag a resource with a broken URL correctly but not tag it twice if it's already been tagged" do
 
-        controller.isURLBroken_ifSoTagIt(@resource_taggedBrokenURLAlready)
+        @resource_taggedBrokenURLAlready.isURLBroken_ifSoTagIt()
         isURLTaggedAsBroken=false
         count=0
         @resource_taggedBrokenURLAlready.reload.types.as_json.each do |type|
@@ -244,12 +244,14 @@ RSpec.describe ResourcesController, :type => :controller do
               count=count+1
            end
         end
+
         expect(isURLTaggedAsBroken).to equal(true)
-        #expect(count).to equal(1)
+        expect(count).to equal(1)
+
     end
 
     it "not tag a resource with a valid URL" do
-        controller.isURLBroken_ifSoTagIt(@resource_goodURL1)
+        @resource_goodURL1.isURLBroken_ifSoTagIt()
         isURLTaggedAsBroken=false
         count=0
         @resource_goodURL1.reload.types.as_json.each do |type|
@@ -263,7 +265,7 @@ RSpec.describe ResourcesController, :type => :controller do
     end
 
     it "https url thats valid shouldn't be tagged as broken" do
-      controller.isURLBroken_ifSoTagIt(@resource_httpsValidURL)
+      @resource_httpsValidURL.isURLBroken_ifSoTagIt()
       isURLTaggedAsBroken=false
       count=0
       @resource_httpsValidURL.reload.types.as_json.each do |type|
@@ -281,13 +283,13 @@ RSpec.describe ResourcesController, :type => :controller do
 
     it "call isUrlBroken for every resource in database" do
 
-        puts ("MELISSA")
-        #puts(Resource.load_all())
+        count=0
         Resource.all.each do |resource|
-            puts ("Examining this Resource")
             puts(resource.title)
-            controller.isURLBroken_ifSoTagIt(resource)
+            resource.isURLBroken_ifSoTagIt()
+            count+=1
         end
+        expect(count).to equal(4)
     end
   end
 end

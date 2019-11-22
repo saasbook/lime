@@ -73,7 +73,7 @@ class ResourcesController < ApplicationController
     @resources = Resource.location_helper(resource_params)
 
     #@resources.map do |resource|
-      #isURLBroken_ifSoTagIt(resource)
+    #  isURLBroken_ifSoTagIt(resource)
     #end
 
     # process the data differently depending if an API call or a webpage
@@ -271,20 +271,7 @@ class ResourcesController < ApplicationController
   end
 
 
-  def isURLBroken_ifSoTagIt(resource)
-    open(resource.url) do |f|
-        #puts resource.url
-        #puts f.status[1]
 
-        if f.status[1]=="OK" then
-            print "GOOD URL"
-        end
-    end
-    rescue StandardError => e
-         print "BAD URL"
-
-         Resource.tagBrokenURL(resource.id)
-    end
   end
 
 
