@@ -1,11 +1,7 @@
 class ResourcesController < ApplicationController
   require 'csv'
-  require 'net/http'
-  require "open-uri"
   include ResourcesControllerHelper
   include ResourcesControllerUpload
-
-
   def resource_params
     params.permit(
                   :title, :url, :contact_email, :location, :population_focuses, :campuses,
@@ -71,10 +67,7 @@ class ResourcesController < ApplicationController
     #   @resources = @resources.order(sort_by)
     # end
     @resources = Resource.location_helper(resource_params)
-
-    #@resources.map do |resource|
-    #  isURLBroken_ifSoTagIt(resource)
-    #end
+    
 
     # process the data differently depending if an API call or a webpage
     respond_to do |format|
@@ -113,11 +106,8 @@ class ResourcesController < ApplicationController
 
         @resources_json = @all_resources.as_json(:include => Resource.include_has_many_params)
 
-
-
         @resources_json.map! do |resource|
           resource = json_fix(resource)
-
         end
       }
     end
@@ -131,7 +121,7 @@ class ResourcesController < ApplicationController
     @has_many_hash = self.has_many_value_hash
     
     # only admins can see unapproved and archived resources
-    if @user.nil? and @resource.approval_status == 0
+    if @user.nil? and @resource&.approval_status == 0
       @resource = nil
     end
     
@@ -269,11 +259,6 @@ class ResourcesController < ApplicationController
     flash[:alert] = "Resource permanently deleted"
     redirect_back(fallback_location: root_path)
   end
-
-
-
-  end
-
-
+end
 
 

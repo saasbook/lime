@@ -163,44 +163,4 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       expect(result.count).to eq 1
     end
   end
-
-
-
-  #Testing for Broken URL
-  describe 'RSpec Tests for Broken URL flag' do
-      before(:each) do
-        Resource.destroy_all
-        @resource_flaggedTypeBrokenURL = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
-                                              "types" => 'BrokenURL, Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
-
-        @resource_badURLNotTaggedYet = Resource.create_resource "title" => "thing2", "url" => "BADURL", "contact_email" => "something@gmail.com", "location" => "Global",
-                                              "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
-
-
-        @resource3 = Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
-                                              "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
-
-        @resource4 = Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
-                                 "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
-
-        User.delete_all
-        User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
-      end
-
-
-      it 'tests that on creating a resource with a Broken URL, it immediately gets tagged as a type BrokenURL' do
-        result = Resource.filter({"types" => "BrokenURL"})
-        #expect(result.count).to eq 1
-       # expect(result.first.title).to eq "thing2"
-        #expect (result.second.title).to eq "thing2"
-      end
-
-      it 'it can check that if the type is tagged BrokenURL, the filter by BrokenURL works' do
-        result = Resource.filter({"types" => "BrokenURL"})
-        #expect(result.count).to eq 2
-        #expect(result.first.title).to eq "thing1"
-        #expect (result.second.title).to eq "thing2"
-      end
-
-   end
 end
