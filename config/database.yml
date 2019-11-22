@@ -49,13 +49,9 @@ test:
   encoding: unicode
   database: lime_test
   pool: 5
-<<<<<<< HEAD
   username: postgres
 #  password: test
-=======
-  username: abfranco
-  password: test
->>>>>>> brokenurl
+
   timeout: 5000
 
 
