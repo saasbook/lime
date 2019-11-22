@@ -1,5 +1,7 @@
 class ResourcesController < ApplicationController
   require 'csv'
+  require 'net/http'
+  require "open-uri"
   include ResourcesControllerHelper
   include ResourcesControllerUpload
   def resource_params
