@@ -22,6 +22,7 @@ RSpec.describe ResourcesController, :type => :controller do
       # get :index, params: {:types => 'Events,Mentoring'}
 
     # end
+
   end
 
   describe 'only allows admins to GET unapproved resources' do
@@ -48,6 +49,7 @@ RSpec.describe ResourcesController, :type => :controller do
     #   response = get :new, params: {}
     #   expect(response.status).to eq 200
     # end
+
   end
 
   describe "GET edit" do
@@ -189,6 +191,7 @@ RSpec.describe ResourcesController, :type => :controller do
      expect(JSON.parse(response.body)).to be_empty
     end
   end
+
 #RSpec test for Broken URL feature
   describe "Testing Broken URL Tag" do
     before (:each) do
@@ -290,4 +293,5 @@ RSpec.describe ResourcesController, :type => :controller do
       expect(count).to equal(4)
     end
   end
+
 end

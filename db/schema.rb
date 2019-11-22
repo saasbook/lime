@@ -102,13 +102,6 @@ ActiveRecord::Schema.define(version: 2019_11_19_181015) do
     t.index ["resource_id"], name: "index_population_focuses_on_resource_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "resource_owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

@@ -21,7 +21,6 @@ class Display extends React.Component {
     let filter_indices = new Map();
     let i = 0;
     Object.keys(this.props.filters).forEach(association => {
-      console.log(association);
       let ref = React.createRef();
       this.resetRefs.push(ref)
       all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} filter={this.filter} ref={this.resetRefs[i]}></Filter>)

@@ -201,4 +201,5 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     end
 
   end
+
 end
