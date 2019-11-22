@@ -71,11 +71,8 @@ group :test do
   gem 'factory_girl_rails' # if using FactoryGirl
   gem 'metric_fu'        # collect code metrics
   gem 'selenium-webdriver', '~> 2.53.4'
-<<<<<<< HEAD
   gem 'timecop'
-=======
 
->>>>>>> brokenurl
 end
 
 group :development do
