@@ -46,9 +46,18 @@
                         <div class="show-tag">
                             <% @tags = @resource[key].to_s.split(',')%>
                             <% @tags.each do |tag| %>
+
+                              <%if tag.to_s.include? "BrokenURL" %>
+                                <% if user_signed_in? %>
+                                  <div class="label">
+                                  <%=  tag.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
+                                  </div>
+                                <% end %>
+                              <% else %>
                                 <div class="label">
                                     <%=  tag.gsub(/[^0-9A-Za-z,\s,\-,\&]/, "") %>
                                 </div>
+                               <% end %>
                             <% end%>
                         </div>
                     </div>
