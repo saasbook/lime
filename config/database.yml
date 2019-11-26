@@ -50,7 +50,7 @@ test:
   database: lime_test
   pool: 5
   username: postgres
-#  password: test
+  #password: test
   timeout: 5000
 
 
