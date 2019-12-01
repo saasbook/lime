@@ -1,4 +1,6 @@
-desc 'Send annual reminder emails to resource owners to remind them to update their resources'
+# frozen_string_literal: true
+desc 'Send annual reminder emails to resource owners to remind them
+      to update their resources'
 task send_annual_reminder_email: :environment do
   out_of_date_resources = Resource.out_of_date_resources
   out_of_date_resources.each do |resource|
@@ -9,7 +11,8 @@ task send_annual_reminder_email: :environment do
   end
 end
 
-desc 'Send first reminder email to resource owners to remind them to update their resources'
+desc 'Send first reminder email to resource owners to remind
+      them to update their resources'
 task send_first_warning_email: :environment do
   out_of_date_resources = Resource.out_of_date_resources
   out_of_date_resources.each do |resource|
@@ -20,7 +23,8 @@ task send_first_warning_email: :environment do
   end
 end
 
-desc 'Send second reminder email to resource owners to remind them to update their resources'
+desc 'Send second reminder email to resource owners to
+      remind them to update their resources'
 task send_second_warning_email: :environment do
   out_of_date_resources = Resource.out_of_date_resources
   out_of_date_resources.each do |resource|
@@ -31,7 +35,8 @@ task send_second_warning_email: :environment do
   end
 end
 
-desc 'Send third reminder email to resource owners to remind them to update their resources'
+desc 'Send third reminder email to resource owners to remind them
+      to update their resources'
 task send_third_warning_email: :environment do
   out_of_date_resources = Resource.out_of_date_resources
   out_of_date_resources.each do |resource|
@@ -42,7 +47,8 @@ task send_third_warning_email: :environment do
   end
 end
 
-desc 'Send expired event email to resource owners to remind them to update their resources'
+desc 'Send expired event email to resource owners to remind
+      them to update their resources'
 task send_expired_event_email: :environment do
   expired_resources = Resource.expired_resources
   expired_resources.each do |resource|
@@ -53,7 +59,8 @@ task send_expired_event_email: :environment do
   end
 end
 
-desc 'Add existing resource owners with valid emails to the Resource Owners table so that they have accounts'
+desc 'Add existing resource owners with valid emails to
+      the Resource Owners table so that they have accounts'
 task add_resource_owners: :environment do
   valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/
 
