@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2019-12-03T11:38:10-08:00">2019-12-03T11:38:10-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2019-12-03T12:32:50-08:00">2019-12-03T12:32:50-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">87.44%</span></span>
+    (<span class="covered_percent"><span class="yellow">87.39%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         16.14
+         15.7
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>54</b> files in total.
-    <b>1362</b> relevant lines. 
-    <span class="green"><b>1191</b> lines covered</span> and
-    <span class="red"><b>171</b> lines missed </span>
+    <b>55</b> files in total.
+    <b>1364</b> relevant lines. 
+    <span class="green"><b>1192</b> lines covered</span> and
+    <span class="red"><b>172</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -62,12 +62,12 @@
       
       <tr>
         <td class="strong"><a href="#7e6869887941487de967ee3ebb15270bef3f1a85" class="src_link" title="app/controllers/resources_controller.rb">app/controllers/resources_controller.rb</a></td>
-        <td class="yellow strong">87.5 %</td>
+        <td class="yellow strong">86.72 %</td>
         <td>263</td>
         <td>128</td>
-        <td>112</td>
-        <td>16</td>
-        <td>9.9</td>
+        <td>111</td>
+        <td>17</td>
+        <td>6.8</td>
       </tr>
       
       <tr>
@@ -153,9 +153,9 @@
       <tr>
         <td class="strong"><a href="#536037945d0a3f5b124e32e412813f516633e066" class="src_link" title="app/mailers/user_mailer.rb">app/mailers/user_mailer.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>44</td>
-        <td>24</td>
-        <td>24</td>
+        <td>46</td>
+        <td>26</td>
+        <td>26</td>
         <td>0</td>
         <td>9.3</td>
       </tr>
@@ -277,7 +277,7 @@
         <td>181</td>
         <td>161</td>
         <td>20</td>
-        <td>93.6</td>
+        <td>92.5</td>
       </tr>
       
       <tr>
@@ -491,13 +491,23 @@
       </tr>
       
       <tr>
-        <td class="strong"><a href="#8055b439a4d0bedeaeb5bfc2a0533ed6a7f0d04f" class="src_link" title="lib/tasks/scheduler.rake">lib/tasks/scheduler.rake</a></td>
-        <td class="green strong">97.96 %</td>
-        <td>84</td>
-        <td>49</td>
-        <td>48</td>
+        <td class="strong"><a href="#997b7deeeabfafdf9872164af4d5a53dacb38341" class="src_link" title="lib/tasks/resource_owner.rake">lib/tasks/resource_owner.rake</a></td>
+        <td class="green strong">92.31 %</td>
+        <td>22</td>
+        <td>13</td>
+        <td>12</td>
         <td>1</td>
-        <td>7.6</td>
+        <td>3.4</td>
+      </tr>
+      
+      <tr>
+        <td class="strong"><a href="#8055b439a4d0bedeaeb5bfc2a0533ed6a7f0d04f" class="src_link" title="lib/tasks/scheduler.rake">lib/tasks/scheduler.rake</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>61</td>
+        <td>36</td>
+        <td>36</td>
+        <td>0</td>
+        <td>9.2</td>
       </tr>
       
       <tr>
@@ -664,11 +674,11 @@
         <div class="source_table" id="7e6869887941487de967ee3ebb15270bef3f1a85">
   <div class="header">
     <h3>app/controllers/resources_controller.rb</h3>
-    <h4><span class="yellow">87.5 %</span> covered</h4>
+    <h4><span class="yellow">86.72 %</span> covered</h4>
     <div>
       <b>128</b> relevant lines. 
-      <span class="green"><b>112</b> lines covered</span> and
-      <span class="red"><b>16</b> lines missed.</span>
+      <span class="green"><b>111</b> lines covered</span> and
+      <span class="red"><b>17</b> lines missed.</span>
     </div>
   </div>
   
@@ -1203,8 +1213,8 @@
           <code class="ruby">            if association.classify.constantize.count(value) &gt; 0</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="89">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="6" data-linenumber="89">
+          <span class="hits">6</span>
           
           <code class="ruby">              @valid_associations.push(value)</code>
         </li>
@@ -1329,8 +1339,8 @@
           <code class="ruby">        @resources_json.map! do |resource|</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="110">
-          <span class="hits">8</span>
+        <li class="missed" data-hits="0" data-linenumber="110">
+          
           
           <code class="ruby">          resource = json_fix(resource)</code>
         </li>
@@ -1989,8 +1999,8 @@
           <code class="ruby">  def json_fix(resource)</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="220">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="4" data-linenumber="220">
+          <span class="hits">4</span>
           
           <code class="ruby">    if (resource.nil?)</code>
         </li>
@@ -2007,44 +2017,44 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="223">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="4" data-linenumber="223">
+          <span class="hits">4</span>
           
           <code class="ruby">    @full_resource = resource.as_json(include: Resource.include_has_many_params)</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="224">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="4" data-linenumber="224">
+          <span class="hits">4</span>
           
           <code class="ruby">    @full_resource.each do |association, values|</code>
         </li>
       
-        <li class="covered" data-hits="396" data-linenumber="225">
-          <span class="hits">396</span>
+        <li class="covered" data-hits="132" data-linenumber="225">
+          <span class="hits">132</span>
           
           <code class="ruby">      if values.kind_of?(Array) &amp;&amp; values.length &gt; 0</code>
         </li>
       
-        <li class="covered" data-hits="25" data-linenumber="226">
-          <span class="hits">25</span>
+        <li class="covered" data-hits="8" data-linenumber="226">
+          <span class="hits">8</span>
           
           <code class="ruby">        new_association = Array.new</code>
         </li>
       
-        <li class="covered" data-hits="25" data-linenumber="227">
-          <span class="hits">25</span>
+        <li class="covered" data-hits="8" data-linenumber="227">
+          <span class="hits">8</span>
           
           <code class="ruby">        values.each do |value|</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="228">
-          <span class="hits">31</span>
+        <li class="covered" data-hits="11" data-linenumber="228">
+          <span class="hits">11</span>
           
           <code class="ruby">          value.each do |k, v|</code>
         </li>
       
-        <li class="covered" data-hits="31" data-linenumber="229">
-          <span class="hits">31</span>
+        <li class="covered" data-hits="11" data-linenumber="229">
+          <span class="hits">11</span>
           
           <code class="ruby">            new_association.push(v)</code>
         </li>
@@ -2061,8 +2071,8 @@
           <code class="ruby">        end</code>
         </li>
       
-        <li class="covered" data-hits="25" data-linenumber="232">
-          <span class="hits">25</span>
+        <li class="covered" data-hits="8" data-linenumber="232">
+          <span class="hits">8</span>
           
           <code class="ruby">        @full_resource[association] = new_association</code>
         </li>
@@ -2079,8 +2089,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="235">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="4" data-linenumber="235">
+          <span class="hits">4</span>
           
           <code class="ruby">    return @full_resource</code>
         </li>
@@ -4335,8 +4345,8 @@
     <h3>app/mailers/user_mailer.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>24</b> relevant lines. 
-      <span class="green"><b>24</b> lines covered</span> and
+      <b>26</b> relevant lines. 
+      <span class="green"><b>26</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -4413,196 +4423,208 @@
         <li class="covered" data-hits="10" data-linenumber="12">
           <span class="hits">10</span>
           
-          <code class="ruby">    mail(to: @resource_owner.email, subject: &#39;Thank you for registering on the Berkeley Innovation Resources Database!&#39;)</code>
+          <code class="ruby">    @email = @resource_owner.email</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="13">
+        <li class="covered" data-hits="10" data-linenumber="13">
+          <span class="hits">10</span>
           
-          
-          <code class="ruby">  end</code>
+          <code class="ruby">    mail(to: @resource_owner.email, subject: &#39;Thank you for registering on the Berkeley Innovation Resources Database!&#39;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="14">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="15">
+        <li class="covered" data-hits="1" data-linenumber="16">
           <span class="hits">1</span>
           
           <code class="ruby">  def annual_reminder_email</code>
         </li>
       
-        <li class="covered" data-hits="32" data-linenumber="16">
+        <li class="covered" data-hits="32" data-linenumber="17">
           <span class="hits">32</span>
           
           <code class="ruby">    @resource = params[:resource]</code>
         </li>
       
-        <li class="covered" data-hits="32" data-linenumber="17">
+        <li class="covered" data-hits="32" data-linenumber="18">
           <span class="hits">32</span>
           
           <code class="ruby">    mail(to: @resource.contact_email, subject: &quot;Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="18">
+        <li class="never" data-hits="" data-linenumber="19">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="19">
+        <li class="never" data-hits="" data-linenumber="20">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="20">
+        <li class="covered" data-hits="1" data-linenumber="21">
           <span class="hits">1</span>
           
           <code class="ruby">  def first_warning_email</code>
         </li>
       
-        <li class="covered" data-hits="22" data-linenumber="21">
+        <li class="covered" data-hits="22" data-linenumber="22">
           <span class="hits">22</span>
           
           <code class="ruby">    @resource = params[:resource]</code>
         </li>
       
-        <li class="covered" data-hits="22" data-linenumber="22">
+        <li class="covered" data-hits="22" data-linenumber="23">
           <span class="hits">22</span>
           
           <code class="ruby">    mail(to: @resource.contact_email, subject: &quot;First warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="23">
+        <li class="never" data-hits="" data-linenumber="24">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="24">
+        <li class="never" data-hits="" data-linenumber="25">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="25">
+        <li class="covered" data-hits="1" data-linenumber="26">
           <span class="hits">1</span>
           
           <code class="ruby">  def second_warning_email</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="26">
+        <li class="covered" data-hits="16" data-linenumber="27">
           <span class="hits">16</span>
           
           <code class="ruby">    @resource = params[:resource]</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="27">
+        <li class="covered" data-hits="16" data-linenumber="28">
           <span class="hits">16</span>
           
           <code class="ruby">    mail(to: @resource.contact_email, subject: &quot;Second warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="28">
+        <li class="never" data-hits="" data-linenumber="29">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="never" data-hits="" data-linenumber="30">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="30">
+        <li class="covered" data-hits="1" data-linenumber="31">
           <span class="hits">1</span>
           
           <code class="ruby">  def third_warning_email</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="31">
+        <li class="covered" data-hits="8" data-linenumber="32">
           <span class="hits">8</span>
           
           <code class="ruby">    @resource = params[:resource]</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="32">
+        <li class="covered" data-hits="8" data-linenumber="33">
           <span class="hits">8</span>
           
           <code class="ruby">    mail(to: @resource.contact_email, subject: &quot;Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.&quot;)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="33">
-          
-          
-          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="34">
           
           
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="35">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="35">
+        <li class="covered" data-hits="1" data-linenumber="36">
           <span class="hits">1</span>
           
           <code class="ruby">  def expired_event_email</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="36">
+        <li class="covered" data-hits="4" data-linenumber="37">
           <span class="hits">4</span>
           
           <code class="ruby">    @resource = params[:resource]</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="37">
+        <li class="covered" data-hits="4" data-linenumber="38">
           <span class="hits">4</span>
           
           <code class="ruby">    mail(to: @resource.contact_email, subject: &quot;Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="38">
+        <li class="never" data-hits="" data-linenumber="39">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="never" data-hits="" data-linenumber="40">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="40">
+        <li class="covered" data-hits="1" data-linenumber="41">
           <span class="hits">1</span>
           
           <code class="ruby">  def resource_approved_email</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="41">
+        <li class="covered" data-hits="10" data-linenumber="42">
           <span class="hits">10</span>
           
           <code class="ruby">    @resource = params[:resource]</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="42">
+        <li class="covered" data-hits="10" data-linenumber="43">
           <span class="hits">10</span>
           
-          <code class="ruby">    mail(to: @resource.contact_email, subject: &quot;Your email has been approved on the Berkeley Innovations Resource Database&quot;) unless @resource.contact_email.nil?</code>
+          <code class="ruby">    mail(to: @resource.contact_email, subject: &#39;Your email has been approved on the Berkeley Innovations Resource Database&#39;) \</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
+        <li class="covered" data-hits="10" data-linenumber="44">
+          <span class="hits">10</span>
+          
+          <code class="ruby">      unless @resource.contact_email.nil? &amp;&amp; Email.valid_email?(email)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="44">
+        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby">end</code>
@@ -6816,8 +6838,8 @@
           <code class="ruby">    {</code>
         </li>
       
-        <li class="covered" data-hits="34" data-linenumber="26">
-          <span class="hits">34</span>
+        <li class="covered" data-hits="26" data-linenumber="26">
+          <span class="hits">26</span>
           
           <code class="ruby">      :types =&gt; {:only =&gt; [:val]},</code>
         </li>
@@ -8070,8 +8092,8 @@
           <code class="ruby">  def destroy_related_records</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="235">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="235">
+          <span class="hits">76</span>
           
           <code class="ruby">    types.each do |audience|</code>
         </li>
@@ -8088,8 +8110,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="238">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="238">
+          <span class="hits">76</span>
           
           <code class="ruby">    audiences.each do |audience|</code>
         </li>
@@ -8106,8 +8128,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="241">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="241">
+          <span class="hits">76</span>
           
           <code class="ruby">    client_tags.each do |audience|</code>
         </li>
@@ -8124,8 +8146,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="244">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="244">
+          <span class="hits">76</span>
           
           <code class="ruby">    population_focuses.each do |audience|</code>
         </li>
@@ -8142,8 +8164,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="247">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="247">
+          <span class="hits">76</span>
           
           <code class="ruby">    campuses.each do |audience|</code>
         </li>
@@ -8160,8 +8182,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="250">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="250">
+          <span class="hits">76</span>
           
           <code class="ruby">    colleges.each do |audience|</code>
         </li>
@@ -8178,8 +8200,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="253">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="253">
+          <span class="hits">76</span>
           
           <code class="ruby">    availabilities.each do |audience|</code>
         </li>
@@ -8196,8 +8218,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="256">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="256">
+          <span class="hits">76</span>
           
           <code class="ruby">    innovation_stages.each do |audience|</code>
         </li>
@@ -8214,8 +8236,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="259">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="259">
+          <span class="hits">76</span>
           
           <code class="ruby">    topics.each do |audience|</code>
         </li>
@@ -8232,8 +8254,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="95" data-linenumber="262">
-          <span class="hits">95</span>
+        <li class="covered" data-hits="76" data-linenumber="262">
+          <span class="hits">76</span>
           
           <code class="ruby">    technologies.each do |audience|</code>
         </li>
@@ -12782,14 +12804,165 @@
 </div>
 
       
+        <div class="source_table" id="997b7deeeabfafdf9872164af4d5a53dacb38341">
+  <div class="header">
+    <h3>lib/tasks/resource_owner.rake</h3>
+    <h4><span class="green">92.31 %</span> covered</h4>
+    <div>
+      <b>13</b> relevant lines. 
+      <span class="green"><b>12</b> lines covered</span> and
+      <span class="red"><b>1</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">desc &#39;Add existing resource owners with valid emails to</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby">      the Resource Owners table so that they have accounts&#39;</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">task add_resource_owners: :environment do</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="4">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="5">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="6">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  valid_emails = Set.new</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="7">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  Resource.all.each do |resource|</code>
+        </li>
+      
+        <li class="covered" data-hits="8" data-linenumber="8">
+          <span class="hits">8</span>
+          
+          <code class="ruby">    if !resource.contact_email.blank? &amp;&amp; valid_email_regex.match(resource.contact_email)</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="9">
+          <span class="hits">6</span>
+          
+          <code class="ruby">      valid_emails.add(resource.contact_email)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="11">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="12">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="13">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  ResourceOwner.all.each do |owner|</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="14">
+          
+          
+          <code class="ruby">    puts owner</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="16">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="17">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  valid_emails.each do |email|</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="18">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    password = Devise.friendly_token(20)</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="19">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    @resource_owner = ResourceOwner.create(email: email, password: password)</code>
+        </li>
+      
+        <li class="covered" data-hits="6" data-linenumber="20">
+          <span class="hits">6</span>
+          
+          <code class="ruby">    UserMailer.with(resource_owner: @resource_owner, password: password).existing_welcome_email.deliver_now</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="21">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="22">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+
+      
         <div class="source_table" id="8055b439a4d0bedeaeb5bfc2a0533ed6a7f0d04f">
   <div class="header">
     <h3>lib/tasks/scheduler.rake</h3>
-    <h4><span class="green">97.96 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>49</b> relevant lines. 
-      <span class="green"><b>48</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <b>36</b> relevant lines. 
+      <span class="green"><b>36</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -13157,144 +13330,6 @@
         </li>
       
         <li class="never" data-hits="" data-linenumber="61">
-          
-          
-          <code class="ruby">end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="62">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="63">
-          <span class="hits">1</span>
-          
-          <code class="ruby">desc &#39;Add existing resource owners with valid emails to</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="64">
-          
-          
-          <code class="ruby">      the Resource Owners table so that they have accounts&#39;</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="65">
-          <span class="hits">1</span>
-          
-          <code class="ruby">task add_resource_owners: :environment do</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="66">
-          <span class="hits">2</span>
-          
-          <code class="ruby">  valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="67">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="68">
-          <span class="hits">2</span>
-          
-          <code class="ruby">  valid_emails = Set.new</code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="69">
-          <span class="hits">2</span>
-          
-          <code class="ruby">  Resource.all.each do |resource|</code>
-        </li>
-      
-        <li class="covered" data-hits="8" data-linenumber="70">
-          <span class="hits">8</span>
-          
-          <code class="ruby">    if !resource.contact_email.blank? &amp;&amp; valid_email_regex.match(resource.contact_email)</code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="71">
-          <span class="hits">6</span>
-          
-          <code class="ruby">      valid_emails.add(resource.contact_email)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="72">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="73">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="74">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="75">
-          <span class="hits">2</span>
-          
-          <code class="ruby">  ResourceOwner.all.each do |owner|</code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="76">
-          
-          
-          <code class="ruby">    puts owner</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="77">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="78">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="2" data-linenumber="79">
-          <span class="hits">2</span>
-          
-          <code class="ruby">  valid_emails.each do |email|</code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="80">
-          <span class="hits">6</span>
-          
-          <code class="ruby">    password = Devise.friendly_token(20)</code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="81">
-          <span class="hits">6</span>
-          
-          <code class="ruby">    @resource_owner = ResourceOwner.create(email: email, password: password)</code>
-        </li>
-      
-        <li class="covered" data-hits="6" data-linenumber="82">
-          <span class="hits">6</span>
-          
-          <code class="ruby">    UserMailer.with(resource_owner: @resource_owner, password: password).existing_welcome_email.deliver_now</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="83">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby">end</code>
@@ -18856,7 +18891,7 @@
         <li class="covered" data-hits="1" data-linenumber="8">
           <span class="hits">1</span>
           
-          <code class="ruby">    Rake.application.rake_require &#39;tasks/scheduler&#39;</code>
+          <code class="ruby">    Rake.application.rake_require &#39;tasks/resource_owner&#39;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="9">

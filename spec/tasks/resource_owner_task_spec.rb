@@ -5,7 +5,7 @@ require 'rake'
 RSpec.describe 'scheduler namespace rake task' do
   fixtures :resources
   before :all do
-    Rake.application.rake_require 'tasks/scheduler'
+    Rake.application.rake_require 'tasks/resource_owner'
     Rake::Task.define_task(:environment)
   end
 

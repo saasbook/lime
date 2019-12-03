@@ -9,6 +9,7 @@ class UserMailer < ApplicationMailer
   def existing_welcome_email
     @resource_owner = params[:resource_owner]
     @password = params[:password]
+    @email = @resource_owner.email
     mail(to: @resource_owner.email, subject: 'Thank you for registering on the Berkeley Innovation Resources Database!')
   end
 
@@ -39,6 +40,7 @@ class UserMailer < ApplicationMailer
 
   def resource_approved_email
     @resource = params[:resource]
-    mail(to: @resource.contact_email, subject: "Your email has been approved on the Berkeley Innovations Resource Database") unless @resource.contact_email.nil?
+    mail(to: @resource.contact_email, subject: 'Your email has been approved on the Berkeley Innovations Resource Database') \
+      unless @resource.contact_email.nil? && Email.valid_email?(email)
   end
 end
