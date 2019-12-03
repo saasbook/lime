@@ -36,7 +36,7 @@ task send_second_warning_email: :environment do
 end
 
 desc 'Send third reminder email to resource owners to remind them
-      to update their resources'
+      to update their resources. Also moves the resource to the archive.'
 task send_third_warning_email: :environment do
   out_of_date_resources = Resource.out_of_date_resources
   out_of_date_resources.each do |resource|
@@ -44,6 +44,7 @@ task send_third_warning_email: :environment do
 
     UserMailer.with(resource: resource).third_warning_email.deliver_now
     resource.update_num_emails(4)
+    resource.update_approval_status(2)
   end
 end
 

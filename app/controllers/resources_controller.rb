@@ -6,8 +6,8 @@ class ResourcesController < ApplicationController
     params.permit(
                   :title, :url, :contact_email, :location, :population_focuses, :campuses,
                   :colleges, :availabilities, :innovation_stages, :topics, :technologies,
-                  :types, :audiences, :description, :approval_status, :flagged, :flagged_comment, 
-                  :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone, 
+                  :types, :audiences, :description, :approval_status, :flagged, :flagged_comment,
+                  :contact_name, :contact_phone, :client_tags, :resource_email, :resource_phone,
                   :address, :deadline, :notes, :funding_amount, :approved_by, :search,
 
                   types: [], colleges: [], audiences: [], campuses: [], client_tags: [], innovation_stages: [],
@@ -45,15 +45,15 @@ class ResourcesController < ApplicationController
       session[key] = value
     end
     @sort_by = params[:sort_by].to_s
-    if @sort_by == nil || (@sort_by != "location" && @sort_by != "title")
+    if @sort_by.nil? || (@sort_by != "location" && @sort_by != "title")
       @sort_by = "updated_at"
     end
 
     # TODO (if API GET requests available for non-admins)
     # if an Admin making API call, show all resources
-    # else show only resources that have approval_status = 1 
-  
-    # this functionality was meant for the web app 
+    # else show only resources that have approval_status = 1
+
+    # this functionality was meant for the web app
     # but has been removed
     #
     # if (@resources == nil || @resources.length == 0)
@@ -67,18 +67,18 @@ class ResourcesController < ApplicationController
     #   @resources = @resources.order(sort_by)
     # end
     @resources = Resource.location_helper(resource_params)
-    
+
 
     # process the data differently depending if an API call or a webpage
     respond_to do |format|
       format.json {
         @resources = @resources.order(@sort_by)
 
-        render :json => @resources
+        render json: @resources
       }
       format.html {
         # no one using the web app is allowed to view unapproved
-        params[:approval_status] = 1 
+        params[:approval_status] = 1
 
         @has_many_hash = self.has_many_value_hash
         @filters = {}
@@ -97,14 +97,14 @@ class ResourcesController < ApplicationController
         @locations = Location.get_locations
         @child_locations = Hash.new
 
-        @locations["location"].each {|value|
+        @locations["location"].each { |value|
           children = Location.child_locations(value)
           @child_locations[value] = children
         }
         # attempt to eager load all resources
-        @all_resources = Resource.where(:approval_status => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies)
+        @all_resources = Resource.where(approval_status: 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies)
 
-        @resources_json = @all_resources.as_json(:include => Resource.include_has_many_params)
+        @resources_json = @all_resources.as_json(include: Resource.include_has_many_params)
 
         @resources_json.map! do |resource|
           resource = json_fix(resource)
@@ -119,17 +119,17 @@ class ResourcesController < ApplicationController
     @all_values_hash = Resource.all_values_hash
     @all_public_values_hash = Resource.all_public_values_hash
     @has_many_hash = self.has_many_value_hash
-    
+
     # only admins can see unapproved and archived resources
     if @user.nil? and @resource&.approval_status == 0
       @resource = nil
     end
-    
+
     @resource = json_fix(@resource)
     @updated_at = @resource["updated_at"]
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
-      format.html  
+      format.json { render json: @resource.to_json(include: Resource.include_has_many_params) }
+      format.html
     end
   end
 
@@ -148,9 +148,9 @@ class ResourcesController < ApplicationController
     @missing = Resource.find_missing_params(params)
 
     #@missing = !((Resource.get_required_resources & params.keys).sort == Resource.get_required_resources.sort)
-    
+
     if @missing.length > 0
-      params.each {|key, val| session[key] = params[key]}
+      params.each { |key, val| session[key] = params[key] }
       # redirect_to :controller => 'resources', :action => 'new'
       return
     end
@@ -173,52 +173,54 @@ class ResourcesController < ApplicationController
     if params[:location] != nil then Location.nest_location(params[:location]) end
 
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:includes => Resource.include_has_many_params) }
-      format.html {redirect_to :controller => '/resources'}
+      format.json { render json: @resource.to_json(includes: Resource.include_has_many_params) }
+      format.html { redirect_to controller: '/resources' }
     end
   end
 
   def update
     @resource = Resource.find_by(id: params[:id])
-    if @resource == nil
+    if @resource.nil?
       flash[:notice] = "This resource does not exist"
       return
     end
-    
+
     new_params = Resource.cast_param_vals(params)
     # TODO: finish/fix edit log functionality
     # Resource.log_edits(new_params)
 
     # Don't let guests update anything unless the params are "allowed"
-    if Resource.guest_update_params_allowed?(resource_params) && @user == nil
+    if Resource.guest_update_params_allowed?(resource_params) && @user.nil?
       # temp: update anyway
       Resource.update_resource(new_params[:id], resource_params)
-    elsif @user == nil
+    elsif @user.nil?
       flash[:notice] = "You don't have permissions to update records"
-      redirect_to :controller => 'resources', :action => 'edit'
+      redirect_to controller: 'resources', action: 'edit'
       return
     else
       Resource.update_resource(new_params[:id], resource_params)
+      # send approval email to resource owner if updated approval status to 1
+      UserMailer.with(resource: @resource).resource_approved_email.deliver_now
     end
     @resource = Resource.find(new_params[:id])
 
     respond_to do |format|
-      format.json {render :json => @resource.to_json(:include => Resource.include_has_many_params) }
+      format.json { render json: @resource.to_json(include: Resource.include_has_many_params) }
       format.html do
         flash[:notice] = "Resource updated."
-        redirect_to :controller => 'resources', :action => 'edit'
+        redirect_to controller: 'resources', action: 'edit'
       end
     end
   end
 
-  # fixes the formatting issue that .to_json does 
+  # fixes the formatting issue that .to_json does
   # where the associations with "many_params" are converted to arrays of hashes for each ":val"
   # this helper converts the array of hashes to just an array
   def json_fix(resource)
-    if (resource == nil) 
+    if (resource.nil?)
       return nil
     end
-    @full_resource = resource.as_json(:include => Resource.include_has_many_params)
+    @full_resource = resource.as_json(include: Resource.include_has_many_params)
     @full_resource.each do |association, values|
       if values.kind_of?(Array) && values.length > 0
         new_association = Array.new
@@ -233,20 +235,17 @@ class ResourcesController < ApplicationController
     return @full_resource
   end
 
- 
-
-
   def edit
-    if !Resource.guest_update_params_allowed?(resource_params) and @user == nil
+    if !Resource.guest_update_params_allowed?(resource_params) and @user.nil?
       flash[:notice] = "You don't have permissions to update records"
       redirect_to '/resources.html'
       return
     end
 
     respond_to do |format|
-      format.json {redirect_to "/resources/" + params[:id] + "/edit.html" }
+      format.json { redirect_to "/resources/" + params[:id] + "/edit.html" }
       format.html do
-        @resource = Resource.find(params[:id]) 
+        @resource = Resource.find(params[:id])
         @locations = Location.get_locations
         @session = session
         @has_many_hash = self.has_many_value_hash

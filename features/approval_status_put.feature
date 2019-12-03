@@ -69,3 +69,32 @@ Feature: admin edits list of unapproved resources
     Then I should receive a JSON object
     And the JSON should be empty
     And the response status should be "400"
+
+  Scenario: admin user can approve all resources and resource owners should receive emails
+    When I make a PUT request to "/resources/approve/many" with parameters:
+      | approve_list |  api_key  |
+      |     all      | 123456789 |
+    Then all the resources should be approved
+    And I should receive a JSON object
+    And the JSON should contain all the resources
+    And the number of emails delivered should be "2"
+
+  Scenario: admin user can approve multiple resources and resource owners should receive emails
+    When I approve the following resources with api key "123456789":
+      |         title        |
+      | Girls in Engineering |
+      |    Google Scholars   |
+    Then all the resources should be approved
+    And I should receive a JSON object
+    And the JSON should contain "Girls in Engineering"
+    And the JSON should contain "Google Scholars"
+    And the number of emails delivered should be "2"
+
+  Scenario: admin user can approve single resource and resource owner should receive an email
+    When I approve the following resources with api key "123456789":
+      |      title      |
+      | Google Scholars |
+    Then the "Google Scholars" resource should be approved
+    And I should receive a JSON object
+    And the JSON should contain "Google Scholars"
+    And the number of emails delivered should be "1"

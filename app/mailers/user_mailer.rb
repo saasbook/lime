@@ -36,4 +36,9 @@ class UserMailer < ApplicationMailer
     @resource = params[:resource]
     mail(to: @resource.contact_email, subject: "Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
   end
+
+  def resource_approved_email
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: "Your email has been approved on the Berkeley Innovations Resource Database") unless @resource.contact_email.nil?
+  end
 end

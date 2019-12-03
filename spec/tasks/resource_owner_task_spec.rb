@@ -2,16 +2,16 @@ require 'rspec'
 require 'rails_helper'
 require 'rake'
 
-RSpec.describe 'resource_owner_tasks namespace rake task' do
+RSpec.describe 'scheduler namespace rake task' do
   fixtures :resources
   before :all do
-    Rake.application.rake_require 'tasks/resource_owner_tasks'
+    Rake.application.rake_require 'tasks/scheduler'
     Rake::Task.define_task(:environment)
   end
 
   let :run_rake_task do
-    Rake::Task['resource_owner_tasks:add_resource_owners'].reenable
-    Rake.application.invoke_task 'resource_owner_tasks:add_resource_owners'
+    Rake::Task['add_resource_owners'].reenable
+    Rake.application.invoke_task 'add_resource_owners'
   end
 
   it 'should add existing resource owners with valid emails to the resource owners table' do
