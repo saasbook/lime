@@ -26,8 +26,16 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - bundle exec rake db:reset
 
+install:
+  - bundle install
+  - nvm install node
+  - node -v
+  - npm i -g yarn
+  - yarn
+
 scripts:
   - bundle exec rake db:setup
+  - bundle exec rails webpacker:compile
   - bundle exec rspec
   - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
   - bundle exec cucumber --strict
