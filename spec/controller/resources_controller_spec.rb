@@ -23,6 +23,7 @@ RSpec.describe ResourcesController, type: :controller do
 
       expect(Resource).to receive(:filter).with(params)
       get :index, params: { types: 'Events,Mentoring' }
+    end
   end
 
   describe 'only allows admins to GET unapproved resources' do
@@ -49,6 +50,7 @@ RSpec.describe ResourcesController, type: :controller do
       response = get :new, params: {}
       expect(response.status).to eq 200
     end
+  end
 
   describe 'GET edit' do
     it 'does not allow guests to visit the edit page for a resource' do
@@ -277,11 +279,7 @@ RSpec.describe ResourcesController, type: :controller do
       expect(count).to equal(0)
     end
 
-
-
-
     it "call isUrlBroken for every resource in database" do
-
       count=0
       Resource.all.each do |resource|
         puts(resource.title)
@@ -291,5 +289,4 @@ RSpec.describe ResourcesController, type: :controller do
       expect(count).to equal(4)
     end
   end
-
 end
