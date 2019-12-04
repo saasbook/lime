@@ -35,7 +35,7 @@ install:
 
 scripts:
   - bundle exec rake db:setup
- # - bundle exec rake db:fixtures:load
+  - bundle exec rake db:fixtures:load
   - bundle exec rails webpacker:compile
   - bundle exec rspec
   - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
