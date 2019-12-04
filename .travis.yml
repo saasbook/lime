@@ -26,17 +26,30 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - bundle exec rake db:reset
 
+install:
+  - bundle install
+  - nvm install node
+  - node -v
+  - npm i -g yarn
+  - yarn
+
 scripts:
   - bundle exec rake db:setup
+  - bundle exec rake db:fixtures:load
+  - bundle exec rails webpacker:compile
   - bundle exec rspec
+  - echo $SUITE
   - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
   - bundle exec cucumber --strict
+  - echo $SUITE
   - $CCTR format-coverage --output coverage/codeclimate.$SUITE.json
 
 after_script:
-  - $CCTR sum-coverage coverage/codeclimate.*.json | $CCTR upload-coverage
+  - $CCTR sum-coverage coverage/codeclimate.*.json > coverage/codeclimate.json
+  - $CCTR upload-coverage
   - $CCTR after-build --exit-code $TRAVIS_TEST_RESULT
   - rm -f config/application.yml
 
 notifications:
     - false
+    
