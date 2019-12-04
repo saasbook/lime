@@ -47,9 +47,8 @@ scripts:
 after_script:
   - $CCTR sum-coverage coverage/codeclimate.*.json > coverage/codeclimate.json
   - $CCTR upload-coverage
-#  - $CCTR sum-coverage coverage/codeclimate.rspec.json coverage/codeclimate.cucumber.json | $CCTR upload-coverage
   - $CCTR after-build --exit-code $TRAVIS_TEST_RESULT
   - rm -f config/application.yml
 
 notifications:
-    - false
+  - false
