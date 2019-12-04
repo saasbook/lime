@@ -38,7 +38,7 @@ class Resource < ActiveRecord::Base
 
   def self.guest_update_params_allowed?(resource_params)
      update_allowed = (((resource_params.keys.size <= 1) and
-         (resource_params.keys[0] == 'flagged' ) and (resource_params['flagged'] == 1)) or
+         (resource_params.keys[0] == 'flagged') and (resource_params['flagged'] == 1)) or
          ((resource_params.keys[0] == 'flagged' or resource_params.keys[0] == 'flagged_comment') and
          (resource_params.keys[1] == 'flagged' or resource_params.keys[1] == 'flagged_comment') and resource_params['flagged'] == 1))
     return update_allowed
