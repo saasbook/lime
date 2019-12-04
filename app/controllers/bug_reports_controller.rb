@@ -84,6 +84,6 @@ class BugReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bug_report_params
-      params.require(:bug_report).permit(:desc, :closed)
+      params.require(:bug_report).permit(:desc, :name, :email, :closed)
     end
 end

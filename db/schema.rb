@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2019_11_19_181015) do
     t.boolean "closed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "email"
   end
 
   create_table "campuses", force: :cascade do |t|

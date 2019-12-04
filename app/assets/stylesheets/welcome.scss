@@ -49,7 +49,7 @@ body {
 
 .desc-container {
   width: 75vw;
-  margin: 0 auto 128px auto;
+  margin: 0 auto auto;
   p {
     font-size: 1.75rem;
   }
@@ -176,6 +176,22 @@ p.alert, p.alert-danger, p.alert-success {
     border: 2px solid #FDB515;
     transition: 100ms;
   }
+}
+
+.submit_button {
+  color: white;
+  background-color: #198BCC;
+  border: none;
+  height: 64px;
+  font-size: 24px;
+  border-radius: 96px;
+  transition: 500ms;
+  padding: 5px 15px;
+}
+
+.submit_button:hover {
+  background-color: #006D9D;
+  transition: 500ms;
 }
 
 //#filter-column .btn {

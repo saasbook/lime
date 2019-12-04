@@ -17,7 +17,7 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-# Learn more: http://github.com/javan/whenever
+set :output, "log/cron.log"
 
 every 1.day do # 1.minute 1.day 1.week 1.month 1.year is also supported
   rake "reminder_emails:send_annual_reminder_email"
@@ -25,3 +25,4 @@ every 1.day do # 1.minute 1.day 1.week 1.month 1.year is also supported
   rake "reminder_emails:send_second_warning_email"
   rake "reminder_emails:send_third_warning_email"
 end
+
