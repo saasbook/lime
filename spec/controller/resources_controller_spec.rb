@@ -6,6 +6,8 @@ RSpec.describe ResourcesController, type: :controller do
     it 'returns the right HTTP response codes' do
       get :index
       expect(response.status).to eq 200
+      Resource.create!(title: "resource1", url: "www.website.com", contact_email: "email@gmail.com", location: "Berkeley", description: "description")
+      Resource.create!(title: "resource2", url: "www.website.com", contact_email: "email@gmail.com", location: "Berkeley", description: "description")
       expect(Resource.find_by_id(1)).to_not be nil
       get :show, params: { format: :json, id: 1 }
       expect(response.status).to eq 200
