@@ -13,29 +13,49 @@ class UserMailer < ApplicationMailer
     mail(to: @resource_owner.email, subject: 'Congrats on inclusion in the Innovation Resources Database – please review')
   end
 
-  def annual_reminder_email
+  def annual_initial
     @resource = params[:resource]
     mail(to: @resource.contact_email, subject: "Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
   end
 
-  def first_warning_email
+  def annual_first_reminder
     @resource = params[:resource]
-    mail(to: @resource.contact_email, subject: "First warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+    mail(to: @resource.contact_email, subject: "Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
   end
 
-  def second_warning_email
+  def annual_second_reminder
     @resource = params[:resource]
-    mail(to: @resource.contact_email, subject: "Second warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+    mail(to: @resource.contact_email, subject: "Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
   end
 
-  def third_warning_email
+  def expired_date_initial
     @resource = params[:resource]
-    mail(to: @resource.contact_email, subject: "Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+    mail(to: @resource.contact_email, subject: 'Innovation Resources Database – please update your deadline')
   end
 
-  def expired_event_email
+  def expired_date_first_reminder
     @resource = params[:resource]
-    mail(to: @resource.contact_email, subject: "Third warning: Please update your resource #{@resource.title} on the Berkeley Innovations Resources Database.")
+    mail(to: @resource.contact_email, subject: 'Innovation Resources Database – reminder to update your deadline')
+  end
+
+  def expired_date_second_reminder
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: 'Innovation Resources Database – final reminder to update your deadline')
+  end
+
+  def broken_url_initial
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: 'Innovation Resources Database – please review your listing')
+  end
+
+  def broken_url_first_reminder
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: 'Innovation Resources Database – reminder to review your listing')
+  end
+
+  def broken_url_second_reminder
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: 'Innovation Resources Database – final reminder to review your listing')
   end
 
   def resource_approved_email

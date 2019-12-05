@@ -164,51 +164,30 @@ class Resource < ActiveRecord::Base
     return resource
   end
 
+  def num_weeks_passed_column?(column, num)
+    if column == 'last_email_sent'
+      TimeDifference.between(last_email_sent, Time.now).in_weeks >= num
+    elsif column == 'expired_last'
+      TimeDifference.between(expired_last, Time.now).in_weeks >= num
+    end
+  end
+
   def not_updated_in_a_year?
     TimeDifference.between(updated_at, Time.now).in_years >= 1
-  end
-
-  def one_week_passed?
-    TimeDifference.between(last_email_sent, Time.now).in_weeks >= 1
-  end
-
-  def two_weeks_passed?
-    TimeDifference.between(last_email_sent, Time.now).in_weeks >= 2
-  end
-
-  def one_month_passed?
-    TimeDifference.between(last_email_sent, Time.now).in_months >= 1
   end
 
   def expired?
     !deadline.blank? && deadline < Time.now
   end
 
-  def update_num_emails_and_last_email_sent(num_emails)
+  def update_column_no_timestamp(column, value)
     Resource.record_timestamps = false
-    update!(num_emails: num_emails)
-    update!(last_email_sent: Time.now)
+    update_column(column, value)
     Resource.record_timestamps = true
   end
 
-  def update_num_emails(num_emails)
-    Resource.record_timestamps = false
-    update!(num_emails: num_emails)
-    Resource.record_timestamps = true
-  end
-
-  def update_approval_status(approval_status)
-    Resource.record_timestamps = false
-    update!(approval_status: approval_status)
-    Resource.record_timestamps = true
-  end
-
-  def update_expired_email_sent(truth)
-    Resource.record_timestamps = false
-    update!(expired_email_sent: truth)
-    Resource.record_timestamps = true
-  end
-
+  # returns all resources that have not been updated in a year
+  # and has a valid contact email
   def self.out_of_date_resources
     out_of_date_resources = Set.new
     Resource.all.each do |resource|
@@ -220,6 +199,8 @@ class Resource < ActiveRecord::Base
     out_of_date_resources
   end
 
+  # returns all resources that have a deadline and is expired
+  # and has a valid contact email
   def self.expired_resources
     expired_resources = Set.new
     Resource.all.each do |resource|
@@ -336,12 +317,12 @@ class Resource < ActiveRecord::Base
 
   def isURLBroken_ifSoTagIt
     open(url) do |f|
-      if f.status[1]=="OK" then
-        print "GOOD URL"
+      if f.status[1]=='OK' then
+        print 'GOOD URL'
       end
     end
   rescue StandardError => e
-    print "BAD URL"
+    print 'BAD URL'
     Resource.tagBrokenURL(id)
   end
 
@@ -351,7 +332,7 @@ class Resource < ActiveRecord::Base
 
     isBrokenURLAlreadyTagged=false
     resource.types.as_json.each do |type|
-      if type["val"]=="BrokenURL"
+      if type['val']=='BrokenURL'
 
         isBrokenURLAlreadyTagged=true
       end
