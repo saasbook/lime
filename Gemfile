@@ -46,8 +46,8 @@ gem 'devise'
 gem 'webpacker'
 gem 'react-rails'
 
-# whenever gem for scheduling emails
-gem 'whenever', require: false
+# gem for storing email secrets
+gem 'figaro'
 
 gem 'time_difference'
 

@@ -51,5 +51,4 @@ after_script:
   - rm -f config/application.yml
 
 notifications:
-    - false
-    
+  - false
