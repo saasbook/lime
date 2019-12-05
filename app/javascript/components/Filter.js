@@ -20,6 +20,14 @@ class Filter extends React.Component {
         </button>
       )
     });
+
+
+    var index=initial_values.indexOf("BrokenURL")
+    //if (!user_signed_in) {
+    //initial_values.splice(index, 1);
+    //}
+
+
     return initial_values;
   }
 
