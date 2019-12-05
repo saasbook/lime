@@ -10,7 +10,7 @@ class UserMailer < ApplicationMailer
     @resource_owner = params[:resource_owner]
     @password = params[:password]
     @email = @resource_owner.email
-    mail(to: @resource_owner.email, subject: 'Thank you for registering on the Berkeley Innovation Resources Database!')
+    mail(to: @resource_owner.email, subject: 'Congrats on inclusion in the Innovation Resources Database – please review')
   end
 
   def annual_reminder_email
