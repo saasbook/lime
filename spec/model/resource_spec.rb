@@ -164,7 +164,7 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     end
   end
 
-  #Testing for Broken URL
+  # Testing for Broken URL
   describe 'RSpec Tests for Broken URL flag' do
     before(:each) do
       Resource.destroy_all
@@ -199,7 +199,26 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       #expect(result.first.title).to eq "thing1"
       #expect (result.second.title).to eq "thing2"
     end
+  end
 
+  describe 'approval_emails' do
+    fixtures :resources
+    it 'should send a reminder email to resources (with a valid resource owner
+        email) who has been approved has passed' do
+      expect{ Resource.approval_email(Resource.first) }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+
+    it 'should not change updated_at attribute' do
+      expect { Resource.approval_email(Resource.first) }.to_not change { Resource.first.updated_at }
+    end
+
+    it 'should update approval_num to be 1 and approval_last to the current time' do
+      frozen_time = Time.local(2019, 11, 11)
+      Timecop.freeze(frozen_time)
+      Resource.approval_email(Resource.first)
+      expect(Resource.first.approval_num).to eq 1
+      expect(Resource.first.approval_last).to eq frozen_time
+    end
   end
 
 end

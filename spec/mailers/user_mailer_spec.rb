@@ -20,7 +20,7 @@ RSpec.describe UserMailer, type: :mailer do
       end
 
       it 'renders the right text in the email' do
-        expect(mail.body.encoded).to include('Congratulations, your organization and resources have been added to the Innovation Resources Database used by UC Berkeley and the City of Berkeley and beyond.')
+        expect(mail.body.encoded).to include('Greetings from the Innovation Resources Database')
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe UserMailer, type: :mailer do
       end
 
       it 'renders the right text in the email' do
-        expect(mail.body.encoded).to include("You have not updated your resource #{resource.title}")
+        expect(mail.body.encoded).to include('Initial')
       end
     end
   end

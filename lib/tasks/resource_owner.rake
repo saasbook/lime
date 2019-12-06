@@ -1,17 +1,10 @@
 desc 'Add existing resource owners with valid emails to
       the Resource Owners table so that they have accounts'
 task add_resource_owners: :environment do
-  valid_email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/
-
   valid_emails = Set.new
   Resource.all.each do |resource|
-    if !resource.contact_email.blank? && valid_email_regex.match(resource.contact_email)
-      valid_emails.add(resource.contact_email)
-    end
-  end
-
-  ResourceOwner.all.each do |owner|
-    puts owner
+    email = resource.contact_email
+    valid_emails.add(email) if !email.blank? && Email.valid_email?(email)
   end
 
   valid_emails.each do |email|

@@ -58,9 +58,18 @@ class UserMailer < ApplicationMailer
     mail(to: @resource.contact_email, subject: 'Innovation Resources Database – final reminder to review your listing')
   end
 
-  def resource_approved_email
+  def approval_initial
     @resource = params[:resource]
-    mail(to: @resource.contact_email, subject: 'Your email has been approved on the Berkeley Innovations Resource Database') \
-      unless @resource.contact_email.nil? && Email.valid_email?(email)
+    mail(to: @resource.contact_email, subject: 'Congrats on inclusion in the Innovation Resources Database – please review')
+  end
+
+  def approval_first_reminder
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: 'Congrats on inclusion in the Innovation Resources Database – reminder to review')
+  end
+
+  def approval_second_reminder
+    @resource = params[:resource]
+    mail(to: @resource.contact_email, subject: 'Congrats on inclusion in the Innovation Resources Database – review opp')
   end
 end

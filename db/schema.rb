@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_083400) do
+ActiveRecord::Schema.define(version: 2019_12_06_000317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,8 @@ ActiveRecord::Schema.define(version: 2019_12_05_083400) do
     t.datetime "last_email_sent"
     t.integer "expired_num", default: 0
     t.datetime "expired_last"
+    t.integer "approval_num", default: 0
+    t.datetime "approval_last"
   end
 
   create_table "technologies", force: :cascade do |t|

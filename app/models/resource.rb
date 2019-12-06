@@ -41,7 +41,7 @@ class Resource < ActiveRecord::Base
          (resource_params.keys[0] == 'flagged') and (resource_params['flagged'] == 1)) or
          ((resource_params.keys[0] == 'flagged' or resource_params.keys[0] == 'flagged_comment') and
          (resource_params.keys[1] == 'flagged' or resource_params.keys[1] == 'flagged_comment') and resource_params['flagged'] == 1))
-    return update_allowed
+     update_allowed
   end
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
@@ -50,7 +50,7 @@ class Resource < ActiveRecord::Base
   end
 
   def self.get_associations_hash(resource)
-    return {:audiences => resource.audiences, :availabilities => resource.availabilities,
+    {:audiences => resource.audiences, :availabilities => resource.availabilities,
             :campuses => resource.campuses, :client_tags => resource.client_tags,
             :colleges => resource.colleges, :innovation_stages => resource.innovation_stages,
             :population_focuses => resource.population_focuses, :technologies => resource.technologies,
@@ -80,10 +80,10 @@ class Resource < ActiveRecord::Base
 
     # return early if there are no has_many fields
     search_regex = ''
-      if params[:search].to_s.length != 0
-        search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR description ~* '.*" + params[:search].to_s + ".*'"  + " OR url ~* '.*" + params[:search].to_s + ".*'"
-      end
-      params.delete :search
+    if params[:search].to_s.length != 0
+      search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR description ~* '.*" + params[:search].to_s + ".*'"  + " OR url ~* '.*" + params[:search].to_s + ".*'"
+    end
+    params.delete :search
     if has_many_hash.empty?
       return Resource.where(params).where(search_regex)
     else
@@ -108,7 +108,7 @@ class Resource < ActiveRecord::Base
       end
     end
     # return ActiveRecord::Relation instead of array so that ActiveRecord calls can be chained outside this function
-    return Resource.where(id: filtered.map(&:id))
+    Resource.where(id: filtered.map(&:id))
   end
 
   #
@@ -130,7 +130,7 @@ class Resource < ActiveRecord::Base
       end
     end
 
-    return params
+    params
   end
 
   def self.log_edits(params)
@@ -153,7 +153,7 @@ class Resource < ActiveRecord::Base
       Resource.create_associations(resource, params)
     end
 
-    return resource
+    resource
   end
 
   def self.update_resource(id, params)
@@ -161,55 +161,7 @@ class Resource < ActiveRecord::Base
 
     resource = Resource.update(id, resource_hash)
     Resource.create_associations(resource, params)
-    return resource
-  end
-
-  def num_weeks_passed_column?(column, num)
-    if column == 'last_email_sent'
-      TimeDifference.between(last_email_sent, Time.now).in_weeks >= num
-    elsif column == 'expired_last'
-      TimeDifference.between(expired_last, Time.now).in_weeks >= num
-    end
-  end
-
-  def not_updated_in_a_year?
-    TimeDifference.between(updated_at, Time.now).in_years >= 1
-  end
-
-  def expired?
-    !deadline.blank? && deadline < Time.now
-  end
-
-  def update_column_no_timestamp(column, value)
-    Resource.record_timestamps = false
-    update_column(column, value)
-    Resource.record_timestamps = true
-  end
-
-  # returns all resources that have not been updated in a year
-  # and has a valid contact email
-  def self.out_of_date_resources
-    out_of_date_resources = Set.new
-    Resource.all.each do |resource|
-      email = resource.contact_email
-      if !email.blank? && Email.valid_email?(email) && resource.not_updated_in_a_year?
-        out_of_date_resources.add(resource)
-      end
-    end
-    out_of_date_resources
-  end
-
-  # returns all resources that have a deadline and is expired
-  # and has a valid contact email
-  def self.expired_resources
-    expired_resources = Set.new
-    Resource.all.each do |resource|
-      email = resource.contact_email
-      if !email.blank? && Email.valid_email?(email) && resource.expired?
-        expired_resources.add(resource)
-      end
-    end
-    expired_resources
+    resource
   end
 
   def destroy_related_records
@@ -258,12 +210,12 @@ class Resource < ActiveRecord::Base
         resource_hash[field] = val
       end
     end
-    return params, resource_hash
+    [params, resource_hash]
   end
 
   def self.create_associations(resource, params)
     fields_hash = get_associations_hash(resource)
-    
+
     fields_hash.each do |field, association|
       association.delete_all # if updating, need to delete and remake associations
       if params[field] != nil
@@ -281,7 +233,7 @@ class Resource < ActiveRecord::Base
         missing.append r
       end
     end
-    return missing
+    missing
   end
 
   # if filtering by location, filtering should behave as the following
@@ -311,8 +263,32 @@ class Resource < ActiveRecord::Base
     #     params[:location] = location
     #     resources = resources.or(self.filter(params))
     #   end
-    # end 
-    return resources
+    # end
+    resources
+  end
+
+  def num_weeks_passed_column?(column, num)
+    if column == 'last_email_sent'
+      TimeDifference.between(last_email_sent, Time.now).in_weeks >= num
+    elsif column == 'expired_last'
+      TimeDifference.between(expired_last, Time.now).in_weeks >= num
+    elsif column == 'approval_last'
+      TimeDifference.between(approval_last, Time.now).in_weeks >= num
+    end
+  end
+
+  def not_updated_in_a_year?
+    TimeDifference.between(updated_at, Time.now).in_years >= 1
+  end
+
+  def expired?
+    !deadline.blank? && deadline < Time.now
+  end
+
+  def update_column_no_timestamp(column, value)
+    Resource.record_timestamps = false
+    update_column(column, value)
+    Resource.record_timestamps = true
   end
 
   def isURLBroken_ifSoTagIt

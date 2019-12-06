@@ -121,9 +121,7 @@ class ResourcesController < ApplicationController
     @has_many_hash = self.has_many_value_hash
 
     # only admins can see unapproved and archived resources
-    if @user.nil? and @resource&.approval_status == 0
-      @resource = nil
-    end
+    @resource = nil if @user.nil? and @resource&.approval_status == 0
 
     @resource = json_fix(@resource)
     @updated_at = @resource["updated_at"]
@@ -170,7 +168,7 @@ class ResourcesController < ApplicationController
     rp[:approval_status] = 0
     rp[:flagged] = 0
     @resource = Resource.create_resource(rp)
-    if params[:location] != nil then Location.nest_location(params[:location]) end
+    Location.nest_location(params[:location]) if params[:location] != nil
 
     respond_to do |format|
       format.json { render json: @resource.to_json(includes: Resource.include_has_many_params) }
@@ -199,8 +197,11 @@ class ResourcesController < ApplicationController
       return
     else
       Resource.update_resource(new_params[:id], resource_params)
-      # send approval email to resource owner if updated approval status to 1
-      UserMailer.with(resource: @resource).resource_approved_email.deliver_now
+      # send approval email to resource owner if updated approval status to 1 and if
+      # the resource has a valid contact email
+      if resource_params[:approval_status] == 1
+        Resource.approval_email(@resource)
+      end
     end
     @resource = Resource.find(new_params[:id])
 
@@ -217,9 +218,7 @@ class ResourcesController < ApplicationController
   # where the associations with "many_params" are converted to arrays of hashes for each ":val"
   # this helper converts the array of hashes to just an array
   def json_fix(resource)
-    if (resource.nil?)
-      return nil
-    end
+    return nil if (resource.nil?)
     @full_resource = resource.as_json(include: Resource.include_has_many_params)
     @full_resource.each do |association, values|
       if values.kind_of?(Array) && values.length > 0

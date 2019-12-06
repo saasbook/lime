@@ -40,3 +40,18 @@ task send_expired_event_email: :environment do
     end
   end
 end
+
+desc 'Send approval reminder emails to resource owners to remind
+      them to check if everything looks right'
+task send_approval_email: :environment do
+  approved_resources_sent = Resource.approved_resources_email_sent
+  approved_resources_sent.each do |resource|
+    if resource.approval_num == 1 && resource.num_weeks_passed_column?('approval_last', 1)
+      UserMailer.with(resource: resource).approval_first_reminder.deliver_now
+      resource.update_column_no_timestamp(:approval_num, 2)
+    elsif resource.approval_num == 2 && resource.num_weeks_passed_column?('approval_last', 3)
+      UserMailer.with(resource: resource).approval_second_reminder.deliver_now
+      resource.update_column_no_timestamp(:approval_num, 3)
+    end
+  end
+end
