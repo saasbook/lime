@@ -8,7 +8,7 @@ RSpec.describe UserMailer, type: :mailer do
       let(:resource_owner) { instance_double 'ResourceOwner', email: 'testemail@email.com', password: 'testpassword'}
       let(:mail) { UserMailer.with(resource_owner: resource_owner).existing_welcome_email.deliver_now }
       it 'renders the subject' do
-        expect(mail.subject).to eq('Thank you for registering on the Berkeley Innovation Resources Database!')
+        expect(mail.subject).to eq('Congrats on inclusion in the Innovation Resources Database – please review')
       end
 
       it 'renders the receiver email' do
@@ -20,13 +20,13 @@ RSpec.describe UserMailer, type: :mailer do
       end
 
       it 'renders the right text in the email' do
-        expect(mail.body.encoded).to include('You are an existing user in our database.')
+        expect(mail.body.encoded).to include('Greetings from the Innovation Resources Database')
       end
     end
 
     describe 'annual reminder email' do
       let(:resource) { instance_double 'Resource', contact_email: 'testemail@email.com', title: 'TestResource'}
-      let(:mail) { UserMailer.with(resource: resource).annual_reminder_email.deliver_now }
+      let(:mail) { UserMailer.with(resource: resource).annual_initial.deliver_now }
 
       it 'renders the subject' do
         expect(mail.subject).to eq("Please update your resource #{resource.title} on the Berkeley Innovations Resources Database.")
@@ -41,7 +41,7 @@ RSpec.describe UserMailer, type: :mailer do
       end
 
       it 'renders the right text in the email' do
-        expect(mail.body.encoded).to include("You have not updated your resource #{resource.title}")
+        expect(mail.body.encoded).to include('Initial')
       end
     end
   end
