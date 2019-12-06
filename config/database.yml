@@ -49,7 +49,7 @@ test:
   encoding: unicode
   database: lime_test
   pool: 5
-  username: postgres
+  username: abfranco
   #password: test
   timeout: 5000
 
