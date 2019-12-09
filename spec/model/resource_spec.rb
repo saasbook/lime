@@ -176,10 +176,10 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
                                                               "types" => 'Scholarship,Funding,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
 
-      @resource3 = Resource.create_resource "title" => "thing3", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
+      @resource3 = Resource.create_resource "title" => "thing3", "url" => "www.google.com", "contact_email" => "something@gmail.com", "location" => "Global",
                                             "types" => 'Scholarship,Events,Networking', "audiences" => 'Grad,Undergrad', "description" => "descriptions", "approval_status" => 0
 
-      @resource4 = Resource.create_resource "title" => "thing4", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "someplace",
+      @resource4 = Resource.create_resource "title" => "thing4", "url" => "www.facebook.com", "contact_email" => "something@gmail.com", "location" => "someplace",
                                             "types" => 'Funding,Mentoring', "audiences" => 'Grad,Undergrad', "description" => "descriptions"
 
       User.delete_all
@@ -191,19 +191,6 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       expect { Resource.first.isURLBroken_ifSoTagIt }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
 
-    it 'tests that on creating a resource with a Broken URL, it immediately gets tagged as a type BrokenURL' do
-      result = Resource.filter({"types" => "BrokenURL"})
-      #expect(result.count).to eq 1
-      # expect(result.first.title).to eq "thing2"
-      #expect (result.second.title).to eq "thing2"
-    end
-
-    it 'it can check that if the type is tagged BrokenURL, the filter by BrokenURL works' do
-      result = Resource.filter({"types" => "BrokenURL"})
-      #expect(result.count).to eq 2
-      #expect(result.first.title).to eq "thing1"
-      #expect (result.second.title).to eq "thing2"
-    end
   end
 
   describe 'approval_emails' do

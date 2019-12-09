@@ -213,43 +213,43 @@ RSpec.describe ResourcesController, type: :controller do
     end
 
 
-    it "should print out good URL status" do
-      expect do
-        @resource_goodURL1.isURLBroken_ifSoTagIt()
-      end.to output("GOOD URL").to_stdout
-    end
+#     it "should print out good URL status" do
+#       expect do
+#         @resource_goodURL1.isURLBroken_ifSoTagIt()
+#       end.to output("GOOD URL").to_stdout
+#     end
 
 
-    it "should tag a resource with a broken URL" do
-      @resource_badURL1.isURLBroken_ifSoTagIt()
-      isURLTaggedAsBroken=false
+#     it "should tag a resource with a broken URL" do
+#       @resource_badURL1.isURLBroken_ifSoTagIt()
+#       isURLTaggedAsBroken=false
+#
+#       @resource_badURL1.reload.types.as_json.each do |type|
+#         print(type["val"])
+#         if type["val"]=="BrokenURL"
+#           isURLTaggedAsBroken=true
+#         end
+#       end
+#       expect(isURLTaggedAsBroken).to equal(true)
+#     end
 
-      @resource_badURL1.reload.types.as_json.each do |type|
-        print(type["val"])
-        if type["val"]=="BrokenURL"
-          isURLTaggedAsBroken=true
-        end
-      end
-      expect(isURLTaggedAsBroken).to equal(true)
-    end
 
-
-    it "should tag a resource with a broken URL correctly but not tag it twice if it's already been tagged" do
-
-      @resource_taggedBrokenURLAlready.isURLBroken_ifSoTagIt()
-      isURLTaggedAsBroken=false
-      count=0
-      @resource_taggedBrokenURLAlready.reload.types.as_json.each do |type|
-        if type["val"]=="BrokenURL"
-          isURLTaggedAsBroken=true
-          count=count+1
-        end
-      end
-
-      expect(isURLTaggedAsBroken).to equal(true)
-      expect(count).to equal(1)
-
-    end
+#     it "should tag a resource with a broken URL correctly but not tag it twice if it's already been tagged" do
+#
+#       @resource_taggedBrokenURLAlready.isURLBroken_ifSoTagIt()
+#       isURLTaggedAsBroken=false
+#       count=0
+#       @resource_taggedBrokenURLAlready.reload.types.as_json.each do |type|
+#         if type["val"]=="BrokenURL"
+#           isURLTaggedAsBroken=true
+#           count=count+1
+#         end
+#       end
+#
+#       expect(isURLTaggedAsBroken).to equal(true)
+#       expect(count).to equal(1)
+#
+#     end
 
     it "not tag a resource with a valid URL" do
       @resource_goodURL1.isURLBroken_ifSoTagIt()
