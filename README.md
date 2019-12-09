@@ -18,9 +18,17 @@
     * Resource Attributes    
     * Creating new resources
 ## Running up the app locally
-To set up and run the app locally, first run the command  
-rake db:reset  
-Then set up the app as normal, rake db:setup, and rails s. You MUST run rake db:reset first or you will encounter errors. 
+To set up and run the app locally, first set up postgres.  
+Run `psql postgres` in terminal.   
+Create a new user: `create user postgres;`  
+Change the role: `alter user postgres createdb;`  
+Use `\du` to check users and their roles  
+Make sure user is a super user with `alter user postgres superuser`  
+Exit with `\q`
+
+run `rake db:reset`  
+Then set up the app as normal, `rake db:setup`, and `rails s`.  
+You MUST run rake db:reset first or you will encounter errors. 
 ## Api Usage
 ### Getting an API key
 Login to your profile on the website at   
