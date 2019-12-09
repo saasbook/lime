@@ -55,3 +55,18 @@ task send_approval_email: :environment do
     end
   end
 end
+
+desc 'Send broken URL reminder emails to resource owners to remind
+      them to update their URL'
+task send_broken_url_email: :environment do
+  broken_url_resources_sent = Resource.broken_url_resources_email_sent
+  broken_url_resources_sent.each do |resource|
+    if resource.broken_num == 1 && resource.num_weeks_passed_column?('broken_last', 1)
+      UserMailer.with(resource: resource).broken_url_first_reminder.deliver_now
+      resource.update_column_no_timestamp(:broken_num, 2)
+    elsif resource.broken_num == 2 && resource.num_weeks_passed_column?('broken_last', 3)
+      UserMailer.with(resource: resource).broken_url_second_reminder.deliver_now
+      resource.update_column_no_timestamp(:broken_num, 3)
+    end
+  end
+end

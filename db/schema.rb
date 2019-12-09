@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_000317) do
+ActiveRecord::Schema.define(version: 2019_12_09_040809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(version: 2019_12_06_000317) do
     t.datetime "expired_last"
     t.integer "approval_num", default: 0
     t.datetime "approval_last"
+    t.integer "broken_num", default: 0
+    t.datetime "broken_last"
   end
 
   create_table "technologies", force: :cascade do |t|
