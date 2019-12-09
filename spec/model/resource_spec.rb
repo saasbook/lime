@@ -166,6 +166,7 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
 
   # Testing for Broken URL
   describe 'RSpec Tests for Broken URL flag' do
+    fixtures :resources
     before(:each) do
       Resource.destroy_all
       @resource_flaggedTypeBrokenURL = Resource.create_resource "title" => "thing1", "url" => "something.com", "contact_email" => "something@gmail.com", "location" => "Global",
@@ -185,6 +186,10 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       User.create!(:email => 'example@gmail.com', :password => 'password', :api_token => 'example')
     end
 
+    it 'should send an email to resource owners who own resources with
+        bad URLs' do
+      expect { Resource.first.isURLBroken_ifSoTagIt }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
 
   end
 
@@ -192,7 +197,7 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
     fixtures :resources
     it 'should send a reminder email to resources (with a valid resource owner
         email) who has been approved has passed' do
-      expect{ Resource.approval_email(Resource.first) }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { Resource.approval_email(Resource.first) }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
 
     it 'should not change updated_at attribute' do
@@ -205,6 +210,26 @@ RSpec.describe 'Resource model methods functionality', :type => :model do
       Resource.approval_email(Resource.first)
       expect(Resource.first.approval_num).to eq 1
       expect(Resource.first.approval_last).to eq frozen_time
+    end
+  end
+
+  describe 'broken_url_emails' do
+    fixtures :resources
+
+    it 'should send a reminder email to the resource owner' do
+      expect { Resource.broken_url_email(Resource.first) }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+
+    it 'should not change updated_at attribute' do
+      expect { Resource.broken_url_email(Resource.first) }.to_not change { Resource.first.updated_at }
+    end
+
+    it 'should update broken_num to be 1 and broken_last to the current time' do
+      frozen_time = Time.local(2019, 11, 11)
+      Timecop.freeze(frozen_time)
+      Resource.broken_url_email(Resource.first)
+      expect(Resource.first.broken_num).to eq 1
+      expect(Resource.first.broken_last).to eq frozen_time
     end
   end
 
