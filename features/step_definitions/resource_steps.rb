@@ -11,6 +11,12 @@ Given /the following users exist:/ do |users_table|
   end
 end
 
+Given /the following resource owners exist:/ do |resources_owners_table|
+  resources_owners_table.hashes.each do |ro|
+    ResourceOwner.create ro
+  end
+end
+
 Then /the following audiences exist/ do |audiences_table|
   audiences_table.hashes.each do |audience|
     Audience.create audience
@@ -199,6 +205,14 @@ Then /I should see the text "(.*)"/ do |text|
   end
 end
 
+Then /I should not see the text "(.*)"/ do |text|
+  if page.respond_to? :should
+    page.should_not have_content(text)
+  else
+    assert !page.has_content?(text)
+  end
+end
+
 Then /I should not see the message "(.*)"/ do |text|
   if page.respond_to? :should
     page.should_not have_content(text)
@@ -251,6 +265,13 @@ Given /I am logged in with user "(.*)" and password "(.*)"/ do |user, pass|
   visit "/users/sign_in"
   fill_in("Email", with: user)
   fill_in("Password", with: pass)
+  click_button("Log in")
+end
+
+Given /I am logged in with email "(.*)" and password "(.*)" as a resource owner/ do |email, pass|
+  visit "/resource_owners/sign_in"
+  fill_in("Email", :with => email)
+  fill_in("Password", :with => pass)
   click_button("Log in")
 end
 

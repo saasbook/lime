@@ -95,7 +95,7 @@ module ResourcesControllerHelper
         r.save(validate: false) # for now, force update even if not valid
 
         # Send email to resource owner if the resource has a valid contact email
-          Resource.approval_email(r)
+        Resource.approval_email(r)
       end
       resources = Resource.all
     else
@@ -213,7 +213,7 @@ module ResourcesControllerHelper
     end
   end
 
-      private
+  private
   def set_user
     if request.format.json? and params.include? :api_key
       @user = User.where(api_token: params[:api_key]).first
@@ -252,6 +252,10 @@ module ResourcesControllerHelper
       Resource.approval_email(r)
       @resources << r
     end
-    return @resources
+    @resources
+  end
+
+  def set_resource_owner
+    @resource_owner = current_resource_owner
   end
 end

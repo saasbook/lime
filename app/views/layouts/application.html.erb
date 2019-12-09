@@ -61,12 +61,12 @@
           </div>
           
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'admin-button nav-link') %>
+<!--        for resource owner-->
         <% elsif resource_owner_signed_in?%>
           <%= link_to('Logout', destroy_resource_owner_session_path, method: :delete, class: 'admin-button nav-link') %>
-
+          <%= link_to('Edit', owner_edit_resource_path(current_resource_owner.email), class: 'admin-button nav-link') %>
         <% else %>
           <%#= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
-<!--          TODO: create user path for resource owners instead of admins!-->
           <%= link_to('Log in', new_resource_owner_session_path, class: 'admin-button nav-link') %>
           <%= link_to('Admin', new_user_session_path, class: 'admin-button nav-link')  %>
 
