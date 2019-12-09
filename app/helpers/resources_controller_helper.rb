@@ -118,7 +118,7 @@ module ResourcesControllerHelper
     r.save(validate: false)
     flash[:notice] = "Thank you for your feedback. A database admin will create fixes as soon as possible."
     redirect_back(fallback_location: root_path)
-    end
+  end
 
   def archive
     id = params[:id]
@@ -178,9 +178,9 @@ module ResourcesControllerHelper
   def nilUser
     if request.format.json?
       render status: 400, json: {}.to_json
-      else
-        redirect_to "/resources.html"
-      end
+    else
+      redirect_to "/resources.html"
+    end
   end
 
   def flagged
