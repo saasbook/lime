@@ -24,7 +24,7 @@ class Display extends React.Component {
     Object.keys(this.props.filters).forEach(association => {
       let ref = React.createRef();
       this.resetRefs.push(ref)
-      all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} filter={this.filter} ref={this.resetRefs[i]}></Filter>)
+      all_filters.set(association, <Filter key={association} association={association} values={this.props.filters[association]} user_signed_in={this.props.user_signed_in} filter={this.filter} ref={this.resetRefs[i]}></Filter>)
       filter_indices.set(association, i);
       i++;
     });
@@ -285,6 +285,7 @@ class Display extends React.Component {
 Display.propTypes = {
   filters: PropTypes.object,
   child_locations: PropTypes.object,
-  resources: PropTypes.array
+  resources: PropTypes.array,
+  user_signed_in: PropTypes.bool
 };
 export default Display
