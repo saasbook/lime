@@ -199,7 +199,7 @@ class ResourcesController < ApplicationController
       Resource.update_resource(new_params[:id], resource_params)
       # send approval email to resource owner if updated approval status to 1 and if
       # the resource has a valid contact email
-      if resource_params[:approval_status] == 1
+      if resource_params[:approval_status] == 1 && @resource.approval_status == 0
         Resource.approval_email(@resource)
       end
     end
