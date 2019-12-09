@@ -55,3 +55,14 @@ task send_approval_email: :environment do
     end
   end
 end
+
+
+desc 'Parse entire Database and tag resources with BrokenURL'
+task tag_broken_URL: :environment do
+      Resource.all.each do |resource|
+        resource.isURLBroken_ifSoTagIt()
+      end
+end
+
+
+

@@ -95,7 +95,7 @@ module ResourcesControllerHelper
         r.save(validate: false) # for now, force update even if not valid
 
         # Send email to resource owner if the resource has a valid contact email
-        Resource.approval_email(r)
+          Resource.approval_email(r)
       end
       resources = Resource.all
     else
