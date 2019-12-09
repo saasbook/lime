@@ -28,7 +28,11 @@ class Resource extends React.Component {
         for (let j = 0; j < tag_associations[i].length; j++) {
           let value = tag_associations[i][j];
           let label = (<div className="text label" key={"label-" + value}> {value} </div>);
-          tags.push(label);
+
+          if (value != "BrokenURL") {
+            tags.push(label);
+          }
+
         }
       }
 

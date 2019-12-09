@@ -23,25 +23,25 @@ class Resource < ActiveRecord::Base
 
   def self.include_has_many_params
     {
-      types: {only: [:val]},
-      audiences: {only: [:val]},
-      client_tags: {only: [:val]},
-      population_focuses: {only: [:val]},
-      campuses: {only: [:val]},
-      colleges: {only: [:val]},
-      availabilities: {only: [:val]},
-      innovation_stages: {only: [:val]},
-      topics: {only: [:val]},
-      technologies: {only: [:val]}
+        types: {only: [:val]},
+        audiences: {only: [:val]},
+        client_tags: {only: [:val]},
+        population_focuses: {only: [:val]},
+        campuses: {only: [:val]},
+        colleges: {only: [:val]},
+        availabilities: {only: [:val]},
+        innovation_stages: {only: [:val]},
+        topics: {only: [:val]},
+        technologies: {only: [:val]}
     }
   end
 
   def self.guest_update_params_allowed?(resource_params)
-     update_allowed = (((resource_params.keys.size <= 1) and
-         (resource_params.keys[0] == 'flagged') and (resource_params['flagged'] == 1)) or
-         ((resource_params.keys[0] == 'flagged' or resource_params.keys[0] == 'flagged_comment') and
-         (resource_params.keys[1] == 'flagged' or resource_params.keys[1] == 'flagged_comment') and resource_params['flagged'] == 1))
-     update_allowed
+    update_allowed = (((resource_params.keys.size <= 1) and
+        (resource_params.keys[0] == 'flagged') and (resource_params['flagged'] == 1)) or
+        ((resource_params.keys[0] == 'flagged' or resource_params.keys[0] == 'flagged_comment') and
+            (resource_params.keys[1] == 'flagged' or resource_params.keys[1] == 'flagged_comment') and resource_params['flagged'] == 1))
+    update_allowed
   end
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
@@ -51,10 +51,10 @@ class Resource < ActiveRecord::Base
 
   def self.get_associations_hash(resource)
     {audiences: resource.audiences, availabilities: resource.availabilities,
-            campuses: resource.campuses, client_tags: resource.client_tags,
-            colleges: resource.colleges, innovation_stages: resource.innovation_stages,
-            population_focuses: resource.population_focuses, technologies: resource.technologies,
-            topics: resource.topics, types: resource.types
+     campuses: resource.campuses, client_tags: resource.client_tags,
+     colleges: resource.colleges, innovation_stages: resource.innovation_stages,
+     population_focuses: resource.population_focuses, technologies: resource.technologies,
+     topics: resource.topics, types: resource.types
     }
   end
 
@@ -69,7 +69,7 @@ class Resource < ActiveRecord::Base
         # String variation (JSON request)
         if params[key].is_a?(String)
           has_many_hash[key] = params[key].split(',').map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace
-        # List variation (HTML request)
+          # List variation (HTML request)
         elsif params[key].is_a?(Array)
           has_many_hash[key] = params[key]
         end
@@ -302,6 +302,20 @@ class Resource < ActiveRecord::Base
     Resource.broken_url_email(resource)
   end
 
+
+  def self.untagBrokenURL(id)
+    resource = Resource.find_by(id: id)
+
+    isBrokenURLAlreadyTagged=false
+    resource.types.as_json.each do |type|
+      if type['val']=='BrokenURL'
+        isBrokenURLAlreadyTagged=true
+      end
+    end
+
+    if isBrokenURLAlreadyTagged
+      resource.types.find_by(:val => 'BrokenURL').destroy #deleting BrokenURL type
+    end
+    #puts resource.types.as_json
+  end
 end
-
-
