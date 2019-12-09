@@ -95,7 +95,7 @@ module ResourcesControllerHelper
         r.save(validate: false) # for now, force update even if not valid
 
         # Send email to resource owner if the resource has a valid contact email
-          Resource.approval_email(r)
+        Resource.approval_email(r)
       end
       resources = Resource.all
     else
@@ -240,7 +240,9 @@ module ResourcesControllerHelper
   end
 
   def update_approvals_in_list(lst)
-    status = 1 if status
+    if (status)
+      status = 1
+    end
     @resources = []
     lst.each do |id|
       next unless Resource.exists?(id: id)
