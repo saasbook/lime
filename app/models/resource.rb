@@ -295,6 +295,7 @@ class Resource < ActiveRecord::Base
     open(url) do |f|
       if f.status[1]=='OK' then
         print 'GOOD URL'
+        Resource.untagBrokenURL(id)
       end
     end
   rescue StandardError => e
@@ -315,11 +316,33 @@ class Resource < ActiveRecord::Base
     end
 
     if !isBrokenURLAlreadyTagged
+      puts "tagging"
       resource.types.create!(:val => 'BrokenURL')
 
     end
   end
 
+
+   def self.untagBrokenURL(id)
+       resource = Resource.find_by(id: id)
+
+        isBrokenURLAlreadyTagged=false
+        resource.types.as_json.each do |type|
+            if type['val']=='BrokenURL'
+                isBrokenURLAlreadyTagged=true
+            end
+        end
+
+       if isBrokenURLAlreadyTagged
+            resource.types.find_by(:val => 'BrokenURL').destroy #deleting BrokenURL type
+       end
+       #puts resource.types.as_json
+   end
+
 end
+
+
+
+
 
 
