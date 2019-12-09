@@ -68,7 +68,8 @@ module Resourceconcern
       out_of_date_resources = Set.new
       Resource.all.each do |resource|
         email = resource.contact_email
-        if !email.blank? && Email.valid_email?(email) && resource.not_updated_in_a_year?
+        if !email.blank? && Email.valid_email?(email) \
+          && resource.not_updated_in_a_year? && resource.approval_status == 1
           out_of_date_resources.add(resource)
         end
       end
@@ -81,7 +82,8 @@ module Resourceconcern
       expired_resources = Set.new
       Resource.all.each do |resource|
         email = resource.contact_email
-        if !email.blank? && Email.valid_email?(email) && resource.expired?
+        if !email.blank? && Email.valid_email?(email) && resource.expired? \
+          && resource.approval_status == 1
           expired_resources.add(resource)
         end
       end
