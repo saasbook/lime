@@ -270,6 +270,11 @@ class ResourcesController < ApplicationController
   def owner_edit
     # session[:resource_owner] = false
     @resource = Resource.find_by contact_email:params[:email]
+    if @resource.nil?
+      flash[:notice] = "The resources you own might be under a different email, please contact us."
+      redirect_to '/resources.html'
+      return
+    end
     if @resource_owner.nil? || (@resource.contact_email != @resource_owner.email)
       flash[:notice] = "You don't have permissions to update this record."
       redirect_to '/resources.html'

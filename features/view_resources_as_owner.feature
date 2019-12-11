@@ -16,7 +16,7 @@ Feature: view resources owned by the resource owner
 	      | email                        | password |
 	      | example@example.com          | password |
 
-  	Scenario: view all the 	resources that belongs to the owner
+  	Scenario: view owned resources as the owner
   		Given I am logged in with email "example@example.com" and password "password" as a resource owner
   		And I am on "/resources.html"
   		Then I should see the text "Society of Women Engineers "
