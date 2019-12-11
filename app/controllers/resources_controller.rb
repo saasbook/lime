@@ -122,7 +122,7 @@ class ResourcesController < ApplicationController
     @has_many_hash = self.has_many_value_hash
 
     # only admins can see unapproved and archived resources
-    @resource = nil if @user.nil? and @resource&.approval_status == 0
+    @resource = nil if @user.nil? && (@resource&.approval_status == 0)
 
     @resource = json_fix(@resource)
     @updated_at = @resource["updated_at"]
@@ -153,7 +153,7 @@ class ResourcesController < ApplicationController
       # redirect_to :controller => 'resources', :action => 'new'
       return
     end
-    if params[:description] != nil and params[:description].length > 500 then @desc_too_long = true end
+    if (params[:description] != nil) && (params[:description].length > 500) then @desc_too_long = true end
     if @desc_too_long
       params.each do |key, val|
         session[key] = params[key]
@@ -200,7 +200,7 @@ class ResourcesController < ApplicationController
       Resource.update_resource(new_params[:id], resource_params)
       # send approval email to resource owner if updated approval status to 1 and if
       # the resource has a valid contact email
-      if resource_params[:approval_status] == 1
+      if resource_params[:approval_status] == 1 && @resource.approval_status == 0
         Resource.approval_email(@resource)
       end
     end
@@ -236,14 +236,14 @@ class ResourcesController < ApplicationController
   end
 
   def edit
-    if !Resource.guest_update_params_allowed?(resource_params) and @user == nil and @resource_owner == nil
+    if !Resource.guest_update_params_allowed?(resource_params) && @user.nil? && @resource_owner.nil?
       flash[:notice] = "You don't have permissions to update records"
       redirect_to '/resources.html'
       return
     end
 
     @resource = Resource.find(params[:id])
-    if @resource_owner and @resource.contact_email != @resource_owner.email and @user == nil
+    if @resource_owner && (@resource.contact_email != @resource_owner.email) && @user.nil?
       flash[:notice] = "You don't have permissions to update this record."
       redirect_to '/resources.html'
       return
@@ -265,20 +265,20 @@ class ResourcesController < ApplicationController
     flash[:alert] = "Resource permanently deleted"
     redirect_back(fallback_location: root_path)
   end
-end
 
-# find the resource to edit based on owner's email
-def owner_edit
-  # session[:resource_owner] = false
-  @resource = Resource.find_by contact_email:params[:email]
-  if @resource_owner == nil or @resource.contact_email != @resource_owner.email
-    flash[:notice] = "You don't have permissions to update this record."
-    redirect_to '/resources.html'
-    return
+  # find the resource to edit based on owner's email
+  def owner_edit
+    # session[:resource_owner] = false
+    @resource = Resource.find_by contact_email:params[:email]
+    if @resource_owner.nil? || (@resource.contact_email != @resource_owner.email)
+      flash[:notice] = "You don't have permissions to update this record."
+      redirect_to '/resources.html'
+      return
+    end
+
+    params[:id] = @resource.id.to_s
+    redirect_to "/resources/" + params[:id] + "/edit.html"
   end
-
-  params[:id] = @resource.id.to_s
-  redirect_to "/resources/" + params[:id] + "/edit.html"
 end
 
 

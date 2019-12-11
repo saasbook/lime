@@ -240,7 +240,9 @@ module ResourcesControllerHelper
   end
 
   def update_approvals_in_list(lst)
-    status = 1 if status
+    if (status)
+      status = 1
+    end
     @resources = []
     lst.each do |id|
       next unless Resource.exists?(id: id)
