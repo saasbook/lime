@@ -29,7 +29,7 @@ RSpec.describe UserMailer, type: :mailer do
       let(:mail) { UserMailer.with(resource: resource).annual_initial.deliver_now }
 
       it 'renders the subject' do
-        expect(mail.subject).to eq("Please update your resource #{resource.title} on the Berkeley Innovations Resources Database.")
+        expect(mail.subject).to eq('ACTION: Annual update of your listing in the Innovation Resources Database')
       end
 
       it 'renders the receiver email' do
@@ -41,7 +41,7 @@ RSpec.describe UserMailer, type: :mailer do
       end
 
       it 'renders the right text in the email' do
-        expect(mail.body.encoded).to include('Initial')
+        expect(mail.body.encoded).to include('Once a year we ask you to take a look at the description and make updates as you see fit')
       end
     end
   end
