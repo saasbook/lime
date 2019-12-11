@@ -14,8 +14,8 @@
             <% if user_signed_in? %>
                 <%= link_to 'Archive', resources_archive_path(resource), method: :put, data: { confirm: "Are you sure you want to archive?", id: resource["id"] } , class: "btn btn-outline-primary btn-archive", id: resource["id"] %>
             <% elsif resource_owner_signed_in?%>
-                <%= link_to('Confirm', resources_all_path, class: "btn btn-outline-primary") %>
-            <% end %>
+                <%= link_to('Confirm', confirm_path(resource["id"]), method: :post, class: "btn btn-outline-primary") %>
+              <% end %>
 
             </div>
             <div class="resource-title text">

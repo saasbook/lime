@@ -14,6 +14,11 @@
     </div>
 
   <%= form_tag("/resources/" + @resource.id.to_s + ".html", method: "patch", id: "form_section") do %>
+    <div id="form_submit">
+      <a> <button>Update</button></a>
+      <%#= button_tag("Update", :id => "submit_button") %>
+      <p id="message"><p>
+    </div>
       <div class="form_step">
           <h2>Basic Information</h2>
           <div class="resource_row">

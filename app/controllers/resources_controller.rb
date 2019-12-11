@@ -286,6 +286,13 @@ class ResourcesController < ApplicationController
     params[:id] = @resource.id.to_s
     redirect_to "/resources/" + params[:id] + "/edit.html"
   end
+
+  def confirm
+    @resource = Resource.find(params[:id])
+    @resource.update_attribute(:updated_at, Time.now)
+    redirect_to resources_all_path
+  end
+  helper_method :confirm
 end
 
 
