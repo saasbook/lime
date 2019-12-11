@@ -246,8 +246,8 @@ class ResourcesController < ApplicationController
 
     @resource = Resource.find(params[:id])
     if @resource_owner && (@resource.contact_email != @resource_owner.email) && @user.nil?
-      flash[:notice] = "You don't have permissions to update this record."
-      redirect_to '/resources.html'
+      flash[:notice] = "You don't have permission to update this record."
+      redirect_to resources_all_path
       return
     end
 
@@ -269,23 +269,23 @@ class ResourcesController < ApplicationController
   end
 
   # find the resource to edit based on owner's email
-  def owner_edit
-    # session[:resource_owner] = false
-    @resource = Resource.find_by contact_email:params[:email]
-    if @resource.nil?
-      flash[:notice] = "The resources you own might be under a different email, please contact us."
-      redirect_to '/resources.html'
-      return
-    end
-    if @resource_owner.nil? || (@resource.contact_email != @resource_owner.email)
-      flash[:notice] = "You don't have permissions to update this record."
-      redirect_to '/resources.html'
-      return
-    end
-
-    params[:id] = @resource.id.to_s
-    redirect_to "/resources/" + params[:id] + "/edit.html"
-  end
+  # def owner_edit
+  #   # session[:resource_owner] = false
+  #   @resource = Resource.find_by contact_email:params[:email]
+  #   if @resource.nil?
+  #     flash[:notice] = "The resources you own might be under a different email, please contact us."
+  #     redirect_to '/resources.html'
+  #     return
+  #   end
+  #   if @resource_owner.nil? || (@resource.contact_email != @resource_owner.email)
+  #     flash[:notice] = "You don't have permissions to update this record."
+  #     redirect_to '/resources.html'
+  #     return
+  #   end
+  #
+  #   params[:id] = @resource.id.to_s
+  #   redirect_to "/resources/" + params[:id] + "/edit.html"
+  # end
 
   def confirm
     @resource = Resource.find(params[:id])

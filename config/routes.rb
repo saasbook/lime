@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'resources/archived', to: 'resources#archived'
   get 'resources/flagged', to: 'resources#flagged'
   get 'resources/all', to: 'resources#all'
-  get 'resources/:email/edit', to: 'resources#owner_edit', as: "owner_edit_resource",  constraints: { email: /.+@.+\..*/ }
+  # get 'resources/:email/edit', to: 'resources#owner_edit', as: "owner_edit_resource",  constraints: { email: /.+@.+\..*/ }
   post 'resources/:id/confirm', to: 'resources#confirm', as: "confirm"
   # If a 'display user information' page gets added, may be good idea to move location
   # of flash key button to that page.

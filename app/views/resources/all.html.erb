@@ -1,7 +1,9 @@
 <div class="top" id="approval-title">
   <h1>Resources</h1>
-</div>
-
+<!--</div>-->
+<%# if flash[:notice] %>
+<!--  <p class="notice"><%#= flash[:notice] %></p>-->
+<%# end %>
 <div id="all"  id="resource-container-wrapper">
     <div id="approval-column">
         <% @resources.each do |resource| %>

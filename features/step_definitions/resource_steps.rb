@@ -299,3 +299,8 @@ end
 Then /the number of emails delivered should be "(\d)"/ do |number|
   expect(ActionMailer::Base.deliveries.count).to eq number.to_i
 end
+
+Then /I should be on my resources page/ do
+  # print page.html
+  expect(page.find('h1').text).to eq "Resources"
+end

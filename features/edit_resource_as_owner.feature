@@ -16,7 +16,6 @@ Feature: edit a resource through view
 
   	Scenario: edit a resource that belongs to the owner
   		Given I am logged in with email "example@example.com" and password "password" as a resource owner
-  		And I am on "/"
   		And I follow "Edit"
   		And I fill in "Description" with "describe"
   		And I select "Events" for "Resource Type"
@@ -30,8 +29,8 @@ Feature: edit a resource through view
 	Scenario: can't edit a resource
 		Given I am logged in with email "example@example.com" and password "password" as a resource owner
 		And I am on "/resources/2/edit.html"
-		Then I should be on the welcome page
-		Then I should see the text "You don't have permissions to update this record"
+		Then I should be on my resources page
+		Then I should see the text "You don't have permission to update this record"
 
 
   		
