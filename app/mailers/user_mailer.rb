@@ -71,7 +71,7 @@ class UserMailer < ApplicationMailer
   def approval_initial
     @resource = params[:resource]
     @resource_edit = Rails.configuration.action_mailer.default_url_options[:host] + '/resource_owners/sign_in'
-    unless ResourceOwner.find_by_email(@email).nil?
+    if ResourceOwner.find_by_email(@email).nil?
       @email = @resource.contact_email
       @password = Devise.friendly_token(20)
       @resource_owner = ResourceOwner.create(email: @email, password: @password)
