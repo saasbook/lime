@@ -1,9 +1,7 @@
 Feature: edit a resource through view
-
 	As an admin
 	I want to able to manually change details of a resource
 	So that I can update a resource.
-
 
 	Background: resources have been added to database
   
@@ -27,9 +25,3 @@ Feature: edit a resource through view
   		And I am on "/resources/1.html"
   		Then I should see the text "describe"
   		Then I should see the text "Events"
-
-
-  		
-
-
-
