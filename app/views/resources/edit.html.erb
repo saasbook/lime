@@ -189,7 +189,7 @@
             </div>
       </div>
 
-
+      <% if user_signed_in? %>
       <div class="form_step">
           <h2>Admin Information</h2>
           <div class="resource_row">
@@ -223,6 +223,7 @@
               </div>
           </div>
         </div>
+      <% end %>
 
       <div id="form_submit">
             <%= button_tag("Update", :id => "submit_button") %>

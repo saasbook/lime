@@ -11,9 +11,12 @@
             <%= link_to("View Resource", "/resources/" + resource.id.to_s + ".html", class: "btn btn-outline-primary") %>
             
             <%= link_to('Edit', edit_resource_path(resource), class: "btn btn-outline-primary") %>
+            <% if user_signed_in? %>
+                <%= link_to 'Archive', resources_archive_path(resource), method: :put, data: { confirm: "Are you sure you want to archive?", id: resource["id"] } , class: "btn btn-outline-primary btn-archive", id: resource["id"] %>
+            <% elsif resource_owner_signed_in?%>
+                <%= link_to('Confirm', resources_all_path, class: "btn btn-outline-primary") %>
+            <% end %>
 
-            <%= link_to 'Archive', resources_archive_path(resource), method: :put, data: { confirm: "Are you sure you want to archive?", id: resource["id"] } , class: "btn btn-outline-primary btn-archive", id: resource["id"] %>
-        
             </div>
             <div class="resource-title text">
                 <%= resource.title %>

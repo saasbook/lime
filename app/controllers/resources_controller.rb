@@ -192,6 +192,8 @@ class ResourcesController < ApplicationController
     if Resource.guest_update_params_allowed?(resource_params) && @user.nil?
       # temp: update anyway
       Resource.update_resource(new_params[:id], resource_params)
+    elsif @resource_owner && (@resource.contact_email == @resource_owner.email)
+      Resource.update_resource(new_params[:id], resource_params)
     elsif @user.nil?
       flash[:notice] = "You don't have permissions to update records"
       redirect_to controller: 'resources', action: 'edit'
