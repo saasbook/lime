@@ -152,7 +152,9 @@ The app can currently send automatic emails to resource owners who have approved
 * Expired event emails
 * Approval emails (sent to resource owners upon approval of a resource)
 
-The script for sending these emails are located in `lib/tasks/scheduler.rake`, and the HTML templates for these emails are lcoated in `app/views/user_mailer`. Each type of email has three templates: one for the initial email, one for the first reminder after the initial, and one for the second reminder after the initial. The script is scheduled to run daily on Heroku scheduler.
+The script for sending these emails are located in `lib/tasks/scheduler.rake`, and the HTML templates for these emails are lcoated in `app/views/user_mailer`. Each type of email has three templates: one for the initial email, one for the first reminder after the initial, and one for the second reminder after the initial. The script should be scheduled to run daily on Heroku scheduler. For example, one of the tasks inside `scheduler.rake` is called `send_annual_reminder_email`; to schedule it daily, it should be added to Heroku scheduler like so:
+![Heroku Schedule Imgur](https://i.imgur.com/JBvaW4R.png)
+
 
 All email templates include a link to the sign in page for resource owners to click on. It is very important to to modify the `config.action_mailer.default_url_options` line in `/config/environments/production.rb` to the appropriate Heroku host name to make sure that the sign-in link in emails work. For example, if the website is hosted at `https://berkeleyinnovres.herokuapp.com`, then this line should be
 ```ruby
