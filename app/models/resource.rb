@@ -13,8 +13,8 @@ class Resource < ActiveRecord::Base
   has_many :technologies, dependent: :destroy
   after_destroy :destroy_related_records
   # validations: https://guides.rubyonrails.org/active_record_validations.html
-  validates :title, :url, :location, :presence => true
-  validates :description, :presence => true#, :length => {:maximum => 500}
+  validates :title, :url, :location, presence: true
+  validates :description, presence: true#, :length => {:maximum => 500}
   # TODO: figure out if a character limit is needed since certain descriptions in the original spread sheet have above 500 characters (ex: CITRIS Foundry)
 
   def self.auth_params
@@ -23,25 +23,25 @@ class Resource < ActiveRecord::Base
 
   def self.include_has_many_params
     {
-      :types => {:only => [:val]},
-      :audiences => {:only => [:val]},
-      :client_tags => {:only => [:val]},
-      :population_focuses => {:only => [:val]},
-      :campuses => {:only => [:val]},
-      :colleges => {:only => [:val]},
-      :availabilities => {:only => [:val]},
-      :innovation_stages => {:only => [:val]},
-      :topics => {:only => [:val]},
-      :technologies => {:only => [:val]}
+        types: {only: [:val]},
+        audiences: {only: [:val]},
+        client_tags: {only: [:val]},
+        population_focuses: {only: [:val]},
+        campuses: {only: [:val]},
+        colleges: {only: [:val]},
+        availabilities: {only: [:val]},
+        innovation_stages: {only: [:val]},
+        topics: {only: [:val]},
+        technologies: {only: [:val]}
     }
   end
 
   def self.guest_update_params_allowed?(resource_params)
-     update_allowed = (((resource_params.keys.size <= 1) and
-         (resource_params.keys[0] == 'flagged') and (resource_params['flagged'] == 1)) or
-         ((resource_params.keys[0] == 'flagged' or resource_params.keys[0] == 'flagged_comment') and
-         (resource_params.keys[1] == 'flagged' or resource_params.keys[1] == 'flagged_comment') and resource_params['flagged'] == 1))
-     update_allowed
+    update_allowed = (((resource_params.keys.size <= 1) and
+        (resource_params.keys[0] == 'flagged') and (resource_params['flagged'] == 1)) or
+        ((resource_params.keys[0] == 'flagged' or resource_params.keys[0] == 'flagged_comment') and
+            (resource_params.keys[1] == 'flagged' or resource_params.keys[1] == 'flagged_comment') and resource_params['flagged'] == 1))
+    update_allowed
   end
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
@@ -50,11 +50,11 @@ class Resource < ActiveRecord::Base
   end
 
   def self.get_associations_hash(resource)
-    {:audiences => resource.audiences, :availabilities => resource.availabilities,
-            :campuses => resource.campuses, :client_tags => resource.client_tags,
-            :colleges => resource.colleges, :innovation_stages => resource.innovation_stages,
-            :population_focuses => resource.population_focuses, :technologies => resource.technologies,
-            :topics => resource.topics, :types => resource.types
+    {audiences: resource.audiences, availabilities: resource.availabilities,
+     campuses: resource.campuses, client_tags: resource.client_tags,
+     colleges: resource.colleges, innovation_stages: resource.innovation_stages,
+     population_focuses: resource.population_focuses, technologies: resource.technologies,
+     topics: resource.topics, types: resource.types
     }
   end
 
@@ -69,7 +69,7 @@ class Resource < ActiveRecord::Base
         # String variation (JSON request)
         if params[key].is_a?(String)
           has_many_hash[key] = params[key].split(',').map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace
-        # List variation (HTML request)
+          # List variation (HTML request)
         elsif params[key].is_a?(Array)
           has_many_hash[key] = params[key]
         end
@@ -103,9 +103,7 @@ class Resource < ActiveRecord::Base
         bool_arr.append (associations_hash[field].records.collect(&:val) & values).sort == values.sort
       end
       # if all queries return true, append the record to the returned value
-      if bool_arr.all?
-        filtered.append resource
-      end
+      filtered.append resource if bool_arr.all?
     end
     # return ActiveRecord::Relation instead of array so that ActiveRecord calls can be chained outside this function
     Resource.where(id: filtered.map(&:id))
@@ -118,9 +116,7 @@ class Resource < ActiveRecord::Base
         .compact.each { |field| params[field] = params[field].to_s }
     if params[:flagged]
       params[:flagged] = params[:flagged].to_i
-      if params[:flagged] < 0 || params[:flagged] > 1
-        params[:flagged] = 1
-      end
+      params[:flagged] = 1 if params[:flagged] < 0 || params[:flagged] > 1
     end
 
     if params[:approval_status]
@@ -141,7 +137,7 @@ class Resource < ActiveRecord::Base
   end
 
   def self.edit_helper(id, param)
-    @edit = Edit.new(:resource_id => id, :user => @user, :parameter => param)
+    @edit = Edit.new(resource_id: id, user: @user, parameter: param)
     @edit.save!
   end
 
@@ -149,9 +145,7 @@ class Resource < ActiveRecord::Base
     params, resource_hash = Resource.separate_params(params)
 
     resource = Resource.create(resource_hash)
-    if resource.valid?
-      Resource.create_associations(resource, params)
-    end
+    Resource.create_associations(resource, params) if resource.valid?
 
     resource
   end
@@ -202,9 +196,7 @@ class Resource < ActiveRecord::Base
     resource_hash = {}
     params.each do |field, val|
       if has_many_associations.include? field
-        if val.is_a?(String)
-          params[field] = val.split(',')
-        end
+        params[field] = val.split(',') if val.is_a?(String)
       else
         params.delete field
         resource_hash[field] = val
@@ -220,7 +212,7 @@ class Resource < ActiveRecord::Base
       association.delete_all # if updating, need to delete and remake associations
       if params[field] != nil
         params[field].each do |val|
-          association.create!(:val => val)
+          association.create!(val: val)
         end
       end
     end
@@ -229,9 +221,7 @@ class Resource < ActiveRecord::Base
   def self.find_missing_params(params)
     missing = []
     Resource.get_required_resources.each do |r|
-      if !params.include?(r) or params[r] == ''
-        missing.append r
-      end
+      missing.append r if !params.include?(r) or params[r] == ''
     end
     missing
   end
@@ -242,7 +232,7 @@ class Resource < ActiveRecord::Base
   def self.location_helper(params)
 
     location = params[:location]
-    if location.nil? || !Location.where(:val => location).exists?
+    if location.nil? || !Location.where(val: location).exists?
       return filter(params)
     end
 
@@ -274,6 +264,8 @@ class Resource < ActiveRecord::Base
       TimeDifference.between(expired_last, Time.now).in_weeks >= num
     elsif column == 'approval_last'
       TimeDifference.between(approval_last, Time.now).in_weeks >= num
+    elsif column == 'broken_last'
+      TimeDifference.between(broken_last, Time.now).in_weeks >= num
     end
   end
 
@@ -293,10 +285,7 @@ class Resource < ActiveRecord::Base
 
   def isURLBroken_ifSoTagIt
     open(url) do |f|
-      if f.status[1]=='OK' then
-        print 'GOOD URL'
-        Resource.untagBrokenURL(id)
-      end
+      print 'GOOD URL' if f.status[1] == 'OK'
     end
   rescue StandardError => e
     print 'BAD URL'
@@ -304,45 +293,29 @@ class Resource < ActiveRecord::Base
   end
 
   def self.tagBrokenURL(id)
+    resource = Resource.find_by(id: id)
+    isBrokenURLAlreadyTagged = false
+    resource.types.as_json.each do |type|
+      isBrokenURLAlreadyTagged = true if type['val'] == 'BrokenURL'
+    end
+    resource.types.create!(val: 'BrokenURL') unless isBrokenURLAlreadyTagged
+    Resource.broken_url_email(resource)
+  end
 
+
+  def self.untagBrokenURL(id)
     resource = Resource.find_by(id: id)
 
     isBrokenURLAlreadyTagged=false
     resource.types.as_json.each do |type|
       if type['val']=='BrokenURL'
-
         isBrokenURLAlreadyTagged=true
       end
     end
 
-    if !isBrokenURLAlreadyTagged
-      puts "tagging"
-      resource.types.create!(:val => 'BrokenURL')
-
+    if isBrokenURLAlreadyTagged
+      resource.types.find_by(:val => 'BrokenURL').destroy #deleting BrokenURL type
     end
+    #puts resource.types.as_json
   end
-
-
-   def self.untagBrokenURL(id)
-       resource = Resource.find_by(id: id)
-
-        isBrokenURLAlreadyTagged=false
-        resource.types.as_json.each do |type|
-            if type['val']=='BrokenURL'
-                isBrokenURLAlreadyTagged=true
-            end
-        end
-
-       if isBrokenURLAlreadyTagged
-            resource.types.find_by(:val => 'BrokenURL').destroy #deleting BrokenURL type
-       end
-       #puts resource.types.as_json
-   end
-
 end
-
-
-
-
-
-

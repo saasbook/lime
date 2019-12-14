@@ -104,15 +104,39 @@ module Resourceconcern
       approved_resources_sent
     end
 
+    # returns all resources that have been sent a broken url email
+    def broken_url_resources_email_sent
+      broken_url_sent = Set.new
+      Resource.all.each do |resource|
+        email = resource.contact_email
+        if !email.blank? && Email.valid_email?(email) \
+           && resource.broken_num != 0
+          broken_url_sent.add(resource)
+        end
+      end
+      broken_url_sent
+    end
+
     # sends the initial approval email and sets up the state necessary
     # for future approval emails
     def approval_email(resource)
-      UserMailer.with(resource: resource).approval_initial.deliver_now
       email = resource.contact_email
       return unless !email.blank? && Email.valid_email?(email)
 
+      UserMailer.with(resource: resource).approval_initial.deliver_now
       resource.update_column_no_timestamp(:approval_num, 1)
       resource.update_column_no_timestamp(:approval_last, Time.now)
+    end
+
+    # sends the initial broken url email and sets up the state necessary
+    # for future broken url emails
+    def broken_url_email(resource)
+      email = resource.contact_email
+      return unless !email.blank? && Email.valid_email?(email)
+
+      UserMailer.with(resource: resource).broken_url_initial.deliver_now
+      resource.update_column_no_timestamp(:broken_num, 1)
+      resource.update_column_no_timestamp(:broken_last, Time.now)
     end
   end
 end

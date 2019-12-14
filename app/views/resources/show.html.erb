@@ -79,7 +79,9 @@
     </div>
 
     <div class="links" %>
-        <% if user_signed_in? %>
+        <% if resource_owner_signed_in? and @resource["contact_email"] == current_resource_owner.email%>
+        <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
+        <% elsif user_signed_in? %>
             <% all_values = @has_many_hash %>
             <%= link_to('Edit', edit_resource_path(@resource), class: "btn btn-outline-primary") %>
             

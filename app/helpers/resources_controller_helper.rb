@@ -95,7 +95,7 @@ module ResourcesControllerHelper
         r.save(validate: false) # for now, force update even if not valid
 
         # Send email to resource owner if the resource has a valid contact email
-          Resource.approval_email(r)
+        Resource.approval_email(r)
       end
       resources = Resource.all
     else
@@ -118,7 +118,7 @@ module ResourcesControllerHelper
     r.save(validate: false)
     flash[:notice] = "Thank you for your feedback. A database admin will create fixes as soon as possible."
     redirect_back(fallback_location: root_path)
-    end
+  end
 
   def archive
     id = params[:id]
@@ -137,18 +137,27 @@ module ResourcesControllerHelper
   end
 
   def all
-    if @user.nil?
+    if @user.nil? and @resource_owner.nil?
       if request.format.json?
         render status: 400, json: {}.to_json
       else
         redirect_to "/resources.html"
       end
-    else
-      @resources = Resource.where(approval_status: 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
+    elsif resource_owner_signed_in?
+      # emails in database have space in the front/back sometimes
+      @resources = Resource.where('contact_email ~* :regex', :regex => '.*'+@resource_owner.email+'.*').includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
       @all_values_hash = Resource.all_values_hash
       @has_many_hash = self.has_many_value_hash
       respond_to do |format|
-        format.json {@resource.to_json(include: Resource.include_has_many_params)}
+        format.json {@resource.to_json(:include => Resource.include_has_many_params)}
+        format.html
+      end
+    else
+      @resources = Resource.where(:approval_status => 1).includes(:types, :audiences, :client_tags, :population_focuses, :campuses, :colleges, :availabilities, :innovation_stages, :topics, :technologies) # eager load resources
+      @all_values_hash = Resource.all_values_hash
+      @has_many_hash = self.has_many_value_hash
+      respond_to do |format|
+        format.json {@resource.to_json(:include => Resource.include_has_many_params)}
         format.html
       end
     end
@@ -178,9 +187,9 @@ module ResourcesControllerHelper
   def nilUser
     if request.format.json?
       render status: 400, json: {}.to_json
-      else
-        redirect_to "/resources.html"
-      end
+    else
+      redirect_to "/resources.html"
+    end
   end
 
   def flagged
@@ -213,7 +222,7 @@ module ResourcesControllerHelper
     end
   end
 
-      private
+  private
   def set_user
     if request.format.json? and params.include? :api_key
       @user = User.where(api_token: params[:api_key]).first
@@ -240,7 +249,9 @@ module ResourcesControllerHelper
   end
 
   def update_approvals_in_list(lst)
-    status = 1 if status
+    if (status)
+      status = 1
+    end
     @resources = []
     lst.each do |id|
       next unless Resource.exists?(id: id)
@@ -252,6 +263,10 @@ module ResourcesControllerHelper
       Resource.approval_email(r)
       @resources << r
     end
-    return @resources
+    @resources
+  end
+
+  def set_resource_owner
+    @resource_owner = current_resource_owner
   end
 end

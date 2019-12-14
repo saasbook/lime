@@ -166,3 +166,12 @@ The appropriate environment variables must be set locally or in production in or
 ## Resource Owners
 
 To add existing users of the database as a resource owners (this should be only run once on production), run `heroku run rake add_resource_owners` from your local terminal. This will also send out an email to all resourec owners with their account credentials.
+
+## The BrokenURL tag
+The BrokenURL tag is a special tag that is automatically updated on a daily basis. This tag is only viewable for admins. Basically if the URL of the resource is NOT valid, this tag will automatically appear. 
+
+There are 2 ways to untag a BrokenURL tag:
+Manually untag the resource from the admins edit page
+Edit the URL manually and then wait 24 hours for our automatic Broken URL detection algorithm to pick up the tag
+
+Note: Automatic Broken URL detection occurs 12 AM Pacific Standard Time every day.
