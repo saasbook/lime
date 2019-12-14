@@ -143,3 +143,13 @@ you MUST have the required resource fields listed above, but may add any of the 
 To gain administrative access to the website, you will be required to have a "Registration key" that will be given by someone who has control of the database.
 
 If you are managing the SQL database of a deployed version of the website, the registration key can be manually edited as long as the key is properly hashed.
+
+## The BrokenURL tag
+The BrokenURL tag is a special tag that is automatically updated on a daily basis. This tag is only viewable for admins. Basically if the URL of the resource is NOT valid, this tag will automatically appear. 
+
+There are 2 ways to untag a BrokenURL tag:
+Manually untag the resource from the admins edit page
+Edit the URL manually and then wait 24 hours for our automatic Broken URL detection algorithm to pick up the tag
+
+Note: Automatic Broken URL detection occurs 12 AM Pacific Standard Time every day.
+
