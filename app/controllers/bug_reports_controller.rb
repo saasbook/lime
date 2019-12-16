@@ -32,7 +32,7 @@ class BugReportsController < ApplicationController
 
     respond_to do |format|
       if @bug_report.save
-        format.html { redirect_to "/", notice: 'Bug report was successfully created.' }
+        format.html { redirect_to "/", notice: 'Successfully submitted feedback!' }
         format.json { render :show, status: :created, location: @bug_report }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class BugReportsController < ApplicationController
   def update
     respond_to do |format|
       if @bug_report.update(bug_report_params)
-        format.html { redirect_to @bug_report, notice: 'Bug report was successfully updated.' }
+        format.html { redirect_to @bug_report, notice: 'Successfully updated feedback!' }
         format.json { render :show, status: :ok, location: @bug_report }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class BugReportsController < ApplicationController
   def destroy
     @bug_report.destroy()
     respond_to do |format|
-      format.html { redirect_to bug_reports_url, notice: 'Bug report was successfully deleted.' }
+      format.html { redirect_to bug_reports_url, notice: 'Successfully deleted feedback!' }
       format.json { head :no_content }
     end
   end
@@ -84,6 +84,6 @@ class BugReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bug_report_params
-      params.require(:bug_report).permit(:desc, :closed)
+      params.require(:bug_report).permit(:desc, :name, :email, :closed)
     end
 end

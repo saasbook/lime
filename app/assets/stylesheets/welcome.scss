@@ -1,6 +1,7 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
 @font-face {
   font-family: 'Nunito';
   src: url('../assets/Nunito/Nunito-Regular.ttf') format('truetype');
@@ -48,7 +49,7 @@ body {
 
 .desc-container {
   width: 75vw;
-  margin: 0 auto 128px auto;
+  margin: 0 auto auto;
   p {
     font-size: 1.75rem;
   }
@@ -153,6 +154,48 @@ p.alert, p.alert-danger, p.alert-success {
   transition: 100ms;
 }
 
+.submit-resource-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 100px;
+  padding: 20px;
+  text-align: center;
+}
+
+.submit-resource-button {
+  padding: 20px;
+  background-color: #FDB515;
+  border: 2px solid #fff;
+  transition: 100ms;
+  border-radius: 4px;
+  font-size: 24px;
+  color: black;
+  &:hover {
+    background-color: #fff;
+    border: 2px solid #FDB515;
+    transition: 100ms;
+  }
+}
+
+.submit_button {
+  color: white;
+  background-color: #198BCC;
+  border: none;
+  height: 64px;
+  font-size: 24px;
+  border-radius: 96px;
+  transition: 500ms;
+  padding: 5px 15px;
+}
+
+.submit_button:hover {
+  background-color: #006D9D;
+  transition: 500ms;
+}
+
+//#filter-column .btn {
+//}
 
 
 footer {

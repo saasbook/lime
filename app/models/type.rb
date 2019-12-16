@@ -5,7 +5,7 @@ class Type < ActiveRecord::Base
     ['Events', 'Mentoring', 'Education & Awareness', 'Funding & Grants', 'Networks',
      'Student Groups', 'Fellowships & Scholarships', 'Competitions', 'Investors for Equity, VCs',
      'Accelerators & Incubators', 'Courses', 'Training & Support', 'Crowdfunding',
-     'Job & Internship'
+     'Job & Internship', 'BrokenURL'
     ]
   end
 

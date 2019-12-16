@@ -20,6 +20,15 @@ class Filter extends React.Component {
         </button>
       )
     });
+
+
+    var index=initial_values.indexOf("BrokenURL")
+    if (!this.props.user_signed_in) {
+      initial_values.splice(index, 1);
+    }
+
+
+
     return initial_values;
   }
 
@@ -84,6 +93,7 @@ class Filter extends React.Component {
 
 Filter.propTypes = {
   association: PropTypes.string,
-  values: PropTypes.array
+  values: PropTypes.array,
+  user_signed_in: PropTypes.bool
 };
 export default Filter

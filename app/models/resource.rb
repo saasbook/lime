@@ -38,10 +38,10 @@ class Resource < ActiveRecord::Base
 
   def self.guest_update_params_allowed?(resource_params)
      update_allowed = (((resource_params.keys.size <= 1) and
-         (resource_params.keys[0] == "flagged" ) and (resource_params["flagged"] == 1)) or
-         ((resource_params.keys[0] == "flagged" or resource_params.keys[0] == "flagged_comment") and
-         (resource_params.keys[1] == "flagged" or resource_params.keys[1] == "flagged_comment") and resource_params["flagged"] == 1))
-    return update_allowed
+         (resource_params.keys[0] == 'flagged') and (resource_params['flagged'] == 1)) or
+         ((resource_params.keys[0] == 'flagged' or resource_params.keys[0] == 'flagged_comment') and
+         (resource_params.keys[1] == 'flagged' or resource_params.keys[1] == 'flagged_comment') and resource_params['flagged'] == 1))
+     update_allowed
   end
 
   # returns a list of all associations [:types, :audiences, :client_tags, :population_focuses, :campuses, ...]
@@ -50,7 +50,7 @@ class Resource < ActiveRecord::Base
   end
 
   def self.get_associations_hash(resource)
-    return {:audiences => resource.audiences, :availabilities => resource.availabilities,
+    {:audiences => resource.audiences, :availabilities => resource.availabilities,
             :campuses => resource.campuses, :client_tags => resource.client_tags,
             :colleges => resource.colleges, :innovation_stages => resource.innovation_stages,
             :population_focuses => resource.population_focuses, :technologies => resource.technologies,
@@ -65,7 +65,7 @@ class Resource < ActiveRecord::Base
     # has_many_hash = {k => [v1,v2,v3]} ; ex. {audiences => [undergrad, grad, alumni]}
     has_many_hash = {}
     params.each_key do |key|
-      if self.has_many_associations.include?(key)
+      if has_many_associations.include?(key)
         # String variation (JSON request)
         if params[key].is_a?(String)
           has_many_hash[key] = params[key].split(',').map { |x| x.strip } # split by comma delimiter, and strip leading and trailing whitespace
@@ -75,20 +75,20 @@ class Resource < ActiveRecord::Base
         end
         params.delete(key) # remove has_many key from params
       end
-      
+
     end
 
     # return early if there are no has_many fields
-    search_regex = ""
-      if params[:search].to_s.length != 0
-        search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR description ~* '.*" + params[:search].to_s + ".*'"  + " OR url ~* '.*" + params[:search].to_s + ".*'"
-      end
-      params.delete :search
+    search_regex = ''
+    if params[:search].to_s.length != 0
+      search_regex = "title ~* '.*" + params[:search].to_s + ".*'" + " OR description ~* '.*" + params[:search].to_s + ".*'"  + " OR url ~* '.*" + params[:search].to_s + ".*'"
+    end
+    params.delete :search
     if has_many_hash.empty?
       return Resource.where(params).where(search_regex)
     else
       resources = Resource.where(params).where(search_regex).includes(*Resource.has_many_associations)
-      return self.filter_has_many_helper(resources, has_many_hash)
+      return filter_has_many_helper(resources, has_many_hash)
     end
   end
 
@@ -96,7 +96,7 @@ class Resource < ActiveRecord::Base
   def self.filter_has_many_helper(resources, has_many_hash)
     filtered = [] # list of returned records
     resources.find_each do |resource|
-      associations_hash = self.get_associations_hash(resource)
+      associations_hash = get_associations_hash(resource)
       bool_arr = []
       # for each has_many query, check if the current record's has_many field contains all values in the query
       has_many_hash.each do |field, values|
@@ -108,10 +108,10 @@ class Resource < ActiveRecord::Base
       end
     end
     # return ActiveRecord::Relation instead of array so that ActiveRecord calls can be chained outside this function
-    return Resource.where(id: filtered.map(&:id))
+    Resource.where(id: filtered.map(&:id))
   end
 
-  # 
+  #
   def self.cast_param_vals(params)
     params.values_at(
         :flagged_comment,:title,:url,:location)
@@ -130,14 +130,14 @@ class Resource < ActiveRecord::Base
       end
     end
 
-    return params
+    params
   end
 
   def self.log_edits(params)
     # if the field exists, then create and Edit
     params.values_at(
         :flagged,:approval_status,:title,:url,:location)
-        .compact.each { |field| self.edit_helper(params[:id], field) }
+        .compact.each { |field| edit_helper(params[:id], field) }
   end
 
   def self.edit_helper(id, param)
@@ -152,8 +152,8 @@ class Resource < ActiveRecord::Base
     if resource.valid?
       Resource.create_associations(resource, params)
     end
-    
-    return resource
+
+    resource
   end
 
   def self.update_resource(id, params)
@@ -161,7 +161,7 @@ class Resource < ActiveRecord::Base
 
     resource = Resource.update(id, resource_hash)
     Resource.create_associations(resource, params)
-    return resource
+    resource
   end
 
   def destroy_related_records
@@ -197,13 +197,11 @@ class Resource < ActiveRecord::Base
     end
   end
 
-  
-
   def self.separate_params(params)
     params = params.to_h.map {|k,v| [k.to_sym, v]}.to_h
     resource_hash = {}
     params.each do |field, val|
-      if self.has_many_associations.include? field
+      if has_many_associations.include? field
         if val.is_a?(String)
           params[field] = val.split(',')
         end
@@ -212,12 +210,12 @@ class Resource < ActiveRecord::Base
         resource_hash[field] = val
       end
     end
-    return params, resource_hash
+    [params, resource_hash]
   end
 
   def self.create_associations(resource, params)
-    fields_hash = self.get_associations_hash(resource)
-    
+    fields_hash = get_associations_hash(resource)
+
     fields_hash.each do |field, association|
       association.delete_all # if updating, need to delete and remake associations
       if params[field] != nil
@@ -231,11 +229,11 @@ class Resource < ActiveRecord::Base
   def self.find_missing_params(params)
     missing = []
     Resource.get_required_resources.each do |r|
-      if !params.include?(r) or params[r] == ""
+      if !params.include?(r) or params[r] == ''
         missing.append r
       end
     end
-    return missing
+    missing
   end
 
   # if filtering by location, filtering should behave as the following
@@ -245,14 +243,14 @@ class Resource < ActiveRecord::Base
 
     location = params[:location]
     if location.nil? || !Location.where(:val => location).exists?
-      return self.filter(params)
+      return filter(params)
     end
 
     locations = Location.child_locations(location)
     resources = Resource.none
     locations.each do |location|
       params[:location] = location
-      resources = resources.or(self.filter(params))
+      resources = resources.or(filter(params))
     end
 
     # if resources.length < 1
@@ -265,10 +263,86 @@ class Resource < ActiveRecord::Base
     #     params[:location] = location
     #     resources = resources.or(self.filter(params))
     #   end
-    # end 
-    return resources
+    # end
+    resources
   end
- 
+
+  def num_weeks_passed_column?(column, num)
+    if column == 'last_email_sent'
+      TimeDifference.between(last_email_sent, Time.now).in_weeks >= num
+    elsif column == 'expired_last'
+      TimeDifference.between(expired_last, Time.now).in_weeks >= num
+    elsif column == 'approval_last'
+      TimeDifference.between(approval_last, Time.now).in_weeks >= num
+    end
+  end
+
+  def not_updated_in_a_year?
+    TimeDifference.between(updated_at, Time.now).in_years >= 1
+  end
+
+  def expired?
+    !deadline.blank? && deadline < Time.now
+  end
+
+  def update_column_no_timestamp(column, value)
+    Resource.record_timestamps = false
+    update_column(column, value)
+    Resource.record_timestamps = true
+  end
+
+  def isURLBroken_ifSoTagIt
+    open(url) do |f|
+      if f.status[1]=='OK' then
+        print 'GOOD URL'
+        Resource.untagBrokenURL(id)
+      end
+    end
+  rescue StandardError => e
+    print 'BAD URL'
+    Resource.tagBrokenURL(id)
+  end
+
+  def self.tagBrokenURL(id)
+
+    resource = Resource.find_by(id: id)
+
+    isBrokenURLAlreadyTagged=false
+    resource.types.as_json.each do |type|
+      if type['val']=='BrokenURL'
+
+        isBrokenURLAlreadyTagged=true
+      end
+    end
+
+    if !isBrokenURLAlreadyTagged
+      puts "tagging"
+      resource.types.create!(:val => 'BrokenURL')
+
+    end
+  end
+
+
+   def self.untagBrokenURL(id)
+       resource = Resource.find_by(id: id)
+
+        isBrokenURLAlreadyTagged=false
+        resource.types.as_json.each do |type|
+            if type['val']=='BrokenURL'
+                isBrokenURLAlreadyTagged=true
+            end
+        end
+
+       if isBrokenURLAlreadyTagged
+            resource.types.find_by(:val => 'BrokenURL').destroy #deleting BrokenURL type
+       end
+       #puts resource.types.as_json
+   end
+
 end
+
+
+
+
 
 
