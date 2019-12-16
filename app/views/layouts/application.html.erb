@@ -55,9 +55,12 @@
           </div>
           
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'admin-button nav-link') %>
+        <% elsif resource_owner_signed_in?%>
+          <%= link_to('My Resources', resources_all_path, class: 'admin-button nav-link') %>
+          <%= link_to('Logout', destroy_resource_owner_session_path, method: :delete, class: 'admin-button nav-link') %>
         <% else %>
-          <%= link_to('Feedback', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
-          <%= link_to('Log in', new_user_session_path, class: 'admin-button nav-link') %>
+          <%#= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
+          <%= link_to('Log in', new_resource_owner_session_path, class: 'admin-button nav-link') %>
           <%= link_to('Admin', new_user_session_path, class: 'admin-button nav-link')  %>
 
           <%#= link_to('Admin Registration', new_user_registration_path, class: 'admin-button nav-link') %>
