@@ -4,6 +4,9 @@
 
 <div class="top" id="resources-index">
     <h1>Resources </h1>
+    <div class="submit-resource-container">
+      <a class="submit-resource-button" href="/resources/new.html">Suggest a Resource</a>
+     </div>
 </div>
 
 
@@ -12,6 +15,10 @@
 <%= javascript_include_tag "resource-index" %>
 
 <div class="index"  id="resource-container-wrapper">
-  <% resource_data = @resources_json %> 
-  <%= react_component("Display", { filters: @has_many_hash.merge(@locations), child_locations: @child_locations, resources: resource_data }) %>
+  <% resource_data = @resources_json %>
+  <% if user_signed_in? %>
+    <%= react_component("Display", { filters: @has_many_hash.merge(@locations), child_locations: @child_locations, resources: resource_data, user_signed_in: true }) %>
+  <% else %>
+    <%= react_component("Display", { filters: @has_many_hash.merge(@locations), child_locations: @child_locations, resources: resource_data, user_signed_in: false }) %>
+  <% end %>
 </div>

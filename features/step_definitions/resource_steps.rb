@@ -1,13 +1,19 @@
 Given /the following resources exist:/ do |resources_table|
   resources_table.hashes.each do |resource|
-   Resource.create_resource resource
-   true
+    Resource.create_resource resource
+    true
   end
 end
 
 Given /the following users exist:/ do |users_table|
   users_table.hashes.each do |user|
     User.create user
+  end
+end
+
+Given /the following resource owners exist:/ do |resources_owners_table|
+  resources_owners_table.hashes.each do |ro|
+    ResourceOwner.create ro
   end
 end
 
@@ -24,11 +30,11 @@ Then /the following resource_types exist/ do |resource_types_table|
 end
 
 Then /the following locations exist/ do |locations_table|
-  global = Location.create :val => "Global"
-  global.save :validate => false
+  global = Location.create val: "Global"
+  global.save validate: false
   locations_table.hashes.each do |location|
-    parent = Location.where(:val => location['parent'].to_s).first
-    Location.create! :val => location['location'], :parent => parent
+    parent = Location.where(val: location['parent'].to_s).first
+    Location.create! val: location['location'], parent: parent
   end
 end
 
@@ -43,8 +49,8 @@ Then /I should receive a JSON object/ do
 end
 
 Then /the JSON should contain all the resources/ do
-   json = JSON.parse(@response.body)
-   expect(Resource.all.count).to eq json.length
+  json = JSON.parse(@response.body)
+  expect(Resource.all.count).to eq json.length
 end
 
 Then /I should receive one edit/ do
@@ -144,11 +150,11 @@ When /I (?:try to )visit "(.*)"$/ do |page_name|
 end
 
 When /I fill in "(.*)" with "(.*)"/ do |field, value|
-  fill_in(field, :with => value)
+  fill_in(field, with: value)
 end
 
 When /I select "(.*)" for "(.*)"/ do |value, field|
-  check(:id => value)
+  check(id: value)
 end
 
 When /I press "(.*)"/ do |button|
@@ -160,7 +166,7 @@ When /I follow "(.*)"/ do |link|
 end
 
 When /I choose "(.*)" for "(.*)"/ do |value, field|
-  choose(:id => value)
+  choose(id: value)
 end
 
 Then /show me the page/ do
@@ -199,6 +205,14 @@ Then /I should see the text "(.*)"/ do |text|
   end
 end
 
+Then /I should not see the text "(.*)"/ do |text|
+  if page.respond_to? :should
+    page.should_not have_content(text)
+  else
+    assert !page.has_content?(text)
+  end
+end
+
 Then /I should not see the message "(.*)"/ do |text|
   if page.respond_to? :should
     page.should_not have_content(text)
@@ -208,12 +222,12 @@ Then /I should not see the message "(.*)"/ do |text|
 end
 
 Then /the "(.*)" resource should be unapproved/ do |resource|
-  resource = Resource.find_by(:title => resource)
+  resource = Resource.find_by(title: resource)
   expect(resource.approval_status).to eq 0
 end
 
 Then /the "(.*)" resource should be approved/ do |resource|
-  expect(Resource.where(:title => resource).first.approval_status).to eq 1
+  expect(Resource.where(title: resource).first.approval_status).to eq 1
 end
 
 Then /all the resources should be approved/ do
@@ -221,12 +235,12 @@ Then /all the resources should be approved/ do
 end
 
 When /I approve the following resources with api key "(.*)":/ do |api_key, params|
-  resources = params.hashes.map {|r| Resource.where(:title => r["title"]).first.id.to_s}
+  resources = params.hashes.map {|r| Resource.where(title: r["title"]).first.id.to_s}
   if resources.length > 1
     # ids = resources * ","
-    @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key, :approval_status => 1})
+    @response = page.driver.put('/resources/approve/many', approve_list: resources, api_key: api_key, approval_status: 1)
   else
-    @response = page.driver.put("/resources/approve/#{resources[0]}", {:api_key => api_key, :approval_status => 1})
+    @response = page.driver.put("/resources/approve/#{resources[0]}", api_key: api_key, approval_status: 1)
   end
 end
 
@@ -236,7 +250,7 @@ end
 
 When /I approve resources "(.*)" with api key "(.*)"/ do |ids, api_key|
   resources = ids.split(',')
-  @response = page.driver.put('/resources/approve/many', {:approve_list => resources, :api_key => api_key})
+  @response = page.driver.put('/resources/approve/many', approve_list: resources, api_key: api_key)
 end
 
 Then /I should not see the "(.*)" button inside the "(.*)" (.*)/ do |button_name, class_name, element|
@@ -249,13 +263,20 @@ end
 
 Given /I am logged in with user "(.*)" and password "(.*)"/ do |user, pass|
   visit "/users/sign_in"
-  fill_in("Email", :with => user)
+  fill_in("Email", with: user)
+  fill_in("Password", with: pass)
+  click_button("Log in")
+end
+
+Given /I am logged in with email "(.*)" and password "(.*)" as a resource owner/ do |email, pass|
+  visit "/resource_owners/sign_in"
+  fill_in("Email", :with => email)
   fill_in("Password", :with => pass)
   click_button("Log in")
 end
 
 Then /I should see all the unapproved resources/ do
-  expect(Resource.where(:approval_status => 0).all? {|r| page.should have_content r.title}).to be true
+  expect(Resource.where(approval_status: 0).all? {|r| page.should have_content r.title}).to be true
 end
 
 Then /I should be on the welcome page/ do
@@ -273,4 +294,13 @@ end
 
 Given /locations are seeded/ do
   Location.seed
+end
+
+Then /the number of emails delivered should be "(\d)"/ do |number|
+  expect(ActionMailer::Base.deliveries.count).to eq number.to_i
+end
+
+Then /I should be on my resources page/ do
+  # print page.html
+  expect(page.find('h1').text).to eq "Resources"
 end

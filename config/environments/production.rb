@@ -91,4 +91,20 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # use smtp to send emails
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+
+  ActionMailer::Base.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => "587",
+      :user_name            => ENV["GMAIL_USERNAME"],
+      :password             => ENV["GMAIL_PASSWORD"],
+      :authentication       => "plain",
+      :enable_starttls_auto => true
+  }
+
+  # doesn't have to be Heroku, but you get the idea.
+  config.action_mailer.default_url_options = { :host => 'https://berkeleyinnovres.herokuapp.com' }
 end

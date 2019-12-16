@@ -1,8 +1,10 @@
 # Innovation Resources Database API and website
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/9fbc73aa3f01f70834b6/maintainability)](https://codeclimate.com/github/andrewlawhh/lime/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b9caa915bcbf59ff9007/maintainability)](https://codeclimate.com/github/katrinapriya/lime/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/9fbc73aa3f01f70834b6/test_coverage)](https://codeclimate.com/github/andrewlawhh/lime/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b9caa915bcbf59ff9007/test_coverage)](https://codeclimate.com/github/katrinapriya/lime/test_coverage)
+
+[![Build Status](https://travis-ci.org/katrinapriya/lime.svg?branch=master)](https://travis-ci.org/katrinapriya/lime)
 
 ## Table of contents
 
@@ -16,9 +18,17 @@
     * Resource Attributes    
     * Creating new resources
 ## Running up the app locally
-To set up and run the app locally, first run the command  
-rake db:reset  
-Then set up the app as normal, rake db:setup, and rails s. You MUST run rake db:reset first or you will encounter errors. 
+To set up and run the app locally, first set up postgres.  
+Run `psql postgres` in terminal.   
+Create a new user: `create user postgres;`  
+Change the role: `alter user postgres createdb;`  
+Use `\du` to check users and their roles  
+Make sure user is a super user with `alter user postgres superuser`  
+Exit with `\q`
+
+run `rake db:reset`  
+Then set up the app as normal, `rake db:setup`, and `rails s`.  
+You MUST run rake db:reset first or you will encounter errors. 
 ## Api Usage
 ### Getting an API key
 Login to your profile on the website at   
@@ -133,3 +143,35 @@ you MUST have the required resource fields listed above, but may add any of the 
 To gain administrative access to the website, you will be required to have a "Registration key" that will be given by someone who has control of the database.
 
 If you are managing the SQL database of a deployed version of the website, the registration key can be manually edited as long as the key is properly hashed.
+
+## Automatic Emails
+
+The app can currently send automatic emails to resource owners who have approved resources on the website. There are four type of emails being sent out:
+* Broken URL emails
+* Annual emails (sent to resource owners who have approved resources that have not been updated for a year)
+* Expired event emails
+* Approval emails (sent to resource owners upon approval of a resource)
+
+The script for sending these emails are located in `lib/tasks/scheduler.rake`, and the HTML templates for these emails are lcoated in `app/views/user_mailer`. Each type of email has three templates: one for the initial email, one for the first reminder after the initial, and one for the second reminder after the initial. The script should be scheduled to run daily on Heroku scheduler. For example, one of the tasks inside `scheduler.rake` is called `send_annual_reminder_email`; to schedule it daily, it should be added to Heroku scheduler like so:
+![Heroku Schedule Imgur](https://i.imgur.com/JBvaW4R.png)
+
+
+All email templates include a link to the sign in page for resource owners to click on. It is very important to to modify the `config.action_mailer.default_url_options` line in `/config/environments/production.rb` to the appropriate Heroku host name to make sure that the sign-in link in emails work. For example, if the website is hosted at `https://berkeleyinnovres.herokuapp.com`, then this line should be
+```ruby
+config.action_mailer.default_url_options = { :host => 'https://berkeleyinnovres.herokuapp.com' }
+```
+
+The appropriate environment variables must be set locally or in production in order for emails to send. An environment variable called `GMAIL_USERNAME` corresponds to the Gmail address that the app sends emails from, and another environment called `GMAIL_PASSWORD` corresponds to the Gmail password for the Gmail account. The credentials will be given by someone who has control of the database.
+
+## Resource Owners
+
+To add existing users of the database as a resource owners (this should be only run once on production), run `heroku run rake add_resource_owners` from your local terminal. This will also send out an email to all resourec owners with their account credentials.
+
+## The BrokenURL tag
+The BrokenURL tag is a special tag that is automatically updated on a daily basis. This tag is only viewable for admins. Basically if the URL of the resource is NOT valid, this tag will automatically appear. 
+
+There are 2 ways to untag a BrokenURL tag:
+Manually untag the resource from the admins edit page
+Edit the URL manually and then wait 24 hours for our automatic Broken URL detection algorithm to pick up the tag
+
+Note: Automatic Broken URL detection occurs 12 AM Pacific Standard Time every day.
