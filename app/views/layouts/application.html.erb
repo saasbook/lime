@@ -22,6 +22,7 @@
     <nav class="navbar">
       <div id="left-nav">
         <% if user_signed_in? %>
+          <a class="nav-link nav-item" href="/">Home</a>
           <a class="nav-link nav-item" href="/resources.html/">Resources</a>
           <div class="dropdown">
             <a class="dropbtn nav-link nav-item" href="/resources/all.html">Manage Resources</a>
@@ -45,7 +46,10 @@
       <div id="right-nav">
         <% if user_signed_in? %>
           <div class="dropdown">
-            <%= link_to('View Feedback', bug_reports_path, method: :get, class: 'admin-button nav-link nav-item') %>
+            <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
+            <div class="dropdown-content">
+              <%= link_to('View Feedback', bug_reports_path, method: :get, class: 'admin-button nav-link nav-item') %>
+            </div>
           </div>
           <div class="dropdown">
             <%= link_to('Edit Account', edit_user_registration_path, method: :get, class: 'admin-button nav-link') %>
@@ -53,13 +57,13 @@
               <%= link_to('API Key', showkey_user_path, method: :get, class: 'admin-button nav-link') %>
             </div>
           </div>
-          
           <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'admin-button nav-link') %>
         <% elsif resource_owner_signed_in?%>
+          <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
           <%= link_to('My Resources', resources_all_path, class: 'admin-button nav-link') %>
           <%= link_to('Logout', destroy_resource_owner_session_path, method: :delete, class: 'admin-button nav-link') %>
         <% else %>
-          <%#= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
+          <%= link_to('Submit a Bug', new_bug_report_path, method: :get, class: 'admin-button nav-link') %>
           <%= link_to('Log in', new_resource_owner_session_path, class: 'admin-button nav-link') %>
           <%= link_to('Admin', new_user_session_path, class: 'admin-button nav-link')  %>
 
