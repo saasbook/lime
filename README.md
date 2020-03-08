@@ -18,6 +18,9 @@
     * Resource Attributes    
     * Creating new resources
 ## Running up the app locally
+
+<b>Updated Instructions located here: https://docs.google.com/document/d/1HpYSommVZR1MPA-kOLD-GGaOVWxH0wGZdXNHs1vlN3M/edit?usp=sharing
+
 To set up and run the app locally, first set up postgres.  
 Run `psql postgres` in terminal.   
 Create a new user: `create user postgres;`  
